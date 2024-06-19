@@ -6,11 +6,13 @@ import * as path from "path";
 export default defineConfig({
   plugins: [react()],
   server: {
-    port: 3000,
+    port: 1818,
     host: "localhost",
   },
   resolve: {
     alias: {
+      "@components": path.resolve(__dirname, "src/components"),
+      "@utils": path.resolve(__dirname, "src/utils"),
       "@": path.resolve(__dirname, "src"),
     },
   },
