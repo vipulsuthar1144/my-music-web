@@ -2,15 +2,15 @@ import { isLogin } from "@/App";
 import { useEffect } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 
-const AuthWrapper = () => {
+const ProtectedWrapper = () => {
   const navigate = useNavigate();
   useEffect(() => {
-    if (isLogin) {
-      navigate("/home", { replace: true });
+    if (!isLogin) {
+      navigate("/auth", { replace: true });
       return;
     }
-  }, []);
+  });
   return <Outlet />;
 };
 
-export default AuthWrapper;
+export default ProtectedWrapper;
