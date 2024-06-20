@@ -2,11 +2,13 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import * as path from "path";
 
+const FRONTEND_PORT = process.env.VITE_APP_PORT;
+
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
   server: {
-    port: 1818,
+    port: Number(FRONTEND_PORT) || 1818,
     host: "localhost",
   },
   resolve: {

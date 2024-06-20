@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "start": "vite --host 0.0.0.0",
+    "start": "env-cmd -f .env vite --host 0.0.0.0",
     "start:prod": "env-cmd -f .env.production vite",
     "build": "tsc && vite build",
     "build:prod": "tsc && env-cmd -f .env.production vite build",
@@ -37,7 +37,7 @@
     "eslint": "^8.57.0",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.6",
-    "typescript": "^5.2.2",
+    "typescript": "^5.4.5",
     "vite": "^5.2.0"
   }
 }

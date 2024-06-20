@@ -1,3 +1,4 @@
+import Home from "@/pages/home/Home";
 import { Navigate, RouteObject } from "react-router-dom";
 
 const ProtectedRoutes: RouteObject[] = [
@@ -7,7 +8,7 @@ const ProtectedRoutes: RouteObject[] = [
   },
   {
     path: "home",
-    element: <>home</>,
+    element: <Home />,
   },
   {
     path: "about",
@@ -15,7 +16,7 @@ const ProtectedRoutes: RouteObject[] = [
   },
   {
     path: "*",
-    element: <>Opps ! protected Route not found</>,
+    element: <Navigate to={"home"} replace />,
   },
 ];
 

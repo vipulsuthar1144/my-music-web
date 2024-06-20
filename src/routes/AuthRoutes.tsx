@@ -1,3 +1,4 @@
+import Auth from "@/pages/auth/Auth";
 import { Navigate, RouteObject } from "react-router-dom";
 
 const AuthRoutes: RouteObject[] = [
@@ -7,7 +8,7 @@ const AuthRoutes: RouteObject[] = [
   },
   {
     path: "login",
-    element: <>login</>,
+    element: <Auth />,
   },
   {
     path: "*",

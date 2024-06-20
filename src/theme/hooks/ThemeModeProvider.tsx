@@ -1,6 +1,7 @@
 import React, { FC, useLayoutEffect, useState } from "react";
 import { ThemeModeType } from "../types/theme.mode";
-import { DefaultThemeMode, LocalStorageKeys } from "@/src/utils/appConstant";
+import { DefaultThemeMode, LocalStorageKeys } from "@utils/constants";
+import { useGetItemLS, useSetItemLS } from "@/config/localStorage";
 
 interface IThemeModeProvider {
   children: React.ReactNode;
@@ -22,16 +23,14 @@ const ThemeModeProvider: FC<IThemeModeProvider> = ({ children }) => {
   const [themeMode, setThemeMode] = useState<ThemeModeType>(DefaultThemeMode);
 
   useLayoutEffect(() => {
-    if (localStorage.getItem(LocalStorageKeys.THEME_MODE_VALUE)) {
-      let localThemeMode = JSON.parse(localStorage.getItem(LocalStorageKeys.THEME_MODE_VALUE) || DefaultThemeMode);
-      setThemeMode(localThemeMode);
-    }
+    const localThemeMode = useGetItemLS<ThemeModeType>(LocalStorageKeys.THEME_MODE_VALUE);
+    localThemeMode ? setThemeMode(localThemeMode) : setThemeMode(DefaultThemeMode);
   }, []);
 
   const toggleThemeMode = () => {
-    let value: ThemeModeType = themeMode === "light" ? "dark" : "light";
+    const value: ThemeModeType = themeMode == "light" ? "dark" : "light";
     setThemeMode(value);
-    localStorage.setItem(LocalStorageKeys.THEME_MODE_VALUE, JSON.stringify(value));
+    useSetItemLS<ThemeModeType>(LocalStorageKeys.THEME_MODE_VALUE, value);
   };
   return <ThemeModeContext.Provider value={{ themeMode, setThemeMode, toggleThemeMode }}>{children}</ThemeModeContext.Provider>;
 };
