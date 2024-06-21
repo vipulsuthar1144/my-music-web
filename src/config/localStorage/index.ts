@@ -16,7 +16,7 @@ export const useGetItemLS = <T>(key: string): T | null => {
   }
 };
 
-export const useRemoveItemLs = (key: string) => {
+export const useRemoveItemLS = (key: string) => {
   try {
     localStorage.removeItem(key);
   } catch (error) {
@@ -24,7 +24,7 @@ export const useRemoveItemLs = (key: string) => {
   }
 };
 
-export const useClearLs = () => {
+export const useClearLS = () => {
   try {
     localStorage.clear();
   } catch (error) {
