@@ -1,7 +1,8 @@
 import axios from "axios";
 import { requestErrorHandler, requestHandler, responseErrorHandler, responseHandler } from "./interceptors";
 
-const BASE_URL = import.meta.env.VITE_APP_API_ENDPOINT;
+const BASE_URL: string = import.meta.env.VITE_APP_API_ENDPOINT;
+const AUTH_BASE_URL: string = import.meta.env.VITE_APP_AUTH_API_BASE_ENDPOINT;
 
 const headers = {
   "Access-Control-Allow-Origin": "*",
@@ -9,7 +10,7 @@ const headers = {
 };
 
 const baseInstance = axios.create({
-  baseURL: BASE_URL,
+  baseURL: AUTH_BASE_URL,
   headers: headers,
 });
 

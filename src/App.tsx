@@ -4,7 +4,7 @@ import AuthWrapper from "./routes/wrapper/AuthWrapper";
 import ProtectedWrapper from "./routes/wrapper/ProtectedWrapper";
 import AuthRoutes from "./routes/AuthRoutes";
 import ProtectedRoutes from "./routes/ProtectedRoutes";
-export const isLogin: boolean = true;
+export const isLogin: boolean = false;
 function App() {
   const rootRoutes = createBrowserRouter(
     [

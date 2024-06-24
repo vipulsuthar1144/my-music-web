@@ -1,6 +1,11 @@
 interface IBaseAPIResponse<T> {
   code: number;
   message: string;
-  data: T;
-  errors: any[];
+  data?: T | null;
+  error: IBaseErrorResponse;
+}
+
+interface IBaseErrorResponse {
+  status: number;
+  message: string;
 }
