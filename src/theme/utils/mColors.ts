@@ -16,6 +16,8 @@ export const mColors = {
   whiteLight: "#dfe1e7", //primary  text color
   lightGrey: "#acaabc", // secondary text color
 
+  loaderPrimary: "#90caf9",
+
   backgroundBlueDark: "#0c0b1a", //main background color
   backgroundBlueLight: "#170a42", //main background color
 

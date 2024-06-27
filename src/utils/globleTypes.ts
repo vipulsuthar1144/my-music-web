@@ -1,6 +1,8 @@
 import { SxProps, Theme } from "@mui/material";
 import { CSSProperties } from "react";
 
+export type ToastTypes = "success" | "warning" | "error" | "info";
+
 export interface IGlobleImageProps {
   img: string;
   alt: string;

@@ -1,28 +1,13 @@
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./App.css";
-import AuthWrapper from "./routes/wrapper/AuthWrapper";
-import ProtectedWrapper from "./routes/wrapper/ProtectedWrapper";
-import AuthRoutes from "./routes/AuthRoutes";
-import ProtectedRoutes from "./routes/ProtectedRoutes";
-export const isLogin: boolean = false;
+import "react-toastify/dist/ReactToastify.css";
+import AppTheme from "./theme/AppTheme";
+import AppRoutes from "./routes";
 function App() {
-  const rootRoutes = createBrowserRouter(
-    [
-      {
-        path: "/auth/*",
-        element: <AuthWrapper />,
-        children: AuthRoutes,
-      },
-      {
-        path: "/*",
-        element: <ProtectedWrapper />,
-        children: ProtectedRoutes,
-      },
-    ],
-    { basename: "/" }
+  return (
+    <AppTheme>
+      <AppRoutes />
+    </AppTheme>
   );
-
-  return <RouterProvider router={rootRoutes} />;
 }
 
 export default App;

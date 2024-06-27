@@ -4,15 +4,16 @@ import { Navigate, RouteObject } from "react-router-dom";
 const AuthRoutes: RouteObject[] = [
   {
     index: true,
-    element: <Navigate to={"login"} replace />,
-  },
-  {
-    path: "login",
+    // element: <Navigate to={"login"} replace />,
     element: <Auth />,
   },
+  // {
+  //   path: "login",
+  //   element: <Auth />,
+  // },
   {
     path: "*",
-    element: <Navigate to={"login"} replace />,
+    element: <Navigate to={"/"} replace />,
   },
 ];
 
