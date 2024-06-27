@@ -1,12 +1,12 @@
 import { useGetItemLS } from "@/config/localStorage";
 import { ILogin } from "@/pages/auth/utils";
 import { MGradientsDarkTheme } from "@/theme/utils/mGredient";
+import { LoaderAppBar } from "@components/Loader";
 import { Box } from "@mui/material";
 import { LocalStorageKeys } from "@utils/constants";
 import { displayFlexGlobleStyle } from "@utils/styles";
 import { useEffect, useState } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
-import LoadingBar from "react-top-loading-bar";
 
 const ProtectedWrapper = () => {
   const navigate = useNavigate();
@@ -32,7 +32,7 @@ const ProtectedWrapper = () => {
       }}
     >
       {/* <CurrentRoute /> */}
-      <LoadingBar color="#f11946" progress={80} onLoaderFinished={() => {}} transitionTime={2000} loaderSpeed={2000} />
+      <LoaderAppBar color="#f11946" />
       {isLoggedIn && <Outlet />}
     </Box>
   );

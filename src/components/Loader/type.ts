@@ -5,3 +5,9 @@ export interface ILoaderButtonProps extends IGlobalButtonProps {
   color: "primary" | "success";
   loading: boolean;
 }
+
+export interface ILoaderAppBarProps {
+  color?: string;
+  progress?: number;
+  onProgressFinish?: () => void;
+}

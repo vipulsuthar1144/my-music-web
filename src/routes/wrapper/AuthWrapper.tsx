@@ -1,13 +1,12 @@
 import { useGetItemLS } from "@/config/localStorage";
 import { ILogin } from "@/pages/auth/utils";
-import { mColors } from "@/theme/utils/mColors";
 import { MGradientsDarkTheme } from "@/theme/utils/mGredient";
+import { LoaderAppBar } from "@components/Loader";
 import { Box } from "@mui/material";
 import { LocalStorageKeys } from "@utils/constants";
 import { displayFlexGlobleStyle } from "@utils/styles";
 import { useEffect, useState } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
-import LoadingBar from "react-top-loading-bar";
 
 const AuthWrapper = () => {
   const navigate = useNavigate();
@@ -33,8 +32,8 @@ const AuthWrapper = () => {
         background: MGradientsDarkTheme.backroundBlue,
       }}
     >
-      <LoadingBar color={mColors.loaderPrimary} progress={80} onLoaderFinished={() => {}} transitionTime={2000} loaderSpeed={2000} />
       {/* <CurrentRoute /> */}
+      <LoaderAppBar />
       {!isLoggedIn && <Outlet />}
     </Box>
   );
