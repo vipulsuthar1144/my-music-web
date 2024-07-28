@@ -32,11 +32,17 @@ export const getButton = (theme: Theme): MButton => {
     MuiButton: {
       styleOverrides: {
         root: {
-          borderRadius: "40px",
+          borderRadius: "8px",
           textTransform: "none",
-          padding: "5px 25px",
+          padding: "10px 24px",
+          boxSizing: "border-box",
+          transition: "transform 0.2s ease",
           "&:hover": {
-            opacity: 0.8,
+            transform: "scale(1.05)",
+          },
+          "&.Mui-disabled": {
+            color: "inherit",
+            opacity: 0.5,
           },
         },
       },
@@ -45,13 +51,7 @@ export const getButton = (theme: Theme): MButton => {
           props: { variant: "contained", color: "primary" },
           style: {
             color: "primary",
-            // [theme.palette.mode == "dark"]: {
             backgroundImage: MGradientsDarkTheme.buttonBgBlue,
-            "&:hover": {
-              opacity: 1,
-              backgroundImage: MGradientsDarkTheme.buttonBgBlueHover,
-            },
-            // },
           },
         },
 
@@ -61,11 +61,7 @@ export const getButton = (theme: Theme): MButton => {
             color: mColors.black,
             // [theme.palette.mode == "dark"]: {
             backgroundColor: mColors.green,
-            "&:hover": {
-              opacity: 1,
-              backgroundColor: mColors.greenDark,
-              // color: mColors.whiteLight,
-            },
+
             // },
           },
         },

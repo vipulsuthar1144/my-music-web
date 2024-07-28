@@ -21,7 +21,9 @@ const ImageComp = ({ img, alt, style }: IGlobleImageProps) => {
         width: "30%",
         maxWidth: "90%",
         height: "auto",
+        boxSizing: "border-box",
         objectFit: "contain",
+        userSelect: "none",
         ...style,
       }}
     />

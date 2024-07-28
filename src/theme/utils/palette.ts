@@ -15,7 +15,7 @@ const darkThemePalette: IExtendedPaletteOptions = {
     main: mColors.orange,
   },
   text: {
-    primary: mColors.whiteLight,
+    primary: mColors.white,
     secondary: mColors.lightGrey,
   },
   success: {

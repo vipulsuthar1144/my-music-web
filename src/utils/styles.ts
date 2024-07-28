@@ -7,3 +7,5 @@ export const displayFlexGlobleStyle: CSSProperties = {
   flexDirection: "column",
   gap: "20px",
 };
+
+export const globleTransitionTime = "0.2s ease";

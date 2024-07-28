@@ -1,8 +1,7 @@
 import { useSetItemLS } from "@/config/localStorage";
-import { imgSpotifyGreen } from "@assets/images";
+import { imgSpotifyGreenLogin } from "@assets/images";
 import { ContainedGreenButton } from "@components/Button";
 import ImageComp from "@components/Image";
-import { LoaderButton } from "@components/Loader";
 import { Box, useTheme } from "@mui/material";
 import { LocalStorageKeys } from "@utils/constants";
 import { showCustomToast } from "@utils/customToast";
@@ -28,7 +27,7 @@ const Auth = () => {
       }}
     >
       <ImageComp
-        img={imgSpotifyGreen}
+        img={imgSpotifyGreenLogin}
         alt="Spotify"
         style={{
           width: "30%",
@@ -46,7 +45,7 @@ const Auth = () => {
       />
 
       <ContainedGreenButton label={"Login With Spotify"} onClick={showToast} style={{ color: "secondary" }} />
-      <LoaderButton label={"Login With Spotify"} variant={"contained"} color={"primary"} onClick={showToast} loading={true} />
+      {/* <LoaderButton label={"Login With Spotify"} variant={"contained"} color={"primary"} onClick={showToast} loading={true} /> */}
     </Box>
   );
 };

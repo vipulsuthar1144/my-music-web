@@ -1,3 +1,4 @@
-import imgSpotifyGreen from "@assets/images/img_spotify_green.png";
+import imgSpotifyGreenLogin from "@assets/images/img_spotify_green.png";
+import imgSpotifyGreenSideBarLogo from "@assets/images/ic_spotify_logo.png";
 
-export { imgSpotifyGreen };
+export { imgSpotifyGreenLogin, imgSpotifyGreenSideBarLogo };

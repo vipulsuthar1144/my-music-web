@@ -1,4 +1,4 @@
-import { Button, CircularProgress } from "@mui/material";
+import { Box, Button, CircularProgress } from "@mui/material";
 import { ILoaderAppBarProps, ILoaderButtonProps } from "./type";
 import LoadingBar from "react-top-loading-bar";
 import { mColors } from "@/theme/utils/mColors";
@@ -6,20 +6,28 @@ import { mColors } from "@/theme/utils/mColors";
 export const LoaderButton = ({ variant, color, type, onClick, label, loading, style }: ILoaderButtonProps) => {
   const buttonType = type === "reset" || type === "submit" ? type : "button";
   return (
-    <Button
-      variant={variant}
-      color={color}
-      disabled={loading}
-      type={buttonType}
-      onClick={onClick}
+    <Box
       sx={{
         position: "relative",
-        ...style,
+        display: "inline-flex",
+        alignItems: "center",
+        justifyContent: "center",
       }}
     >
-      {label}
-      {loading && <CircularProgress size={24} sx={{ color: "loader.main", position: "absolute" }} />}
-    </Button>
+      <Button
+        variant={variant}
+        color={color}
+        disabled={loading}
+        type={buttonType}
+        onClick={onClick}
+        sx={{
+          ...style,
+        }}
+      >
+        {label}
+      </Button>
+      {loading && <CircularProgress size={24} thickness={5} sx={{ color: "loader.main", position: "absolute" }} />}
+    </Box>
   );
 };
 
