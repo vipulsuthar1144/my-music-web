@@ -2,6 +2,7 @@ import { useSetItemLS } from "@/config/localStorage";
 import { ThemeModeContext, ThemeModeContextType } from "@/theme/hooks/ThemeModeProvider";
 import { LoaderButton } from "@components/Loader";
 import { LocalStorageKeys } from "@utils/constants";
+import { showCustomToast } from "@utils/customToast";
 import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -23,13 +24,13 @@ const Home: React.FC = () => {
         variant={"contained"}
         color={"primary"}
         onClick={() => {
-          // setLoading(true);
-          // setTimeout(() => {
-          //   setLoading(false);
-          //   showCustomToast("Oops! LogOut Failed.", "error");
-          // }, 2000);
-          useSetItemLS(LocalStorageKeys.AUTH_USER_MODEL_KEY, { isLogin: false });
-          navigate("/auth", { replace: true });
+          setLoading(true);
+          setTimeout(() => {
+            setLoading(false);
+            showCustomToast("Oops! LogOut Failed.", "error");
+          }, 2000);
+          // useSetItemLS(LocalStorageKeys.AUTH_USER_MODEL_KEY, { isLogin: false });
+          // navigate("/auth", { replace: true });
         }}
         loading={loading}
       />

@@ -1,4 +1,4 @@
-import { imgSpotifyGreenLogin, imgSpotifyGreenSideBarLogo } from "@assets/images";
+import { imgSpotifyGreenSideBarLogo } from "@assets/images";
 import ImageComp from "@components/Image";
 import Overlay from "@components/Overlay";
 import {
@@ -19,20 +19,30 @@ import { Box, useTheme } from "@mui/material";
 import { globleTransitionTime } from "@utils/styles";
 import { useState } from "react";
 import { Menu, MenuItem, Sidebar, sidebarClasses } from "react-pro-sidebar";
+import { useNavigate } from "react-router-dom";
 
 const AppSideBar = () => {
   const theme = useTheme();
+  const navigate = useNavigate();
   const [isCollapse, setCollapse] = useState(true);
   const [hoveredItem, setHoveredItem] = useState<number | null>(null);
+  const [selectedItem, setSelectedItem] = useState<number | null>(0);
 
   const menuItems = [
-    { name: "Dashboard", icon: <HomeOutlined />, filledIcon: <Home /> },
-    { name: "Search", icon: <SearchOutlined />, filledIcon: <Search /> },
-    { name: "Favorite Songs", icon: <FavoriteBorder />, filledIcon: <Favorite /> },
-    { name: "Recently Played", icon: <HeadphonesOutlined />, filledIcon: <Headphones /> },
-    { name: "Settings", icon: <SettingsOutlined />, filledIcon: <Settings /> },
-    { name: "My Profile", icon: <AccountCircleOutlined />, filledIcon: <AccountCircle /> },
+    {
+      id: "home",
+      name: "Dashboard",
+      icon: <HomeOutlined />,
+      filledIcon: <Home />,
+    },
+    { id: "search", name: "Search", icon: <SearchOutlined />, filledIcon: <Search /> },
+    { id: "favorite", name: "Favorite Songs", icon: <FavoriteBorder />, filledIcon: <Favorite /> },
+    { id: "recent", name: "Recently Played", icon: <HeadphonesOutlined />, filledIcon: <Headphones /> },
+    { id: "settings", name: "Settings", icon: <SettingsOutlined />, filledIcon: <Settings /> },
+    { id: "profile", name: "My Profile", icon: <AccountCircleOutlined />, filledIcon: <AccountCircle /> },
   ];
+
+  const handleMenuItemClick = (to: string) => navigate(to);
 
   return (
     <>
@@ -43,13 +53,14 @@ const AppSideBar = () => {
           borderWidth: 0,
           position: "fixed",
           [`.${sidebarClasses.container}`]: {
-            // backgroundColor: "rgba(12,11,26,0.7)",
-            backgroundColor: "transparent",
+            // backgroundColor: "rgba(126,11,26,0.7)",
             // backdropFilter: "blur(2px)",
+            backgroundColor: "transparent",
+            // width: isCollapse ? "auto" : "fit-content",
             height: "100vh",
           },
         }}
-        transitionDuration={200}
+        transitionDuration={400}
         collapsed={isCollapse}
       >
         <Box sx={{ display: "flex", flexDirection: "column", justifyContent: "center", height: "100%", position: "relative" }}>
@@ -60,7 +71,7 @@ const AppSideBar = () => {
               width: "50px",
               position: "absolute",
               top: 20,
-              left: 20,
+              left: 15,
             }}
           />
           <Menu
@@ -72,24 +83,38 @@ const AppSideBar = () => {
             }}
             menuItemStyles={{
               button: {
-                color: `${theme.palette.text.secondary}`,
                 boxSizing: "border-box",
                 transition: `transform  ${globleTransitionTime}, margin-left ${globleTransitionTime}`,
                 marginTop: "0.3rem",
-                fontSize: "0.9rem",
-                // fontFamily: ["Ubuntu-semibold"].join(","),
+                // fontSize: "1rem",
                 ":hover": {
                   backgroundColor: "inherit",
-                  transform: "scale(1.04)",
-                  marginLeft: "0.4rem",
-                  fontWeight: "600",
+                  transform: "scale(1.07)",
+                  // marginLeft: "0.7rem",
+                  // paddingLeft: "0.7rem",
+                  fontFamily: "Ubuntu-medium",
                   color: `${theme.palette.text.primary}`,
                 },
               },
             }}
           >
             {menuItems.map((item, index) => (
-              <MenuItem key={index} icon={hoveredItem === index ? item.filledIcon : item.icon} onMouseEnter={() => setHoveredItem(index)} onMouseLeave={() => setHoveredItem(null)}>
+              <MenuItem
+                key={index}
+                icon={hoveredItem === index || selectedItem === index ? item.filledIcon : item.icon}
+                style={{
+                  // backgroundColor: "red",
+                  userSelect: "none",
+                  color: hoveredItem === index || selectedItem === index ? `${theme.palette.text.primary}` : `${theme.palette.text.secondary}`,
+                  fontFamily: hoveredItem === index || selectedItem === index ? "Ubuntu-medium" : "Ubuntu-regular",
+                }}
+                onClick={() => {
+                  handleMenuItemClick(item.id);
+                  setSelectedItem(index);
+                }}
+                onMouseEnter={() => setHoveredItem(index)}
+                onMouseLeave={() => setHoveredItem(null)}
+              >
                 {item.name}
               </MenuItem>
             ))}
