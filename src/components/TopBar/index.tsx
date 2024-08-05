@@ -1,10 +1,11 @@
 import { useSetItemLS } from "@/config/localStorage";
 import { StyledBackIcon, StyledForwardIcon, StyledNotificationIconFilled, StyledSettingIconFilled, StyledThemeModeIconFilled } from "@assets/SVG";
 import { LoaderButton } from "@components/Button";
+import EditText from "@components/EditText";
 import withIconStyles from "@components/HOC/withIconStyles";
 import CustomIcon from "@components/HOC/withIconStyles";
-import { ArrowBackIosNewRounded, ArrowForwardIosRounded, Home, LogoutRounded } from "@mui/icons-material";
-import { AppBar, IconButton, Stack, Toolbar } from "@mui/material";
+import { AccountCircle, ArrowBackIosNewRounded, ArrowForwardIosRounded, CloseRounded, Home, LogoutRounded, SearchRounded } from "@mui/icons-material";
+import { AppBar, IconButton, InputAdornment, Stack, TextField, Toolbar } from "@mui/material";
 import { LocalStorageKeys, PageRoutes } from "@utils/constants";
 import { globleDisplayFlexStyle } from "@utils/globleStyle";
 import React, { useState } from "react";
@@ -37,6 +38,7 @@ const TopBar = () => {
         <Stack direction={"row"} gap={"0.1rem"} width={"50%"}>
           <StyledBackIcon />
           <StyledForwardIcon />
+          <EditText />
         </Stack>
         <Stack direction={"row"} justifyContent={"flex-end"} alignItems={"center"} width={"50%"}>
           <StyledNotificationIconFilled />

@@ -39,7 +39,7 @@ const ProtectedWrapper = () => {
       }}
     >
       {/* <CurrentRoute /> */}
-      <LoaderAppBar />
+      {/* <LoaderAppBar /> */}
 
       {isLoggedIn && (
         <>
