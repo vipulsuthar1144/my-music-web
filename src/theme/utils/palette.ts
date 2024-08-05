@@ -9,10 +9,10 @@ const lightThemePalette: IExtendedPaletteOptions = {};
 
 const darkThemePalette: IExtendedPaletteOptions = {
   primary: {
-    main: mColors.darkGray,
+    main: mColors.midNightBlack,
   },
   secondary: {
-    main: mColors.orange,
+    main: mColors.gunMetal,
   },
   text: {
     primary: mColors.white,

@@ -1,5 +1,6 @@
+import { MGradientsDarkTheme } from "@/theme/utils/mGredient";
 import { Box } from "@mui/material";
-import { globleTransitionTime } from "@utils/styles";
+import { globleTransitionTime } from "@utils/globleStyle";
 
 type OverlayProps = {
   isShown: boolean;
@@ -14,7 +15,7 @@ const Overlay = ({ isShown }: OverlayProps) => {
         left: 0,
         width: "100%",
         height: "100%",
-        background: `linear-gradient(to right, rgba(12,11,26,0.9) 60%, rgba(12,11,26,0.1) )`,
+        background: MGradientsDarkTheme.overlay,
         // backdropFilter: "blur(2px)",
         zIndex: 11,
         transition: ` opacity  ${globleTransitionTime}, visibility ${globleTransitionTime}`,

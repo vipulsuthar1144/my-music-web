@@ -16,7 +16,8 @@ import {
   SettingsOutlined,
 } from "@mui/icons-material";
 import { Box, useTheme } from "@mui/material";
-import { globleTransitionTime } from "@utils/styles";
+import { PageRoutes } from "@utils/constants";
+import { globleTransitionTime } from "@utils/globleStyle";
 import { useState } from "react";
 import { Menu, MenuItem, Sidebar, sidebarClasses } from "react-pro-sidebar";
 import { useNavigate } from "react-router-dom";
@@ -30,16 +31,15 @@ const AppSideBar = () => {
 
   const menuItems = [
     {
-      id: "home",
+      id: PageRoutes.HOME,
       name: "Dashboard",
       icon: <HomeOutlined />,
       filledIcon: <Home />,
     },
-    { id: "search", name: "Search", icon: <SearchOutlined />, filledIcon: <Search /> },
-    { id: "favorite", name: "Favorite Songs", icon: <FavoriteBorder />, filledIcon: <Favorite /> },
-    { id: "recent", name: "Recently Played", icon: <HeadphonesOutlined />, filledIcon: <Headphones /> },
-    { id: "settings", name: "Settings", icon: <SettingsOutlined />, filledIcon: <Settings /> },
-    { id: "profile", name: "My Profile", icon: <AccountCircleOutlined />, filledIcon: <AccountCircle /> },
+    { id: PageRoutes.SEARCH, name: "Search", icon: <SearchOutlined />, filledIcon: <Search /> },
+    { id: PageRoutes.FAVORITES, name: "Favorite Songs", icon: <FavoriteBorder />, filledIcon: <Favorite /> },
+    { id: PageRoutes.RECENT_PLAYED, name: "Recently Played", icon: <HeadphonesOutlined />, filledIcon: <Headphones /> },
+    { id: PageRoutes.PROFILE, name: "My Profile", icon: <AccountCircleOutlined />, filledIcon: <AccountCircle /> },
   ];
 
   const handleMenuItemClick = (to: string) => navigate(to);
@@ -60,7 +60,6 @@ const AppSideBar = () => {
             height: "100vh",
           },
         }}
-        transitionDuration={400}
         collapsed={isCollapse}
       >
         <Box sx={{ display: "flex", flexDirection: "column", justifyContent: "center", height: "100%", position: "relative" }}>
@@ -68,10 +67,10 @@ const AppSideBar = () => {
             img={imgSpotifyGreenSideBarLogo}
             alt="Spotify"
             style={{
-              width: "50px",
+              width: "40px",
               position: "absolute",
-              top: 20,
-              left: 15,
+              top: 15,
+              left: 20,
             }}
           />
           <Menu
@@ -84,14 +83,14 @@ const AppSideBar = () => {
             menuItemStyles={{
               button: {
                 boxSizing: "border-box",
-                transition: `transform  ${globleTransitionTime}, margin-left ${globleTransitionTime}`,
+                transition: `transform  ${globleTransitionTime}, padding-left ${globleTransitionTime}`,
                 marginTop: "0.3rem",
                 // fontSize: "1rem",
+
                 ":hover": {
                   backgroundColor: "inherit",
                   transform: "scale(1.07)",
-                  // marginLeft: "0.7rem",
-                  // paddingLeft: "0.7rem",
+                  paddingLeft: "2rem",
                   fontFamily: "Ubuntu-medium",
                   color: `${theme.palette.text.primary}`,
                 },
@@ -103,7 +102,6 @@ const AppSideBar = () => {
                 key={index}
                 icon={hoveredItem === index || selectedItem === index ? item.filledIcon : item.icon}
                 style={{
-                  // backgroundColor: "red",
                   userSelect: "none",
                   color: hoveredItem === index || selectedItem === index ? `${theme.palette.text.primary}` : `${theme.palette.text.secondary}`,
                   fontFamily: hoveredItem === index || selectedItem === index ? "Ubuntu-medium" : "Ubuntu-regular",

@@ -2,6 +2,7 @@
 import { Theme, ComponentsProps, ComponentsOverrides, ComponentsVariants } from "@mui/material";
 import { MGradientsDarkTheme } from "../utils/mGredient";
 import { mColors } from "../utils/mColors";
+import { globleTransitionTime } from "@utils/globleStyle";
 
 declare module "@mui/material/Button" {
   interface ButtonPropsVariantOverrides {
@@ -36,12 +37,13 @@ export const getButton = (theme: Theme): MButton => {
           textTransform: "none",
           padding: "10px 24px",
           boxSizing: "border-box",
-          transition: "transform 0.2s ease",
+          transition: `transform ${globleTransitionTime}`,
           "&:hover": {
             transform: "scale(1.05)",
           },
           "&.Mui-disabled": {
             color: "inherit",
+            backgroundColor: "inherit",
             opacity: 0.5,
           },
         },
@@ -50,8 +52,21 @@ export const getButton = (theme: Theme): MButton => {
         {
           props: { variant: "contained", color: "primary" },
           style: {
-            color: "primary",
-            backgroundImage: MGradientsDarkTheme.buttonBgBlue,
+            background: MGradientsDarkTheme.buttonBgBlue,
+          },
+        },
+
+        {
+          props: { variant: "contained", color: "secondary" },
+          style: {
+            backgroundColor: theme.palette.secondary.main,
+            "&:hover": {
+              backgroundColor: theme.palette.secondary.main,
+            },
+            "&.Mui-disabled": {
+              backgroundColor: theme.palette.secondary.main,
+              opacity: 0.7,
+            },
           },
         },
 
@@ -60,8 +75,14 @@ export const getButton = (theme: Theme): MButton => {
           style: {
             color: mColors.black,
             // [theme.palette.mode == "dark"]: {
-            backgroundColor: mColors.green,
-
+            backgroundColor: theme.palette.success.main,
+            "&:hover": {
+              backgroundColor: theme.palette.success.main,
+            },
+            "&.Mui-disabled": {
+              color: mColors.black,
+              backgroundColor: theme.palette.success.main,
+            },
             // },
           },
         },

@@ -1,11 +1,12 @@
 import { useSetItemLS } from "@/config/localStorage";
 import { imgSpotifyGreenLogin } from "@assets/images";
-import { ContainedGreenButton } from "@components/Button";
+import { ContainedGreenButton, LoaderButton } from "@components/Button";
 import ImageComp from "@components/Image";
+import { LoginRounded } from "@mui/icons-material";
 import { Box, useTheme } from "@mui/material";
-import { LocalStorageKeys } from "@utils/constants";
+import { LocalStorageKeys, PageRoutes } from "@utils/constants";
 import { showCustomToast } from "@utils/customToast";
-import { displayFlexGlobleStyle } from "@utils/styles";
+import { globleDisplayFlexStyle } from "@utils/globleStyle";
 import { useNavigate } from "react-router-dom";
 
 const Auth = () => {
@@ -15,13 +16,13 @@ const Auth = () => {
   const showToast = () => {
     // toggleThemeMode();
     useSetItemLS(LocalStorageKeys.AUTH_USER_MODEL_KEY, { isLogin: true });
-    navigate("/home", { replace: true });
+    navigate(PageRoutes.HOME, { replace: true });
     showCustomToast("login success", "success");
   };
   return (
     <Box
       sx={{
-        ...displayFlexGlobleStyle,
+        ...globleDisplayFlexStyle,
         height: "100%",
         width: "100%",
       }}
@@ -44,8 +45,7 @@ const Auth = () => {
         }}
       />
 
-      <ContainedGreenButton label={"Login With Spotify"} onClick={showToast} style={{ color: "secondary" }} />
-      {/* <LoaderButton label={"Login With Spotify"} variant={"contained"} color={"primary"} onClick={showToast} loading={true} /> */}
+      <LoaderButton label={"Login With Spotify"} variant={"contained"} color={"success"} onClick={showToast} />
     </Box>
   );
 };

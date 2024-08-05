@@ -1,47 +1,44 @@
 import Home from "@/pages/home/Home";
+import { PageRoutes } from "@utils/constants";
 import { Navigate, RouteObject } from "react-router-dom";
 
 const ProtectedRoutes: RouteObject[] = [
   {
     index: true,
-    element: <Navigate to={"home"} replace />,
+    element: <Navigate to={PageRoutes.HOME} replace />,
   },
   {
-    path: "home",
+    path: PageRoutes.HOME,
     element: <Home />,
-  },
-  {
-    path: "about",
-    element: <>About</>,
   },
 
   {
-    path: "search",
+    path: PageRoutes.SEARCH,
     element: <>Search</>,
   },
 
   {
-    path: "favorite",
+    path: PageRoutes.FAVORITES,
     element: <>Favorites</>,
   },
 
   {
-    path: "recent",
+    path: PageRoutes.RECENT_PLAYED,
     element: <>Recent</>,
   },
   {
-    path: "settins",
+    path: PageRoutes.SETTINGS,
     element: <>Settings</>,
   },
 
   {
-    path: "profile",
+    path: PageRoutes.PROFILE,
     element: <>Profile</>,
   },
 
   {
     path: "*",
-    element: <Navigate to={"home"} replace />,
+    element: <Navigate to={PageRoutes.HOME} replace />,
   },
 ];
 

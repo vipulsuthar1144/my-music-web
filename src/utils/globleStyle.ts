@@ -1,6 +1,6 @@
 import { CSSProperties } from "react";
 
-export const displayFlexGlobleStyle: CSSProperties = {
+export const globleDisplayFlexStyle: CSSProperties = {
   display: "flex",
   justifyContent: "center",
   alignItems: "center",

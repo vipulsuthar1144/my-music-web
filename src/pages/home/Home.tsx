@@ -1,6 +1,6 @@
 import { useSetItemLS } from "@/config/localStorage";
 import { ThemeModeContext, ThemeModeContextType } from "@/theme/hooks/ThemeModeProvider";
-import { LoaderButton } from "@components/Loader";
+import { LoaderButton } from "@components/Button";
 import { LocalStorageKeys } from "@utils/constants";
 import { showCustomToast } from "@utils/customToast";
 import { useContext, useEffect, useState } from "react";
@@ -20,17 +20,17 @@ const Home: React.FC = () => {
       <h1>Home </h1>
       <h4>Current Theme :: {themeMode} </h4>
       <LoaderButton
-        label={"LogOut"}
+        label={"jai HO"}
         variant={"contained"}
-        color={"primary"}
+        color={"secondary"}
         onClick={() => {
-          setLoading(true);
-          setTimeout(() => {
-            setLoading(false);
-            showCustomToast("Oops! LogOut Failed.", "error");
-          }, 2000);
-          // useSetItemLS(LocalStorageKeys.AUTH_USER_MODEL_KEY, { isLogin: false });
-          // navigate("/auth", { replace: true });
+          // setLoading(true);
+          // setTimeout(() => {
+          //   setLoading(false);
+          //   useSetItemLS(LocalStorageKeys.AUTH_USER_MODEL_KEY, { isLogin: false });
+          //   navigate("/auth", { replace: true });
+          //   // showCustomToast("Oops! LogOut Failed.", "error");
+          // }, 2000);
         }}
         loading={loading}
       />

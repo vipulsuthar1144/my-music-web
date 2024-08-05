@@ -1,5 +1,6 @@
-import { SxProps, Theme } from "@mui/material";
-import { CSSProperties } from "react";
+import { SvgIconComponent } from "@mui/icons-material";
+import { SvgIconProps, SxProps, Theme } from "@mui/material";
+import React, { ComponentType, CSSProperties } from "react";
 
 export type ToastTypes = "success" | "warning" | "error" | "info";
 
@@ -16,4 +17,5 @@ export interface IGlobalButtonProps {
   onClick?: (e: any) => void;
   style?: CSSProperties;
   type?: string;
+  startIcon?: React.ReactElement;
 }

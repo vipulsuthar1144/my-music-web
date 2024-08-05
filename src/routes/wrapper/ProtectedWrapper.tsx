@@ -3,8 +3,9 @@ import { ILogin } from "@/pages/auth/utils";
 import { MGradientsDarkTheme } from "@/theme/utils/mGredient";
 import { LoaderAppBar } from "@components/Loader";
 import AppSideBar from "@components/SideBar";
+import TopBar from "@components/TopBar";
 import { Box } from "@mui/material";
-import { LocalStorageKeys } from "@utils/constants";
+import { LocalStorageKeys, PageRoutes } from "@utils/constants";
 import { useEffect, useState } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 
@@ -16,7 +17,7 @@ const ProtectedWrapper = () => {
     const user: ILogin | null = useGetItemLS(LocalStorageKeys.AUTH_USER_MODEL_KEY);
     if (user == null || !user.isLogin) {
       setIsLoggedIn(false);
-      navigate("/auth", { replace: true });
+      navigate(PageRoutes.AUTH, { replace: true });
       return;
     } else setIsLoggedIn(true);
   }, [isLoggedIn]);
@@ -33,6 +34,7 @@ const ProtectedWrapper = () => {
         gap: "1rem",
         overflowX: "hidden",
         overflowY: "auto",
+        // paddingTop: "3px",
         background: MGradientsDarkTheme.backroundBlue,
       }}
     >
@@ -44,9 +46,11 @@ const ProtectedWrapper = () => {
           <AppSideBar />
           <Box
             sx={{
-              marginLeft: "100px",
+              flex: 1,
+              ml: "80px",
             }}
           >
+            <TopBar />
             <Outlet />
           </Box>
         </>

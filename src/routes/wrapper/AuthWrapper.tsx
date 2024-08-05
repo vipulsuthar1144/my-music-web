@@ -3,8 +3,8 @@ import { ILogin } from "@/pages/auth/utils";
 import { MGradientsDarkTheme } from "@/theme/utils/mGredient";
 import { LoaderAppBar } from "@components/Loader";
 import { Box } from "@mui/material";
-import { LocalStorageKeys } from "@utils/constants";
-import { displayFlexGlobleStyle } from "@utils/styles";
+import { LocalStorageKeys, PageRoutes } from "@utils/constants";
+import { globleDisplayFlexStyle } from "@utils/globleStyle";
 import { useEffect, useState } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 
@@ -16,7 +16,7 @@ const AuthWrapper = () => {
     const user: ILogin | null = useGetItemLS(LocalStorageKeys.AUTH_USER_MODEL_KEY);
     if (user && user.isLogin) {
       setIsLoggedIn(true);
-      navigate("/home", { replace: true });
+      navigate(PageRoutes.HOME, { replace: true });
       return;
     } else setIsLoggedIn(false);
   }, [isLoggedIn]);
@@ -26,7 +26,7 @@ const AuthWrapper = () => {
       sx={{
         width: "100%",
         height: "100vh",
-        ...displayFlexGlobleStyle,
+        ...globleDisplayFlexStyle,
         overflowX: "hidden",
         overflowY: "auto",
         background: MGradientsDarkTheme.backroundBlue,
