@@ -34,7 +34,6 @@ const ProtectedWrapper = () => {
         gap: "1rem",
         overflowX: "hidden",
         overflowY: "auto",
-        // paddingTop: "3px",
         background: MGradientsDarkTheme.backroundBlue,
       }}
     >
@@ -43,14 +42,15 @@ const ProtectedWrapper = () => {
 
       {isLoggedIn && (
         <>
+          <TopBar />
           <AppSideBar />
           <Box
             sx={{
               flex: 1,
               ml: "80px",
+              mt: "60px",
             }}
           >
-            <TopBar />
             <Outlet />
           </Box>
         </>

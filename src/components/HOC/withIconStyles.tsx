@@ -1,3 +1,4 @@
+import { MGradientsDarkTheme } from "@/theme/utils/mGredient";
 import { alpha, IconButton, SvgIconProps, SvgIconTypeMap, Theme, Tooltip } from "@mui/material";
 import { OverridableComponent } from "@mui/material/OverridableComponent";
 import { makeStyles } from "@mui/styles";
@@ -8,14 +9,14 @@ const useStyles = makeStyles((theme: Theme) => ({
   root: {
     fontSize: "40px",
     color: theme.palette.text.primary,
-    transition: `transform ${globleTransitionTime}`,
+    transition: `background-image ${globleTransitionTime}`,
     cursor: "pointer",
     padding: "10px",
     boxSizing: "border-box",
     borderRadius: "50%",
     "&:hover": {
       // transform: "scale(1.2)",
-      backgroundColor: theme.palette.secondary.main,
+      backgroundImage: MGradientsDarkTheme.hoverBgColor,
     },
   },
 }));

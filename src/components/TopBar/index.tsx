@@ -1,9 +1,11 @@
 import { useSetItemLS } from "@/config/localStorage";
+import { imgSpotifyGreenSideBarLogo } from "@assets/images";
 import { StyledBackIcon, StyledForwardIcon, StyledNotificationIconFilled, StyledSettingIconFilled, StyledThemeModeIconFilled } from "@assets/SVG";
 import { LoaderButton } from "@components/Button";
 import EditText from "@components/EditText";
 import withIconStyles from "@components/HOC/withIconStyles";
 import CustomIcon from "@components/HOC/withIconStyles";
+import ImageComp from "@components/Image";
 import { AccountCircle, ArrowBackIosNewRounded, ArrowForwardIosRounded, CloseRounded, Home, LogoutRounded, SearchRounded } from "@mui/icons-material";
 import { AppBar, IconButton, InputAdornment, Stack, TextField, Toolbar } from "@mui/material";
 import { LocalStorageKeys, PageRoutes } from "@utils/constants";
@@ -16,14 +18,14 @@ const TopBar = () => {
   const navigate = useNavigate();
   return (
     <AppBar
-      position="static"
       sx={{
         backgroundColor: "transparent",
         // backgroundColor: "red",
         backgroundImage: "none",
         boxShadow: "none",
-        backdropFilter: "blur(3px)",
+        backdropFilter: "blur(50px)",
         height: "fit-content",
+        zIndex: 10,
       }}
     >
       <Toolbar
@@ -33,8 +35,20 @@ const TopBar = () => {
           flexDirection: "raw",
           justifyContent: "space-between",
           paddingX: 1,
+          position: "relative",
+          paddingLeft: "80px",
         }}
       >
+        <ImageComp
+          img={imgSpotifyGreenSideBarLogo}
+          alt="Spotify"
+          style={{
+            width: "40px",
+            position: "absolute",
+            top: 15,
+            left: 20,
+          }}
+        />
         <Stack direction={"row"} gap={"0.1rem"} width={"50%"}>
           <StyledBackIcon />
           <StyledForwardIcon />

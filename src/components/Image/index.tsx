@@ -1,7 +1,7 @@
 import { Box } from "@mui/material";
 import { IGlobleImageProps } from "@utils/globleTypes";
 
-const ImageComp = ({ img, alt, style }: IGlobleImageProps) => {
+const ImageComp = ({ img, alt, style, onClick }: IGlobleImageProps) => {
   // return <img src={img} alt={alt} style={{ height: "auto", objectFit: "contain",
   //   // backgroundColor: mColors.red,
   //   ...style }} />;
@@ -14,6 +14,7 @@ const ImageComp = ({ img, alt, style }: IGlobleImageProps) => {
 
   return (
     <Box
+      onClick={onClick}
       component="img"
       src={img}
       alt={alt}

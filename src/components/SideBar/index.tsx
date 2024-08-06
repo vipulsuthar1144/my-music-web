@@ -63,16 +63,6 @@ const AppSideBar = () => {
         collapsed={isCollapse}
       >
         <Box sx={{ display: "flex", flexDirection: "column", justifyContent: "center", height: "100%", position: "relative" }}>
-          <ImageComp
-            img={imgSpotifyGreenSideBarLogo}
-            alt="Spotify"
-            style={{
-              width: "40px",
-              position: "absolute",
-              top: 15,
-              left: 20,
-            }}
-          />
           <Menu
             onMouseEnter={() => {
               setCollapse(false);

@@ -8,6 +8,7 @@ export interface IGlobleImageProps {
   img: string;
   alt: string;
   style?: SxProps<Theme>;
+  onClick?: (e: any) => void;
 }
 
 export interface IGlobalButtonProps {

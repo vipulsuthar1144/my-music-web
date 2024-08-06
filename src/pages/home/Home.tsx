@@ -1,8 +1,7 @@
-import { useSetItemLS } from "@/config/localStorage";
+import ItemArtistAlbumsList from "@/pages/home/utilityComp/ItemArtistAlbumsList";
 import { ThemeModeContext, ThemeModeContextType } from "@/theme/hooks/ThemeModeProvider";
 import { LoaderButton } from "@components/Button";
-import { LocalStorageKeys } from "@utils/constants";
-import { showCustomToast } from "@utils/customToast";
+import { Stack } from "@mui/material";
 import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -34,6 +33,68 @@ const Home: React.FC = () => {
         }}
         loading={loading}
       />
+
+      <Stack direction={"row"} gap={"10px"}>
+        <ItemArtistAlbumsList />
+        <ItemArtistAlbumsList />
+        <ItemArtistAlbumsList />
+        <ItemArtistAlbumsList />
+        <ItemArtistAlbumsList />
+        <ItemArtistAlbumsList />
+        <ItemArtistAlbumsList />
+        <ItemArtistAlbumsList />
+        <ItemArtistAlbumsList />
+        <ItemArtistAlbumsList />
+        <ItemArtistAlbumsList />
+        <ItemArtistAlbumsList />
+        <ItemArtistAlbumsList />
+        <ItemArtistAlbumsList />
+        <ItemArtistAlbumsList />
+        <ItemArtistAlbumsList />
+        <ItemArtistAlbumsList />
+        <ItemArtistAlbumsList />
+      </Stack>
+
+      <Stack direction={"row"} gap={"10px"}>
+        <ItemArtistAlbumsList />
+        <ItemArtistAlbumsList />
+        <ItemArtistAlbumsList />
+        <ItemArtistAlbumsList />
+        <ItemArtistAlbumsList />
+        <ItemArtistAlbumsList />
+        <ItemArtistAlbumsList />
+        <ItemArtistAlbumsList />
+        <ItemArtistAlbumsList />
+        <ItemArtistAlbumsList />
+        <ItemArtistAlbumsList />
+        <ItemArtistAlbumsList />
+        <ItemArtistAlbumsList />
+        <ItemArtistAlbumsList />
+        <ItemArtistAlbumsList />
+        <ItemArtistAlbumsList />
+        <ItemArtistAlbumsList />
+        <ItemArtistAlbumsList />
+      </Stack>
+      <Stack direction={"row"} gap={"10px"}>
+        <ItemArtistAlbumsList />
+        <ItemArtistAlbumsList />
+        <ItemArtistAlbumsList />
+        <ItemArtistAlbumsList />
+        <ItemArtistAlbumsList />
+        <ItemArtistAlbumsList />
+        <ItemArtistAlbumsList />
+        <ItemArtistAlbumsList />
+        <ItemArtistAlbumsList />
+        <ItemArtistAlbumsList />
+        <ItemArtistAlbumsList />
+        <ItemArtistAlbumsList />
+        <ItemArtistAlbumsList />
+        <ItemArtistAlbumsList />
+        <ItemArtistAlbumsList />
+        <ItemArtistAlbumsList />
+        <ItemArtistAlbumsList />
+        <ItemArtistAlbumsList />
+      </Stack>
     </div>
   );
 };
