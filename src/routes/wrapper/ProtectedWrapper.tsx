@@ -1,5 +1,6 @@
 import { useGetItemLS } from "@/config/localStorage";
 import { ILogin } from "@/pages/auth/utils";
+import TrackPlayer from "@/pages/home/utilityComp/TrackPlayer";
 import { MGradientsDarkTheme } from "@/theme/utils/mGredient";
 import { LoaderAppBar } from "@components/Loader";
 import AppSideBar from "@components/SideBar";
@@ -44,6 +45,7 @@ const ProtectedWrapper = () => {
         <>
           <TopBar />
           <AppSideBar />
+          <TrackPlayer />
           <Box
             sx={{
               flex: 1,

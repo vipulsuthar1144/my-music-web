@@ -16,7 +16,7 @@ const Home: React.FC = () => {
 
   return (
     <div>
-      <h1>Home </h1>
+      {/* <h1>Home </h1>
       <h4>Current Theme :: {themeMode} </h4>
       <LoaderButton
         label={"jai HO"}
@@ -32,7 +32,7 @@ const Home: React.FC = () => {
           // }, 2000);
         }}
         loading={loading}
-      />
+      /> */}
 
       <Stack direction={"row"} gap={"10px"}>
         <ItemArtistAlbumsList />
@@ -55,6 +55,26 @@ const Home: React.FC = () => {
         <ItemArtistAlbumsList />
       </Stack>
 
+      <Stack direction={"row"} gap={"10px"}>
+        <ItemArtistAlbumsList />
+        <ItemArtistAlbumsList />
+        <ItemArtistAlbumsList />
+        <ItemArtistAlbumsList />
+        <ItemArtistAlbumsList />
+        <ItemArtistAlbumsList />
+        <ItemArtistAlbumsList />
+        <ItemArtistAlbumsList />
+        <ItemArtistAlbumsList />
+        <ItemArtistAlbumsList />
+        <ItemArtistAlbumsList />
+        <ItemArtistAlbumsList />
+        <ItemArtistAlbumsList />
+        <ItemArtistAlbumsList />
+        <ItemArtistAlbumsList />
+        <ItemArtistAlbumsList />
+        <ItemArtistAlbumsList />
+        <ItemArtistAlbumsList />
+      </Stack>
       <Stack direction={"row"} gap={"10px"}>
         <ItemArtistAlbumsList />
         <ItemArtistAlbumsList />

@@ -7,9 +7,8 @@ import React, { Component, ComponentType } from "react";
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
-    fontSize: "40px",
     color: theme.palette.text.primary,
-    transition: `background-image ${globleTransitionTime}`,
+    transition: `background-image ${globleTransitionTime}, cursor ${globleTransitionTime}`,
     cursor: "pointer",
     padding: "10px",
     boxSizing: "border-box",
@@ -21,19 +20,14 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const withIconStyles = <P extends SvgIconProps>(IconComponent: ComponentType<P>, title: string = ""): React.FC<P> => {
+const withIconStyles = <P extends SvgIconProps>(IconComponent: ComponentType<P>, title: string = "", fontSize: string = "20px"): React.FC<P> => {
   const WithIconStyles: React.FC<P> = (props) => {
     const classes = useStyles();
 
     return (
       <Tooltip title={title}>
-        <IconButton
-          sx={{
-            padding: 0,
-            fontSize: 0,
-          }}
-        >
-          <IconComponent {...props} className={classes.root} />;
+        <IconButton className={classes.root}>
+          <IconComponent {...props} sx={{ fontSize: fontSize }} />
         </IconButton>
       </Tooltip>
     );

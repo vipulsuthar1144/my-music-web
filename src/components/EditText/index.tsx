@@ -1,5 +1,6 @@
 import { CloseRounded, SearchRounded } from "@mui/icons-material";
 import { InputAdornment, TextField } from "@mui/material";
+import { globleEaseInOutTransitionTime } from "@utils/globleStyle";
 import React from "react";
 
 const EditText = () => {
@@ -51,6 +52,7 @@ const EditText = () => {
           "& fieldset": {
             borderColor: "text.secondary",
             borderWidth: "0px",
+            // transition: `border-width ${globleEaseInOutTransitionTime}, border-color ${globleEaseInOutTransitionTime}`,
           },
         },
         "& .MuiInputBase-input": {

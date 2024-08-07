@@ -1,7 +1,7 @@
 import { MGradientsDarkTheme } from "@/theme/utils/mGredient";
 import { imgCar, imgPlayBtnGreen, imgSpotifyGreenSideBarLogo } from "@assets/images";
 import ImageComp from "@components/Image";
-import { Box, Card, CardActionArea, CardContent, CardMedia, Typography } from "@mui/material";
+import { Box, Card, CardActionArea, CardContent, CardMedia, Tooltip, Typography } from "@mui/material";
 import { showCustomToast } from "@utils/customToast";
 import { globleDisplayFlexStyle, globleEaseInOutTransitionTime, globleTransitionTime } from "@utils/globleStyle";
 import { useState } from "react";
@@ -56,7 +56,6 @@ const ItemArtistAlbumsList = () => {
             img={imgPlayBtnGreen}
             alt="Spotify"
             style={{
-              zIndex: 10,
               width: "60px",
               position: "absolute",
               bottom: isHovered ? 10 : -10,

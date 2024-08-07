@@ -23,7 +23,7 @@ const ImageComp = ({ img, alt, style, onClick }: IGlobleImageProps) => {
         maxWidth: "90%",
         height: "auto",
         boxSizing: "border-box",
-        objectFit: "contain",
+        objectFit: "fill",
         userSelect: "none",
         ...style,
       }}
