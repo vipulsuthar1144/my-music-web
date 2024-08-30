@@ -1,121 +1,84 @@
 import ItemArtistAlbumsList from "@/pages/home/utilityComp/ItemArtistAlbumsList";
-import { ThemeModeContext, ThemeModeContextType } from "@/theme/hooks/ThemeModeProvider";
-import { LoaderButton } from "@components/Button";
-import { Stack } from "@mui/material";
-import { useContext, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Box, Grid, Typography } from "@mui/material";
+import { useEffect, useMemo, useState } from "react";
+import ItemSongList from "./utilityComp/ItemSongList";
+import { globleRemoveScrollbarStyle } from "@utils/globleStyle";
 
 const Home: React.FC = () => {
-  const { themeMode } = useContext<ThemeModeContextType>(ThemeModeContext);
-  const [loading, setLoading] = useState(false);
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    console.log("home");
-  }, []);
-
   return (
-    <div>
-      {/* <h1>Home </h1>
-      <h4>Current Theme :: {themeMode} </h4>
-      <LoaderButton
-        label={"jai HO"}
-        variant={"contained"}
-        color={"secondary"}
-        onClick={() => {
-          // setLoading(true);
-          // setTimeout(() => {
-          //   setLoading(false);
-          //   useSetItemLS(LocalStorageKeys.AUTH_USER_MODEL_KEY, { isLogin: false });
-          //   navigate("/auth", { replace: true });
-          //   // showCustomToast("Oops! LogOut Failed.", "error");
-          // }, 2000);
-        }}
-        loading={loading}
-      /> */}
+    <Box component={"div"} sx={{ flex: 1 }}>
+      <Grid container spacing={{ xs: 1 }} p={"10px"} columns={{ xs: 4, sm: 12 }}>
+        <Grid item sx={{ my: "15px" }} xs={4} sm={12}>
+          <Grid container>
+            <Grid item sx={{ backgroundColor: "red" }}>
+              <Typography variant="h3" mb={"10px"}>
+                Tranding Songs
+              </Typography>
+            </Grid>
 
-      <Stack direction={"row"} gap={"10px"}>
-        <ItemArtistAlbumsList />
-        <ItemArtistAlbumsList />
-        <ItemArtistAlbumsList />
-        <ItemArtistAlbumsList />
-        <ItemArtistAlbumsList />
-        <ItemArtistAlbumsList />
-        <ItemArtistAlbumsList />
-        <ItemArtistAlbumsList />
-        <ItemArtistAlbumsList />
-        <ItemArtistAlbumsList />
-        <ItemArtistAlbumsList />
-        <ItemArtistAlbumsList />
-        <ItemArtistAlbumsList />
-        <ItemArtistAlbumsList />
-        <ItemArtistAlbumsList />
-        <ItemArtistAlbumsList />
-        <ItemArtistAlbumsList />
-        <ItemArtistAlbumsList />
-      </Stack>
-
-      <Stack direction={"row"} gap={"10px"}>
-        <ItemArtistAlbumsList />
-        <ItemArtistAlbumsList />
-        <ItemArtistAlbumsList />
-        <ItemArtistAlbumsList />
-        <ItemArtistAlbumsList />
-        <ItemArtistAlbumsList />
-        <ItemArtistAlbumsList />
-        <ItemArtistAlbumsList />
-        <ItemArtistAlbumsList />
-        <ItemArtistAlbumsList />
-        <ItemArtistAlbumsList />
-        <ItemArtistAlbumsList />
-        <ItemArtistAlbumsList />
-        <ItemArtistAlbumsList />
-        <ItemArtistAlbumsList />
-        <ItemArtistAlbumsList />
-        <ItemArtistAlbumsList />
-        <ItemArtistAlbumsList />
-      </Stack>
-      <Stack direction={"row"} gap={"10px"}>
-        <ItemArtistAlbumsList />
-        <ItemArtistAlbumsList />
-        <ItemArtistAlbumsList />
-        <ItemArtistAlbumsList />
-        <ItemArtistAlbumsList />
-        <ItemArtistAlbumsList />
-        <ItemArtistAlbumsList />
-        <ItemArtistAlbumsList />
-        <ItemArtistAlbumsList />
-        <ItemArtistAlbumsList />
-        <ItemArtistAlbumsList />
-        <ItemArtistAlbumsList />
-        <ItemArtistAlbumsList />
-        <ItemArtistAlbumsList />
-        <ItemArtistAlbumsList />
-        <ItemArtistAlbumsList />
-        <ItemArtistAlbumsList />
-        <ItemArtistAlbumsList />
-      </Stack>
-      <Stack direction={"row"} gap={"10px"}>
-        <ItemArtistAlbumsList />
-        <ItemArtistAlbumsList />
-        <ItemArtistAlbumsList />
-        <ItemArtistAlbumsList />
-        <ItemArtistAlbumsList />
-        <ItemArtistAlbumsList />
-        <ItemArtistAlbumsList />
-        <ItemArtistAlbumsList />
-        <ItemArtistAlbumsList />
-        <ItemArtistAlbumsList />
-        <ItemArtistAlbumsList />
-        <ItemArtistAlbumsList />
-        <ItemArtistAlbumsList />
-        <ItemArtistAlbumsList />
-        <ItemArtistAlbumsList />
-        <ItemArtistAlbumsList />
-        <ItemArtistAlbumsList />
-        <ItemArtistAlbumsList />
-      </Stack>
-    </div>
+            <Grid item sx={{ backgroundColor: "blue" }} xs={10}>
+              <Typography variant="h3" mb={"10px"}>
+                Tranding Songs
+              </Typography>
+            </Grid>
+          </Grid>
+        </Grid>
+        <Grid item sx={{ my: "15px" }}>
+          <Typography variant="h3" mb={"10px"}>
+            Trending Artists
+          </Typography>
+          <Box
+            component={"div"}
+            width={"100%"}
+            sx={{
+              display: "flex",
+              justifyContent: "space-between",
+              overflow: "auto",
+              ...globleRemoveScrollbarStyle,
+            }}
+          >
+            {Array.from(Array(10)).map((_, index) => (
+              <Box
+                key={index}
+                sx={{
+                  minWidth: `150px`,
+                  // maxWidth: `150px`,
+                }}
+              >
+                <ItemArtistAlbumsList isArtist={true} />
+              </Box>
+            ))}
+          </Box>
+        </Grid>
+        <Grid item sx={{ my: "15px" }}>
+          <Typography variant="h3" mb={"10px"}>
+            Recommended for you
+          </Typography>
+          <Box
+            component={"div"}
+            width={"100%"}
+            sx={{
+              display: "flex",
+              justifyContent: "space-between",
+              overflow: "auto",
+              ...globleRemoveScrollbarStyle,
+            }}
+          >
+            {Array.from(Array(10)).map((_, index) => (
+              <Box
+                key={index}
+                sx={{
+                  minWidth: `150px`,
+                  // maxWidth: `150px`,
+                }}
+              >
+                <ItemArtistAlbumsList />
+              </Box>
+            ))}
+          </Box>
+        </Grid>
+      </Grid>
+    </Box>
   );
 };
 

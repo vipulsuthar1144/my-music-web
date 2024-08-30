@@ -1,4 +1,5 @@
 import { useSetItemLS } from "@/config/localStorage";
+import { mColors } from "@/theme/utils/mColors";
 import { imgSpotifyGreenSideBarLogo } from "@assets/images";
 import { StyledBackIcon, StyledForwardIcon, StyledNotificationIconFilled, StyledSettingIconFilled, StyledThemeModeIconFilled } from "@assets/SVG";
 import { LoaderButton } from "@components/Button";
@@ -18,12 +19,14 @@ const TopBar = () => {
   const navigate = useNavigate();
   return (
     <AppBar
+      position="sticky"
       sx={{
-        backgroundColor: "transparent",
-        // backgroundColor: "red",
+        // backgroundColor: "transparent",
+        backgroundColor: mColors.EbonyBlack,
         backgroundImage: "none",
         boxShadow: "none",
-        backdropFilter: "blur(50px)",
+        width: "100%",
+        // backdropFilter: "blur(50px)",
         height: "fit-content",
         zIndex: 10,
       }}
@@ -36,19 +39,8 @@ const TopBar = () => {
           justifyContent: "space-between",
           paddingX: 1,
           position: "relative",
-          paddingLeft: "80px",
         }}
       >
-        <ImageComp
-          img={imgSpotifyGreenSideBarLogo}
-          alt="Spotify"
-          style={{
-            width: "40px",
-            position: "absolute",
-            top: 15,
-            left: 20,
-          }}
-        />
         <Stack direction={"row"} gap={"0.1rem"} width={"50%"}>
           <StyledBackIcon />
           <StyledForwardIcon />

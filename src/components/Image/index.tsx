@@ -15,6 +15,7 @@ const ImageComp = ({ img, alt, style, onClick }: IGlobleImageProps) => {
   return (
     <Box
       onClick={onClick}
+      onMouseDown={(event) => event.stopPropagation()}
       component="img"
       src={img}
       alt={alt}

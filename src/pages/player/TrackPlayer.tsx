@@ -2,7 +2,7 @@ import { MGradientsDarkTheme } from "@/theme/utils/mGredient";
 import { img1, imgCar, imgPlayBtnGreen, imgSpotifyGreenSideBarLogo } from "@assets/images";
 import {
   StyledCloseIconFilled,
-  StyledFavoriteIconFilled,
+  StyledFavoriteIconOutlined,
   StyledNextIconFilled,
   StyledPauseIconOutlined,
   StyledPlayIconOutlined,
@@ -23,6 +23,7 @@ const TrackPlayer = () => {
 
   return (
     <Box
+      draggable
       component={"div"}
       onMouseDown={() => {
         setIsPressed(true);
@@ -37,7 +38,7 @@ const TrackPlayer = () => {
         width: "350px",
         height: "auto",
         // maxHeight: "400px",
-        backgroundColor: "rgba(200,200,200,0.1)",
+        backgroundColor: "rgba(200,200,200,0.15)",
         // backgroundColor: "rgba(12,11,26,0.4)",
         // backgroundColor: "secondary.main",
         backdropFilter: "blur(20px)",
@@ -90,14 +91,15 @@ const TrackPlayer = () => {
       {/* song details */}
       <Box component={"div"} sx={{ width: "100%", ...globleDisplayFlexStyle, flexDirection: "row", justifyContent: "space-between" }}>
         <Box component={"div"}>
-          <Typography variant="h6" color="text.primary">
+          <Typography variant="subtitle1" color="text.primary">
             Piya Aye Na
           </Typography>
-          <Typography variant="body2" color="text.secondary">
+          <Typography variant="subtitle2" color="text.secondary">
             Aashique 2
           </Typography>
         </Box>
-        <StyledFavoriteIconFilled />
+
+        <StyledFavoriteIconOutlined />
       </Box>
       <Box component={"div"} width={"100%"}>
         <Slider
@@ -111,10 +113,10 @@ const TrackPlayer = () => {
           }}
         />
         <Box component={"div"} sx={{ width: "100%", ...globleDisplayFlexStyle, flexDirection: "row", justifyContent: "space-between" }}>
-          <Typography variant="subtitle1" color="text.secondary">
+          <Typography variant="body2" color="text.secondary">
             02:00
           </Typography>
-          <Typography variant="subtitle1" color="text.secondary">
+          <Typography variant="body2" color="text.secondary">
             03:10
           </Typography>
         </Box>

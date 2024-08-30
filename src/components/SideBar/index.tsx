@@ -1,3 +1,4 @@
+import { MGradientsDarkTheme } from "@/theme/utils/mGredient";
 import { imgSpotifyGreenSideBarLogo } from "@assets/images";
 import ImageComp from "@components/Image";
 import Overlay from "@components/Overlay";
@@ -53,6 +54,7 @@ const AppSideBar = () => {
           borderWidth: 0,
           position: "fixed",
           [`.${sidebarClasses.container}`]: {
+            // background: MGradientsDarkTheme.backroundBlue,
             // backgroundColor: "rgba(126,11,26,0.7)",
             // backdropFilter: "blur(2px)",
             backgroundColor: "transparent",
@@ -63,6 +65,17 @@ const AppSideBar = () => {
         collapsed={isCollapse}
       >
         <Box sx={{ display: "flex", flexDirection: "column", justifyContent: "center", height: "100%", position: "relative" }}>
+          <ImageComp
+            img={imgSpotifyGreenSideBarLogo}
+            alt="Spotify"
+            style={{
+              width: "40px",
+              position: "absolute",
+              top: 15,
+              left: 20,
+              zIndex: 10,
+            }}
+          />
           <Menu
             onMouseEnter={() => {
               setCollapse(false);

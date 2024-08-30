@@ -1,4 +1,6 @@
 import Home from "@/pages/home/Home";
+import Search from "@/pages/search/Search";
+import { Box } from "@mui/material";
 import { PageRoutes } from "@utils/constants";
 import { Navigate, RouteObject } from "react-router-dom";
 
@@ -14,7 +16,7 @@ const ProtectedRoutes: RouteObject[] = [
 
   {
     path: PageRoutes.SEARCH,
-    element: <>Search</>,
+    element: <Search />,
   },
 
   {
@@ -33,7 +35,7 @@ const ProtectedRoutes: RouteObject[] = [
 
   {
     path: PageRoutes.PROFILE,
-    element: <>Profile</>,
+    element: <Box sx={{ width: "100%", minHeight: "45vh" }}>profile</Box>,
   },
 
   {

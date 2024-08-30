@@ -3,7 +3,7 @@ import { alpha, IconButton, SvgIconProps, SvgIconTypeMap, Theme, Tooltip } from 
 import { OverridableComponent } from "@mui/material/OverridableComponent";
 import { makeStyles } from "@mui/styles";
 import { globleTransitionTime } from "@utils/globleStyle";
-import React, { Component, ComponentType } from "react";
+import React, { Component, ComponentType, MouseEvent } from "react";
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -20,14 +20,19 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const withIconStyles = <P extends SvgIconProps>(IconComponent: ComponentType<P>, title: string = "", fontSize: string = "20px"): React.FC<P> => {
-  const WithIconStyles: React.FC<P> = (props) => {
+type WithIconStylesProps = {
+  onClick?: (event: MouseEvent<HTMLElement>) => void;
+  fontSize?: string;
+};
+
+const withIconStyles = <P extends SvgIconProps>(IconComponent: ComponentType<P>, title: string = "", defaultFontSize: string = "20px"): React.FC<Omit<P, "fontSize"> & WithIconStylesProps> => {
+  const WithIconStyles: React.FC<Omit<P, "fontSize"> & WithIconStylesProps> = ({ onClick, fontSize = defaultFontSize, ...props }) => {
     const classes = useStyles();
 
     return (
-      <Tooltip title={title}>
-        <IconButton className={classes.root}>
-          <IconComponent {...props} sx={{ fontSize: fontSize }} />
+      <Tooltip title={title} disableInteractive>
+        <IconButton className={classes.root} onMouseDown={(event) => event.stopPropagation()} onClick={onClick}>
+          <IconComponent {...(props as P)} sx={{ fontSize, color: "text.primary" }} />
         </IconButton>
       </Tooltip>
     );

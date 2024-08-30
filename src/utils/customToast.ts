@@ -7,6 +7,12 @@ export const showCustomToast = (message: string, toastType: ToastTypes) => {
     autoClose: 1000,
     toastId: message,
     isLoading: false,
+    hideProgressBar: true,
+    closeButton: false,
+    draggable: true,
+    progress: undefined,
+    pauseOnHover: true,
+    closeOnClick: true,
   };
   // toast.dismiss();
   toast[toastType](message, toastOptions);

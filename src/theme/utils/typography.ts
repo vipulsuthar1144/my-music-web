@@ -1,82 +1,80 @@
 import { TypographyOptions } from "@mui/material/styles/createTypography";
 import "@assets/fonts/font.css";
+import { CSSProperties } from "react";
+
+const sharedStyles: CSSProperties = {
+  fontFamily: ["Ubuntu-regular"].join(","),
+  userSelect: "none",
+  whiteSpace: "nowrap",
+  overflow: "hidden",
+  textOverflow: "ellipsis",
+  display: "block",
+};
 
 export const typography: TypographyOptions = {
-  allVariants: {
-    fontFamily: ["Ubuntu-medium"].join(","),
-    userSelect: "none",
-  },
   h1: {
-    fontSize: "42px",
-    // lineHeight: "44px",
-    fontWeight: 600,
-    userSelect: "none",
+    fontSize: "35px",
+    fontWeight: 900,
+    ...sharedStyles,
   },
   h2: {
-    fontSize: "34px",
-    // lineHeight: "40px",
-    fontWeight: 500,
-    userSelect: "none",
+    fontSize: "30px",
+    fontWeight: 800,
+    ...sharedStyles,
   },
   h3: {
-    fontSize: "27px",
-    // lineHeight: "32px",
-    fontWeight: 500,
-    userSelect: "none",
+    fontSize: "24px",
+    fontWeight: 600,
+    ...sharedStyles,
   },
   h4: {
     fontSize: "21px",
-    // lineHeight: "24px",
-    fontWeight: 500,
-    userSelect: "none",
+    fontWeight: 600,
+    ...sharedStyles,
   },
   h5: {
     fontSize: "18px",
-    // lineHeight: "20px",
     fontWeight: 500,
-    userSelect: "none",
+    ...sharedStyles,
   },
   h6: {
-    fontSize: "16px",
-    // lineHeight: "24px",
+    fontSize: "15px",
     fontWeight: 500,
+    ...sharedStyles,
   },
   body1: {
-    fontSize: "14px",
-    // lineHeight: "normal",
+    fontSize: "15px",
     fontWeight: 400,
-    userSelect: "none",
+    ...sharedStyles,
   },
   body2: {
     fontSize: "13px",
-    // lineHeight: "12px",
     fontWeight: 400,
-    userSelect: "none",
+    ...sharedStyles,
   },
   subtitle1: {
-    fontSize: "10px",
-    // lineHeight: "12px",
+    fontSize: "15px",
     fontWeight: 400,
-    userSelect: "none",
+    ...sharedStyles,
   },
   subtitle2: {
-    fontSize: "9px",
-    // lineHeight: "12px",
+    fontSize: "13px",
     fontWeight: 400,
-    userSelect: "none",
+    ...sharedStyles,
   },
   button: {
     textTransform: "capitalize",
-    fontWeight: 400,
+    fontWeight: 500,
     letterSpacing: "0.15px",
+    fontFamily: ["Ubuntu-regular"].join(","),
     userSelect: "none",
   },
   caption: {
     fontSize: "11px",
-    userSelect: "none",
+    ...sharedStyles,
   },
   overline: {
     fontSize: "11px",
-    userSelect: "none",
+    ...sharedStyles,
   },
 };

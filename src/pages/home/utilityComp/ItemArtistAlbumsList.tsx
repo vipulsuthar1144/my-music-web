@@ -1,19 +1,24 @@
 import { MGradientsDarkTheme } from "@/theme/utils/mGredient";
-import { imgCar, imgPlayBtnGreen, imgSpotifyGreenSideBarLogo } from "@assets/images";
+import { img1, imgCar, imgPlayBtnGreen, imgSpotifyGreenSideBarLogo } from "@assets/images";
 import ImageComp from "@components/Image";
-import { Box, Card, CardActionArea, CardContent, CardMedia, Tooltip, Typography } from "@mui/material";
+import { Box, ButtonBase, Card, CardActionArea, CardContent, CardMedia, Tooltip, Typography } from "@mui/material";
 import { showCustomToast } from "@utils/customToast";
 import { globleDisplayFlexStyle, globleEaseInOutTransitionTime, globleTransitionTime } from "@utils/globleStyle";
 import { useState } from "react";
 
-const ItemArtistAlbumsList = () => {
+type ItemArtistAlbumsListProps = {
+  isArtist?: boolean;
+};
+
+const ItemArtistAlbumsList: React.FC<ItemArtistAlbumsListProps> = ({ isArtist = false }) => {
   const [isHovered, setIsHovered] = useState(false);
   return (
     <Card
       sx={{
-        width: "220px",
-        maxHeight: "300px",
+        width: "100%",
+        // maxWidth: "250px",
         overflow: "hidden",
+        boxSizing: "border-box",
         backgroundColor: "transparent",
         backgroundImage: "none",
         transition: `transform ${globleEaseInOutTransitionTime},backgroundColor ${globleEaseInOutTransitionTime}`,
@@ -38,14 +43,15 @@ const ItemArtistAlbumsList = () => {
         <Box sx={{ position: "relative", aspectRatio: 1 }}>
           <CardMedia
             component="img"
-            image={imgCar}
+            image={isArtist ? imgCar : img1}
             alt="green iguana"
+            loading="lazy"
             sx={{
               objectFit: "fill",
               cursor: "pointer",
               aspectRatio: 1,
               // borderRadius: "8px",
-              borderRadius: "50%",
+              borderRadius: isArtist ? "50%" : "8px",
             }}
           />
 
@@ -56,10 +62,10 @@ const ItemArtistAlbumsList = () => {
             img={imgPlayBtnGreen}
             alt="Spotify"
             style={{
-              width: "60px",
+              width: "40%",
               position: "absolute",
-              bottom: isHovered ? 10 : -10,
-              right: isHovered ? 10 : -10,
+              bottom: isHovered ? 0 : -10,
+              right: isHovered ? 0 : -10,
               transition: `opacity ${globleEaseInOutTransitionTime}, transform ${globleEaseInOutTransitionTime},right ${globleEaseInOutTransitionTime},bottom ${globleEaseInOutTransitionTime}`,
               opacity: isHovered ? 1 : 0,
               transform: isHovered ? "scale(1)" : "scale(0.5)",
@@ -69,11 +75,11 @@ const ItemArtistAlbumsList = () => {
             }}
           />
         </Box>
-        <CardContent sx={{ padding: 0, m: 0 }}>
-          <Typography variant="h6" color="text.primary">
+        <CardContent sx={{ padding: 0, m: 0, width: "100%" }}>
+          <Typography variant="subtitle1" color="text.primary">
             Arijit Singh
           </Typography>
-          <Typography variant="body2" color="text.secondary">
+          <Typography variant="subtitle2" color="text.secondary">
             Artist
           </Typography>
         </CardContent>

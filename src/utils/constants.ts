@@ -1,6 +1,11 @@
+import { Theme, useMediaQuery } from "@mui/material";
 import { ThemeModeType } from "../theme/types/theme.mode";
 
 export const DefaultThemeMode: ThemeModeType = "dark";
+
+export const useIsSmallScreen = (theme: Theme) => {
+  return useMediaQuery(theme.breakpoints.down("md"));
+};
 
 export const LocalStorageKeys = {
   THEME_MODE_VALUE: "THEME_MODE_VALUE",
@@ -12,7 +17,7 @@ export const PageRoutes = {
   HOME: "home",
   SEARCH: "search",
   FAVORITES: "favorites",
-  RECENT_PLAYED: "recentplayed",
+  RECENT_PLAYED: "recent",
   SETTINGS: "settings",
   PROFILE: "profile",
   ALBUMS: "albums",
