@@ -7,12 +7,13 @@ import { Navigate, RouteObject } from "react-router-dom";
 const ProtectedRoutes: RouteObject[] = [
   {
     index: true,
-    element: <Navigate to={PageRoutes.HOME} replace />,
-  },
-  {
-    path: PageRoutes.HOME,
+    // element: <Navigate to={PageRoutes.HOME} replace />,
     element: <Home />,
   },
+  // {
+  //   path: PageRoutes.HOME,
+  //   element: <Navigate to={"/"} replace />,
+  // },
 
   {
     path: PageRoutes.SEARCH,
@@ -40,7 +41,7 @@ const ProtectedRoutes: RouteObject[] = [
 
   {
     path: "*",
-    element: <Navigate to={PageRoutes.HOME} replace />,
+    element: <Navigate to={PageRoutes.BASE} replace />,
   },
 ];
 

@@ -1,7 +1,8 @@
 import { MGradientsDarkTheme } from "@/theme/utils/mGredient";
 import { img1, imgCar, imgPlayBtnGreen, imgSpotifyGreenSideBarLogo } from "@assets/images";
 import ImageComp from "@components/Image";
-import { Box, ButtonBase, Card, CardActionArea, CardContent, CardMedia, Tooltip, Typography } from "@mui/material";
+import { Box, ButtonBase, Card, CardActionArea, CardContent, CardMedia, Theme, Tooltip, Typography } from "@mui/material";
+import { makeStyles } from "@mui/styles";
 import { showCustomToast } from "@utils/customToast";
 import { globleDisplayFlexStyle, globleEaseInOutTransitionTime, globleTransitionTime } from "@utils/globleStyle";
 import { useState } from "react";
@@ -12,23 +13,14 @@ type ItemTopResultProps = {
 
 const ItemTopResult: React.FC<ItemTopResultProps> = ({ isArtist = false }) => {
   const [isHovered, setIsHovered] = useState(false);
+  const classes = useStyles();
   return (
     <Card
+      className={classes.root}
       sx={{
-        width: "100%",
-        // maxHeight: "250px",
-        overflow: "hidden",
-        boxSizing: "border-box",
         backgroundColor: "secondary.main",
         backgroundImage: "none",
-        transition: `transform ${globleEaseInOutTransitionTime},backgroundColor ${globleEaseInOutTransitionTime}`,
-        borderRadius: "8px",
         boxShadow: "none",
-        "&:hover": {
-          // transform: "scale(1.15)",
-          backgroundImage: MGradientsDarkTheme.hoverBgColor,
-          // backgroundColor: "secondary.main",
-        },
       }}
     >
       <CardActionArea
@@ -69,8 +61,8 @@ const ItemTopResult: React.FC<ItemTopResultProps> = ({ isArtist = false }) => {
             transition: `opacity ${globleEaseInOutTransitionTime}, transform ${globleEaseInOutTransitionTime},right ${globleEaseInOutTransitionTime},bottom ${globleEaseInOutTransitionTime}`,
             opacity: isHovered ? 1 : 0,
             transform: isHovered ? "scale(1)" : "scale(0.5)",
-            "&:hover": {
-              // transform: "scale(1.2)",
+            "&:active": {
+              transform: "scale(0.5)",
             },
           }}
         />
@@ -88,3 +80,16 @@ const ItemTopResult: React.FC<ItemTopResultProps> = ({ isArtist = false }) => {
 };
 
 export default ItemTopResult;
+
+const useStyles = makeStyles((theme: Theme) => ({
+  root: {
+    width: "100%",
+    overflow: "hidden",
+    boxSizing: "border-box",
+    transition: `transform ${globleEaseInOutTransitionTime},backgroundColor ${globleEaseInOutTransitionTime}`,
+    borderRadius: "8px",
+    "&:hover": {
+      backgroundImage: MGradientsDarkTheme.hoverBgColor,
+    },
+  },
+}));

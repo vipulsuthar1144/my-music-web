@@ -10,7 +10,6 @@ import ImageComp from "@components/Image";
 import { AccountCircle, ArrowBackIosNewRounded, ArrowForwardIosRounded, CloseRounded, Home, LogoutRounded, SearchRounded } from "@mui/icons-material";
 import { AppBar, IconButton, InputAdornment, Stack, TextField, Toolbar } from "@mui/material";
 import { LocalStorageKeys, PageRoutes } from "@utils/constants";
-import { globleDisplayFlexStyle } from "@utils/globleStyle";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -34,7 +33,7 @@ const TopBar = () => {
       <Toolbar
         disableGutters
         sx={{
-          ...globleDisplayFlexStyle,
+          display: "flex",
           flexDirection: "raw",
           justifyContent: "space-between",
           paddingX: 1,

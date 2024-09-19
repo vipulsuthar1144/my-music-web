@@ -1,14 +1,15 @@
 import { useGetItemLS } from "@/config/localStorage";
 import { ILogin } from "@/pages/auth/utils";
+import TrackPlayer from "@/pages/player/TrackPlayer";
 import { MGradientsDarkTheme } from "@/theme/utils/mGredient";
 import AppSideBar from "@components/SideBar";
 import TopBar from "@components/TopBar";
-import { Box, styled, Theme, useTheme } from "@mui/material";
+import { Box, Grid, styled, Theme, useTheme } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { display } from "@mui/system";
 import { LocalStorageKeys, PageRoutes, useIsSmallScreen } from "@utils/constants";
 import { useEffect, useRef, useState } from "react";
-import { Outlet, useLocation, useNavigate } from "react-router-dom";
+import { Outlet, useLocation, useNavigate, useNavigation } from "react-router-dom";
 
 const ProtectedWrapper = () => {
   const navigate = useNavigate();
@@ -22,9 +23,7 @@ const ProtectedWrapper = () => {
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (containerRef.current) {
-      containerRef.current.scrollTo(0, 0);
-    }
+    containerRef.current && containerRef.current.scrollTo(0, 0);
   }, [location]);
 
   useEffect(() => {
@@ -38,7 +37,7 @@ const ProtectedWrapper = () => {
   }, [isLoggedIn]);
 
   return (
-    <Box component={"div"} className={classes.root}>
+    <Box className={classes.root}>
       {isLoggedIn && (
         <>
           {!isSmallScreen && (
@@ -47,8 +46,12 @@ const ProtectedWrapper = () => {
             </Box>
           )}
           <CustomScrollBox ref={containerRef} ml={isSmallScreen ? 0 : sidebarWidth} className={classes.mainContent}>
+            {/* {!isSmallScreen && <TopBar />} */}
             <TopBar />
-            <Outlet />
+            <Box sx={{ minHeight: "50vh" }}>
+              <Outlet />
+              <TrackPlayer />
+            </Box>
             <Box className={classes.footer}>this is footer</Box>
           </CustomScrollBox>
         </>
@@ -78,9 +81,8 @@ const useStyles = makeStyles((theme: Theme) => ({
   mainContent: {
     width: "100%",
     borderRadius: "10px",
-    maxWidth: "1700px",
+    maxWidth: "2000px",
     height: "100vh",
-    // minHeight: "100vh",
     overflowY: "auto",
     overflowX: "hidden",
   },

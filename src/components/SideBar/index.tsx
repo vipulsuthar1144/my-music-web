@@ -32,7 +32,7 @@ const AppSideBar = () => {
 
   const menuItems = [
     {
-      id: PageRoutes.HOME,
+      id: PageRoutes.BASE,
       name: "Dashboard",
       icon: <HomeOutlined />,
       filledIcon: <Home />,

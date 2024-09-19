@@ -1,85 +1,79 @@
 import ItemArtistAlbumsList from "@/pages/home/utilityComp/ItemArtistAlbumsList";
-import { Box, Grid, Typography } from "@mui/material";
-import { useEffect, useMemo, useState } from "react";
+import { Box, Theme, Typography } from "@mui/material";
 import ItemSongList from "./utilityComp/ItemSongList";
-import { globleRemoveScrollbarStyle } from "@utils/globleStyle";
+import styled from "@emotion/styled";
+import { makeStyles } from "@mui/styles";
+import { ContainerWithoutScrollbar, RootContainer } from "@components/styledComponents";
 
 const Home: React.FC = () => {
+  const classes = useStyle();
   return (
-    <Box component={"div"} sx={{ flex: 1 }}>
-      <Grid container spacing={{ xs: 1 }} p={"10px"} columns={{ xs: 4, sm: 12 }}>
-        <Grid item sx={{ my: "15px" }} xs={4} sm={12}>
-          <Grid container>
-            <Grid item sx={{ backgroundColor: "red" }}>
-              <Typography variant="h3" mb={"10px"}>
-                Tranding Songs
-              </Typography>
-            </Grid>
-
-            <Grid item sx={{ backgroundColor: "blue" }} xs={10}>
-              <Typography variant="h3" mb={"10px"}>
-                Tranding Songs
-              </Typography>
-            </Grid>
-          </Grid>
-        </Grid>
-        <Grid item sx={{ my: "15px" }}>
-          <Typography variant="h3" mb={"10px"}>
-            Trending Artists
+    <RootContainer>
+      <Typography variant="h3">Play Recentaly</Typography>
+      <ContainerWithoutScrollbar>
+        {Array.from(Array(15)).map((_, index) => (
+          <ItemArtistAlbumsList key={index} isArtist={false} />
+        ))}
+      </ContainerWithoutScrollbar>
+      <Typography variant="h3"> Tranding Songs </Typography>
+      <ContainerWithoutScrollbar sx={{ scrollSnapType: "x mandatory" }} gap={"10px"}>
+        <Box className={classes.trendingContainer}>
+          <Typography variant="h4" mb={"10px"}>
+            Hindi
           </Typography>
-          <Box
-            component={"div"}
-            width={"100%"}
-            sx={{
-              display: "flex",
-              justifyContent: "space-between",
-              overflow: "auto",
-              ...globleRemoveScrollbarStyle,
-            }}
-          >
-            {Array.from(Array(10)).map((_, index) => (
-              <Box
-                key={index}
-                sx={{
-                  minWidth: `150px`,
-                  // maxWidth: `150px`,
-                }}
-              >
-                <ItemArtistAlbumsList isArtist={true} />
-              </Box>
-            ))}
-          </Box>
-        </Grid>
-        <Grid item sx={{ my: "15px" }}>
-          <Typography variant="h3" mb={"10px"}>
-            Recommended for you
+          {Array.from(Array(5)).map((_, index) => (
+            <ItemSongList key={index} />
+          ))}
+        </Box>
+        <Box className={classes.trendingContainer}>
+          <Typography variant="h4" mb={"10px"}>
+            Punjabi
           </Typography>
-          <Box
-            component={"div"}
-            width={"100%"}
-            sx={{
-              display: "flex",
-              justifyContent: "space-between",
-              overflow: "auto",
-              ...globleRemoveScrollbarStyle,
-            }}
-          >
-            {Array.from(Array(10)).map((_, index) => (
-              <Box
-                key={index}
-                sx={{
-                  minWidth: `150px`,
-                  // maxWidth: `150px`,
-                }}
-              >
-                <ItemArtistAlbumsList />
-              </Box>
-            ))}
-          </Box>
-        </Grid>
-      </Grid>
-    </Box>
+          {Array.from(Array(5)).map((_, index) => (
+            <ItemSongList key={index} />
+          ))}
+        </Box>
+        <Box className={classes.trendingContainer}>
+          <Typography variant="h4" mb={"10px"}>
+            English
+          </Typography>
+          {Array.from(Array(5)).map((_, index) => (
+            <ItemSongList key={index} />
+          ))}
+        </Box>
+      </ContainerWithoutScrollbar>
+      <Typography variant="h3">Trending Artists</Typography>
+      <ContainerWithoutScrollbar>
+        {Array.from(Array(15)).map((_, index) => (
+          <ItemArtistAlbumsList key={index} isArtist={true} />
+        ))}
+      </ContainerWithoutScrollbar>
+      <Typography variant="h3">Recommended for you</Typography>
+      <ContainerWithoutScrollbar>
+        {Array.from(Array(15)).map((_, index) => (
+          <ItemArtistAlbumsList key={index} isArtist={false} />
+        ))}
+      </ContainerWithoutScrollbar>
+    </RootContainer>
   );
 };
 
 export default Home;
+
+const useStyle = makeStyles((theme: Theme) => ({
+  mainContainer: {
+    flex: 1,
+    display: "flex",
+    flexDirection: "column",
+    gap: "10px",
+    padding: "10px",
+  },
+  trendingContainer: {
+    flex: 1,
+    minWidth: "330px",
+    backgroundColor: theme.palette.secondary.main,
+    borderRadius: "10px",
+    padding: "10px",
+    scrollSnapAlign: "start",
+  },
+}));

@@ -41,6 +41,9 @@ export const getButton = (theme: Theme): MButton => {
           "&:hover": {
             transform: "scale(1.05)",
           },
+          "&:active": {
+            transform: "scale(1.01)",
+          },
           "&.Mui-disabled": {
             color: "inherit",
             backgroundColor: "inherit",

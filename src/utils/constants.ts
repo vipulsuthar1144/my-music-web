@@ -13,6 +13,7 @@ export const LocalStorageKeys = {
 };
 
 export const PageRoutes = {
+  BASE: "/",
   AUTH: "auth",
   HOME: "home",
   SEARCH: "search",

@@ -1,7 +1,8 @@
 import { MGradientsDarkTheme } from "@/theme/utils/mGredient";
 import { img1, imgCar, imgPlayBtnGreen, imgSpotifyGreenSideBarLogo } from "@assets/images";
 import ImageComp from "@components/Image";
-import { Box, ButtonBase, Card, CardActionArea, CardContent, CardMedia, Tooltip, Typography } from "@mui/material";
+import { Box, ButtonBase, Card, CardActionArea, CardContent, CardMedia, Theme, Tooltip, Typography } from "@mui/material";
+import { makeStyles } from "@mui/styles";
 import { showCustomToast } from "@utils/customToast";
 import { globleDisplayFlexStyle, globleEaseInOutTransitionTime, globleTransitionTime } from "@utils/globleStyle";
 import { useState } from "react";
@@ -12,23 +13,14 @@ type ItemArtistAlbumsListProps = {
 
 const ItemArtistAlbumsList: React.FC<ItemArtistAlbumsListProps> = ({ isArtist = false }) => {
   const [isHovered, setIsHovered] = useState(false);
+  const classes = useStyle();
   return (
     <Card
+      className={classes.root}
       sx={{
-        width: "100%",
-        // maxWidth: "250px",
-        overflow: "hidden",
-        boxSizing: "border-box",
         backgroundColor: "transparent",
         backgroundImage: "none",
-        transition: `transform ${globleEaseInOutTransitionTime},backgroundColor ${globleEaseInOutTransitionTime}`,
-        borderRadius: "8px",
         boxShadow: "none",
-        "&:hover": {
-          // transform: "scale(1.15)",
-          backgroundImage: MGradientsDarkTheme.hoverBgColor,
-          // backgroundColor: "secondary.main",
-        },
       }}
     >
       <CardActionArea
@@ -89,3 +81,23 @@ const ItemArtistAlbumsList: React.FC<ItemArtistAlbumsListProps> = ({ isArtist = 
 };
 
 export default ItemArtistAlbumsList;
+
+const useStyle = makeStyles((theme: Theme) => ({
+  root: {
+    // width: "100%",
+    // width: "150px",
+    flexShrink: 0,
+    flexBasis: "150px",
+    // flexGrow: 1,
+    overflow: "hidden",
+    boxSizing: "border-box",
+
+    transition: `transform ${globleEaseInOutTransitionTime},backgroundColor ${globleEaseInOutTransitionTime}`,
+    borderRadius: "8px",
+    "&:hover": {
+      // transform: "scale(1.15)",
+      backgroundImage: MGradientsDarkTheme.hoverBgColor,
+      // backgroundColor: "secondary.main",
+    },
+  },
+}));

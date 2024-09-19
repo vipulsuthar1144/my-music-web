@@ -1,30 +1,27 @@
-import { MGradientsDarkTheme } from "@/theme/utils/mGredient";
-import { img1, imgCar, imgPlayBtnGreen, imgSpotifyGreenSideBarLogo } from "@assets/images";
+import { img1 } from "@assets/images";
 import {
   StyledCloseIconFilled,
   StyledFavoriteIconOutlined,
   StyledNextIconFilled,
   StyledPauseIconOutlined,
-  StyledPlayIconOutlined,
   StyledPreviousIconFilled,
   StyledRepeatIconFilled,
-  StyledRepeatOnceIconFilled,
   StyledShuffleIconUnFilled,
 } from "@assets/SVG";
 import ImageComp from "@components/Image";
-import { PauseCircleOutlineRounded, PlayCircleOutlineRounded, ShuffleRounded } from "@mui/icons-material";
-import { Box, Card, CardActionArea, CardContent, CardMedia, Divider, Slider, sliderClasses, Tooltip, Typography } from "@mui/material";
-import { showCustomToast } from "@utils/customToast";
-import { globleDisplayFlexStyle, globleEaseInOutTransitionTime, globleTransitionTime } from "@utils/globleStyle";
+import { Box, Slider, sliderClasses, Theme, Typography } from "@mui/material";
+import { makeStyles } from "@mui/styles";
 import { useState } from "react";
 
 const TrackPlayer = () => {
   const [isPressed, setIsPressed] = useState(false);
+  const classes = useStyle();
 
   return (
     <Box
       draggable
       component={"div"}
+      className={classes.root}
       onMouseDown={() => {
         setIsPressed(true);
       }}
@@ -35,47 +32,13 @@ const TrackPlayer = () => {
         setIsPressed(false);
       }}
       sx={{
-        width: "350px",
-        height: "auto",
-        // maxHeight: "400px",
-        backgroundColor: "rgba(200,200,200,0.15)",
-        // backgroundColor: "rgba(12,11,26,0.4)",
-        // backgroundColor: "secondary.main",
-        backdropFilter: "blur(20px)",
-        borderRadius: "10px",
-        position: "fixed",
-        bottom: 20,
-        right: 20,
-        zIndex: 10,
-        ...globleDisplayFlexStyle,
-        justifyContent: "flex-start",
-        gap: "20px",
-        padding: "20px 40px",
         cursor: isPressed ? "grabbing" : "grab",
       }}
     >
-      {/* cross icon */}
-      <Box
-        component={"div"}
-        sx={{
-          position: "absolute",
-          top: 5,
-          right: 5,
-        }}
-      >
+      <Box className={classes.crossBtn}>
         <StyledCloseIconFilled />
       </Box>
-      {/* drag indicator */}
-      <Box
-        component={"div"}
-        sx={{
-          width: 80,
-          height: 3,
-          backgroundColor: "text.secondary",
-          borderRadius: "10px",
-          opacity: 0.6,
-        }}
-      />
+      <Box className={classes.dragIndigator} />
       {/* song image */}
       <ImageComp
         img={img1}
@@ -89,8 +52,8 @@ const TrackPlayer = () => {
       />
 
       {/* song details */}
-      <Box component={"div"} sx={{ width: "100%", ...globleDisplayFlexStyle, flexDirection: "row", justifyContent: "space-between" }}>
-        <Box component={"div"}>
+      <Box className={classes.displayFlex}>
+        <Box>
           <Typography variant="subtitle1" color="text.primary">
             Piya Aye Na
           </Typography>
@@ -106,13 +69,12 @@ const TrackPlayer = () => {
           sx={{
             color: "success.main",
             padding: "5px 0px",
-
             [`& .${sliderClasses.rail}`]: {
               backgroundColor: "text.secondary",
             },
           }}
         />
-        <Box component={"div"} sx={{ width: "100%", ...globleDisplayFlexStyle, flexDirection: "row", justifyContent: "space-between" }}>
+        <Box className={classes.displayFlex}>
           <Typography variant="body2" color="text.secondary">
             02:00
           </Typography>
@@ -122,7 +84,7 @@ const TrackPlayer = () => {
         </Box>
       </Box>
 
-      <Box component={"div"} sx={{ width: "110%", ...globleDisplayFlexStyle, flexDirection: "row", justifyContent: "space-between", gap: "0px" }}>
+      <Box width={"110%"} className={classes.displayFlex}>
         <StyledShuffleIconUnFilled />
         <StyledPreviousIconFilled />
         {/* <StyledPlayIconOutlined color="success" /> */}
@@ -136,3 +98,42 @@ const TrackPlayer = () => {
 };
 
 export default TrackPlayer;
+
+const useStyle = makeStyles((theme: Theme) => ({
+  root: {
+    width: "350px",
+    height: "auto",
+    backgroundColor: "rgba(200,200,200,0.15)",
+    backdropFilter: "blur(20px)",
+    borderRadius: "10px",
+    position: "fixed",
+    bottom: 20,
+    right: 20,
+    zIndex: 10,
+    display: "flex",
+    alignItems: "center",
+    flexDirection: "column",
+    justifyContent: "flex-start",
+    gap: "20px",
+    padding: "20px 40px",
+  },
+  crossBtn: {
+    position: "absolute",
+    top: 5,
+    right: 5,
+  },
+  dragIndigator: {
+    width: 80,
+    height: 3,
+    backgroundColor: theme.palette.text.secondary,
+    borderRadius: "10px",
+    opacity: 0.6,
+  },
+  displayFlex: {
+    width: "100%",
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
+}));

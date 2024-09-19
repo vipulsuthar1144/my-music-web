@@ -1,8 +1,12 @@
-import { PaletteColorOptions, PaletteOptions } from "@mui/material";
+import { Palette, PaletteColor, PaletteColorOptions, PaletteOptions } from "@mui/material";
 import { mColors } from "./mColors";
 
 export interface IExtendedPaletteOptions extends PaletteOptions {
   loader?: PaletteColorOptions;
+}
+
+export interface IExtendedPalette extends Palette {
+  loader?: PaletteColor;
 }
 
 const lightThemePalette: IExtendedPaletteOptions = {};

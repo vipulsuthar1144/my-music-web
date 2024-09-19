@@ -3,41 +3,20 @@ import { img1, imgCar, imgPlayBtnGreen, imgSpotifyGreenSideBarLogo } from "@asse
 import { StyledFavoriteIconOutlined } from "@assets/SVG";
 import ImageComp from "@components/Image";
 import { AccessTimeRounded, FavoriteBorder, FavoriteOutlined } from "@mui/icons-material";
-import { Box, ButtonBase, Card, CardActionArea, CardContent, CardMedia, IconButton, Stack, Tooltip, Typography } from "@mui/material";
+import { Box, ButtonBase, Card, CardActionArea, CardContent, CardMedia, IconButton, Stack, Theme, Tooltip, Typography } from "@mui/material";
+import { makeStyles } from "@mui/styles";
 import { showCustomToast } from "@utils/customToast";
 import { globleDisplayFlexStyle, globleEaseInOutTransitionTime, globleTransitionTime } from "@utils/globleStyle";
 import { useState } from "react";
 
 const ItemSongList = () => {
-  const [isHovered, setIsHovered] = useState(false);
+  const classes = useStyle();
   return (
-    <Card
-      sx={{
-        width: "100%",
-        overflow: "hidden",
-        backgroundColor: "transparent",
-        backgroundImage: "none",
-        transition: `transform ${globleEaseInOutTransitionTime},backgroundColor ${globleEaseInOutTransitionTime}`,
-        borderRadius: "5px",
-        boxShadow: "none",
-        boxSizing: "border-box",
-        "&:hover": {
-          // transform: "scale(1.15)",
-          // backgroundImage: MGradientsDarkTheme.hoverBgColor,
-          backgroundColor: "secondary.main",
-        },
-      }}
-    >
+    <Card sx={{ backgroundColor: "transparent", backgroundImage: "none", boxShadow: "none" }} className={classes.root}>
       <CardActionArea
-        onMouseEnter={() => {
-          setIsHovered(true);
-        }}
-        onMouseLeave={() => {
-          setIsHovered(false);
-        }}
         sx={{
           height: "100%",
-          ...globleDisplayFlexStyle,
+          display: "flex",
           flexDirection: "row",
           justifyContent: "flex-start",
           alignItems: "center",
@@ -89,3 +68,15 @@ const ItemSongList = () => {
 };
 
 export default ItemSongList;
+
+const useStyle = makeStyles((theme: Theme) => ({
+  root: {
+    width: "100%",
+    transition: `transform ${globleEaseInOutTransitionTime},backgroundColor ${globleEaseInOutTransitionTime}`,
+    borderRadius: "5px",
+    boxSizing: "border-box",
+    "&:hover": {
+      backgroundColor: theme.palette.secondary.main,
+    },
+  },
+}));
