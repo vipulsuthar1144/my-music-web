@@ -26,8 +26,8 @@ const ItemSongList = () => {
           boxSizing: "border-box",
         }}
       >
-        <Box sx={{ position: "relative", aspectRatio: 1 }}>
-          <CardMedia
+        {/* <Box sx={{ position: "relative", aspectRatio: 1 }}> */}
+        {/* <CardMedia
             component="img"
             image={img1}
             alt="green iguana"
@@ -40,8 +40,19 @@ const ItemSongList = () => {
               // borderRadius: "8px",
               borderRadius: "5px",
             }}
-          />
-        </Box>
+          /> */}
+        <ImageComp
+          img={img1}
+          alt={"album"}
+          style={{
+            width: "40px",
+            aspectRatio: 1,
+            cursor: "pointer",
+            borderRadius: "5px",
+            boxShadow: "0px 10px 10px 2px rgba(0,0,0,0.2)",
+          }}
+        />
+        {/* </Box> */}
         <CardContent sx={{ padding: 0, m: 0, flex: 1, display: "flex", justifyContent: "space-between", alignItems: "center" }}>
           <Box>
             <Typography variant="subtitle1" color="text.primary" mb={"2px"}>

@@ -9,9 +9,10 @@ import { useState } from "react";
 
 type ItemArtistAlbumsListProps = {
   isArtist?: boolean;
+  onClick?: () => void;
 };
 
-const ItemArtistAlbumsList: React.FC<ItemArtistAlbumsListProps> = ({ isArtist = false }) => {
+const ItemArtistAlbumsList: React.FC<ItemArtistAlbumsListProps> = ({ isArtist = false, onClick }) => {
   const [isHovered, setIsHovered] = useState(false);
   const classes = useStyle();
   return (
@@ -24,6 +25,7 @@ const ItemArtistAlbumsList: React.FC<ItemArtistAlbumsListProps> = ({ isArtist = 
       }}
     >
       <CardActionArea
+        onClick={onClick}
         onMouseEnter={() => {
           setIsHovered(true);
         }}
@@ -36,8 +38,7 @@ const ItemArtistAlbumsList: React.FC<ItemArtistAlbumsListProps> = ({ isArtist = 
           <CardMedia
             component="img"
             image={isArtist ? imgCar : img1}
-            alt="green iguana"
-            loading="lazy"
+            alt={isArtist ? "artist" : "album"}
             sx={{
               objectFit: "fill",
               cursor: "pointer",
@@ -54,7 +55,8 @@ const ItemArtistAlbumsList: React.FC<ItemArtistAlbumsListProps> = ({ isArtist = 
             img={imgPlayBtnGreen}
             alt="Spotify"
             style={{
-              width: "40%",
+              width: "60px",
+              aspectRatio: 1.06,
               position: "absolute",
               bottom: isHovered ? 0 : -10,
               right: isHovered ? 0 : -10,

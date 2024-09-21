@@ -1,17 +1,21 @@
 import { useGetItemLS } from "@/config/localStorage";
 import { ILogin } from "@/pages/auth/utils";
+import CurrentRoute from "@/pages/CurrentRoute";
 import { MGradientsDarkTheme } from "@/theme/utils/mGredient";
 import { LoaderAppBar } from "@components/Loader";
 import { Box } from "@mui/material";
 import { LocalStorageKeys, PageRoutes } from "@utils/constants";
 import { globleDisplayFlexStyle } from "@utils/globleStyle";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
+import LoadingBar from "react-top-loading-bar";
 
 const AuthWrapper = () => {
   const navigate = useNavigate();
+  const ref = useRef(null);
 
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(true);
+
   useEffect(() => {
     const user: ILogin | null = useGetItemLS(LocalStorageKeys.AUTH_USER_MODEL_KEY);
     if (user && user.isLogin) {
@@ -19,6 +23,7 @@ const AuthWrapper = () => {
       navigate(PageRoutes.HOME, { replace: true });
       return;
     } else setIsLoggedIn(false);
+    //  ref.current.continuousStart();
   }, [isLoggedIn]);
 
   return (
@@ -32,8 +37,9 @@ const AuthWrapper = () => {
         background: MGradientsDarkTheme.backroundBlue,
       }}
     >
-      {/* <CurrentRoute /> */}
-      <LoaderAppBar />
+      <CurrentRoute />
+      {/* <LoadingBar color="#f11946" ref={ref} /> */}
+      {/* <LoaderAppBar /> */}
       {!isLoggedIn && <Outlet />}
     </Box>
   );

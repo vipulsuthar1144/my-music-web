@@ -4,15 +4,23 @@ import ItemSongList from "./utilityComp/ItemSongList";
 import styled from "@emotion/styled";
 import { makeStyles } from "@mui/styles";
 import { ContainerWithoutScrollbar, RootContainer } from "@components/styledComponents";
+import { useNavigate } from "react-router-dom";
 
 const Home: React.FC = () => {
   const classes = useStyle();
+  const navigate = useNavigate();
   return (
     <RootContainer>
       <Typography variant="h3">Play Recentaly</Typography>
       <ContainerWithoutScrollbar>
         {Array.from(Array(15)).map((_, index) => (
-          <ItemArtistAlbumsList key={index} isArtist={false} />
+          <ItemArtistAlbumsList
+            key={index}
+            onClick={() => {
+              navigate("/search");
+            }}
+            isArtist={false}
+          />
         ))}
       </ContainerWithoutScrollbar>
       <Typography variant="h3"> Tranding Songs </Typography>

@@ -21,7 +21,7 @@ const ImageComp = ({ img, alt, style, onClick }: IGlobleImageProps) => {
       alt={alt}
       sx={{
         width: "30%",
-        maxWidth: "90%",
+        maxWidth: "100%",
         height: "auto",
         boxSizing: "border-box",
         objectFit: "fill",

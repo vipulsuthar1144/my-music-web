@@ -12,88 +12,110 @@ import ImageComp from "@components/Image";
 import { Box, Slider, sliderClasses, Theme, Typography } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { useState } from "react";
+import Draggable from "react-draggable";
 
 const TrackPlayer = () => {
   const [isPressed, setIsPressed] = useState(false);
+  const [isDrag, setIsDrag] = useState(true);
   const classes = useStyle();
 
   return (
-    <Box
-      draggable
-      component={"div"}
-      className={classes.root}
+    <Draggable
+      allowAnyClick={false}
+      disabled={!isDrag}
+      bounds="parent" // Restrict dragging within the parent
+      axis="both" // Can drag along both x and y axes
+      // defaultPosition={{ x: 100, y: 100 }} // Set initial position
       onMouseDown={() => {
         setIsPressed(true);
       }}
-      onMouseUp={() => {
-        setIsPressed(false);
+      onDrag={() => {
+        setIsPressed(true);
       }}
-      onMouseLeave={() => {
+      onStop={() => {
         setIsPressed(false);
-      }}
-      sx={{
-        cursor: isPressed ? "grabbing" : "grab",
       }}
     >
-      <Box className={classes.crossBtn}>
-        <StyledCloseIconFilled />
-      </Box>
-      <Box className={classes.dragIndigator} />
-      {/* song image */}
-      <ImageComp
-        img={img1}
-        alt="green iguana"
-        style={{
-          width: 150,
-          height: 150,
-          aspectRatio: 1,
-          borderRadius: "10px",
+      <Box
+        component={"div"}
+        className={classes.root}
+        sx={{
+          cursor: isPressed ? "grabbing" : "grab",
         }}
-      />
-
-      {/* song details */}
-      <Box className={classes.displayFlex}>
-        <Box>
-          <Typography variant="subtitle1" color="text.primary">
-            Piya Aye Na
-          </Typography>
-          <Typography variant="subtitle2" color="text.secondary">
-            Aashique 2
-          </Typography>
+      >
+        <Box className={classes.crossBtn}>
+          <StyledCloseIconFilled />
         </Box>
-
-        <StyledFavoriteIconOutlined />
-      </Box>
-      <Box component={"div"} width={"100%"}>
-        <Slider
-          sx={{
-            color: "success.main",
-            padding: "5px 0px",
-            [`& .${sliderClasses.rail}`]: {
-              backgroundColor: "text.secondary",
-            },
+        <Box className={classes.dragIndigator} />
+        {/* song image */}
+        <ImageComp
+          img={img1}
+          alt="album image"
+          style={{
+            width: 150,
+            // height: 150,
+            aspectRatio: 1,
+            borderRadius: "10px",
+            boxShadow: "0px 10px 10px 2px rgba(0,0,0,0.2)",
           }}
         />
+
+        {/* song details */}
         <Box className={classes.displayFlex}>
-          <Typography variant="body2" color="text.secondary">
-            02:00
-          </Typography>
-          <Typography variant="body2" color="text.secondary">
-            03:10
-          </Typography>
+          <Box>
+            <Typography variant="subtitle1" color="text.primary">
+              Piya Aye Na
+            </Typography>
+            <Typography variant="subtitle2" color="text.secondary">
+              Aashique 2
+            </Typography>
+          </Box>
+
+          <StyledFavoriteIconOutlined />
+        </Box>
+        <Box component={"div"} width={"100%"}>
+          <Box
+            component={"div"}
+            onMouseEnter={() => setIsDrag(false)}
+            onMouseLeave={() => {
+              setIsDrag(true);
+              setIsPressed(false);
+            }}
+          >
+            <Slider
+              onChange={() => {
+                setIsDrag(false);
+              }}
+              sx={{
+                color: "success.main",
+                padding: "5px 0px",
+                [`& .${sliderClasses.rail}`]: {
+                  backgroundColor: "text.secondary",
+                },
+              }}
+            />
+          </Box>
+          <Box className={classes.displayFlex}>
+            <Typography variant="body2" color="text.secondary">
+              02:00
+            </Typography>
+            <Typography variant="body2" color="text.secondary">
+              03:10
+            </Typography>
+          </Box>
+        </Box>
+
+        <Box width={"110%"} className={classes.displayFlex}>
+          <StyledShuffleIconUnFilled />
+          <StyledPreviousIconFilled />
+          {/* <StyledPlayIconOutlined color="success" /> */}
+          <StyledPauseIconOutlined />
+          <StyledNextIconFilled />
+          <StyledRepeatIconFilled />
+          {/* <StyledRepeatOnceIconFilled /> */}
         </Box>
       </Box>
-
-      <Box width={"110%"} className={classes.displayFlex}>
-        <StyledShuffleIconUnFilled />
-        <StyledPreviousIconFilled />
-        {/* <StyledPlayIconOutlined color="success" /> */}
-        <StyledPauseIconOutlined />
-        <StyledNextIconFilled />
-        <StyledRepeatIconFilled />
-        {/* <StyledRepeatOnceIconFilled /> */}
-      </Box>
-    </Box>
+    </Draggable>
   );
 };
 
@@ -106,10 +128,11 @@ const useStyle = makeStyles((theme: Theme) => ({
     backgroundColor: "rgba(200,200,200,0.15)",
     backdropFilter: "blur(20px)",
     borderRadius: "10px",
-    position: "fixed",
+    position: "absolute",
+    // position: "fixed",
     bottom: 20,
     right: 20,
-    zIndex: 10,
+    zIndex: 12,
     display: "flex",
     alignItems: "center",
     flexDirection: "column",

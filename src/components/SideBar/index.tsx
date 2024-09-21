@@ -70,6 +70,7 @@ const AppSideBar = () => {
             alt="Spotify"
             style={{
               width: "40px",
+              height: "40px",
               position: "absolute",
               top: 15,
               left: 20,

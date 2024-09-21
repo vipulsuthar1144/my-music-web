@@ -9,5 +9,6 @@ export interface ILoaderButtonProps extends IGlobalButtonProps {
 export interface ILoaderAppBarProps {
   color?: string;
   progress?: number;
+  ref?: string;
   onProgressFinish?: () => void;
 }

@@ -4,12 +4,11 @@ import TrackPlayer from "@/pages/player/TrackPlayer";
 import { MGradientsDarkTheme } from "@/theme/utils/mGredient";
 import AppSideBar from "@components/SideBar";
 import TopBar from "@components/TopBar";
-import { Box, Grid, styled, Theme, useTheme } from "@mui/material";
+import { Box, styled, Theme, useTheme } from "@mui/material";
 import { makeStyles } from "@mui/styles";
-import { display } from "@mui/system";
 import { LocalStorageKeys, PageRoutes, useIsSmallScreen } from "@utils/constants";
 import { useEffect, useRef, useState } from "react";
-import { Outlet, useLocation, useNavigate, useNavigation } from "react-router-dom";
+import { Outlet, useLocation, useNavigate } from "react-router-dom";
 
 const ProtectedWrapper = () => {
   const navigate = useNavigate();
@@ -45,12 +44,13 @@ const ProtectedWrapper = () => {
               <AppSideBar />
             </Box>
           )}
+          {!isSmallScreen && <TrackPlayer />}
           <CustomScrollBox ref={containerRef} ml={isSmallScreen ? 0 : sidebarWidth} className={classes.mainContent}>
             {/* {!isSmallScreen && <TopBar />} */}
+
             <TopBar />
             <Box sx={{ minHeight: "50vh" }}>
               <Outlet />
-              <TrackPlayer />
             </Box>
             <Box className={classes.footer}>this is footer</Box>
           </CustomScrollBox>
@@ -70,6 +70,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     display: "flex",
     justifyContent: "center",
     alignItems: "flex-start",
+    position: "relative",
   },
   sidebar: {
     height: "100%",
