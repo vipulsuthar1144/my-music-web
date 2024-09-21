@@ -5,10 +5,10 @@ import { CSSProperties } from "react";
 const sharedStyles: CSSProperties = {
   fontFamily: ["Ubuntu-regular"].join(","),
   userSelect: "none",
-  whiteSpace: "nowrap",
-  overflow: "hidden",
-  textOverflow: "ellipsis",
-  display: "block",
+  // whiteSpace: "nowrap",
+  // overflow: "hidden",
+  // textOverflow: "ellipsis",
+  // display: "block",
 };
 
 export const typography: TypographyOptions = {

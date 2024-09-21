@@ -29,15 +29,15 @@ const AuthWrapper = () => {
   return (
     <Box
       sx={{
-        width: "100%",
-        height: "100vh",
+        // width: "100%",
+        minHeight: "100vh",
         ...globleDisplayFlexStyle,
-        overflowX: "hidden",
-        overflowY: "auto",
+        // overflowX: "hidden",
+        // overflowY: "auto",
         background: MGradientsDarkTheme.backroundBlue,
       }}
     >
-      <CurrentRoute />
+      {/* <CurrentRoute /> */}
       {/* <LoadingBar color="#f11946" ref={ref} /> */}
       {/* <LoaderAppBar /> */}
       {!isLoggedIn && <Outlet />}

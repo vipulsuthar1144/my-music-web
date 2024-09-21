@@ -39,21 +39,24 @@ const ProtectedWrapper = () => {
     <Box className={classes.root}>
       {isLoggedIn && (
         <>
-          {!isSmallScreen && (
-            <Box className={classes.sidebar}>
-              <AppSideBar />
-            </Box>
-          )}
           {!isSmallScreen && <TrackPlayer />}
-          <CustomScrollBox ref={containerRef} ml={isSmallScreen ? 0 : sidebarWidth} className={classes.mainContent}>
-            {/* {!isSmallScreen && <TopBar />} */}
-
+          {!isSmallScreen && <AppSideBar />}
+          <CustomScrollBox
+            ref={containerRef}
+            ml={isSmallScreen ? 0 : sidebarWidth}
+            sx={{
+              "::-webkit-scrollbar": {
+                width: isSmallScreen ? "0px" : "5px",
+              },
+            }}
+          >
             <TopBar />
-            <Box sx={{ minHeight: "50vh" }}>
-              <Outlet />
-            </Box>
+            <Outlet />
             <Box className={classes.footer}>this is footer</Box>
           </CustomScrollBox>
+          {/* <Box component={"aside"} sx={{ width: "50px", height: "100vh", backgroundColor: "error.main" }}>
+            this is footer
+          </Box> */}
         </>
       )}
     </Box>
@@ -64,30 +67,9 @@ export default ProtectedWrapper;
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
-    width: "100%",
-    height: "100vh",
     background: MGradientsDarkTheme.backroundBlue,
     display: "flex",
-    justifyContent: "center",
-    alignItems: "flex-start",
-    position: "relative",
   },
-  sidebar: {
-    height: "100%",
-    position: "fixed",
-    left: 0,
-    top: 0,
-    zIndex: 11,
-  },
-  mainContent: {
-    width: "100%",
-    borderRadius: "10px",
-    maxWidth: "2000px",
-    height: "100vh",
-    overflowY: "auto",
-    overflowX: "hidden",
-  },
-
   footer: {
     marginTop: "10px",
     backgroundColor: theme.palette.secondary.main,
@@ -98,17 +80,22 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 export const CustomScrollBox = styled(Box)(({ theme }) => ({
+  width: "100%",
+  // overflow: "hidden",
+  overflow: "hidden  auto",
+  height: "100vh",
+  borderRadius: "20px",
   "::-webkit-scrollbar": {
-    width: "12px",
-    height: "12px",
-    display: "none",
+    width: "5px",
+    // height: "12px",
+    // display: "none",
   },
   "::-webkit-scrollbar-track": {
     background: "transparent",
   },
   "::-webkit-scrollbar-thumb": {
     background: theme.palette.text.secondary, // Thumb color
-    // borderRadius: "5px",
+    borderRadius: "5px",
   },
   "::-webkit-scrollbar-thumb:hover": {
     // backgroundColor: theme.palette.primary.dark, // Darker color on hover

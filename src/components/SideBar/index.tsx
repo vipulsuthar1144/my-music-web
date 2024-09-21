@@ -53,6 +53,8 @@ const AppSideBar = () => {
           zIndex: 11,
           borderWidth: 0,
           position: "fixed",
+          left: 0,
+          top: 0,
           [`.${sidebarClasses.container}`]: {
             // background: MGradientsDarkTheme.backroundBlue,
             // backgroundColor: "rgba(126,11,26,0.7)",
