@@ -6,7 +6,7 @@ type OverlayProps = {
   isShown: boolean;
 };
 
-const Overlay = ({ isShown }: OverlayProps) => {
+const OverlaySidebar = ({ isShown }: OverlayProps) => {
   return (
     <Box
       sx={{
@@ -26,4 +26,4 @@ const Overlay = ({ isShown }: OverlayProps) => {
   );
 };
 
-export default Overlay;
+export default OverlaySidebar;

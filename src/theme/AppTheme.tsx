@@ -1,8 +1,8 @@
+import { Theme } from "@mui/material";
 import { FC } from "react";
 import ThemeModeProvider from "./hooks/ThemeModeProvider";
+import { IExtendedPalette } from "./utils/palette";
 import MTheme from "./wrapper/MTheme";
-import { Theme, useTheme } from "@mui/material";
-import { IExtendedPalette, IExtendedPaletteOptions } from "./utils/palette";
 
 interface IAppThemeProps {
   children: React.ReactNode;

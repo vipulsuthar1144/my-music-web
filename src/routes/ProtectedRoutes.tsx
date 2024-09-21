@@ -7,14 +7,8 @@ import { Navigate, RouteObject } from "react-router-dom";
 const ProtectedRoutes: RouteObject[] = [
   {
     index: true,
-    // element: <Navigate to={PageRoutes.HOME} replace />,
     element: <Home />,
   },
-  // {
-  //   path: PageRoutes.HOME,
-  //   element: <Navigate to={"/"} replace />,
-  // },
-
   {
     path: PageRoutes.SEARCH,
     element: <Search />,
@@ -36,7 +30,7 @@ const ProtectedRoutes: RouteObject[] = [
 
   {
     path: PageRoutes.PROFILE,
-    element: <Box sx={{ width: "100%", minHeight: "45vh" }}>profile</Box>,
+    element: <Box>profile</Box>,
   },
 
   {

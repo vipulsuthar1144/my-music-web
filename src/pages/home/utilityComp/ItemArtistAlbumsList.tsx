@@ -1,10 +1,9 @@
 import { MGradientsDarkTheme } from "@/theme/utils/mGredient";
-import { img1, imgCar, imgPlayBtnGreen, imgSpotifyGreenSideBarLogo } from "@assets/images";
+import { img1, imgCar, imgPlayBtnGreen } from "@assets/images";
 import ImageComp from "@components/Image";
-import { Box, ButtonBase, Card, CardActionArea, CardContent, CardMedia, Theme, Tooltip, Typography } from "@mui/material";
+import { Box, Card, CardActionArea, CardContent, CardMedia, Typography } from "@mui/material";
 import { makeStyles } from "@mui/styles";
-import { showCustomToast } from "@utils/customToast";
-import { globleDisplayFlexStyle, globleEaseInOutTransitionTime, globleTransitionTime } from "@utils/globleStyle";
+import { globleEaseInOutTransitionTime } from "@utils/globleStyle";
 import { useState } from "react";
 
 type ItemArtistAlbumsListProps = {
@@ -32,7 +31,7 @@ const ItemArtistAlbumsList: React.FC<ItemArtistAlbumsListProps> = ({ isArtist = 
         onMouseLeave={() => {
           setIsHovered(false);
         }}
-        sx={{ height: "100%", ...globleDisplayFlexStyle, justifyContent: "flex-start", alignItems: "flex-start", gap: "10px", padding: "10px" }}
+        sx={{ height: "100%", display: "flex", flexDirection: "column", justifyContent: "flex-start", alignItems: "flex-start", gap: "10px", padding: "10px" }}
       >
         <Box sx={{ position: "relative", aspectRatio: 1 }}>
           <CardMedia
@@ -84,22 +83,16 @@ const ItemArtistAlbumsList: React.FC<ItemArtistAlbumsListProps> = ({ isArtist = 
 
 export default ItemArtistAlbumsList;
 
-const useStyle = makeStyles((theme: Theme) => ({
+const useStyle = makeStyles({
   root: {
-    // width: "100%",
-    // width: "150px",
     flexShrink: 0,
     flexBasis: "150px",
-    // flexGrow: 1,
     overflow: "hidden",
     boxSizing: "border-box",
-
     transition: `transform ${globleEaseInOutTransitionTime},backgroundColor ${globleEaseInOutTransitionTime}`,
     borderRadius: "8px",
     "&:hover": {
-      // transform: "scale(1.15)",
       backgroundImage: MGradientsDarkTheme.hoverBgColor,
-      // backgroundColor: "secondary.main",
     },
   },
-}));
+});

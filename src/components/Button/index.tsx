@@ -1,6 +1,5 @@
-import { ILoaderButtonProps } from "@components/Loader/type";
 import { Box, Button, CircularProgress } from "@mui/material";
-import { IGlobalButtonProps } from "@utils/globleTypes";
+import { IGlobalButtonProps, ILoaderButtonProps } from "@utils/globleTypes";
 
 export const ContainedButton = ({ label, onClick, disabled, style, type }: IGlobalButtonProps) => {
   const buttonType = type === "reset" || type === "submit" ? type : "button";

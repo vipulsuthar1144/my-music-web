@@ -1,13 +1,9 @@
-import { MGradientsDarkTheme } from "@/theme/utils/mGredient";
-import { img1, imgCar, imgPlayBtnGreen, imgSpotifyGreenSideBarLogo } from "@assets/images";
-import { StyledFavoriteIconOutlined } from "@assets/SVG";
+import { img1 } from "@assets/images";
 import ImageComp from "@components/Image";
-import { AccessTimeRounded, FavoriteBorder, FavoriteOutlined } from "@mui/icons-material";
-import { Box, ButtonBase, Card, CardActionArea, CardContent, CardMedia, IconButton, Stack, Theme, Tooltip, Typography } from "@mui/material";
+import { AccessTimeRounded } from "@mui/icons-material";
+import { Box, Card, CardActionArea, CardContent, Stack, Theme, Typography } from "@mui/material";
 import { makeStyles } from "@mui/styles";
-import { showCustomToast } from "@utils/customToast";
-import { globleDisplayFlexStyle, globleEaseInOutTransitionTime, globleTransitionTime } from "@utils/globleStyle";
-import { useState } from "react";
+import { globleEaseInOutTransitionTime } from "@utils/globleStyle";
 
 const ItemSongList = () => {
   const classes = useStyle();

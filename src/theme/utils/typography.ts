@@ -9,6 +9,10 @@ const sharedStyles: CSSProperties = {
   // overflow: "hidden",
   // textOverflow: "ellipsis",
   // display: "block",
+
+  // display: '-webkit-box',
+  // WebkitBoxOrient: 'vertical',
+  // WebkitLineClamp: 3,  // Number of lines before the ellipsis
 };
 
 export const typography: TypographyOptions = {

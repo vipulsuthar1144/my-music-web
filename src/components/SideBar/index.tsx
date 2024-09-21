@@ -1,21 +1,7 @@
-import { MGradientsDarkTheme } from "@/theme/utils/mGredient";
 import { imgSpotifyGreenSideBarLogo } from "@assets/images";
 import ImageComp from "@components/Image";
-import Overlay from "@components/Overlay";
-import {
-  AccountCircle,
-  AccountCircleOutlined,
-  Favorite,
-  FavoriteBorder,
-  Headphones,
-  HeadphonesOutlined,
-  Home,
-  HomeOutlined,
-  Search,
-  SearchOutlined,
-  Settings,
-  SettingsOutlined,
-} from "@mui/icons-material";
+import OverlaySidebar from "@components/Overlay";
+import { AccountCircle, AccountCircleOutlined, Favorite, FavoriteBorder, Headphones, HeadphonesOutlined, Home, HomeOutlined, Search, SearchOutlined } from "@mui/icons-material";
 import { Box, useTheme } from "@mui/material";
 import { PageRoutes } from "@utils/constants";
 import { globleTransitionTime } from "@utils/globleStyle";
@@ -47,7 +33,7 @@ const AppSideBar = () => {
 
   return (
     <>
-      <Overlay isShown={isCollapse} />
+      <OverlaySidebar isShown={isCollapse} />
       <Sidebar
         rootStyles={{
           zIndex: 11,
@@ -56,11 +42,7 @@ const AppSideBar = () => {
           left: 0,
           top: 0,
           [`.${sidebarClasses.container}`]: {
-            // background: MGradientsDarkTheme.backroundBlue,
-            // backgroundColor: "rgba(126,11,26,0.7)",
-            // backdropFilter: "blur(2px)",
             backgroundColor: "transparent",
-            // width: isCollapse ? "auto" : "fit-content",
             height: "100vh",
           },
         }}

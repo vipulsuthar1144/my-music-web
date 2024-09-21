@@ -1,12 +1,11 @@
 import { useSetItemLS } from "@/config/localStorage";
 import { imgSpotifyGreenLogin } from "@assets/images";
-import { ContainedGreenButton, LoaderButton } from "@components/Button";
+import { LoaderButton } from "@components/Button";
 import ImageComp from "@components/Image";
-import { LoginRounded } from "@mui/icons-material";
-import { Box, useTheme } from "@mui/material";
+import { RootContainer } from "@components/styledComponents";
+import { useTheme } from "@mui/material";
 import { LocalStorageKeys, PageRoutes } from "@utils/constants";
 import { showCustomToast } from "@utils/customToast";
-import { globleDisplayFlexStyle } from "@utils/globleStyle";
 import { useNavigate } from "react-router-dom";
 
 const Auth = () => {
@@ -20,11 +19,11 @@ const Auth = () => {
     showCustomToast("login success", "success");
   };
   return (
-    <Box
+    <RootContainer
       sx={{
-        ...globleDisplayFlexStyle,
         height: "100%",
-        width: "100%",
+        alignItems: "center",
+        justifyContent: "center",
       }}
     >
       <ImageComp
@@ -46,7 +45,7 @@ const Auth = () => {
       />
 
       <LoaderButton label={"Login With Spotify"} variant={"contained"} color={"success"} onClick={showToast} />
-    </Box>
+    </RootContainer>
   );
 };
 

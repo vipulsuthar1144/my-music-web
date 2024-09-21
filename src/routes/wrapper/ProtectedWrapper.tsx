@@ -7,6 +7,7 @@ import TopBar from "@components/TopBar";
 import { Box, styled, Theme, useTheme } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { LocalStorageKeys, PageRoutes, useIsSmallScreen } from "@utils/constants";
+import { sidebarWidth } from "@utils/globleStyle";
 import { useEffect, useRef, useState } from "react";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 
@@ -14,7 +15,6 @@ const ProtectedWrapper = () => {
   const navigate = useNavigate();
   const theme = useTheme();
   const isSmallScreen = useIsSmallScreen(theme);
-  const sidebarWidth = "80px";
   const classes = useStyles();
 
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
@@ -54,9 +54,6 @@ const ProtectedWrapper = () => {
             <Outlet />
             <Box className={classes.footer}>this is footer</Box>
           </CustomScrollBox>
-          {/* <Box component={"aside"} sx={{ width: "50px", height: "100vh", backgroundColor: "error.main" }}>
-            this is footer
-          </Box> */}
         </>
       )}
     </Box>
@@ -67,6 +64,7 @@ export default ProtectedWrapper;
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
+    height: "100vh",
     background: MGradientsDarkTheme.backroundBlue,
     display: "flex",
   },

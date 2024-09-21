@@ -4,7 +4,7 @@ import ImageComp from "@components/Image";
 import { Box, ButtonBase, Card, CardActionArea, CardContent, CardMedia, Theme, Tooltip, Typography } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { showCustomToast } from "@utils/customToast";
-import { globleDisplayFlexStyle, globleEaseInOutTransitionTime, globleTransitionTime } from "@utils/globleStyle";
+import { globleEaseInOutTransitionTime, globleTransitionTime } from "@utils/globleStyle";
 import { useState } from "react";
 
 type ItemTopResultProps = {
@@ -30,7 +30,7 @@ const ItemTopResult: React.FC<ItemTopResultProps> = ({ isArtist = false }) => {
         onMouseLeave={() => {
           setIsHovered(false);
         }}
-        sx={{ height: "100%", ...globleDisplayFlexStyle, justifyContent: "flex-start", alignItems: "flex-start", gap: "10px", padding: "12px", position: "relative" }}
+        sx={{ height: "100%", display: "flex", flexDirection: "column", justifyContent: "flex-start", alignItems: "flex-start", gap: "10px", padding: "12px", position: "relative" }}
       >
         <CardMedia
           component="img"

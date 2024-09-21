@@ -1,16 +1,12 @@
 import { useSetItemLS } from "@/config/localStorage";
 import { mColors } from "@/theme/utils/mColors";
-import { imgSpotifyGreenSideBarLogo } from "@assets/images";
 import { StyledBackIcon, StyledForwardIcon, StyledNotificationIconFilled, StyledSettingIconFilled, StyledThemeModeIconFilled } from "@assets/SVG";
 import { LoaderButton } from "@components/Button";
 import EditText from "@components/EditText";
-import withIconStyles from "@components/HOC/withIconStyles";
-import CustomIcon from "@components/HOC/withIconStyles";
-import ImageComp from "@components/Image";
-import { AccountCircle, ArrowBackIosNewRounded, ArrowForwardIosRounded, CloseRounded, Home, LogoutRounded, SearchRounded } from "@mui/icons-material";
-import { AppBar, IconButton, InputAdornment, Stack, TextField, Toolbar } from "@mui/material";
+import { LogoutRounded } from "@mui/icons-material";
+import { AppBar, Stack, Toolbar } from "@mui/material";
 import { LocalStorageKeys, PageRoutes } from "@utils/constants";
-import React, { useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const TopBar = () => {
@@ -20,12 +16,12 @@ const TopBar = () => {
     <AppBar
       position="sticky"
       sx={{
-        // backgroundColor: "transparent",
+        top: 0,
+        left: 0,
         backgroundColor: mColors.EbonyBlack,
         backgroundImage: "none",
         boxShadow: "none",
         width: "100%",
-        // backdropFilter: "blur(50px)",
         height: "fit-content",
         zIndex: 10,
       }}

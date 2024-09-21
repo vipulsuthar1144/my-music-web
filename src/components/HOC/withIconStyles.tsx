@@ -1,24 +1,8 @@
 import { MGradientsDarkTheme } from "@/theme/utils/mGredient";
-import { alpha, IconButton, SvgIconProps, SvgIconTypeMap, Theme, Tooltip } from "@mui/material";
-import { OverridableComponent } from "@mui/material/OverridableComponent";
+import { IconButton, SvgIconProps, Theme, Tooltip } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { globleTransitionTime } from "@utils/globleStyle";
-import React, { Component, ComponentType, MouseEvent } from "react";
-
-const useStyles = makeStyles((theme: Theme) => ({
-  root: {
-    color: theme.palette.text.primary,
-    transition: `background-image ${globleTransitionTime}, cursor ${globleTransitionTime}`,
-    cursor: "pointer",
-    padding: "10px",
-    boxSizing: "border-box",
-    borderRadius: "50%",
-    "&:hover": {
-      // transform: "scale(1.2)",
-      backgroundImage: MGradientsDarkTheme.hoverBgColor,
-    },
-  },
-}));
+import React, { ComponentType, MouseEvent } from "react";
 
 type WithIconStylesProps = {
   onClick?: (event: MouseEvent<HTMLElement>) => void;
@@ -42,3 +26,17 @@ const withIconStyles = <P extends SvgIconProps>(IconComponent: ComponentType<P>,
 };
 
 export default withIconStyles;
+
+const useStyles = makeStyles((theme: Theme) => ({
+  root: {
+    color: theme.palette.text.primary,
+    transition: `background-image ${globleTransitionTime}, cursor ${globleTransitionTime}`,
+    cursor: "pointer",
+    padding: "10px",
+    boxSizing: "border-box",
+    borderRadius: "50%",
+    "&:hover": {
+      backgroundImage: MGradientsDarkTheme.hoverBgColor,
+    },
+  },
+}));

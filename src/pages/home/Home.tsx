@@ -1,7 +1,6 @@
 import ItemArtistAlbumsList from "@/pages/home/utilityComp/ItemArtistAlbumsList";
 import { Box, Theme, Typography } from "@mui/material";
 import ItemSongList from "./utilityComp/ItemSongList";
-import styled from "@emotion/styled";
 import { makeStyles } from "@mui/styles";
 import { ContainerWithoutScrollbar, RootContainer } from "@components/styledComponents";
 import { useNavigate } from "react-router-dom";
@@ -17,7 +16,7 @@ const Home: React.FC = () => {
           <ItemArtistAlbumsList
             key={index}
             onClick={() => {
-              navigate("/search");
+              navigate("search");
             }}
             isArtist={false}
           />
