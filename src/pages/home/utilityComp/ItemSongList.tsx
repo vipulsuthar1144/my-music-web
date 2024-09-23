@@ -1,5 +1,6 @@
 import { img1 } from "@assets/images";
 import ImageComp from "@components/Image";
+import { SingleLineTypo } from "@components/styledComponents";
 import { AccessTimeRounded } from "@mui/icons-material";
 import { Box, Card, CardActionArea, CardContent, Stack, Theme, Typography } from "@mui/material";
 import { makeStyles } from "@mui/styles";
@@ -37,6 +38,9 @@ const ItemSongList = () => {
               borderRadius: "5px",
             }}
           /> */}
+        <Typography variant="subtitle1" color="text.primary" mr={"2px"}>
+          1
+        </Typography>
         <ImageComp
           img={img1}
           alt={"album"}
@@ -51,12 +55,12 @@ const ItemSongList = () => {
         {/* </Box> */}
         <CardContent sx={{ padding: 0, m: 0, flex: 1, display: "flex", justifyContent: "space-between", alignItems: "center" }}>
           <Box>
-            <Typography variant="subtitle1" color="text.primary" mb={"2px"}>
+            <SingleLineTypo variant="subtitle1" color="text.primary" mb={"2px"}>
               Arijit Singh
-            </Typography>
-            <Typography variant="subtitle2" color="text.secondary">
+            </SingleLineTypo>
+            <SingleLineTypo variant="subtitle2" color="text.secondary">
               Artist
-            </Typography>
+            </SingleLineTypo>
           </Box>
           <Stack direction={"row"} gap={"10px"} sx={{ boxSizing: "border-box" }}>
             {/* <StyledFavoriteIconOutlined /> */}

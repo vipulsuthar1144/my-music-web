@@ -1,7 +1,8 @@
+import ProfileArtistOrAlbum from "@/pages/details/ProfileArtistOrAlbum";
+import SeeAll from "@/pages/details/SeeAll";
 import Home from "@/pages/home/Home";
 import Search from "@/pages/search/Search";
 import { Box } from "@mui/material";
-import { PageRoutes } from "@utils/constants";
 import { Navigate, RouteObject } from "react-router-dom";
 
 const ProtectedRoutes: RouteObject[] = [
@@ -10,32 +11,39 @@ const ProtectedRoutes: RouteObject[] = [
     element: <Home />,
   },
   {
-    path: PageRoutes.SEARCH,
+    path: "search",
     element: <Search />,
   },
-
   {
-    path: PageRoutes.FAVORITES,
+    path: "details",
+    element: <ProfileArtistOrAlbum />,
+  },
+  {
+    path: "seeall",
+    element: <SeeAll />,
+  },
+  {
+    path: "favorites",
     element: <>Favorites</>,
   },
 
   {
-    path: PageRoutes.RECENT_PLAYED,
+    path: "recents",
     element: <>Recent</>,
   },
   {
-    path: PageRoutes.SETTINGS,
+    path: "settings",
     element: <>Settings</>,
   },
 
   {
-    path: PageRoutes.PROFILE,
+    path: "profile",
     element: <Box>profile</Box>,
   },
 
   {
     path: "*",
-    element: <Navigate to={PageRoutes.BASE} replace />,
+    element: <Navigate to={"/"} replace />,
   },
 ];
 

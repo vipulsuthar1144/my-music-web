@@ -15,7 +15,7 @@ const withIconStyles = <P extends SvgIconProps>(IconComponent: ComponentType<P>,
 
     return (
       <Tooltip title={title} disableInteractive>
-        <IconButton className={classes.root} onMouseDown={(event) => event.stopPropagation()} onClick={onClick}>
+        <IconButton aria-label={title ?? "button"} className={classes.root} onMouseDown={(event) => event.stopPropagation()} onClick={onClick}>
           <IconComponent {...(props as P)} sx={{ fontSize, color: "text.primary" }} />
         </IconButton>
       </Tooltip>
@@ -37,6 +37,9 @@ const useStyles = makeStyles((theme: Theme) => ({
     borderRadius: "50%",
     "&:hover": {
       backgroundImage: MGradientsDarkTheme.hoverBgColor,
+    },
+    "&:active": {
+      transform: "scale(0.8)",
     },
   },
 }));

@@ -5,7 +5,7 @@ import { LoaderButton } from "@components/Button";
 import EditText from "@components/EditText";
 import { LogoutRounded } from "@mui/icons-material";
 import { AppBar, Stack, Toolbar } from "@mui/material";
-import { LocalStorageKeys, PageRoutes } from "@utils/constants";
+import { LocalStorageKeys } from "@utils/constants";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -60,7 +60,7 @@ const TopBar = () => {
               setTimeout(() => {
                 setLoading(false);
                 useSetItemLS(LocalStorageKeys.AUTH_USER_MODEL_KEY, { isLogin: false });
-                navigate(PageRoutes.AUTH, { replace: true });
+                navigate("/auth", { replace: true });
                 // showCustomToast("Oops! LogOut Failed.", "error");
               }, 2000);
             }}

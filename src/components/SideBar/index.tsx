@@ -3,7 +3,6 @@ import ImageComp from "@components/Image";
 import OverlaySidebar from "@components/Overlay";
 import { AccountCircle, AccountCircleOutlined, Favorite, FavoriteBorder, Headphones, HeadphonesOutlined, Home, HomeOutlined, Search, SearchOutlined } from "@mui/icons-material";
 import { Box, useTheme } from "@mui/material";
-import { PageRoutes } from "@utils/constants";
 import { globleTransitionTime } from "@utils/globleStyle";
 import { useState } from "react";
 import { Menu, MenuItem, Sidebar, sidebarClasses } from "react-pro-sidebar";
@@ -18,15 +17,15 @@ const AppSideBar = () => {
 
   const menuItems = [
     {
-      id: PageRoutes.BASE,
+      id: "/",
       name: "Dashboard",
       icon: <HomeOutlined />,
       filledIcon: <Home />,
     },
-    { id: PageRoutes.SEARCH, name: "Search", icon: <SearchOutlined />, filledIcon: <Search /> },
-    { id: PageRoutes.FAVORITES, name: "Favorite Songs", icon: <FavoriteBorder />, filledIcon: <Favorite /> },
-    { id: PageRoutes.RECENT_PLAYED, name: "Recently Played", icon: <HeadphonesOutlined />, filledIcon: <Headphones /> },
-    { id: PageRoutes.PROFILE, name: "My Profile", icon: <AccountCircleOutlined />, filledIcon: <AccountCircle /> },
+    { id: "/search", name: "Search", icon: <SearchOutlined />, filledIcon: <Search /> },
+    { id: "/favorites", name: "Favorite Songs", icon: <FavoriteBorder />, filledIcon: <Favorite /> },
+    { id: "/recents", name: "Recently Played", icon: <HeadphonesOutlined />, filledIcon: <Headphones /> },
+    { id: "/profile", name: "My Profile", icon: <AccountCircleOutlined />, filledIcon: <AccountCircle /> },
   ];
 
   const handleMenuItemClick = (to: string) => navigate(to);

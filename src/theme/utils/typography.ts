@@ -5,6 +5,7 @@ import { CSSProperties } from "react";
 const sharedStyles: CSSProperties = {
   fontFamily: ["Ubuntu-regular"].join(","),
   userSelect: "none",
+  color: "text.primary",
   // whiteSpace: "nowrap",
   // overflow: "hidden",
   // textOverflow: "ellipsis",

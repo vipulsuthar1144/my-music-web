@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { Box } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 
 export const RootContainer = styled(Box)({
   flex: 1,
@@ -12,6 +12,7 @@ export const RootContainer = styled(Box)({
 
 export const ContainerWithoutScrollbar = styled(Box)({
   width: "100%",
+  minHeight: "150px",
   display: "flex",
   overflowX: "auto",
   marginBottom: "10px",
@@ -19,6 +20,13 @@ export const ContainerWithoutScrollbar = styled(Box)({
   "&::-webkit-scrollbar": {
     display: "none",
   },
+});
+
+export const SingleLineTypo = styled(Typography)({
+  whiteSpace: "nowrap",
+  overflow: "hidden",
+  textOverflow: "ellipsis",
+  display: "block",
 });
 
 // export const CustomScrollBox = styled(Box)((theme: Theme) => ({

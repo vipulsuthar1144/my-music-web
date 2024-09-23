@@ -8,7 +8,6 @@ const CurrentRoute = () => {
   return (
     <div>
       <h1>CurrentRoute</h1>
-
       <h3>current theme ::{themeMode}</h3>
       <h3>hash ::{location.hash}</h3>
       <h3>key ::{location.key}</h3>

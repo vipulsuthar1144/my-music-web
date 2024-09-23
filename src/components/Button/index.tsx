@@ -19,6 +19,15 @@ export const ContainedGreenButton = ({ label, onClick, disabled, style, type }: 
   );
 };
 
+export const TextButtonPrimary = ({ label, onClick, disabled, style, type }: IGlobalButtonProps) => {
+  const buttonType = type === "reset" || type === "submit" ? type : "button";
+  return (
+    <Button variant="text" sx={{ color: "text.primary" }} type={buttonType} disabled={disabled} onClick={onClick} style={{ ...style }}>
+      {label}
+    </Button>
+  );
+};
+
 export const LoaderButton = ({ variant, color, type, onClick, label, loading = false, style, startIcon }: ILoaderButtonProps) => {
   const buttonType = type === "reset" || type === "submit" ? type : "button";
   return (

@@ -74,6 +74,26 @@ export const getButton = (theme: Theme): MButton => {
         },
 
         {
+          props: { variant: "text" },
+          style: {
+            color: "inherit",
+            borderRadius: "8px",
+            textTransform: "none",
+            padding: "5px 10px",
+            boxSizing: "border-box",
+            transition: `none`,
+            "&:hover": {
+              transform: "scale(1)",
+              textDecoration: "underline",
+            },
+            "&:active": {
+              transform: "scale(0.9)",
+            },
+            // },
+          },
+        },
+
+        {
           props: { variant: "contained", color: "success" },
           style: {
             color: mColors.black,

@@ -7,7 +7,6 @@ import {
   FavoriteBorder,
   Notifications,
   PauseCircleOutlineRounded,
-  PlayCircleFilled,
   PlayCircleOutlineRounded,
   RepeatOneRounded,
   RepeatRounded,

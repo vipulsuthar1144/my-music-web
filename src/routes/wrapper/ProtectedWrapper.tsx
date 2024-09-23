@@ -6,7 +6,7 @@ import AppSideBar from "@components/SideBar";
 import TopBar from "@components/TopBar";
 import { Box, styled, Theme, useTheme } from "@mui/material";
 import { makeStyles } from "@mui/styles";
-import { LocalStorageKeys, PageRoutes, useIsSmallScreen } from "@utils/constants";
+import { LocalStorageKeys, useIsSmallScreen } from "@utils/constants";
 import { sidebarWidth } from "@utils/globleStyle";
 import { useEffect, useRef, useState } from "react";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
@@ -29,7 +29,7 @@ const ProtectedWrapper = () => {
     const user: ILogin | null = useGetItemLS(LocalStorageKeys.AUTH_USER_MODEL_KEY);
     if (user == null || !user.isLogin) {
       setIsLoggedIn(false);
-      navigate(PageRoutes.AUTH, { replace: true });
+      navigate("/auth", { replace: true });
       return;
     }
     setIsLoggedIn(true);
@@ -39,7 +39,7 @@ const ProtectedWrapper = () => {
     <Box className={classes.root}>
       {isLoggedIn && (
         <>
-          {!isSmallScreen && <TrackPlayer />}
+          {/* {!isSmallScreen && <TrackPlayer />} */}
           {!isSmallScreen && <AppSideBar />}
           <CustomScrollBox
             ref={containerRef}

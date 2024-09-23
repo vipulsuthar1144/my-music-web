@@ -1,5 +1,6 @@
-import { Box } from "@mui/material";
-import { IGlobleImageProps } from "@utils/globleTypes";
+import { TextButtonPrimary } from "@components/Button";
+import { Box, Typography } from "@mui/material";
+import { IGlobleImageProps, IGlobleTitleSeeAllProps } from "@utils/globleTypes";
 
 const ImageComp = ({ img, alt, style, onClick }: IGlobleImageProps) => {
   // return <img src={img} alt={alt} style={{ height: "auto", objectFit: "contain",
@@ -19,6 +20,7 @@ const ImageComp = ({ img, alt, style, onClick }: IGlobleImageProps) => {
       component="img"
       src={img}
       alt={alt}
+      loading="lazy"
       sx={{
         width: "30%",
         maxWidth: "100%",
@@ -33,3 +35,13 @@ const ImageComp = ({ img, alt, style, onClick }: IGlobleImageProps) => {
 };
 
 export default ImageComp;
+
+const TitleSeeAll = ({ varient = "h3", title, btnText = "See all", onClick, style }: IGlobleTitleSeeAllProps) => {
+  return (
+    <Box sx={{ display: "flex", width: "100%", justifyContent: "space-between", alignItems: "center", ...style }}>
+      <Typography variant={varient}>{title}</Typography>
+      <TextButtonPrimary label={btnText} onClick={onClick} />
+    </Box>
+  );
+};
+export { TitleSeeAll };

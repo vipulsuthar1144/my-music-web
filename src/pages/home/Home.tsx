@@ -4,19 +4,20 @@ import ItemSongList from "./utilityComp/ItemSongList";
 import { makeStyles } from "@mui/styles";
 import { ContainerWithoutScrollbar, RootContainer } from "@components/styledComponents";
 import { useNavigate } from "react-router-dom";
+import { TitleSeeAll } from "@components/Image";
 
 const Home: React.FC = () => {
   const classes = useStyle();
   const navigate = useNavigate();
   return (
     <RootContainer>
-      <Typography variant="h3">Play Recentaly</Typography>
+      <TitleSeeAll title="Play Recently" />
       <ContainerWithoutScrollbar>
         {Array.from(Array(15)).map((_, index) => (
           <ItemArtistAlbumsList
             key={index}
             onClick={() => {
-              navigate("search");
+              navigate("details");
             }}
             isArtist={false}
           />
@@ -25,15 +26,16 @@ const Home: React.FC = () => {
       <Typography variant="h3"> Tranding Songs </Typography>
       <ContainerWithoutScrollbar sx={{ scrollSnapType: "x mandatory" }} gap={"10px"}>
         <Box className={classes.trendingContainer}>
-          <Typography variant="h4" mb={"10px"}>
+          <Typography variant="h4" my={"10px"}>
             Hindi
           </Typography>
+          {/* <TitleSeeAll varient="h4" title="Hindi" style={{ paddingTop: "10px" }} /> */}
           {Array.from(Array(5)).map((_, index) => (
             <ItemSongList key={index} />
           ))}
         </Box>
         <Box className={classes.trendingContainer}>
-          <Typography variant="h4" mb={"10px"}>
+          <Typography variant="h4" my={"10px"}>
             Punjabi
           </Typography>
           {Array.from(Array(5)).map((_, index) => (
@@ -41,7 +43,7 @@ const Home: React.FC = () => {
           ))}
         </Box>
         <Box className={classes.trendingContainer}>
-          <Typography variant="h4" mb={"10px"}>
+          <Typography variant="h4" my={"10px"}>
             English
           </Typography>
           {Array.from(Array(5)).map((_, index) => (
@@ -49,13 +51,13 @@ const Home: React.FC = () => {
           ))}
         </Box>
       </ContainerWithoutScrollbar>
-      <Typography variant="h3">Trending Artists</Typography>
+      <TitleSeeAll title="Trending Artists" />
       <ContainerWithoutScrollbar>
         {Array.from(Array(15)).map((_, index) => (
           <ItemArtistAlbumsList key={index} isArtist={true} />
         ))}
       </ContainerWithoutScrollbar>
-      <Typography variant="h3">Recommended for you</Typography>
+      <TitleSeeAll title="Recommended for you" />
       <ContainerWithoutScrollbar>
         {Array.from(Array(15)).map((_, index) => (
           <ItemArtistAlbumsList key={index} isArtist={false} />

@@ -1,7 +1,8 @@
 import { MGradientsDarkTheme } from "@/theme/utils/mGredient";
 import { img1, imgCar, imgPlayBtnGreen } from "@assets/images";
 import ImageComp from "@components/Image";
-import { Box, Card, CardActionArea, CardContent, CardMedia, Typography } from "@mui/material";
+import { SingleLineTypo } from "@components/styledComponents";
+import { Box, Card, CardActionArea, CardContent, CardMedia } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { globleEaseInOutTransitionTime } from "@utils/globleStyle";
 import { useState } from "react";
@@ -42,7 +43,6 @@ const ItemArtistAlbumsList: React.FC<ItemArtistAlbumsListProps> = ({ isArtist = 
               objectFit: "fill",
               cursor: "pointer",
               aspectRatio: 1,
-              // borderRadius: "8px",
               borderRadius: isArtist ? "50%" : "8px",
             }}
           />
@@ -69,12 +69,12 @@ const ItemArtistAlbumsList: React.FC<ItemArtistAlbumsListProps> = ({ isArtist = 
           />
         </Box>
         <CardContent sx={{ padding: 0, m: 0, width: "100%" }}>
-          <Typography variant="subtitle1" color="text.primary">
-            Arijit Singh
-          </Typography>
-          <Typography variant="subtitle2" color="text.secondary">
+          <SingleLineTypo variant="subtitle1" color="text.primary">
+            Arijit Singh Arijit Singh
+          </SingleLineTypo>
+          <SingleLineTypo variant="subtitle2" color="text.secondary">
             Artist
-          </Typography>
+          </SingleLineTypo>
         </CardContent>
       </CardActionArea>
     </Card>
