@@ -8,6 +8,8 @@ export const useIsSmallScreen = (theme: Theme) => {
 };
 
 export const LocalStorageKeys = {
+  IS_LOGGED_IN: "IS_LOGGED_IN",
+  ACCESS_TOKEN: "ACCESS_TOKEN",
   THEME_MODE_VALUE: "THEME_MODE_VALUE",
   AUTH_USER_MODEL_KEY: "AUTH_USER_MODEL_KEY",
 };

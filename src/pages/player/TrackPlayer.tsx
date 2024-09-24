@@ -1,4 +1,4 @@
-import { img1 } from "@assets/images";
+import { img1, musicWave } from "@assets/images";
 import {
   StyledCloseIconFilled,
   StyledFavoriteIconOutlined,

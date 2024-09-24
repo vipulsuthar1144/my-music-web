@@ -1,5 +1,4 @@
-import { useGetItemLS } from "@/config/localStorage";
-import { ILogin } from "@/pages/auth/utils";
+import useLocalStorage from "@/config/localStorage.config";
 import TrackPlayer from "@/pages/player/TrackPlayer";
 import { MGradientsDarkTheme } from "@/theme/utils/mGredient";
 import AppSideBar from "@components/SideBar";
@@ -8,7 +7,7 @@ import { Box, styled, Theme, useTheme } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { LocalStorageKeys, useIsSmallScreen } from "@utils/constants";
 import { sidebarWidth } from "@utils/globleStyle";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 
 const ProtectedWrapper = () => {
@@ -17,7 +16,8 @@ const ProtectedWrapper = () => {
   const isSmallScreen = useIsSmallScreen(theme);
   const classes = useStyles();
 
-  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
+  const [accessToken, _] = useLocalStorage(LocalStorageKeys.ACCESS_TOKEN, "");
+  const [isLoggedIn, setIsLoggedIn] = useLocalStorage(LocalStorageKeys.IS_LOGGED_IN, false);
   const location = useLocation();
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -26,8 +26,8 @@ const ProtectedWrapper = () => {
   }, [location]);
 
   useEffect(() => {
-    const user: ILogin | null = useGetItemLS(LocalStorageKeys.AUTH_USER_MODEL_KEY);
-    if (user == null || !user.isLogin) {
+    console.log("Protected Wrapper");
+    if (!accessToken) {
       setIsLoggedIn(false);
       navigate("/auth", { replace: true });
       return;

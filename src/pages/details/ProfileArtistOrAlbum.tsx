@@ -31,18 +31,18 @@ const ProfileArtistOrAlbum = () => {
           }}
         />
         <Box sx={{ flex: "1 1 auto" }}>
-          <Typography variant="h5" mb={"15px"}>
+          <Typography variant="h6" mb={"15px"}>
             Arijit Singh
           </Typography>
           <Typography variant="h1" style={{ fontSize: "clamp(2rem,0.5rem + 3vw, 3rem)", fontWeight: "900" }} mb={"15px"}>
             Arijit Singh Arijit singh
           </Typography>
-          <Typography variant="h5" mb={"2px"}>
+          <Typography variant="h6" mb={"2px"}>
             Arijit Singh
           </Typography>
         </Box>
       </Box>
-      <TitleSeeAll title="Popular" style={{ marginTop: "10px" }} onClick={() => navigate("/seeall")} />
+      <TitleSeeAll title="Popular" style={{ marginTop: "10px" }} onClick={() => navigate("/section")} />
       <Box mx={"20px"}>
         {Array.from(Array(10)).map((_, __) => (
           <ItemSongList />
@@ -75,6 +75,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     flexWrap: "wrap",
     flex: 1,
     gap: "30px",
-    alignItems: "center",
+    alignItems: "flex-end",
   },
 }));

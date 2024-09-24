@@ -1,11 +1,9 @@
-import { useSetItemLS } from "@/config/localStorage";
 import { mColors } from "@/theme/utils/mColors";
 import { StyledBackIcon, StyledForwardIcon, StyledNotificationIconFilled, StyledSettingIconFilled, StyledThemeModeIconFilled } from "@assets/SVG";
 import { LoaderButton } from "@components/Button";
 import EditText from "@components/EditText";
 import { LogoutRounded } from "@mui/icons-material";
 import { AppBar, Stack, Toolbar } from "@mui/material";
-import { LocalStorageKeys } from "@utils/constants";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -59,7 +57,7 @@ const TopBar = () => {
               setLoading(true);
               setTimeout(() => {
                 setLoading(false);
-                useSetItemLS(LocalStorageKeys.AUTH_USER_MODEL_KEY, { isLogin: false });
+                localStorage.clear();
                 navigate("/auth", { replace: true });
                 // showCustomToast("Oops! LogOut Failed.", "error");
               }, 2000);

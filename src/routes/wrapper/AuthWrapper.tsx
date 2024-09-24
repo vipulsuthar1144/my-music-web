@@ -1,23 +1,23 @@
-import { useGetItemLS } from "@/config/localStorage";
-import { ILogin } from "@/pages/auth/utils";
+import useLocalStorage from "@/config/localStorage.config";
 import { MGradientsDarkTheme } from "@/theme/utils/mGredient";
 import { Box } from "@mui/material";
 import { LocalStorageKeys } from "@utils/constants";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 
 const AuthWrapper = () => {
   const navigate = useNavigate();
-  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(true);
+  const [accessToken, _] = useLocalStorage(LocalStorageKeys.ACCESS_TOKEN, "");
+  const [isLoggedIn, setIsLoggedIn] = useLocalStorage(LocalStorageKeys.IS_LOGGED_IN, false);
 
   useEffect(() => {
-    const user: ILogin | null = useGetItemLS(LocalStorageKeys.AUTH_USER_MODEL_KEY);
-    if (user && user.isLogin) {
+    console.log("AUth Wrapper");
+    if (accessToken) {
       setIsLoggedIn(true);
       navigate("/", { replace: true });
       return;
     } else setIsLoggedIn(false);
-  }, [isLoggedIn]);
+  }, []);
 
   return (
     <Box

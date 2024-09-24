@@ -1,6 +1,5 @@
-import { Box, Grid, Typography } from "@mui/material";
+import { Grid, Typography } from "@mui/material";
 import ItemArtistAlbumsList from "../home/utilityComp/ItemArtistAlbumsList";
-import TrackPlayer from "../player/TrackPlayer";
 import ItemSongList from "../home/utilityComp/ItemSongList";
 import ItemTopResult from "../home/utilityComp/ItemTopResult";
 import { ContainerWithoutScrollbar, RootContainer } from "@components/styledComponents";

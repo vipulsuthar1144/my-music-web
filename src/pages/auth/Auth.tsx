@@ -1,23 +1,13 @@
-import { useSetItemLS } from "@/config/localStorage";
 import { imgSpotifyGreenLogin } from "@assets/images";
 import { LoaderButton } from "@components/Button";
 import ImageComp from "@components/Image";
 import { RootContainer } from "@components/styledComponents";
 import { useTheme } from "@mui/material";
-import { LocalStorageKeys } from "@utils/constants";
-import { showCustomToast } from "@utils/customToast";
-import { useNavigate } from "react-router-dom";
-
+import useAuth from "./Auth.hooks";
 const Auth = () => {
+  const { loading, goToLoginURL } = useAuth();
   const theme = useTheme();
-  const navigate = useNavigate();
 
-  const showToast = () => {
-    // toggleThemeMode();
-    useSetItemLS(LocalStorageKeys.AUTH_USER_MODEL_KEY, { isLogin: true });
-    navigate("/", { replace: true });
-    showCustomToast("login success", "success");
-  };
   return (
     <RootContainer
       sx={{
@@ -43,8 +33,7 @@ const Auth = () => {
           },
         }}
       />
-
-      <LoaderButton label={"Login With Spotify"} variant={"contained"} color={"success"} onClick={showToast} />
+      <LoaderButton label={"Login With Spotify"} variant={"contained"} color={"success"} loading={loading} onClick={goToLoginURL} />
     </RootContainer>
   );
 };

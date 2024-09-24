@@ -1,5 +1,5 @@
 import axios from "axios";
-import { requestErrorHandler, requestHandler, responseErrorHandler, responseHandler } from "./interceptors";
+import { requestErrorHandler, requestHandler, responseErrorHandler, responseHandler } from "./axios.interceptors";
 
 const BASE_URL: string = import.meta.env.VITE_APP_API_ENDPOINT;
 const AUTH_BASE_URL: string = import.meta.env.VITE_APP_AUTH_API_BASE_ENDPOINT;
