@@ -1,10 +1,9 @@
 import { MGradientsDarkTheme } from "@/theme/utils/mGredient";
-import { img1, imgCar, imgPlayBtnGreen, imgSpotifyGreenSideBarLogo } from "@assets/images";
+import { img1, imgCar, imgPlayBtnGreen } from "@assets/images";
 import ImageComp from "@components/Image";
-import { Box, ButtonBase, Card, CardActionArea, CardContent, CardMedia, Theme, Tooltip, Typography } from "@mui/material";
+import { Card, CardActionArea, CardContent, CardMedia, Theme, Typography } from "@mui/material";
 import { makeStyles } from "@mui/styles";
-import { showCustomToast } from "@utils/customToast";
-import { globleEaseInOutTransitionTime, globleTransitionTime } from "@utils/globleStyle";
+import { globleEaseInOutTransitionTime } from "@utils/globleStyle";
 import { useState } from "react";
 
 type ItemTopResultProps = {

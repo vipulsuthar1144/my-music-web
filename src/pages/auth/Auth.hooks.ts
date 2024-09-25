@@ -10,22 +10,20 @@ const useAuth = () => {
   const scopes = ["user-read-currently-playing", "user-read-recently-played", "user-read-playback-state", "user-top-read", "user-modify-playback-state"];
   const loginURL = `${authEndpoint}?client_id=${clientId}&redirect_uri=${redirectUrl}&scope=${scopes.join("%20")}&response_type=token&show_dialog=true`;
 
-  const [loading, setloading] = useState<boolean>(false);
+  const [progress, setprogress] = useState(0);
   const [_, setAccessToken] = useLocalStorage(LocalStorageKeys.ACCESS_TOKEN, "");
   const [__, setIsLoggedIn] = useLocalStorage(LocalStorageKeys.IS_LOGGED_IN, false);
   const navigate = useNavigate();
 
   useEffect(() => {
     console.log("auth.hook.ts");
-
     const token = getAccessTokenFromURL();
-    setloading(false);
     window.history.replaceState(null, "", window.location.pathname);
     if (token) {
       setIsLoggedIn(true);
       setAccessToken(token);
-      navigate("/");
-      // window.location.hash = "";
+      navigate("/", { replace: true });
+      return;
     } else {
       setIsLoggedIn(false);
     }
@@ -33,7 +31,7 @@ const useAuth = () => {
   }, []);
 
   const goToLoginURL = () => {
-    setloading(true);
+    setprogress(100);
     window.location.href = loginURL;
   };
 
@@ -43,7 +41,7 @@ const useAuth = () => {
     return params.get("access_token") ?? "";
   };
 
-  return { loginURL, loading, setloading, getAccessTokenFromURL, goToLoginURL };
+  return { progress, goToLoginURL };
 };
 
 export default useAuth;

@@ -1,4 +1,4 @@
-import { img1, musicWave } from "@assets/images";
+import { img1 } from "@assets/images";
 import {
   StyledCloseIconFilled,
   StyledFavoriteIconOutlined,
@@ -18,7 +18,6 @@ const TrackPlayer = () => {
   const [isPressed, setIsPressed] = useState(false);
   const [isDrag, setIsDrag] = useState(true);
   const classes = useStyle();
-
   return (
     <Draggable
       allowAnyClick={false}

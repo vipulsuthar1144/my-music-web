@@ -9,3 +9,5 @@ interface IBaseErrorResponse {
   status: number;
   message: string;
 }
+
+export type { IBaseAPIResponse, IBaseErrorResponse };

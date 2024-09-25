@@ -1,7 +1,7 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import AuthWrapper from "./wrapper/AuthWrapper";
+import AuthWrapper from "./wrapper/Auth.wrapper";
 import AuthRoutes from "./AuthRoutes";
-import ProtectedWrapper from "./wrapper/ProtectedWrapper";
+import ProtectedWrapper from "./wrapper/Protected.wrapper";
 import ProtectedRoutes from "./ProtectedRoutes";
 
 const AppRoutes = () => {
