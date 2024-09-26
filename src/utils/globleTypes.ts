@@ -5,10 +5,18 @@ import React, { CSSProperties } from "react";
 export type ToastTypes = "success" | "warning" | "error" | "info";
 
 export interface IGlobleImageProps {
-  img: string;
+  img?: string;
   alt: string;
   style?: SxProps<Theme>;
+  isPreventClickEffect?: boolean;
   onClick?: (e: any) => void;
+}
+
+export interface IGlobalEditTextProps {
+  text?: string;
+  onTestChange?: (e: any) => void;
+  onCrossBtnClick?: (e: any) => void;
+  hasCrossIcon?: boolean;
 }
 
 export interface IGlobleTitleSeeAllProps {

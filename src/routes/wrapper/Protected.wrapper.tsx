@@ -39,7 +39,7 @@ const ProtectedWrapper = () => {
     <Box className={classes.root}>
       {isLoggedIn && (
         <>
-          {!isSmallScreen && <TrackPlayer />}
+          {/* {!isSmallScreen && <TrackPlayer />} */}
           {!isSmallScreen && <AppSideBar />}
           <CustomScrollBox
             ref={containerRef}

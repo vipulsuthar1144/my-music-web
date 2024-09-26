@@ -1,3 +1,5 @@
+import { setSearchText } from "@/store/slices/search.slice";
+import { useAppDispatch, useAppSelector } from "@/store/store";
 import { mColors } from "@/theme/utils/mColors";
 import { StyledBackIcon, StyledForwardIcon, StyledNotificationIconFilled, StyledSettingIconFilled, StyledThemeModeIconFilled } from "@assets/SVG";
 import { LoaderButton } from "@components/Button";
@@ -5,13 +7,24 @@ import EditText from "@components/EditText";
 import { LogoutRounded } from "@mui/icons-material";
 import { AppBar, Stack, Theme, Toolbar } from "@mui/material";
 import { makeStyles } from "@mui/styles";
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 const TopBar = () => {
   const [loading, setLoading] = useState(false);
+  const { searchText } = useAppSelector((state) => state.search);
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const classes = useStyles();
+
+  const onTextChange = (e: ChangeEvent<HTMLInputElement>) => {
+    dispatch(setSearchText(e.target.value));
+  };
+
+  const onCrossBtnClick = () => {
+    dispatch(setSearchText(""));
+  };
   return (
     <AppBar position="sticky" sx={{ backgroundColor: mColors.EbonyBlack, backgroundImage: "none", boxShadow: "none", zIndex: 10 }} className={classes.appbar}>
       <Toolbar disableGutters sx={{ paddingX: 1 }} className={classes.toolBar}>
@@ -26,7 +39,7 @@ const TopBar = () => {
               navigate(1);
             }}
           />
-          <EditText />
+          <EditText text={searchText} onTestChange={onTextChange} onCrossBtnClick={onCrossBtnClick} hasCrossIcon={searchText ? true : false} />
         </Stack>
         <Stack direction={"row"} justifyContent={"flex-end"} alignItems={"center"} width={"50%"}>
           <StyledNotificationIconFilled />

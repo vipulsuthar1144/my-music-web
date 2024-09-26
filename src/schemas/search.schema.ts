@@ -4,13 +4,13 @@ import { IPlaylistSchema } from "./playlist.schema";
 import { ITrackSchema } from "./track.schema";
 
 export interface ISearchSchema {
-  tracks?: BaseSearch<ITrackSchema>;
-  artists?: BaseSearch<IAritstSchema>;
-  albums?: BaseSearch<IAlbumSchema>;
-  playlists?: BaseSearch<IPlaylistSchema>;
+  tracks?: IBaseSearch<ITrackSchema>;
+  artists?: IBaseSearch<IAritstSchema>;
+  albums?: IBaseSearch<IAlbumSchema>;
+  playlists?: IBaseSearch<IPlaylistSchema>;
 }
 
-interface BaseSearch<T> {
+export interface IBaseSearch<T> {
   href?: string;
   limit?: number;
   next?: string;

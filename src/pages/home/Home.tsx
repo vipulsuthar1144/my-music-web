@@ -5,20 +5,10 @@ import { makeStyles } from "@mui/styles";
 import { ContainerWithoutScrollbar, RootContainer } from "@components/styledComponents";
 import { useNavigate } from "react-router-dom";
 import { TitleSeeAll } from "@components/Image";
-import { useEffect } from "react";
-import { getArtistByIdAPI } from "@/services/artist.services";
-import { getRecentPlayedAPI } from "@/services/recent.services.";
 
 const Home: React.FC = () => {
   const classes = useStyle();
   const navigate = useNavigate();
-
-  useEffect(() => {
-    (async () => {
-      const data = await getRecentPlayedAPI();
-      console.log(data);
-    })();
-  }, []);
   return (
     <RootContainer>
       <TitleSeeAll title="Play Recently" />

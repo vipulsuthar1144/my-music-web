@@ -1,0 +1,66 @@
+import { ICategory } from "@/schemas/category.schema";
+import { colorsArr } from "@/theme/utils/mColors";
+import { imgCar } from "@assets/images";
+import ImageComp from "@components/Image";
+import { Box, CardActionArea, Typography } from "@mui/material";
+import { globleEaseInOutTransitionTime } from "@utils/globleStyle";
+import { useState } from "react";
+
+type ItemCategoryListProps = {
+  category: ICategory;
+};
+
+const ItemCategoryList = ({ category }: ItemCategoryListProps) => {
+  const [isHovered, setIsHovered] = useState(false);
+
+  return (
+    <Box
+      component={"div"}
+      sx={{
+        flexShrink: 0,
+        // flexBasis: "450px",
+        cursor: "pointer",
+        overflow: "hidden",
+        boxSizing: "border-box",
+        backgroundColor: `${category.bgColor}`,
+        aspectRatio: 2 / 1,
+        borderRadius: "8px",
+        position: "relative",
+      }}
+    >
+      <CardActionArea
+        onMouseEnter={() => {
+          setIsHovered(true);
+        }}
+        onMouseLeave={() => {
+          setIsHovered(false);
+        }}
+        sx={{ height: "100%", display: "flex", justifyContent: "flex-start", alignItems: "flex-start" }}
+      >
+        <Typography variant="h3" position={"relative"} style={{ fontSize: "clamp(0.6rem,5rem, 1.7rem)", zIndex: 2 }} m={"20px"}>
+          {category.name}
+        </Typography>
+        <ImageComp
+          img={category.icons && category?.icons[0]?.url}
+          alt={"album"}
+          isPreventClickEffect={true}
+          style={{
+            position: "absolute",
+            top: "30%",
+            left: "60%",
+            transform: isHovered ? " rotate(-45deg) scale(1.15) " : "scale(1) rotate(-45deg)",
+
+            width: "50%",
+            aspectRatio: 1,
+            zIndex: 1,
+            borderRadius: "8px",
+            boxShadow: "0px 10px 10px 5px rgba(0,0,0,0.4)",
+            transition: `transform ${globleEaseInOutTransitionTime}`,
+          }}
+        />
+      </CardActionArea>
+    </Box>
+  );
+};
+
+export default ItemCategoryList;

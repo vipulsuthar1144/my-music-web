@@ -29,3 +29,23 @@ export const mColors = {
   RibbonBlue: "#095ae6", // main button background
   SmaltBlue: "#062794", // main button background
 };
+
+export const colorsArr = [
+  "#ec0088",
+  "#006852",
+  "#9a00df",
+  "#232a61",
+  "#538826",
+  "#be0092",
+  "#ab6554",
+  "#c25b1d",
+  "#2f5ee5",
+  "#9759a8",
+  "#ee1312",
+  "#950032",
+  "#f40034",
+  "#777777",
+  "#3f7c93",
+  "#fc9c3b",
+  "#ab6554",
+];

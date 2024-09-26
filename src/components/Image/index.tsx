@@ -2,7 +2,7 @@ import { TextButtonPrimary } from "@components/Button";
 import { Box, Typography } from "@mui/material";
 import { IGlobleImageProps, IGlobleTitleSeeAllProps } from "@utils/globleTypes";
 
-const ImageComp = ({ img, alt, style, onClick }: IGlobleImageProps) => {
+const ImageComp = ({ img, alt, style, onClick, isPreventClickEffect = false }: IGlobleImageProps) => {
   // return <img src={img} alt={alt} style={{ height: "auto", objectFit: "contain",
   //   // backgroundColor: mColors.red,
   //   ...style }} />;
@@ -16,7 +16,7 @@ const ImageComp = ({ img, alt, style, onClick }: IGlobleImageProps) => {
   return (
     <Box
       onClick={onClick}
-      onMouseDown={(event) => event.stopPropagation()}
+      onMouseDown={(event) => isPreventClickEffect && event.stopPropagation()}
       component="img"
       src={img}
       alt={alt}

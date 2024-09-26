@@ -1,13 +1,16 @@
 import { CloseRounded, SearchRounded } from "@mui/icons-material";
 import { InputAdornment, TextField } from "@mui/material";
 import { globleEaseInOutTransitionTime } from "@utils/globleStyle";
+import { IGlobalEditTextProps } from "@utils/globleTypes";
 import React from "react";
 
-const EditText = () => {
+const EditText = ({ onTestChange, text, onCrossBtnClick, hasCrossIcon = false }: IGlobalEditTextProps) => {
   return (
     <TextField
       id="outlined-error"
       color="secondary"
+      value={text}
+      onChange={onTestChange}
       InputProps={{
         startAdornment: (
           <InputAdornment position="start">
@@ -22,10 +25,12 @@ const EditText = () => {
         endAdornment: (
           <InputAdornment position="end">
             <CloseRounded
+              onClick={onCrossBtnClick}
               sx={{
                 cursor: "pointer",
                 color: "text.primary",
                 fontSize: "24px",
+                display: hasCrossIcon ? "block" : "none",
               }}
             />
           </InputAdornment>
