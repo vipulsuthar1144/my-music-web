@@ -37,13 +37,13 @@ const ItemCategoryList = ({ category }: ItemCategoryListProps) => {
         }}
         sx={{ height: "100%", display: "flex", justifyContent: "flex-start", alignItems: "flex-start" }}
       >
-        <Typography variant="h3" position={"relative"} style={{ fontSize: "clamp(0.6rem,5rem, 1.7rem)", zIndex: 2 }} m={"20px"}>
+        <Typography variant="h3" position={"relative"} style={{ fontSize: "clamp(0.6em,5em, 1.7em)", zIndex: 2 }} m={"20px"}>
           {category.name}
         </Typography>
         <ImageComp
           img={category.icons && category?.icons[0]?.url}
           alt={"album"}
-          isPreventClickEffect={true}
+          isPreventClickEffect={false}
           style={{
             position: "absolute",
             top: "30%",

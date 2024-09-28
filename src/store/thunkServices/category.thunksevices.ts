@@ -1,9 +1,9 @@
 import { ICategorySchema } from "@/schemas/category.schema";
 import { getAllCategoryAPI } from "@/services/category.services";
-import { createAsyncThunk } from "@reduxjs/toolkit";
+import getAsyncThunk from "../getAsyncThunk";
 
-export const getAllCategories = createAsyncThunk<ICategorySchema, void>("GET/allCategories", async () => {
-  const result = await getAllCategoryAPI();
-  if (result.data) return result.data as ICategorySchema;
-  throw new Error("Failed to fetch categories");
+export const getAllCategories = getAsyncThunk<ICategorySchema, void>("GET/allCategories", async (_, signal) => {
+  const result = await getAllCategoryAPI(_, signal);
+  if (result.data) return result.data;
+  return result.data;
 });

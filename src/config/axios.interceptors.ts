@@ -1,4 +1,5 @@
 import { LocalStorageKeys } from "@utils/constants";
+import axios from "axios";
 import { toast } from "react-toastify";
 
 export const getAccessToken = (): string => {
@@ -21,6 +22,10 @@ const responseHandler = (response: any) => {
 };
 
 const responseErrorHandler = (error: any) => {
+  if (axios.isCancel(error)) {
+    console.log("responseErrorHandler error " + error);
+    return Promise.reject(error);
+  }
   toast.error(error.message);
   return Promise.reject(error);
 };
