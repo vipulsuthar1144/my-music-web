@@ -1,4 +1,4 @@
-import { useAppDispatch, useAppSelector } from "@/store/store";
+import { RootState, useAppDispatch, useAppSelector } from "@/store/store";
 import { getAllCategories } from "@/store/thunkServices/category.thunksevices";
 import { colorsArr } from "@/theme/utils/mColors";
 import { RootContainer } from "@components/styledComponents";
@@ -8,6 +8,7 @@ import ItemCategoryList from "./ItemCategoryList";
 import { getSearchResultAPI } from "@/services/search.services";
 import { Console, log } from "console";
 import { getSearchResult } from "@/store/thunkServices/search.thunksevices";
+import { useSelector } from "react-redux";
 
 const SeeAll = () => {
   const { isLoading, isError, categories } = useAppSelector((state) => state.category);
@@ -19,10 +20,15 @@ const SeeAll = () => {
   }, []);
 
   useEffect(() => {
-    fetchdata();
+    const timeout = setTimeout(() => {
+      fetchdata();
+    }, 500);
+
+    return () => clearTimeout(timeout);
   }, [searchText]);
 
   const fetchdata = async () => {
+    // console.log(searchText);
     if (searchText.length > 0) {
       dispatch(getSearchResult(searchText));
     }
@@ -41,7 +47,6 @@ const SeeAll = () => {
       );
     }
 
-    console.log("================================", categories.length);
     return (
       <Grid container spacing={2}>
         {categories?.length > 0 &&

@@ -2,6 +2,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import artistReducer from "./slices/artist.slice";
 import categoryReducer from "./slices/category.slice";
 import searchReducer from "./slices/search.slice";
+import globelLoaderReducer from "./slices/globleLoader.slice";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 
 export const store = configureStore({
@@ -9,6 +10,7 @@ export const store = configureStore({
     artist: artistReducer,
     category: categoryReducer,
     search: searchReducer,
+    globleLoader: globelLoaderReducer,
   },
 });
 

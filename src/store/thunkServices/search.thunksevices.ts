@@ -5,8 +5,6 @@ import getAsyncThunk from "../getAsyncThunk";
 
 export const getSearchResult = getAsyncThunk<ISearchSchema, string>("GET/searchResult", async (searchQuery, signal) => {
   const result = await getSearchResultAPI(searchQuery, signal);
-
-  console.log(result);
   if (result.data) return result.data;
   return result;
 });
