@@ -1,4 +1,4 @@
-import useLocalStorage from "@/config/localStorage.config";
+import useLocalStorage from "@/config/useLocalStorage";
 import { MGradientsDarkTheme } from "@/theme/utils/mGredient";
 import { Box } from "@mui/material";
 import { LocalStorageKeys } from "@utils/constants";

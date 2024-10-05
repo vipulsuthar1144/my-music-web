@@ -1,16 +1,15 @@
 import { CloseRounded, SearchRounded } from "@mui/icons-material";
 import { InputAdornment, TextField } from "@mui/material";
-import { globleEaseInOutTransitionTime } from "@utils/globleStyle";
 import { IGlobalEditTextProps } from "@utils/globleTypes";
-import React from "react";
 
-const EditText = ({ onTestChange, text, onCrossBtnClick, hasCrossIcon = false }: IGlobalEditTextProps) => {
+const EditText = ({ onFocus, onTextChange, text, onCrossBtnClick, hasCrossIcon = false }: IGlobalEditTextProps) => {
   return (
     <TextField
       id="outlined-error"
       color="secondary"
       value={text}
-      onChange={onTestChange}
+      onChange={onTextChange}
+      onFocus={onFocus}
       InputProps={{
         startAdornment: (
           <InputAdornment position="start">
@@ -35,6 +34,7 @@ const EditText = ({ onTestChange, text, onCrossBtnClick, hasCrossIcon = false }:
             />
           </InputAdornment>
         ),
+        autoComplete: "off",
       }}
       placeholder="What do you want to play?"
       sx={{
@@ -44,6 +44,7 @@ const EditText = ({ onTestChange, text, onCrossBtnClick, hasCrossIcon = false }:
         "& .MuiOutlinedInput-root": {
           borderRadius: "8px",
           height: "100%",
+          overflow: "hidden",
           backgroundColor: "secondary.main",
 
           "&.Mui-focused fieldset": {
@@ -62,6 +63,7 @@ const EditText = ({ onTestChange, text, onCrossBtnClick, hasCrossIcon = false }:
         },
         "& .MuiInputBase-input": {
           height: "100%",
+          backgroundColor: "secondary.main",
         },
       }}
     />

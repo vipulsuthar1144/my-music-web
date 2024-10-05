@@ -8,7 +8,7 @@ import { mColors } from "@/theme/utils/mColors";
 import { useTheme } from "@mui/material";
 
 const Auth = () => {
-  const { progress, goToLoginURL } = useAuth();
+  const { progress, listenerGoToLoginURL } = useAuth();
   const theme = useTheme();
   return (
     <>
@@ -37,7 +37,7 @@ const Auth = () => {
             },
           }}
         />
-        <LoaderButton label={"Login With Spotify"} variant={"contained"} color={"success"} onClick={goToLoginURL} />
+        <LoaderButton label={"Login With Spotify"} variant={"contained"} color={"success"} onClick={listenerGoToLoginURL} />
       </RootContainer>
     </>
   );

@@ -2,11 +2,14 @@ import { createSlice } from "@reduxjs/toolkit";
 import { getAllCategories } from "../thunkServices/category.thunksevices";
 import { ICategorySlice } from "@/schemas/category.schema";
 import { colorsArr } from "@/theme/utils/mColors";
+import { getRandomColor } from "@utils/genaralFunctions";
 
 const intialState: ICategorySlice = {
-  isLoading: false,
-  isError: false,
+  isCategoriesLoading: false,
+  isCategoriesError: false,
   categories: [],
+  hasMoreCategoriesData: true,
+  categoriesOffset: 0,
 };
 
 export const categorySlice = createSlice({
@@ -16,21 +19,24 @@ export const categorySlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(getAllCategories.pending, (state) => {
-        state.isLoading = true;
+        state.isCategoriesLoading = true;
       })
       .addCase(getAllCategories.fulfilled, (state, action) => {
-        state.isLoading = false;
+        state.isCategoriesLoading = false;
         const items = action.payload?.categories?.items;
         if (items && Array.isArray(items)) {
+          state.hasMoreCategoriesData = (action.payload.categories?.total ?? 0) >= (action.payload.categories?.offset ?? 0);
+          state.categoriesOffset += action.payload.categories?.limit ?? 0;
+
           items?.forEach((items) => {
-            items.bgColor = colorsArr[Math.floor(Math.random() * colorsArr.length)];
+            items.bgColor = getRandomColor();
           });
           state.categories = [...state.categories, ...items];
         }
       })
       .addCase(getAllCategories.rejected, (state) => {
-        state.isLoading = false;
-        state.isError = true;
+        state.isCategoriesLoading = false;
+        state.isCategoriesError = true;
       });
   },
 });

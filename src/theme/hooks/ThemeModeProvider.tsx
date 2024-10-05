@@ -1,7 +1,7 @@
 import React, { FC, useLayoutEffect, useState } from "react";
 import { ThemeModeType } from "../types/theme.mode";
 import { DefaultThemeMode, LocalStorageKeys } from "@utils/constants";
-import useLocalStorage from "@/config/localStorage.config";
+import useLocalStorage from "@/config/useLocalStorage";
 
 interface IThemeModeProvider {
   children: React.ReactNode;

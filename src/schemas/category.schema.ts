@@ -14,7 +14,9 @@ export interface ICategory {
 }
 
 export interface ICategorySlice {
-  isLoading: boolean;
+  isCategoriesLoading: boolean;
   categories: ICategory[];
-  isError: boolean;
+  isCategoriesError: boolean;
+  hasMoreCategoriesData: boolean;
+  categoriesOffset: number;
 }

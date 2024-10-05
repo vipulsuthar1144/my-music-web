@@ -1,3 +1,4 @@
+import { img1 } from "@assets/images";
 import { TextButtonPrimary } from "@components/Button";
 import { Box, Typography } from "@mui/material";
 import { IGlobleImageProps, IGlobleTitleSeeAllProps } from "@utils/globleTypes";

@@ -19,3 +19,10 @@ export interface IBaseSearch<T> {
   total?: number;
   items?: T[];
 }
+
+export interface ISearchSlice {
+  isSearchDataLoading: boolean;
+  searchData: ISearchSchema | null;
+  isSearchDataError: boolean;
+  searchQuery: string;
+}

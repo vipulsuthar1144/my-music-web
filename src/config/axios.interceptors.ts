@@ -10,19 +10,19 @@ export const getAccessToken = (): string => {
 };
 
 const requestHandler = (request: any) => {
-  // store.dispatch(setTopLoadingProgress(30));
+  store.dispatch(setTopLoadingProgress(30));
   request.headers.Authorization = `Bearer ${getAccessToken()}`;
   // request.headers["Access-Control-Allow-Origin"] = "*";
   return request;
 };
 
 const requestErrorHandler = (err: any) => {
-  // store.dispatch(setTopLoadingProgress(100));
+  store.dispatch(setTopLoadingProgress(100));
   return Promise.reject(err);
 };
 
 const responseHandler = (response: any) => {
-  // store.dispatch(setTopLoadingProgress(100));
+  store.dispatch(setTopLoadingProgress(100));
   return Promise.resolve(response);
 };
 
@@ -31,7 +31,7 @@ const responseErrorHandler = (error: any) => {
     console.log("responseErrorHandler error " + error);
     return Promise.reject(error);
   }
-  // store.dispatch(setTopLoadingProgress(100));
+  store.dispatch(setTopLoadingProgress(100));
   toast.error(error.message);
   return Promise.reject(error);
 };

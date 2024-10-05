@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import useLocalStorage from "@/config/localStorage.config";
+import useLocalStorage from "@/config/useLocalStorage";
 import { LocalStorageKeys } from "@utils/constants";
 import { useEffect, useState } from "react";
 
@@ -30,7 +30,7 @@ const useAuth = () => {
     console.log(token);
   }, []);
 
-  const goToLoginURL = () => {
+  const listenerGoToLoginURL = () => {
     setprogress(100);
     window.location.href = loginURL;
   };
@@ -41,7 +41,7 @@ const useAuth = () => {
     return params.get("access_token") ?? "";
   };
 
-  return { progress, goToLoginURL };
+  return { progress, listenerGoToLoginURL };
 };
 
 export default useAuth;

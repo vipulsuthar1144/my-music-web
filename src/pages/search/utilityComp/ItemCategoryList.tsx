@@ -1,6 +1,4 @@
 import { ICategory } from "@/schemas/category.schema";
-import { colorsArr } from "@/theme/utils/mColors";
-import { imgCar } from "@assets/images";
 import ImageComp from "@components/Image";
 import { Box, CardActionArea, Typography } from "@mui/material";
 import { globleEaseInOutTransitionTime } from "@utils/globleStyle";
@@ -49,7 +47,6 @@ const ItemCategoryList = ({ category }: ItemCategoryListProps) => {
             top: "30%",
             left: "60%",
             transform: isHovered ? " rotate(-45deg) scale(1.15) " : "scale(1) rotate(-45deg)",
-
             width: "50%",
             aspectRatio: 1,
             zIndex: 1,

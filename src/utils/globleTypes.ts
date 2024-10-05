@@ -14,7 +14,8 @@ export interface IGlobleImageProps {
 
 export interface IGlobalEditTextProps {
   text?: string;
-  onTestChange?: (e: any) => void;
+  onTextChange?: (e: any) => void;
+  onFocus?: () => void;
   onCrossBtnClick?: (e: any) => void;
   hasCrossIcon?: boolean;
 }

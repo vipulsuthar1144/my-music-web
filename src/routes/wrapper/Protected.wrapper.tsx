@@ -1,17 +1,14 @@
-import useLocalStorage from "@/config/localStorage.config";
-import TrackPlayer from "@/pages/player/TrackPlayer";
-import { useAppSelector } from "@/store/store";
-import { mColors } from "@/theme/utils/mColors";
+import useLocalStorage from "@/config/useLocalStorage";
 import { MGradientsDarkTheme } from "@/theme/utils/mGredient";
 import AppSideBar from "@components/SideBar";
 import TopBar from "@components/TopBar";
+import TopLoader from "@components/TopLoader";
 import { Box, styled, Theme, useTheme } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { LocalStorageKeys, useIsSmallScreen } from "@utils/constants";
 import { sidebarWidth } from "@utils/globleStyle";
-import { LegacyRef, useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
-import LoadingBar from "react-top-loading-bar";
 
 const ProtectedWrapper = () => {
   const navigate = useNavigate();
@@ -23,7 +20,6 @@ const ProtectedWrapper = () => {
   const [isLoggedIn, setIsLoggedIn] = useLocalStorage(LocalStorageKeys.IS_LOGGED_IN, false);
   const location = useLocation();
   const containerRef = useRef<HTMLDivElement>(null);
-  const { topLoadingProgress } = useAppSelector((state) => state.globleLoader);
 
   useEffect(() => {
     containerRef.current && containerRef.current.scrollTo(0, 0);
@@ -41,7 +37,7 @@ const ProtectedWrapper = () => {
 
   return (
     <Box className={classes.root}>
-      <LoadingBar color={mColors.loaderPrimary} progress={topLoadingProgress} />
+      <TopLoader />
       {isLoggedIn && (
         <>
           {/* {!isSmallScreen && <TrackPlayer />} */}
@@ -72,6 +68,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     height: "100vh",
     background: MGradientsDarkTheme.backroundBlue,
     display: "flex",
+    justifyContent: "center",
   },
   footer: {
     marginTop: "10px",
@@ -84,6 +81,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 export const CustomScrollBox = styled(Box)(({ theme }) => ({
   width: "100%",
+  maxWidth: "1800px",
   // overflow: "hidden",
   overflow: "hidden  auto",
   height: "100vh",

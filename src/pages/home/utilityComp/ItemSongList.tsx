@@ -1,12 +1,18 @@
+import { ITrackSchema } from "@/schemas/track.schema";
 import { img1 } from "@assets/images";
 import ImageComp from "@components/Image";
 import { SingleLineTypo } from "@components/styledComponents";
 import { AccessTimeRounded } from "@mui/icons-material";
 import { Box, Card, CardActionArea, CardContent, Stack, Theme, Typography } from "@mui/material";
 import { makeStyles } from "@mui/styles";
+import { msToTimeConvert } from "@utils/genaralFunctions";
 import { globleEaseInOutTransitionTime } from "@utils/globleStyle";
 
-const ItemSongList = () => {
+type ItemSongListProps = {
+  track?: ITrackSchema;
+};
+
+const ItemSongList = ({ track }: ItemSongListProps) => {
   const classes = useStyle();
   return (
     <Card sx={{ backgroundColor: "transparent", backgroundImage: "none", boxShadow: "none" }} className={classes.root}>
@@ -23,26 +29,11 @@ const ItemSongList = () => {
           boxSizing: "border-box",
         }}
       >
-        {/* <Box sx={{ position: "relative", aspectRatio: 1 }}> */}
-        {/* <CardMedia
-            component="img"
-            image={img1}
-            alt="green iguana"
-            sx={{
-              objectFit: "fill",
-              cursor: "pointer",
-              height: "40px",
-              aspectRatio: 1,
-              boxShadow: "0px 10px 10px 2px rgba(0,0,0,0.2)",
-              // borderRadius: "8px",
-              borderRadius: "5px",
-            }}
-          /> */}
-        <Typography variant="subtitle1" color="text.primary" mr={"2px"}>
+        {/* <Typography variant="subtitle1" color="text.primary" mr={"2px"}>
           1
-        </Typography>
+        </Typography> */}
         <ImageComp
-          img={img1}
+          img={track?.album?.images && track?.album?.images[2]?.url}
           alt={"album"}
           style={{
             width: "40px",
@@ -52,11 +43,10 @@ const ItemSongList = () => {
             boxShadow: "0px 10px 10px 2px rgba(0,0,0,0.2)",
           }}
         />
-        {/* </Box> */}
-        <CardContent sx={{ padding: 0, m: 0, flex: 1, display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-          <Box>
+        <CardContent sx={{ padding: 0, m: 0, width: "100%", flex: 1, display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+          <Box component={"div"}>
             <SingleLineTypo variant="subtitle1" color="text.primary" mb={"2px"}>
-              Arijit Singh
+              {track?.name}
             </SingleLineTypo>
             <SingleLineTypo variant="subtitle2" color="text.secondary">
               Artist
@@ -68,7 +58,7 @@ const ItemSongList = () => {
             <Box sx={{ display: "flex", gap: "10px", alignItems: "center" }}>
               <AccessTimeRounded sx={{ fontSize: "20px", color: "text.secondary" }} />
               <Typography variant="body2" color="text.secondary">
-                23:22
+                {msToTimeConvert(track?.duration_ms || 0)}
               </Typography>
             </Box>
           </Stack>

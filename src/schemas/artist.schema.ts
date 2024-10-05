@@ -9,7 +9,7 @@ export interface IAritstSchema {
   genres?: string[];
   href?: string;
   id?: string;
-  images?: IImage;
+  images?: IImage[];
   name?: string;
   popularity?: number;
   type?: string;

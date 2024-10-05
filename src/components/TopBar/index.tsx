@@ -1,29 +1,55 @@
-import { setSearchText } from "@/store/slices/search.slice";
+import { setSearchQuery } from "@/store/slices/search.slice";
 import { useAppDispatch, useAppSelector } from "@/store/store";
 import { mColors } from "@/theme/utils/mColors";
 import { StyledBackIcon, StyledForwardIcon, StyledNotificationIconFilled, StyledSettingIconFilled, StyledThemeModeIconFilled } from "@assets/SVG";
 import { LoaderButton } from "@components/Button";
 import EditText from "@components/EditText";
 import { LogoutRounded } from "@mui/icons-material";
-import { AppBar, Stack, Theme, Toolbar } from "@mui/material";
+import { AppBar, debounce, Stack, Theme, Toolbar } from "@mui/material";
 import { makeStyles } from "@mui/styles";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useDeferredValue, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 
 const TopBar = () => {
   const [loading, setLoading] = useState(false);
-  const { searchText } = useAppSelector((state) => state.search);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchedQuery, setSearchedQuery] = useState(searchParams.get("q") || "");
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
   const classes = useStyles();
+  // useEffect(() => {
+  //   const timeout = setTimeout(() => {
+  //     dispatch(setSearchQuery(searchedQuery));
+  //   }, 500);
+  //   return () => clearTimeout(timeout);
+  // }, [searchedQuery]);
 
-  const onTextChange = (e: ChangeEvent<HTMLInputElement>) => {
-    dispatch(setSearchText(e.target.value));
+  useEffect(() => {
+    if (location.pathname != "/search") {
+      setSearchedQuery("");
+      setSearchParams({});
+    } else {
+      setSearchedQuery(searchParams.get("q") || "");
+    }
+  }, [location.pathname, searchParams]);
+
+  const listenerOnTextChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target;
+    setSearchedQuery(value);
+    value == "" ? setSearchParams({}) : setSearchParams({ q: value });
   };
 
-  const onCrossBtnClick = () => {
-    dispatch(setSearchText(""));
+  const listenerOFocus = () => {
+    if (location.pathname != "/search") {
+      navigate("/search");
+    }
+  };
+
+  const listenerOnCrossBtnClick = () => {
+    setSearchParams({});
+    setSearchedQuery("");
   };
   return (
     <AppBar position="sticky" sx={{ backgroundColor: mColors.EbonyBlack, backgroundImage: "none", boxShadow: "none", zIndex: 10 }} className={classes.appbar}>
@@ -39,7 +65,7 @@ const TopBar = () => {
               navigate(1);
             }}
           />
-          <EditText text={searchText} onTestChange={onTextChange} onCrossBtnClick={onCrossBtnClick} hasCrossIcon={searchText ? true : false} />
+          <EditText text={searchedQuery} onFocus={listenerOFocus} onTextChange={listenerOnTextChange} onCrossBtnClick={listenerOnCrossBtnClick} hasCrossIcon={searchedQuery ? true : false} />
         </Stack>
         <Stack direction={"row"} justifyContent={"flex-end"} alignItems={"center"} width={"50%"}>
           <StyledNotificationIconFilled />
