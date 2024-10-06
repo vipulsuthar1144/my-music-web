@@ -1,6 +1,6 @@
-import ItemArtistAlbumsList from "@/pages/home/utilityComp/ItemArtistAlbumsList";
+import ItemArtistAlbumsList from "@/pages/search/utilityComp/ItemArtistAlbumsList";
 import { Box, Theme, Typography } from "@mui/material";
-import ItemSongList from "./utilityComp/ItemSongList";
+import ItemSongList from "../search/utilityComp/ItemSongList";
 import { makeStyles } from "@mui/styles";
 import { ContainerWithoutScrollbar, RootContainer } from "@components/styledComponents";
 import { useNavigate } from "react-router-dom";

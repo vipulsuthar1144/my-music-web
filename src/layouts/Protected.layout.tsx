@@ -1,4 +1,4 @@
-import useLocalStorage from "@/config/useLocalStorage";
+import useLocalStorage from "@/config/hooks/useLocalStorage.hooks";
 import { MGradientsDarkTheme } from "@/theme/utils/mGredient";
 import AppSideBar from "@components/SideBar";
 import TopBar from "@components/TopBar";
@@ -10,7 +10,7 @@ import { sidebarWidth } from "@utils/globleStyle";
 import { useEffect, useRef } from "react";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 
-const ProtectedWrapper = () => {
+const ProtectedLayout = () => {
   const navigate = useNavigate();
   const theme = useTheme();
   const isSmallScreen = useIsSmallScreen(theme);
@@ -61,7 +61,7 @@ const ProtectedWrapper = () => {
   );
 };
 
-export default ProtectedWrapper;
+export default ProtectedLayout;
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -85,7 +85,6 @@ export const CustomScrollBox = styled(Box)(({ theme }) => ({
   // overflow: "hidden",
   overflow: "hidden  auto",
   height: "100vh",
-  borderRadius: "20px",
   "::-webkit-scrollbar": {
     width: "5px",
     // height: "12px",

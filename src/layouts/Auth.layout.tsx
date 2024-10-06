@@ -1,11 +1,11 @@
-import useLocalStorage from "@/config/useLocalStorage";
+import useLocalStorage from "@/config/hooks/useLocalStorage.hooks";
 import { MGradientsDarkTheme } from "@/theme/utils/mGredient";
 import { Box } from "@mui/material";
 import { LocalStorageKeys } from "@utils/constants";
 import { useEffect } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 
-const AuthWrapper = () => {
+const AuthLayout = () => {
   const navigate = useNavigate();
   const [accessToken, _] = useLocalStorage(LocalStorageKeys.ACCESS_TOKEN, "");
   const [isLoggedIn, setIsLoggedIn] = useLocalStorage(LocalStorageKeys.IS_LOGGED_IN, false);
@@ -31,4 +31,4 @@ const AuthWrapper = () => {
   );
 };
 
-export default AuthWrapper;
+export default AuthLayout;

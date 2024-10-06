@@ -1,6 +1,6 @@
 import { IExternalUrls } from "./recent.schema";
 
-export interface IAritstSchema {
+export interface IArtistSchema {
   external_urls?: IExternalUrls;
   followers?: {
     href?: string;
@@ -25,6 +25,6 @@ export interface IImage {
 
 export interface IArtistSlice {
   isLoading: boolean;
-  artists: IAritstSchema[];
+  artists: IArtistSchema[];
   isError: boolean;
 }

@@ -3,8 +3,8 @@ import ImageComp, { TitleSeeAll } from "@components/Image";
 import { ContainerWithoutScrollbar, RootContainer } from "@components/styledComponents";
 import { Box, Theme, Typography } from "@mui/material";
 import { globleEaseInOutTransitionTime } from "@utils/globleStyle";
-import ItemSongList from "../home/utilityComp/ItemSongList";
-import ItemArtistAlbumsList from "../home/utilityComp/ItemArtistAlbumsList";
+import ItemSongList from "../search/utilityComp/ItemSongList";
+import ItemArtistAlbumsList from "../search/utilityComp/ItemArtistAlbumsList";
 import { makeStyles } from "@mui/styles";
 import { useNavigate } from "react-router-dom";
 
@@ -42,7 +42,7 @@ const ProfileArtistOrAlbum = () => {
           </Typography>
         </Box>
       </Box>
-      <TitleSeeAll title="Popular" style={{ marginTop: "10px" }} onClick={() => navigate("/section")} />
+      <TitleSeeAll title="Popular" style={{ marginTop: "10px" }} onSeeAllClick={() => navigate("/section")} />
       <Box mx={"20px"}>
         {Array.from(Array(10)).map((_, __) => (
           <ItemSongList />

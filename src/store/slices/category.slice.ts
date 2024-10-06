@@ -27,10 +27,6 @@ export const categorySlice = createSlice({
         if (items && Array.isArray(items)) {
           state.hasMoreCategoriesData = (action.payload.categories?.total ?? 0) >= (action.payload.categories?.offset ?? 0);
           state.categoriesOffset += action.payload.categories?.limit ?? 0;
-
-          items?.forEach((items) => {
-            items.bgColor = getRandomColor();
-          });
           state.categories = [...state.categories, ...items];
         }
       })

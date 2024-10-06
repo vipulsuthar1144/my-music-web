@@ -1,4 +1,4 @@
-import { IAritstSchema, IImage } from "./artist.schema";
+import { IArtistSchema, IImage } from "./artist.schema";
 import { IExternalUrls } from "./recent.schema";
 
 export interface IPlaylistSchema {
@@ -9,7 +9,7 @@ export interface IPlaylistSchema {
   id?: string;
   images?: IImage[];
   name?: string;
-  owner?: IAritstSchema;
+  owner?: IArtistSchema;
   public?: boolean;
   snapshot_id?: string;
   tracks?: {

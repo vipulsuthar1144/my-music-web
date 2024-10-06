@@ -1,10 +1,10 @@
-import { IAritstSchema, IImage } from "./artist.schema";
+import { IArtistSchema, IImage } from "./artist.schema";
 import { IExternalUrls } from "./recent.schema";
 import { IRestrictions } from "./track.schema";
 
 export interface IAlbumSchema {
   album_type?: string;
-  artists?: IAritstSchema[];
+  artists?: IArtistSchema[];
   available_markets?: string[];
   external_urls?: IExternalUrls;
   href?: string;

@@ -1,11 +1,11 @@
 import { IAlbumSchema } from "./album.schema";
-import { IAritstSchema } from "./artist.schema";
+import { IArtistSchema } from "./artist.schema";
 import { IPlaylistSchema } from "./playlist.schema";
 import { ITrackSchema } from "./track.schema";
 
 export interface ISearchSchema {
   tracks?: IBaseSearch<ITrackSchema>;
-  artists?: IBaseSearch<IAritstSchema>;
+  artists?: IBaseSearch<IArtistSchema>;
   albums?: IBaseSearch<IAlbumSchema>;
   playlists?: IBaseSearch<IPlaylistSchema>;
 }

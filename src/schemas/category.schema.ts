@@ -10,7 +10,6 @@ export interface ICategory {
   id?: string;
   icons?: IImage[];
   name?: string;
-  bgColor?: string;
 }
 
 export interface ICategorySlice {

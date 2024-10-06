@@ -1,23 +1,28 @@
+import { IArtistSchema } from "@/schemas/artist.schema";
 import { MGradientsDarkTheme } from "@/theme/utils/mGredient";
-import { img1, imgCar, imgPlayBtnGreen } from "@assets/images";
-import ImageComp from "@components/Image";
-import { SingleLineTypo } from "@components/styledComponents";
+import { img1, imgCar, imgDefaultArtist, imgDefaultSong, imgPlayBtnGreen } from "@assets/images";
+import ImageComp, { ImageCompWithLoader } from "@components/Image";
+import { SingleLineTypo, TwoLineTypo } from "@components/styledComponents";
 import { Box, Card, CardActionArea, CardContent, CardMedia } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { globleEaseInOutTransitionTime } from "@utils/globleStyle";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 type ItemArtistAlbumsListProps = {
   isArtist?: boolean;
   title?: string;
-  type?: string;
+  subtitle?: string;
+  subtitleArr?: IArtistSchema[];
   img?: string;
   onClick?: () => void;
 };
 
-const ItemArtistAlbumsList: React.FC<ItemArtistAlbumsListProps> = ({ title, type, img, isArtist = false, onClick }) => {
+const ItemArtistAlbumsList: React.FC<ItemArtistAlbumsListProps> = ({ title, subtitleArr, subtitle, img, isArtist = false, onClick }) => {
   const [isHovered, setIsHovered] = useState(false);
   const classes = useStyle();
+  const navigate = useNavigate();
   return (
     <Card
       className={classes.root}
@@ -38,24 +43,19 @@ const ItemArtistAlbumsList: React.FC<ItemArtistAlbumsListProps> = ({ title, type
         }}
         sx={{ height: "100%", display: "flex", flexDirection: "column", justifyContent: "flex-start", alignItems: "flex-start", gap: "10px", padding: "10px" }}
       >
-        <Box sx={{ position: "relative", aspectRatio: 1 }}>
-          <CardMedia
-            component="img"
-            // image={isArtist ? imgCar : img1}
-            image={img}
+        <Box sx={{ position: "relative", aspectRatio: 1, width: "100%" }}>
+          <ImageCompWithLoader
+            img={img}
             alt={isArtist ? "artist" : "album"}
-            sx={{
-              objectFit: "cover",
-              cursor: "pointer",
+            errorImage={isArtist ? imgDefaultArtist : imgDefaultSong}
+            style={{
+              width: "100%",
               aspectRatio: 1,
               borderRadius: isArtist ? "50%" : "8px",
+              boxShadow: "0px 10px 10px 2px rgba(0,0,0,0.2)",
             }}
           />
-
           <ImageComp
-            onClick={() => {
-              // showCustomToast("Oops! LogOut Failed.", "error");
-            }}
             img={imgPlayBtnGreen}
             alt="Spotify"
             style={{
@@ -73,12 +73,23 @@ const ItemArtistAlbumsList: React.FC<ItemArtistAlbumsListProps> = ({ title, type
           />
         </Box>
         <CardContent sx={{ padding: 0, m: 0, width: "100%" }}>
-          <SingleLineTypo variant="subtitle1" color="text.primary">
+          <TwoLineTypo variant="subtitle1" color="text.primary" sx={{ textTransform: "capitalize" }}>
             {title}
-          </SingleLineTypo>
-          <SingleLineTypo variant="subtitle2" color="text.secondary">
-            {type}
-          </SingleLineTypo>
+          </TwoLineTypo>
+          <TwoLineTypo variant="subtitle2" color="text.secondary" sx={{ textTransform: "capitalize" }}>
+            {subtitle}
+            {subtitleArr?.map((item) => (
+              <Box
+                component={"span"}
+                onMouseDown={(event) => event.stopPropagation()}
+                key={item.id}
+                onClick={() => navigate(`/artist/${item.id}`)}
+                sx={{ cursor: "pointer", "&:hover": { textDecoration: "underline", color: "text.primary" } }}
+              >
+                {`, ${item.name}`}
+              </Box>
+            ))}
+          </TwoLineTypo>
         </CardContent>
       </CardActionArea>
     </Card>
@@ -90,7 +101,7 @@ export default ItemArtistAlbumsList;
 const useStyle = makeStyles({
   root: {
     flexShrink: 0,
-    flexBasis: "180px",
+    flexBasis: "200px",
     overflow: "hidden",
     boxSizing: "border-box",
     transition: `transform ${globleEaseInOutTransitionTime},backgroundColor ${globleEaseInOutTransitionTime}`,

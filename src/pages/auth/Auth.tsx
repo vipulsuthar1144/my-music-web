@@ -2,13 +2,13 @@ import { imgSpotifyGreenLogin } from "@assets/images";
 import { LoaderButton } from "@components/Button";
 import ImageComp from "@components/Image";
 import { RootContainer } from "@components/styledComponents";
-import useAuth from "./Auth.hooks";
+import useAuthController from "./auth.controller";
 import LoadingBar from "react-top-loading-bar";
 import { mColors } from "@/theme/utils/mColors";
 import { useTheme } from "@mui/material";
 
 const Auth = () => {
-  const { progress, listenerGoToLoginURL } = useAuth();
+  const { progress, listenerGoToLoginURL } = useAuthController();
   const theme = useTheme();
   return (
     <>

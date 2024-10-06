@@ -38,7 +38,7 @@ const TopBar = () => {
   const listenerOnTextChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
     setSearchedQuery(value);
-    value == "" ? setSearchParams({}) : setSearchParams({ q: value });
+    value.trim() == "" ? setSearchParams({}) : setSearchParams({ q: value.trim() });
   };
 
   const listenerOFocus = () => {

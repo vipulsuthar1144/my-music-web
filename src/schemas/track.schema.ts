@@ -1,10 +1,10 @@
 import { IAlbumSchema } from "./album.schema";
-import { IAritstSchema } from "./artist.schema";
+import { IArtistSchema } from "./artist.schema";
 import { IExternalUrls } from "./recent.schema";
 
 export interface ITrackSchema {
   album?: IAlbumSchema;
-  artists?: IAritstSchema[];
+  artists?: IArtistSchema[];
   available_markets?: string[];
   disc_number?: number;
   duration_ms?: number;

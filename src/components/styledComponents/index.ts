@@ -12,7 +12,7 @@ export const RootContainer = styled(Box)({
 
 export const ContainerWithoutScrollbar = styled(Box)({
   width: "100%",
-  minHeight: "150px",
+  // minHeight: "150px",
   display: "flex",
   overflowX: "auto",
   marginBottom: "10px",
@@ -27,6 +27,14 @@ export const SingleLineTypo = styled(Typography)({
   overflow: "hidden",
   textOverflow: "ellipsis",
   display: "block",
+});
+
+export const TwoLineTypo = styled(Typography)({
+  display: "-webkit-box",
+  WebkitLineClamp: 2,
+  WebkitBoxOrient: "vertical",
+  overflow: "hidden",
+  textOverflow: "ellipsis",
 });
 
 // export const CustomScrollBox = styled(Box)((theme: Theme) => ({

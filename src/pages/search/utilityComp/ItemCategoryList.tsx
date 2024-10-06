@@ -1,8 +1,10 @@
 import { ICategory } from "@/schemas/category.schema";
-import ImageComp from "@components/Image";
+import { imgDefaultSong } from "@assets/images";
+import ImageComp, { ImageCompWithLoader } from "@components/Image";
 import { Box, CardActionArea, Typography } from "@mui/material";
+import { getRandomColor } from "@utils/genaralFunctions";
 import { globleEaseInOutTransitionTime } from "@utils/globleStyle";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 
 type ItemCategoryListProps = {
   category: ICategory;
@@ -10,6 +12,9 @@ type ItemCategoryListProps = {
 
 const ItemCategoryList = ({ category }: ItemCategoryListProps) => {
   const [isHovered, setIsHovered] = useState(false);
+  const bgColor = useMemo(() => {
+    return getRandomColor();
+  }, []);
 
   return (
     <Box
@@ -20,7 +25,7 @@ const ItemCategoryList = ({ category }: ItemCategoryListProps) => {
         cursor: "pointer",
         overflow: "hidden",
         boxSizing: "border-box",
-        backgroundColor: `${category.bgColor}`,
+        backgroundColor: bgColor,
         aspectRatio: 2 / 1,
         borderRadius: "8px",
         position: "relative",
@@ -38,7 +43,7 @@ const ItemCategoryList = ({ category }: ItemCategoryListProps) => {
         <Typography variant="h3" position={"relative"} style={{ fontSize: "clamp(0.6em,5em, 1.7em)", zIndex: 2 }} m={"20px"}>
           {category.name}
         </Typography>
-        <ImageComp
+        <ImageCompWithLoader
           img={category.icons && category?.icons[0]?.url}
           alt={"album"}
           isPreventClickEffect={false}

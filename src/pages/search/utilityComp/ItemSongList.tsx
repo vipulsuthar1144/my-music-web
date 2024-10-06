@@ -1,12 +1,14 @@
 import { ITrackSchema } from "@/schemas/track.schema";
-import { img1 } from "@assets/images";
-import ImageComp from "@components/Image";
+import { mColors } from "@/theme/utils/mColors";
+import { img1, imgDefaultSong } from "@assets/images";
+import ImageComp, { ImageCompWithLoader } from "@components/Image";
 import { SingleLineTypo } from "@components/styledComponents";
 import { AccessTimeRounded } from "@mui/icons-material";
 import { Box, Card, CardActionArea, CardContent, Stack, Theme, Typography } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { msToTimeConvert } from "@utils/genaralFunctions";
 import { globleEaseInOutTransitionTime } from "@utils/globleStyle";
+import { useNavigate } from "react-router-dom";
 
 type ItemSongListProps = {
   track?: ITrackSchema;
@@ -14,6 +16,7 @@ type ItemSongListProps = {
 
 const ItemSongList = ({ track }: ItemSongListProps) => {
   const classes = useStyle();
+  const navigate = useNavigate();
   return (
     <Card sx={{ backgroundColor: "transparent", backgroundImage: "none", boxShadow: "none" }} className={classes.root}>
       <CardActionArea
@@ -32,24 +35,33 @@ const ItemSongList = ({ track }: ItemSongListProps) => {
         {/* <Typography variant="subtitle1" color="text.primary" mr={"2px"}>
           1
         </Typography> */}
-        <ImageComp
-          img={track?.album?.images && track?.album?.images[2]?.url}
-          alt={"album"}
+        <ImageCompWithLoader
+          img={track?.album?.images && track?.album?.images[0]?.url}
+          alt={"track"}
           style={{
-            width: "40px",
+            width: "50px",
             aspectRatio: 1,
-            cursor: "pointer",
             borderRadius: "5px",
             boxShadow: "0px 10px 10px 2px rgba(0,0,0,0.2)",
           }}
         />
-        <CardContent sx={{ padding: 0, m: 0, width: "100%", flex: 1, display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-          <Box component={"div"}>
+        <CardContent sx={{ padding: 0, m: 0, width: "80%", flex: 1, display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+          <Box component={"div"} sx={{ width: "75%" }}>
             <SingleLineTypo variant="subtitle1" color="text.primary" mb={"2px"}>
               {track?.name}
             </SingleLineTypo>
             <SingleLineTypo variant="subtitle2" color="text.secondary">
-              Artist
+              {track?.artists?.map((item) => (
+                <Box
+                  component={"span"}
+                  onMouseDown={(event) => event.stopPropagation()}
+                  key={item.id}
+                  onClick={() => navigate(`/artist/${item.id}`)}
+                  sx={{ cursor: "pointer", "&:hover": { textDecoration: "underline", color: "text.primary" } }}
+                >
+                  {` ${item.name}, `}
+                </Box>
+              ))}
             </SingleLineTypo>
           </Box>
           <Stack direction={"row"} gap={"10px"} sx={{ boxSizing: "border-box" }}>

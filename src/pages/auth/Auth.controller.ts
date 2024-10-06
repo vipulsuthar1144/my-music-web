@@ -1,9 +1,9 @@
 import { useNavigate } from "react-router-dom";
-import useLocalStorage from "@/config/useLocalStorage";
+import useLocalStorage from "@/config/hooks/useLocalStorage.hooks";
 import { LocalStorageKeys } from "@utils/constants";
 import { useEffect, useState } from "react";
 
-const useAuth = () => {
+const useAuthController = () => {
   const authEndpoint = import.meta.env.VITE_APP_AUTH_API_BASE_ENDPOINT;
   const redirectUrl = import.meta.env.VITE_APP_REDIRECT_ENDPOINT;
   const clientId = import.meta.env.VITE_APP_CLIENT_ID;
@@ -44,4 +44,4 @@ const useAuth = () => {
   return { progress, listenerGoToLoginURL };
 };
 
-export default useAuth;
+export default useAuthController;

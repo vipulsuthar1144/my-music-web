@@ -7,6 +7,7 @@ export type ToastTypes = "success" | "warning" | "error" | "info";
 export interface IGlobleImageProps {
   img?: string;
   alt: string;
+  errorImage?: string;
   style?: SxProps<Theme>;
   isPreventClickEffect?: boolean;
   onClick?: (e: any) => void;
@@ -25,7 +26,7 @@ export interface IGlobleTitleSeeAllProps {
   title: string;
   btnText?: string;
   style?: CSSProperties;
-  onClick?: (e: any) => void;
+  onSeeAllClick?: (e: any) => void;
 }
 
 export interface IGlobalButtonProps {
