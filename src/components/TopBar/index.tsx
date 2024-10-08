@@ -7,7 +7,7 @@ import EditText from "@components/EditText";
 import { LogoutRounded } from "@mui/icons-material";
 import { AppBar, debounce, Stack, Theme, Toolbar } from "@mui/material";
 import { makeStyles } from "@mui/styles";
-import { ChangeEvent, useDeferredValue, useEffect, useState } from "react";
+import { ChangeEvent, useDeferredValue, useEffect, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 
@@ -15,6 +15,7 @@ const TopBar = () => {
   const [loading, setLoading] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
   const [searchedQuery, setSearchedQuery] = useState(searchParams.get("q") || "");
+  const searchTextFieldRef = useRef<HTMLInputElement>(null);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const location = useLocation();
@@ -27,12 +28,16 @@ const TopBar = () => {
   // }, [searchedQuery]);
 
   useEffect(() => {
+    listenerRemoveFocus();
     if (location.pathname != "/search") {
       setSearchedQuery("");
       setSearchParams({});
     } else {
       setSearchedQuery(searchParams.get("q") || "");
     }
+    return () => {
+      listenerRemoveFocus();
+    };
   }, [location.pathname, searchParams]);
 
   const listenerOnTextChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -41,10 +46,14 @@ const TopBar = () => {
     value.trim() == "" ? setSearchParams({}) : setSearchParams({ q: value.trim() });
   };
 
-  const listenerOFocus = () => {
+  const listenerOnFocus = () => {
     if (location.pathname != "/search") {
       navigate("/search");
     }
+  };
+
+  const listenerRemoveFocus = () => {
+    if (searchTextFieldRef.current) searchTextFieldRef.current?.blur();
   };
 
   const listenerOnCrossBtnClick = () => {
@@ -65,7 +74,14 @@ const TopBar = () => {
               navigate(1);
             }}
           />
-          <EditText text={searchedQuery} onFocus={listenerOFocus} onTextChange={listenerOnTextChange} onCrossBtnClick={listenerOnCrossBtnClick} hasCrossIcon={searchedQuery ? true : false} />
+          <EditText
+            text={searchedQuery}
+            ref={searchTextFieldRef}
+            onFocus={listenerOnFocus}
+            onTextChange={listenerOnTextChange}
+            onCrossBtnClick={listenerOnCrossBtnClick}
+            hasCrossIcon={searchedQuery ? true : false}
+          />
         </Stack>
         <Stack direction={"row"} justifyContent={"flex-end"} alignItems={"center"} width={"50%"}>
           <StyledNotificationIconFilled />

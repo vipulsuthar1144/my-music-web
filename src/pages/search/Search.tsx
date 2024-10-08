@@ -1,10 +1,13 @@
 import { TitleSeeAll } from "@components/Image";
+import ItemCategoryListSkeleton from "@components/skeletons/ItemCategoryList.skeleton";
 import { ContainerWithoutScrollbar, RootContainer } from "@components/styledComponents";
-import { Box, CircularProgress, Grid, Skeleton, Typography } from "@mui/material";
-import ItemCategoryList from "./utilityComp/ItemCategoryList";
+import { Box, CircularProgress, Grid, Typography } from "@mui/material";
+import useSearchController from "./Search.controller";
 import ItemArtistAlbumsList from "./utilityComp/ItemArtistAlbumsList";
+import ItemCategoryList from "./utilityComp/ItemCategoryList";
 import ItemSongList from "./utilityComp/ItemSongList";
-import useSearchController from "./search.controller";
+import SearchPageSkeleton from "@components/skeletons/SearchPage.skeleton";
+import { log } from "console";
 
 const Search = () => {
   const {
@@ -46,9 +49,7 @@ const Search = () => {
           {isCategoriesLoading &&
             Array.from({ length: 20 }, (_, index) => (
               <Grid item xs={12} sm={6} md={4} lg={3}>
-                <Box key={index} sx={{ width: "100%", borderRadius: "8px", aspectRatio: 2 / 1, overflow: "hidden" }}>
-                  <Skeleton variant="rectangular" animation="wave" sx={{ width: "100%", height: `100%` }} />
-                </Box>
+                <ItemCategoryListSkeleton key={index} />
               </Grid>
             ))}
         </Grid>
@@ -56,11 +57,17 @@ const Search = () => {
     );
   };
   const renderSearchResultData = () => {
-    if (searchQuery == "") return;
+    if (searchQuery == "" || searchData == null) return;
     if (isSearchDataLoading) {
-      return <CircularProgress size={30} thickness={5} sx={{ color: "loader.main", alignSelf: "center", margin: "0 auto" }} />;
+      // return <CircularProgress size={30} thickness={5} sx={{ color: "loader.main", alignSelf: "center", margin: "0 auto" }} />;
+      return <SearchPageSkeleton />;
     }
-    if (searchData == null) return;
+    if (searchData?.tracks?.items?.length == 0 && searchData?.artists?.items?.length == 0 && searchData?.albums?.items?.length == 0 && searchData?.playlists?.items?.length == 0)
+      return (
+        <Typography variant="h3" my={"20px"}>
+          No Result Found
+        </Typography>
+      );
     return (
       <>
         {renderTracksData()}

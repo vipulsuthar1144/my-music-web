@@ -101,7 +101,9 @@ export default ItemArtistAlbumsList;
 const useStyle = makeStyles({
   root: {
     flexShrink: 0,
-    flexBasis: "200px",
+    flexBasis: "195px",
+    // width: "100%",
+    height: "auto",
     overflow: "hidden",
     boxSizing: "border-box",
     transition: `transform ${globleEaseInOutTransitionTime},backgroundColor ${globleEaseInOutTransitionTime}`,

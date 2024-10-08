@@ -2,9 +2,10 @@ import { CloseRounded, SearchRounded } from "@mui/icons-material";
 import { InputAdornment, TextField } from "@mui/material";
 import { IGlobalEditTextProps } from "@utils/globleTypes";
 
-const EditText = ({ onFocus, onTextChange, text, onCrossBtnClick, hasCrossIcon = false }: IGlobalEditTextProps) => {
+const EditText = ({ onFocus, ref, onTextChange, text, onCrossBtnClick, hasCrossIcon = false }: IGlobalEditTextProps) => {
   return (
     <TextField
+      ref={ref}
       id="outlined-error"
       color="secondary"
       value={text}

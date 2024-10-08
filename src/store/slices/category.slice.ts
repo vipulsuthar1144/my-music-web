@@ -23,12 +23,9 @@ export const categorySlice = createSlice({
       })
       .addCase(getAllCategories.fulfilled, (state, action) => {
         state.isCategoriesLoading = false;
-        const items = action.payload?.categories?.items;
-        if (items && Array.isArray(items)) {
-          state.hasMoreCategoriesData = (action.payload.categories?.total ?? 0) >= (action.payload.categories?.offset ?? 0);
-          state.categoriesOffset += action.payload.categories?.limit ?? 0;
-          state.categories = [...state.categories, ...items];
-        }
+        state.categoriesOffset += action.payload.categories?.limit ?? 0;
+        state.hasMoreCategoriesData = (action.payload.categories?.total ?? 0) >= state.categoriesOffset;
+        state.categories = [...state.categories, ...(action.payload?.categories?.items ?? [])];
       })
       .addCase(getAllCategories.rejected, (state) => {
         state.isCategoriesLoading = false;

@@ -21,7 +21,10 @@ const useSearchController = () => {
     const timeout = setTimeout(() => {
       handleSearchResult();
     }, 500);
-    return () => clearTimeout(timeout);
+    return () => {
+      clearTimeout(timeout);
+      // dispatch(emptySearchData());
+    };
   }, [searchQuery]);
 
   const handleSearchResult = () => {
@@ -33,16 +36,16 @@ const useSearchController = () => {
   const lastCategoryItemRef = useLoadMore(handleGetCategories, isCategoriesLoading, hasMoreCategoriesData);
 
   const listenerSeeAllTracks = () => {
-    navigate(`/search/tracks/${searchQuery}`);
+    navigate(`/search/track/${searchQuery}`);
   };
   const listenerSeeAllArtists = () => {
-    navigate(`/search/artists/${searchQuery}`);
+    navigate(`/search/artist/${searchQuery}`);
   };
   const listenerSeeAllAlbums = () => {
-    navigate(`/search/albums/${searchQuery}`);
+    navigate(`/search/album/${searchQuery}`);
   };
   const listenerSeeAllPlaylists = () => {
-    navigate(`/search/plalists/${searchQuery}`);
+    navigate(`/search/playlist/${searchQuery}`);
   };
 
   return {

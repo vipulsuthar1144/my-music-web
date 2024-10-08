@@ -14,6 +14,7 @@ export interface IGlobleImageProps {
 }
 
 export interface IGlobalEditTextProps {
+  ref?: any;
   text?: string;
   onTextChange?: (e: any) => void;
   onFocus?: () => void;

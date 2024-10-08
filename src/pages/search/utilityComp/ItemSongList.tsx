@@ -21,6 +21,7 @@ const ItemSongList = ({ track }: ItemSongListProps) => {
     <Card sx={{ backgroundColor: "transparent", backgroundImage: "none", boxShadow: "none" }} className={classes.root}>
       <CardActionArea
         sx={{
+          width: "100%",
           height: "100%",
           display: "flex",
           flexDirection: "row",
@@ -45,8 +46,8 @@ const ItemSongList = ({ track }: ItemSongListProps) => {
             boxShadow: "0px 10px 10px 2px rgba(0,0,0,0.2)",
           }}
         />
-        <CardContent sx={{ padding: 0, m: 0, width: "80%", flex: 1, display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-          <Box component={"div"} sx={{ width: "75%" }}>
+        <CardContent sx={{ padding: 0, m: 0, flex: 1, width: "calc(100% - 80px)", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+          <Box component={"div"} sx={{ flex: 1, maxWidth: "70%" }}>
             <SingleLineTypo variant="subtitle1" color="text.primary" mb={"2px"}>
               {track?.name}
             </SingleLineTypo>
@@ -64,16 +65,12 @@ const ItemSongList = ({ track }: ItemSongListProps) => {
               ))}
             </SingleLineTypo>
           </Box>
-          <Stack direction={"row"} gap={"10px"} sx={{ boxSizing: "border-box" }}>
-            {/* <StyledFavoriteIconOutlined /> */}
-
-            <Box sx={{ display: "flex", gap: "10px", alignItems: "center" }}>
-              <AccessTimeRounded sx={{ fontSize: "20px", color: "text.secondary" }} />
-              <Typography variant="body2" color="text.secondary">
-                {msToTimeConvert(track?.duration_ms || 0)}
-              </Typography>
-            </Box>
-          </Stack>
+          <Box sx={{ display: "flex", gap: "10px", alignItems: "center" }}>
+            <AccessTimeRounded sx={{ fontSize: "20px", color: "text.secondary" }} />
+            <Typography variant="body2" color="text.secondary">
+              {msToTimeConvert(track?.duration_ms || 0)}
+            </Typography>
+          </Box>
         </CardContent>
       </CardActionArea>
     </Card>

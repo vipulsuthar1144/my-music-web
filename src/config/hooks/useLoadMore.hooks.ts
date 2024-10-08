@@ -1,10 +1,10 @@
 import { useEffect, useRef, useCallback } from "react";
 
-const useLoadMore = (callback: () => void, isLoading: boolean, hasMoreData: boolean): React.RefCallback<HTMLElement> => {
+const useLoadMore = (callback: () => void, isLoading: boolean, hasMoreData: boolean, isError?: boolean): React.RefCallback<HTMLElement> => {
   const observer = useRef<IntersectionObserver | null>(null);
   const observe = useCallback(
     (node: HTMLElement | null) => {
-      if (isLoading) return;
+      if (isLoading || !hasMoreData || isError == true) return;
       if (observer.current) observer.current.disconnect();
 
       observer.current = new IntersectionObserver((entries) => {

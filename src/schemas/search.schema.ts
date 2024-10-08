@@ -25,4 +25,11 @@ export interface ISearchSlice {
   searchData: ISearchSchema | null;
   isSearchDataError: boolean;
   searchQuery: string;
+  isSeeAllDataListLoading: boolean;
+  seeAllDataList: IArtistSchema[] | ITrackSchema[] | IAlbumSchema[] | IPlaylistSchema[];
+  isSeeAllDataListError: boolean;
+  hasMoreSeeAllDataList: boolean;
+  seeAllDataListOffset: number;
 }
+
+export type TSeeAllSearchTypeAttribute = "track" | "artist" | "playlist" | "album";

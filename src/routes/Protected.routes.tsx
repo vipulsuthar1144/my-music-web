@@ -1,11 +1,8 @@
-import Practice from "@/pages/details/practice";
 import ProfileArtistOrAlbum from "@/pages/details/ProfileArtistOrAlbum";
-import SeeAll from "@/pages/details/SeeAll";
 import Home from "@/pages/home/Home";
 import Search from "@/pages/search/Search";
-import { ICategory } from "@/schemas/category.schema";
-import { store } from "@/store/store";
-import { getAllCategories } from "@/store/thunkServices/category.thunksevices";
+import SeeAll from "@/pages/search/SeeAll";
+import SeeAllSearch from "@/pages/search/SeeAllSearch";
 import { RootContainer } from "@components/styledComponents";
 import { Box } from "@mui/material";
 import { Navigate, RouteObject } from "react-router-dom";
@@ -17,7 +14,16 @@ const ProtectedRoutes: RouteObject[] = [
   },
   {
     path: "search",
-    element: <Search />,
+    children: [
+      {
+        index: true,
+        element: <Search />,
+      },
+      {
+        path: ":searchType/:searchQuery",
+        element: <SeeAllSearch />,
+      },
+    ],
   },
   {
     path: "details",
@@ -26,7 +32,6 @@ const ProtectedRoutes: RouteObject[] = [
   {
     path: "section/",
     element: <SeeAll />,
-    // element: <Practice />,
   },
   {
     path: "favorites",
