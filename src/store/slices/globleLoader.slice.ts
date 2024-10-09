@@ -1,4 +1,3 @@
-import { IArtistSlice } from "@/schemas/artist.schema";
 import { createSlice } from "@reduxjs/toolkit";
 
 type TGlobleLoader = {

@@ -3,7 +3,7 @@ import { Box, Skeleton } from "@mui/material";
 const ItemSongListSkeleton = () => {
   return (
     <Box sx={{ paddingY: "8px", paddingX: "12px", height: "100%", display: "flex", flexDirection: "row", justifyContent: "flex-start", alignItems: "center", gap: "12px" }}>
-      <Skeleton variant="rectangular" animation="wave" sx={{ width: "50px", height: `50px`, borderRadius: "5px" }} />
+      <Skeleton variant="rectangular" animation="wave" sx={{ width: "60px", height: `50px`, borderRadius: "5px" }} />
       <Box sx={{ width: "100%", height: "100%", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
         <Box sx={{ flex: 1 }}>
           <Skeleton variant="text" animation="wave" sx={{ width: "50%", height: `25px`, marginTop: "3px" }} />

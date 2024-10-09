@@ -1,8 +1,8 @@
 import { IImage } from "./artist.schema";
-import { IBaseSearch } from "./search.schema";
+import { IPagination } from "./search.schema";
 
 export interface ICategorySchema {
-  categories?: IBaseSearch<ICategory>;
+  categories?: IPagination<ICategory>;
 }
 
 export interface ICategory {

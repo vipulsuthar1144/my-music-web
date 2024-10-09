@@ -2,16 +2,16 @@ import { IAlbumSchema } from "@/schemas/album.schema";
 import { IArtistSchema } from "@/schemas/artist.schema";
 import { IPlaylistSchema } from "@/schemas/playlist.schema";
 import { ITrackSchema } from "@/schemas/track.schema";
+import ItemArtistAlbumListSkeleton from "@components/skeletons/ItemArtistAlbumsList.skeleton";
+import ItemSongListSkeleton from "@components/skeletons/ItemSongLIst.skeleton";
 import { RootContainer } from "@components/styledComponents";
-import { Box, Grid, Skeleton, Typography } from "@mui/material";
+import { Box, Grid, Typography } from "@mui/material";
 import useSeeAllSearchController from "./SeeAllSearch.controller";
 import ItemArtistAlbumsList from "./utilityComp/ItemArtistAlbumsList";
 import ItemSongList from "./utilityComp/ItemSongList";
-import ItemSongListSkeleton from "@components/skeletons/ItemSongLIst.skeleton";
-import ItemArtistAlbumListSkeleton from "@components/skeletons/ItemArtistAlbumsList.skeleton";
 
 const SeeAllSearch = () => {
-  const { isSeeAllDataListLoading, seeAllDataList, searchQuery, searchType, lastArtistListItemRef } = useSeeAllSearchController();
+  const { listenerGoToArtistDetails, isSeeAllDataListLoading, seeAllDataList, searchQuery, searchType, lastArtistListItemRef } = useSeeAllSearchController();
 
   const renderDataList = () => {
     if (seeAllDataList.length == 0 && !isSeeAllDataListLoading) {
@@ -42,7 +42,7 @@ const SeeAllSearch = () => {
     return (
       <Grid container spacing={1}>
         {seeAllDataList.map((item: ITrackSchema, index) => (
-          <Grid item xs={12} lg={6}>
+          <Grid item xs={12} lg={6} key={item.id}>
             <Box key={item.id} component={"div"} sx={{ width: "100%" }} ref={index === seeAllDataList.length - 1 ? lastArtistListItemRef : null}>
               <ItemSongList track={item} key={item.id} />
             </Box>
@@ -56,9 +56,16 @@ const SeeAllSearch = () => {
     return (
       <Grid container spacing={1}>
         {seeAllDataList.map((item: IArtistSchema, index) => (
-          <Grid item xs={6} sm={4} md={3} lg={1.5}>
+          <Grid item xs={6} sm={4} md={3} lg={1.5} key={item.id}>
             <Box key={item.id} component={"div"} sx={{ width: "100%" }} ref={index === seeAllDataList.length - 1 ? lastArtistListItemRef : null}>
-              <ItemArtistAlbumsList key={item.id} subtitle={item.type} title={item.name} img={(item.images && item?.images[0]?.url) || ""} isArtist={true} />
+              <ItemArtistAlbumsList
+                onClick={() => item.id && listenerGoToArtistDetails(item.id)}
+                key={item.id}
+                subtitle={item.type}
+                title={item.name}
+                img={(item.images && item?.images[0]?.url) || ""}
+                isArtist={true}
+              />
             </Box>
           </Grid>
         ))}
@@ -71,7 +78,7 @@ const SeeAllSearch = () => {
       <>
         <Grid container spacing={1}>
           {seeAllDataList.map((item: IAlbumSchema, index) => (
-            <Grid item xs={6} sm={4} md={3} lg={1.5}>
+            <Grid item xs={6} sm={4} md={3} lg={1.5} key={item.id}>
               <Box key={item.id} component={"div"} sx={{ width: "100%" }} ref={index === seeAllDataList.length - 1 ? lastArtistListItemRef : null}>
                 <ItemArtistAlbumsList key={item.id} subtitleArr={item.artists} subtitle={item.release_date?.slice(0, 4)} title={item.name} img={(item.images && item?.images[0]?.url) || ""} />
               </Box>
@@ -87,7 +94,7 @@ const SeeAllSearch = () => {
       <>
         <Grid container spacing={1}>
           {seeAllDataList.map((item: IPlaylistSchema, index) => (
-            <Grid item xs={6} sm={4} md={3} lg={1.5}>
+            <Grid item xs={6} sm={4} md={3} lg={1.5} key={item.id}>
               <Box key={item.id} component={"div"} sx={{ width: "100%" }} ref={index === seeAllDataList.length - 1 ? lastArtistListItemRef : null}>
                 <ItemArtistAlbumsList key={item.id} subtitle={`By ${item.owner?.display_name}`} title={item.name} img={(item.images && item?.images[0]?.url) || ""} />
               </Box>

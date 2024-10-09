@@ -9,15 +9,17 @@ const SearchPageSkeleton = () => {
       <Skeleton variant="text" animation="wave" sx={{ width: "20%", height: `50px` }} />
       <Grid container spacing={1} mb={"10px"}>
         {Array.from({ length: 10 }, (_, index) => (
-          <Grid item xs={12} lg={6}>
+          <Grid item xs={12} lg={6} key={index}>
             <ItemSongListSkeleton key={index} />
           </Grid>
         ))}
       </Grid>
       <Skeleton variant="text" animation="wave" sx={{ width: "20%", height: `50px`, marginBottom: "10px" }} />
       <ContainerWithoutScrollbar sx={{ gap: "10px" }}>
-        {Array.from({ length: 10 }, (_, index) => (
+        {Array.from({ length: 20 }, (_, index) => (
+          // <Box width={"200px"}>
           <ItemArtistAlbumListSkeleton isArtist={true} key={index} />
+          // </Box>
         ))}
       </ContainerWithoutScrollbar>
       <Skeleton variant="text" animation="wave" sx={{ width: "20%", height: `50px`, marginBottom: "10px" }} />

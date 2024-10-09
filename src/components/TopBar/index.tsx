@@ -1,14 +1,11 @@
-import { setSearchQuery } from "@/store/slices/search.slice";
-import { useAppDispatch, useAppSelector } from "@/store/store";
 import { mColors } from "@/theme/utils/mColors";
 import { StyledBackIcon, StyledForwardIcon, StyledNotificationIconFilled, StyledSettingIconFilled, StyledThemeModeIconFilled } from "@assets/SVG";
 import { LoaderButton } from "@components/Button";
 import EditText from "@components/EditText";
 import { LogoutRounded } from "@mui/icons-material";
-import { AppBar, debounce, Stack, Theme, Toolbar } from "@mui/material";
+import { AppBar, Stack, Toolbar } from "@mui/material";
 import { makeStyles } from "@mui/styles";
-import { ChangeEvent, useDeferredValue, useEffect, useRef, useState } from "react";
-import { useDispatch } from "react-redux";
+import { ChangeEvent, useEffect, useRef, useState } from "react";
 import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 
 const TopBar = () => {
@@ -16,16 +13,9 @@ const TopBar = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [searchedQuery, setSearchedQuery] = useState(searchParams.get("q") || "");
   const searchTextFieldRef = useRef<HTMLInputElement>(null);
-  const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const location = useLocation();
   const classes = useStyles();
-  // useEffect(() => {
-  //   const timeout = setTimeout(() => {
-  //     dispatch(setSearchQuery(searchedQuery));
-  //   }, 500);
-  //   return () => clearTimeout(timeout);
-  // }, [searchedQuery]);
 
   useEffect(() => {
     listenerRemoveFocus();
@@ -42,8 +32,10 @@ const TopBar = () => {
 
   const listenerOnTextChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
-    setSearchedQuery(value);
-    value.trim() == "" ? setSearchParams({}) : setSearchParams({ q: value.trim() });
+    if (value.length <= 30) {
+      setSearchedQuery(value);
+      value.trim() == "" ? setSearchParams({}) : setSearchParams({ q: value.trim() });
+    }
   };
 
   const listenerOnFocus = () => {

@@ -14,3 +14,8 @@ export const msToTimeConvert = (milliseconds: number): string => {
 export const getRandomColor = (): string => {
   return colorsArr[Math.floor(Math.random() * colorsArr.length)];
 };
+
+export const formatFollowersCount = (followers: number): string => {
+  const numStr = followers.toString();
+  return numStr.replace(/\B(?=(\d{3})+(?!\d))/g, ",").replace(/^(\d+)(\d{3})(?=\d)/, "$1,$2");
+};

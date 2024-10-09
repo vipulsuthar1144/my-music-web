@@ -1,8 +1,6 @@
+import { ICategorySlice } from "@/schemas/category.schema";
 import { createSlice } from "@reduxjs/toolkit";
 import { getAllCategories } from "../thunkServices/category.thunksevices";
-import { ICategorySlice } from "@/schemas/category.schema";
-import { colorsArr } from "@/theme/utils/mColors";
-import { getRandomColor } from "@utils/genaralFunctions";
 
 const intialState: ICategorySlice = {
   isCategoriesLoading: false,
@@ -22,10 +20,22 @@ export const categorySlice = createSlice({
         state.isCategoriesLoading = true;
       })
       .addCase(getAllCategories.fulfilled, (state, action) => {
+        let offset = action.payload.categories?.offset ?? 0;
+        let limit = action.payload.categories?.limit ?? 0;
+        let total = action.payload.categories?.total ?? 0;
+
         state.isCategoriesLoading = false;
-        state.categoriesOffset += action.payload.categories?.limit ?? 0;
-        state.hasMoreCategoriesData = (action.payload.categories?.total ?? 0) >= state.categoriesOffset;
-        state.categories = [...state.categories, ...(action.payload?.categories?.items ?? [])];
+        state.categoriesOffset = offset + limit;
+        state.hasMoreCategoriesData = total >= offset + limit;
+
+        if (action.payload.categories?.offset == 0) {
+          state.categories = [...(action.payload?.categories?.items ?? [])];
+        } else {
+          state.categories = [...state.categories, ...(action.payload?.categories?.items ?? [])];
+        }
+        if (offset >= 80) {
+          state.hasMoreCategoriesData = false;
+        }
       })
       .addCase(getAllCategories.rejected, (state) => {
         state.isCategoriesLoading = false;

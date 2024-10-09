@@ -20,12 +20,12 @@ const useSearchController = () => {
     }
     const timeout = setTimeout(() => {
       handleSearchResult();
-    }, 500);
+    }, 800);
     return () => {
-      clearTimeout(timeout);
+      return clearTimeout(timeout);
       // dispatch(emptySearchData());
     };
-  }, [searchQuery]);
+  }, [dispatch, searchQuery]);
 
   const handleSearchResult = () => {
     searchQuery == "" ? dispatch(emptySearchData()) : dispatch(getSearchResult(searchQuery));
@@ -33,7 +33,7 @@ const useSearchController = () => {
   const handleGetCategories = () => {
     dispatch(getAllCategories({ offset: categoriesOffset }));
   };
-  const lastCategoryItemRef = useLoadMore(handleGetCategories, isCategoriesLoading, hasMoreCategoriesData);
+  const lastCategoryItemRef = useLoadMore(handleGetCategories, isCategoriesLoading, hasMoreCategoriesData, isCategoriesError);
 
   const listenerSeeAllTracks = () => {
     navigate(`/search/track/${searchQuery}`);
@@ -48,7 +48,12 @@ const useSearchController = () => {
     navigate(`/search/playlist/${searchQuery}`);
   };
 
+  const listenerGoToArtistDetails = (artistId: string) => {
+    artistId && navigate(`/artist/${artistId}`);
+  };
+
   return {
+    listenerGoToArtistDetails,
     lastCategoryItemRef,
     listenerSeeAllTracks,
     listenerSeeAllArtists,

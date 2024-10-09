@@ -1,4 +1,4 @@
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createBrowserRouter, Navigate, RouterProvider } from "react-router-dom";
 import AuthLayout from "../layouts/Auth.layout";
 import AuthRoutes from "./Auth.routes";
 import ProtectedLayout from "../layouts/Protected.layout";
@@ -8,14 +8,18 @@ const AppRoutes = () => {
   const rootRoutes = createBrowserRouter(
     [
       {
-        path: "/auth/*",
+        path: "/auth/",
         element: <AuthLayout />,
         children: AuthRoutes,
       },
       {
-        path: "/*",
+        path: "/",
         element: <ProtectedLayout />,
         children: ProtectedRoutes,
+      },
+      {
+        path: "*",
+        element: <Navigate to={"/"} replace />,
       },
     ],
     { basename: "/" }

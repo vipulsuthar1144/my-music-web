@@ -1,6 +1,5 @@
-import { ISearchSchema, TSeeAllSearchTypeAttribute } from "@/schemas/search.schema";
+import { ISearchSchema } from "@/schemas/search.schema";
 import { getSearchResultAPI, getSeeAllDataBySearchQueryAPI } from "@/services/search.services";
-import { createAsyncThunk } from "@reduxjs/toolkit";
 import getAsyncThunk from "../getAsyncThunk";
 
 export const getSearchResult = getAsyncThunk<ISearchSchema, string>("GET/searchResult", async (searchQuery, signal) => {

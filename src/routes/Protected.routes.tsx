@@ -1,11 +1,13 @@
-import ProfileArtistOrAlbum from "@/pages/details/ProfileArtistOrAlbum";
+import ArtistAlbums from "@/pages/artist/ArtistAlbums";
+import ArtistProfile from "@/pages/artist/ArtistProfile";
+import RelatedArtist from "@/pages/artist/RelatedArtist";
+import SeeAll from "@/pages/details/SeeAll";
 import Home from "@/pages/home/Home";
 import Search from "@/pages/search/Search";
-import SeeAll from "@/pages/search/SeeAll";
 import SeeAllSearch from "@/pages/search/SeeAllSearch";
 import { RootContainer } from "@components/styledComponents";
 import { Box } from "@mui/material";
-import { Navigate, RouteObject } from "react-router-dom";
+import { RouteObject } from "react-router-dom";
 
 const ProtectedRoutes: RouteObject[] = [
   {
@@ -26,8 +28,21 @@ const ProtectedRoutes: RouteObject[] = [
     ],
   },
   {
-    path: "details",
-    element: <ProfileArtistOrAlbum />,
+    path: "artist/:artistId",
+    children: [
+      {
+        index: true,
+        element: <ArtistProfile />,
+      },
+      {
+        path: "related-artists",
+        element: <RelatedArtist />,
+      },
+      {
+        path: "albums",
+        element: <ArtistAlbums />,
+      },
+    ],
   },
   {
     path: "section/",
@@ -68,10 +83,10 @@ const ProtectedRoutes: RouteObject[] = [
     ),
   },
 
-  {
-    path: "*",
-    element: <Navigate to={"/"} replace />,
-  },
+  // {
+  //   path: "*",
+  //   element: <Navigate to={"/"} replace />,
+  // },
 ];
 
 export default ProtectedRoutes;

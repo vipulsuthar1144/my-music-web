@@ -1,4 +1,4 @@
-import { ISearchSlice } from "@/schemas/search.schema";
+import { ISearchSchema, ISearchSlice } from "@/schemas/search.schema";
 import { createSlice } from "@reduxjs/toolkit";
 import { getSearchResult, getSeeAllDataBySearchQuery } from "../thunkServices/search.thunksevices";
 
@@ -18,16 +18,8 @@ export const searchSlice = createSlice({
   name: "search",
   initialState: intialState,
   reducers: {
-    setSearchQuery: (state, action) => {
-      state.searchQuery = action.payload;
-    },
     emptySearchData: (state) => {
       state.searchData = null;
-    },
-    resetSeeAllDataList: (state) => {
-      state.seeAllDataList = [];
-      state.hasMoreSeeAllDataList = true;
-      state.seeAllDataListOffset = 0;
     },
   },
   extraReducers: (builder) => {
@@ -52,26 +44,14 @@ export const searchSlice = createSlice({
         state.isSeeAllDataListError = false;
 
         if (action.payload.tracks) {
-          state.seeAllDataListOffset += action.payload.tracks?.limit ?? 0;
-          state.seeAllDataList = [...state.seeAllDataList, ...(action.payload.tracks.items ?? [])];
-          state.hasMoreSeeAllDataList = (action.payload.tracks?.total ?? 0) >= state.seeAllDataListOffset;
+          updateSeeAllData(state, "tracks", action.payload);
         } else if (action.payload.artists) {
-          state.seeAllDataListOffset += action.payload.artists?.limit ?? 0;
-          state.seeAllDataList = [...state.seeAllDataList, ...(action.payload.artists.items ?? [])];
-          state.hasMoreSeeAllDataList = (action.payload.artists?.total ?? 0) >= state.seeAllDataListOffset;
+          updateSeeAllData(state, "artists", action.payload);
         } else if (action.payload.albums) {
-          state.seeAllDataListOffset += action.payload.albums?.limit ?? 0;
-          state.seeAllDataList = [...state.seeAllDataList, ...(action.payload.albums.items ?? [])];
-          state.hasMoreSeeAllDataList = (action.payload.albums?.total ?? 0) >= state.seeAllDataListOffset;
+          updateSeeAllData(state, "albums", action.payload);
         } else if (action.payload.playlists) {
-          state.seeAllDataListOffset += action.payload.playlists?.limit ?? 0;
-          state.seeAllDataList = [...state.seeAllDataList, ...(action.payload.playlists.items ?? [])];
-          state.hasMoreSeeAllDataList = (action.payload.playlists?.total ?? 0) >= state.seeAllDataListOffset;
+          updateSeeAllData(state, "playlists", action.payload);
         } else {
-          state.hasMoreSeeAllDataList = false;
-        }
-
-        if (state.seeAllDataListOffset > 100) {
           state.hasMoreSeeAllDataList = false;
         }
       })
@@ -82,5 +62,23 @@ export const searchSlice = createSlice({
   },
 });
 
-export const { setSearchQuery, emptySearchData, resetSeeAllDataList } = searchSlice.actions;
+export const { emptySearchData } = searchSlice.actions;
 export default searchSlice.reducer;
+
+const updateSeeAllData = (state: ISearchSlice, payloadKey: keyof ISearchSchema, payload: ISearchSchema) => {
+  const data = payload[payloadKey];
+
+  if (data) {
+    const offset = data.offset ?? 0;
+    const limit = data.limit ?? 0;
+    const total = data.total ?? 0;
+    const items = data.items ?? [];
+
+    state.seeAllDataListOffset = offset + limit;
+    state.hasMoreSeeAllDataList = total >= offset + limit;
+
+    state.seeAllDataList = offset === 0 ? [...items] : [...state.seeAllDataList, ...items];
+
+    if (offset >= 80) state.hasMoreSeeAllDataList = false;
+  }
+};

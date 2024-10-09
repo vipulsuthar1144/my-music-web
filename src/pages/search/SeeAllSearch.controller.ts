@@ -1,5 +1,4 @@
 import useLoadMore from "@/config/hooks/useLoadMore.hooks";
-import { resetSeeAllDataList } from "@/store/slices/search.slice";
 import { useAppDispatch, useAppSelector } from "@/store/store";
 import { getSeeAllDataBySearchQuery } from "@/store/thunkServices/search.thunksevices";
 import { useEffect } from "react";
@@ -15,19 +14,21 @@ const useSeeAllSearchController = () => {
     if (!["track", "artist", "playlist", "album"].includes(searchType ?? "")) {
       navigate("/", { replace: true });
     } else {
-      handleGetSeeAllDataBySearchQuery();
+      dispatch(getSeeAllDataBySearchQuery({ searchQuery: searchQuery ?? "", type: searchType ?? "", offset: 0 }));
     }
-    return () => {
-      dispatch(resetSeeAllDataList());
-    };
-  }, [searchQuery, searchType]);
+  }, [dispatch, searchQuery, searchType]);
 
   const handleGetSeeAllDataBySearchQuery = () => {
     dispatch(getSeeAllDataBySearchQuery({ searchQuery: searchQuery ?? "", type: searchType ?? "", offset: seeAllDataListOffset }));
   };
   const lastArtistListItemRef = useLoadMore(handleGetSeeAllDataBySearchQuery, isSeeAllDataListLoading, hasMoreSeeAllDataList, isSeeAllDataListError);
 
+  const listenerGoToArtistDetails = (artistId: string) => {
+    artistId && navigate(`/artist/${artistId}`);
+  };
+
   return {
+    listenerGoToArtistDetails,
     isSeeAllDataListLoading,
     seeAllDataList,
     isSeeAllDataListError,
