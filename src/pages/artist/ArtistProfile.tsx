@@ -108,7 +108,14 @@ const ArtistProfile = () => {
         <Grid container spacing={1} mb={"10px"} paddingX={"10px"} sx={{ zIndex: 1 }}>
           {artistTopTrackList.map((track, _) => (
             <Grid item xs={12} lg={6} key={track.id}>
-              <ItemSongList key={track.id} track={track} />
+              <ItemSongList
+                key={track.id}
+                img={track?.album?.images && track?.album?.images[0]?.url}
+                title={track?.name}
+                subtitle={` From ${track.album?.name}`}
+                // subtitleArr={track.artists?.filter((artist, index) => artist.id != artistId)}
+                trackDuration={track.duration_ms}
+              />
             </Grid>
           ))}
         </Grid>

@@ -41,10 +41,10 @@ const SeeAllSearch = () => {
   const renderTrackList = () => {
     return (
       <Grid container spacing={1}>
-        {seeAllDataList.map((item: ITrackSchema, index) => (
-          <Grid item xs={12} lg={6} key={item.id}>
-            <Box key={item.id} component={"div"} sx={{ width: "100%" }} ref={index === seeAllDataList.length - 1 ? lastArtistListItemRef : null}>
-              <ItemSongList track={item} key={item.id} />
+        {seeAllDataList.map((track: ITrackSchema, index) => (
+          <Grid item xs={12} lg={6} key={track.id}>
+            <Box key={track.id} component={"div"} sx={{ width: "100%" }} ref={index === seeAllDataList.length - 1 ? lastArtistListItemRef : null}>
+              <ItemSongList key={track.id} img={track?.album?.images && track?.album?.images[0]?.url} title={track?.name} subtitleArr={track.artists} trackDuration={track.duration_ms} />
             </Box>
           </Grid>
         ))}

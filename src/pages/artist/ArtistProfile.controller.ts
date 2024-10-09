@@ -62,6 +62,7 @@ const useArtistProfileController = () => {
     isArtistDataError,
     artistData,
     bgColor,
+    artistId,
     artistTopTrackList,
     isArtistTopTracksListLoading,
     isArtistTopTracksListError,

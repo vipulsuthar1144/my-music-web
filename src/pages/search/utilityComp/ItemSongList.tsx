@@ -1,25 +1,29 @@
-import { ITrackSchema } from "@/schemas/track.schema";
-import { mColors } from "@/theme/utils/mColors";
-import { img1, imgDefaultSong } from "@assets/images";
-import ImageComp, { ImageCompWithLoader } from "@components/Image";
+import { IArtistSchema } from "@/schemas/artist.schema";
+import { ImageCompWithLoader } from "@components/Image";
 import { SingleLineTypo } from "@components/styledComponents";
 import { AccessTimeRounded } from "@mui/icons-material";
-import { Box, Card, CardActionArea, CardContent, Stack, Theme, Typography } from "@mui/material";
+import { Box, Card, CardActionArea, CardContent, Theme, Typography } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { msToTimeConvert } from "@utils/genaralFunctions";
 import { globleEaseInOutTransitionTime } from "@utils/globleStyle";
 import { useNavigate } from "react-router-dom";
 
 type ItemSongListProps = {
-  track?: ITrackSchema;
+  title?: string;
+  subtitle?: string;
+  subtitleArr?: IArtistSchema[];
+  trackDuration?: number;
+  img?: string;
+  onClick?: () => void;
 };
 
-const ItemSongList = ({ track }: ItemSongListProps) => {
+const ItemSongList = ({ title, img, subtitleArr, subtitle, onClick, trackDuration }: ItemSongListProps) => {
   const classes = useStyle();
   const navigate = useNavigate();
   return (
     <Card sx={{ backgroundColor: "transparent", backgroundImage: "none", boxShadow: "none" }} className={classes.root}>
       <CardActionArea
+        onClick={onClick}
         sx={{
           width: "100%",
           height: "100%",
@@ -37,7 +41,7 @@ const ItemSongList = ({ track }: ItemSongListProps) => {
           1
         </Typography> */}
         <ImageCompWithLoader
-          img={track?.album?.images && track?.album?.images[0]?.url}
+          img={img}
           alt={"track"}
           style={{
             width: "50px",
@@ -49,10 +53,11 @@ const ItemSongList = ({ track }: ItemSongListProps) => {
         <CardContent sx={{ padding: 0, m: 0, flex: 1, width: "calc(100% - 80px)", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
           <Box component={"div"} sx={{ flex: 1, maxWidth: "70%" }}>
             <SingleLineTypo variant="subtitle1" color="text.primary" mb={"2px"}>
-              {track?.name}
+              {title}
             </SingleLineTypo>
             <SingleLineTypo variant="subtitle2" color="text.secondary">
-              {track?.artists?.map((item) => (
+              {subtitle}
+              {subtitleArr?.map((item) => (
                 <Box
                   component={"span"}
                   onMouseDown={(event) => event.stopPropagation()}
@@ -68,7 +73,7 @@ const ItemSongList = ({ track }: ItemSongListProps) => {
           <Box sx={{ display: "flex", gap: "10px", alignItems: "center" }}>
             <AccessTimeRounded sx={{ fontSize: "20px", color: "text.secondary" }} />
             <Typography variant="body2" color="text.secondary">
-              {msToTimeConvert(track?.duration_ms || 0)}
+              {msToTimeConvert(trackDuration || 0)}
             </Typography>
           </Box>
         </CardContent>

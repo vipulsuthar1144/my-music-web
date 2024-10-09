@@ -83,9 +83,9 @@ const Search = () => {
       <>
         <TitleSeeAll title="Songs" onSeeAllClick={listenerSeeAllTracks} />
         <Grid container spacing={1} mb={"10px"}>
-          {searchData?.tracks?.items?.map((item, _) => (
-            <Grid item xs={12} lg={6} key={item.id}>
-              <ItemSongList track={item} key={item.id} />
+          {searchData?.tracks?.items?.map((track, _) => (
+            <Grid item xs={12} lg={6} key={track.id}>
+              <ItemSongList key={track.id} img={track?.album?.images && track?.album?.images[0]?.url} title={track?.name} subtitleArr={track.artists} trackDuration={track.duration_ms} />
             </Grid>
           ))}
         </Grid>
