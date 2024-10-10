@@ -15,7 +15,8 @@ const ArtistProfile = () => {
   const classes = useStyles();
   const {
     listenerSeeAllTopTracks,
-    listenerArtistDetails,
+    listenerGoToArtistDetails,
+    listenerGoToAlbumDetails,
     listenerSeeAllRelatedArtist,
     listenerSeeAllAlbums,
     isArtistDataLoading,
@@ -131,6 +132,7 @@ const ArtistProfile = () => {
         <ContainerWithoutScrollbar>
           {artistAlbumsList?.map((item, _) => (
             <ItemArtistAlbumsList
+              onClick={() => listenerGoToAlbumDetails(item.id)}
               key={item.id}
               // subtitleArr={item.artists}
               subtitle={`${item.release_date?.slice(0, 4)},${item.album_type}`}
@@ -155,9 +157,7 @@ const ArtistProfile = () => {
               subtitle={item.type}
               title={item.name}
               img={(item.images && item?.images[0]?.url) || ""}
-              onClick={() => {
-                item.id && listenerArtistDetails(item.id);
-              }}
+              onClick={() => listenerGoToArtistDetails(item.id)}
               isArtist={true}
             />
           ))}
@@ -205,7 +205,7 @@ const useStyles = makeStyles((_: Theme) => ({
     display: "flex",
     flexWrap: "wrap",
     position: "relative",
-    flex: 1,
+    // flex: 1,
     gap: "30px",
     alignItems: "flex-end",
   },

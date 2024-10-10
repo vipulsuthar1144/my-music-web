@@ -71,6 +71,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     justifyContent: "center",
   },
   footer: {
+    zIndex: 1,
     marginTop: "10px",
     backgroundColor: theme.palette.secondary.main,
     width: "100%",

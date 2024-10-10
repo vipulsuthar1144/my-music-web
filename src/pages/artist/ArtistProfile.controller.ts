@@ -42,20 +42,23 @@ const useArtistProfileController = () => {
   const listenerSeeAllTopTracks = () => {
     navigate(`/search/track/${artistData?.name}`);
   };
-
-  const listenerArtistDetails = (id: string) => {
-    navigate(`/artist/${id}`);
-  };
   const listenerSeeAllRelatedArtist = () => {
     navigate(`/artist/${artistId}/related-artists`);
   };
   const listenerSeeAllAlbums = () => {
     navigate(`/artist/${artistId}/albums`);
   };
+  const listenerGoToArtistDetails = (artistId?: string) => {
+    navigate(`/artist/${artistId}`);
+  };
+  const listenerGoToAlbumDetails = (albumId?: string) => {
+    albumId && navigate(`/album/${albumId}`);
+  };
 
   return {
     listenerSeeAllTopTracks,
-    listenerArtistDetails,
+    listenerGoToArtistDetails,
+    listenerGoToAlbumDetails,
     listenerSeeAllRelatedArtist,
     listenerSeeAllAlbums,
     isArtistDataLoading,

@@ -14,10 +14,11 @@ type ItemSongListProps = {
   subtitleArr?: IArtistSchema[];
   trackDuration?: number;
   img?: string;
+  track_no?: number;
   onClick?: () => void;
 };
 
-const ItemSongList = ({ title, img, subtitleArr, subtitle, onClick, trackDuration }: ItemSongListProps) => {
+const ItemSongList = ({ title, track_no = 0, img, subtitleArr, subtitle, onClick, trackDuration }: ItemSongListProps) => {
   const classes = useStyle();
   const navigate = useNavigate();
   return (
@@ -37,9 +38,12 @@ const ItemSongList = ({ title, img, subtitleArr, subtitle, onClick, trackDuratio
           boxSizing: "border-box",
         }}
       >
-        {/* <Typography variant="subtitle1" color="text.primary" mr={"2px"}>
-          1
-        </Typography> */}
+        {track_no > 0 && (
+          <Typography variant="subtitle1" color="text.primary" mr={"2px"} width={"20px"}>
+            {track_no}
+          </Typography>
+        )}
+
         <ImageCompWithLoader
           img={img}
           alt={"track"}
@@ -57,7 +61,7 @@ const ItemSongList = ({ title, img, subtitleArr, subtitle, onClick, trackDuratio
             </SingleLineTypo>
             <SingleLineTypo variant="subtitle2" color="text.secondary">
               {subtitle}
-              {subtitleArr?.map((item) => (
+              {subtitleArr?.map((item, index) => (
                 <Box
                   component={"span"}
                   onMouseDown={(event) => event.stopPropagation()}
@@ -65,7 +69,7 @@ const ItemSongList = ({ title, img, subtitleArr, subtitle, onClick, trackDuratio
                   onClick={() => navigate(`/artist/${item.id}`)}
                   sx={{ cursor: "pointer", "&:hover": { textDecoration: "underline", color: "text.primary" } }}
                 >
-                  {` ${item.name}, `}
+                  {subtitleArr.length - 1 == index ? `${item.name}` : `${item.name} • `}
                 </Box>
               ))}
             </SingleLineTypo>
@@ -88,10 +92,11 @@ const useStyle = makeStyles((theme: Theme) => ({
   root: {
     width: "100%",
     transition: `transform ${globleEaseInOutTransitionTime},backgroundColor ${globleEaseInOutTransitionTime}`,
-    borderRadius: "5px",
     boxSizing: "border-box",
+    overFlow: "hidden",
     "&:hover": {
       backgroundColor: theme.palette.secondary.main,
+      borderRadius: "5px",
     },
   },
 }));

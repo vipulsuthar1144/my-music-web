@@ -5,7 +5,7 @@ import ItemArtistAlbumsList from "../search/utilityComp/ItemArtistAlbumsList";
 import useRelatedArtistController from "./RelatedArtist.controller";
 
 const RelatedArtist = () => {
-  const { isRelatedArtistListError, isRelatedArtistListLoading, relatedArtistList, listenerArtistDetails } = useRelatedArtistController();
+  const { isRelatedArtistListError, isRelatedArtistListLoading, relatedArtistList, listenerGoToArtistDetails } = useRelatedArtistController();
 
   const renderArtistsList = () => {
     if (isRelatedArtistListLoading) return renderSkeleton();
@@ -24,7 +24,7 @@ const RelatedArtist = () => {
           {relatedArtistList.map((item, _) => (
             <Grid item xs={6} sm={4} md={3} lg={1.5}>
               <ItemArtistAlbumsList
-                onClick={() => item.id && listenerArtistDetails(item.id)}
+                onClick={() => listenerGoToArtistDetails(item.id)}
                 key={item.id}
                 subtitle={item.type}
                 title={item.name}

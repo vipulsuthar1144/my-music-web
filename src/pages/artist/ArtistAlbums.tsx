@@ -5,7 +5,7 @@ import ItemArtistAlbumsList from "../search/utilityComp/ItemArtistAlbumsList";
 import useArtistAlbumsController from "./ArtistAlbums.controller";
 
 const ArtistAlbums = () => {
-  const { lastAlbumListItemRef, isArtistAlbumsListLoading, isArtistAlbumsListError, artistAlbumsList } = useArtistAlbumsController();
+  const { lastAlbumListItemRef, isArtistAlbumsListLoading, isArtistAlbumsListError, artistAlbumsList, listenerGoToAlbumDetails } = useArtistAlbumsController();
 
   const renderAlbums = () => {
     if (isArtistAlbumsListError)
@@ -24,7 +24,14 @@ const ArtistAlbums = () => {
           {artistAlbumsList.map((item, index) => (
             <Grid item xs={6} sm={4} md={3} lg={1.5} key={`${item.id}${index}`}>
               <Box key={item.id} component={"div"} sx={{ width: "100%" }} ref={index === artistAlbumsList.length - 1 ? lastAlbumListItemRef : null}>
-                <ItemArtistAlbumsList key={item.id} subtitleArr={item.artists} subtitle={item.release_date?.slice(0, 4)} title={item.name} img={(item.images && item?.images[0]?.url) || ""} />
+                <ItemArtistAlbumsList
+                  key={item.id}
+                  onClick={() => listenerGoToAlbumDetails(item.id)}
+                  subtitleArr={item.artists}
+                  subtitle={item.release_date?.slice(0, 4)}
+                  title={item.name}
+                  img={(item.images && item?.images[0]?.url) || ""}
+                />
               </Box>
             </Grid>
           ))}

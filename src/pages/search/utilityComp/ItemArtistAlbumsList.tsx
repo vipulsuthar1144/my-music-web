@@ -78,6 +78,7 @@ const ItemArtistAlbumsList: React.FC<ItemArtistAlbumsListProps> = ({ title, subt
           </TwoLineTypo>
           <TwoLineTypo variant="subtitle2" color="text.secondary" sx={{ textTransform: "capitalize" }}>
             {subtitle}
+
             {subtitleArr?.map((item) => (
               <Box
                 component={"span"}
@@ -86,7 +87,7 @@ const ItemArtistAlbumsList: React.FC<ItemArtistAlbumsListProps> = ({ title, subt
                 onClick={() => navigate(`/artist/${item.id}`)}
                 sx={{ cursor: "pointer", "&:hover": { textDecoration: "underline", color: "text.primary" } }}
               >
-                {`, ${item.name}`}
+                {` • ${item.name}`}
               </Box>
             ))}
           </TwoLineTypo>

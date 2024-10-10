@@ -34,7 +34,8 @@ export default ImageComp;
 
 const ImageCompWithLoader = ({ img, alt, style, onClick, errorImage = imgDefaultSong, isPreventClickEffect = false }: IGlobleImageProps) => {
   const [imgSrc, setImgSrc] = useState(img);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(img ? true : false);
+
   const color = useMemo(() => {
     return getRandomColor();
   }, []);

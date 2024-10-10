@@ -13,15 +13,15 @@ const useRelatedArtistController = () => {
     artistId && dispatch(getRelatedArtists({ artistId }));
   }, [dispatch, artistId]);
 
-  const listenerArtistDetails = (id: string) => {
-    navigate(`/artist/${id}`);
+  const listenerGoToArtistDetails = (artistId?: string) => {
+    artistId && navigate(`/artist/${artistId}`);
   };
 
   return {
     isRelatedArtistListError,
     isRelatedArtistListLoading,
     relatedArtistList,
-    listenerArtistDetails,
+    listenerGoToArtistDetails,
   };
 };
 

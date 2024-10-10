@@ -11,7 +11,7 @@ import ItemArtistAlbumsList from "./utilityComp/ItemArtistAlbumsList";
 import ItemSongList from "./utilityComp/ItemSongList";
 
 const SeeAllSearch = () => {
-  const { listenerGoToArtistDetails, isSeeAllDataListLoading, seeAllDataList, searchQuery, searchType, lastArtistListItemRef } = useSeeAllSearchController();
+  const { listenerGoToArtistDetails, listenerGoToAlbumDetails, isSeeAllDataListLoading, seeAllDataList, searchQuery, searchType, lastArtistListItemRef } = useSeeAllSearchController();
 
   const renderDataList = () => {
     if (seeAllDataList.length == 0 && !isSeeAllDataListLoading) {
@@ -59,7 +59,7 @@ const SeeAllSearch = () => {
           <Grid item xs={6} sm={4} md={3} lg={1.5} key={item.id}>
             <Box key={item.id} component={"div"} sx={{ width: "100%" }} ref={index === seeAllDataList.length - 1 ? lastArtistListItemRef : null}>
               <ItemArtistAlbumsList
-                onClick={() => item.id && listenerGoToArtistDetails(item.id)}
+                onClick={() => listenerGoToArtistDetails(item.id)}
                 key={item.id}
                 subtitle={item.type}
                 title={item.name}
@@ -80,7 +80,14 @@ const SeeAllSearch = () => {
           {seeAllDataList.map((item: IAlbumSchema, index) => (
             <Grid item xs={6} sm={4} md={3} lg={1.5} key={item.id}>
               <Box key={item.id} component={"div"} sx={{ width: "100%" }} ref={index === seeAllDataList.length - 1 ? lastArtistListItemRef : null}>
-                <ItemArtistAlbumsList key={item.id} subtitleArr={item.artists} subtitle={item.release_date?.slice(0, 4)} title={item.name} img={(item.images && item?.images[0]?.url) || ""} />
+                <ItemArtistAlbumsList
+                  key={item.id}
+                  onClick={() => listenerGoToAlbumDetails(item.id)}
+                  subtitleArr={item.artists}
+                  subtitle={item.release_date?.slice(0, 4)}
+                  title={item.name}
+                  img={(item.images && item?.images[0]?.url) || ""}
+                />
               </Box>
             </Grid>
           ))}

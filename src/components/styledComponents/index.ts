@@ -3,7 +3,7 @@ import { Box, Typography } from "@mui/material";
 
 export const RootContainer = styled(Box)({
   flex: 1,
-  minHeight: "50vh",
+  minHeight: "80vh",
   display: "flex",
   flexDirection: "column",
   gap: "10px",

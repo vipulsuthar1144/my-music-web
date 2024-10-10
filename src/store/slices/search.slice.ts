@@ -75,7 +75,7 @@ const updateSeeAllData = (state: ISearchSlice, payloadKey: keyof ISearchSchema, 
     const items = data.items ?? [];
 
     state.seeAllDataListOffset = offset + limit;
-    state.hasMoreSeeAllDataList = total >= offset + limit;
+    state.hasMoreSeeAllDataList = total > offset + limit;
 
     state.seeAllDataList = offset === 0 ? [...items] : [...state.seeAllDataList, ...items];
 

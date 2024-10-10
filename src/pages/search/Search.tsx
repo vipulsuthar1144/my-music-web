@@ -10,6 +10,7 @@ import ItemSongList from "./utilityComp/ItemSongList";
 
 const Search = () => {
   const {
+    listenerGoToAlbumDetails,
     lastCategoryItemRef,
     listenerSeeAllTracks,
     listenerSeeAllArtists,
@@ -105,7 +106,7 @@ const Search = () => {
               title={item.name}
               img={(item.images && item?.images[0]?.url) || ""}
               onClick={() => {
-                listenerGoToArtistDetails(item.id ?? "");
+                listenerGoToArtistDetails(item.id);
               }}
               isArtist={true}
             />
@@ -121,7 +122,14 @@ const Search = () => {
         <TitleSeeAll title="Album" onSeeAllClick={listenerSeeAllAlbums} />
         <ContainerWithoutScrollbar>
           {searchData?.albums?.items?.map((item, _) => (
-            <ItemArtistAlbumsList key={item.id} subtitleArr={item.artists} subtitle={item.release_date?.slice(0, 4)} title={item.name} img={(item.images && item?.images[0]?.url) || ""} />
+            <ItemArtistAlbumsList
+              onClick={() => listenerGoToAlbumDetails(item.id)}
+              key={item.id}
+              subtitleArr={item.artists}
+              subtitle={item.release_date?.slice(0, 4)}
+              title={item.name}
+              img={(item.images && item?.images[0]?.url) || ""}
+            />
           ))}
         </ContainerWithoutScrollbar>
       </>

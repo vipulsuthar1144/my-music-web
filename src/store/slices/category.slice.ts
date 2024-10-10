@@ -26,7 +26,7 @@ export const categorySlice = createSlice({
 
         state.isCategoriesLoading = false;
         state.categoriesOffset = offset + limit;
-        state.hasMoreCategoriesData = total >= offset + limit;
+        state.hasMoreCategoriesData = total > offset + limit;
 
         if (action.payload.categories?.offset == 0) {
           state.categories = [...(action.payload?.categories?.items ?? [])];

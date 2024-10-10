@@ -1,3 +1,4 @@
+import AlbumDetail from "@/pages/album/AlbumDetail";
 import ArtistAlbums from "@/pages/artist/ArtistAlbums";
 import ArtistProfile from "@/pages/artist/ArtistProfile";
 import RelatedArtist from "@/pages/artist/RelatedArtist";
@@ -45,6 +46,10 @@ const ProtectedRoutes: RouteObject[] = [
     ],
   },
   {
+    path: "album/:albumId",
+    element: <AlbumDetail />,
+  },
+  {
     path: "section/",
     element: <SeeAll />,
   },
@@ -58,7 +63,7 @@ const ProtectedRoutes: RouteObject[] = [
   },
 
   {
-    path: "recents",
+    path: "recent-played",
     element: (
       <RootContainer>
         <Box>recents</Box>

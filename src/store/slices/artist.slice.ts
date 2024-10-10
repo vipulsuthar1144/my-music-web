@@ -51,7 +51,7 @@ export const artistSlice = createSlice({
 
         state.isArtistAlbumsListLoading = false;
         state.artistAlbumsListOffset = offset + limit;
-        state.hasMoreArtistAlbumsList = total >= offset + limit;
+        state.hasMoreArtistAlbumsList = total > offset + limit;
 
         if (offset == 0) {
           state.artistAlbumsList = [...(action.payload?.items ?? [])];
