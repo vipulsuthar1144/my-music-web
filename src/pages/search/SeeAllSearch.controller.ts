@@ -1,4 +1,5 @@
 import useLoadMore from "@/config/hooks/useLoadMore.hooks";
+import { resetSearchState } from "@/store/slices/search.slice";
 import { useAppDispatch, useAppSelector } from "@/store/store";
 import { getSeeAllDataBySearchQuery } from "@/store/thunkServices/search.thunksevices";
 import { useEffect } from "react";
@@ -14,6 +15,7 @@ const useSeeAllSearchController = () => {
     if (!["track", "artist", "playlist", "album"].includes(searchType ?? "")) {
       navigate("/", { replace: true });
     } else {
+      dispatch(resetSearchState());
       dispatch(getSeeAllDataBySearchQuery({ searchQuery: searchQuery ?? "", type: searchType ?? "", offset: 0 }));
     }
   }, [dispatch, searchQuery, searchType]);

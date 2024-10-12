@@ -62,7 +62,7 @@ const PlaylistDetails = () => {
               {playlistData?.name}
             </Typography>
             <Typography variant="subtitle1" mb={"5px"}>
-              {playlistData?.description}
+              {playlistData?.description?.includes("href") ? "" : playlistData?.description}
             </Typography>
             <Typography variant="h6" color="text.primary">
               <Box component={"span"} onClick={() => {}} sx={{ cursor: "pointer", "&:hover": { textDecoration: "underline", color: "text.primary" } }}>

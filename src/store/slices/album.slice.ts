@@ -19,7 +19,19 @@ const intialState: IAlbumSlice = {
 export const albumSlice = createSlice({
   name: "album",
   initialState: intialState,
-  reducers: {},
+  reducers: {
+    resetAlbumState: (state) => {
+      state.bgColor = "#9759a8";
+      state.isAlbumDataLoading = false;
+      state.isAlbumDataError = false;
+      state.albumData = null;
+      state.isTrackListError = false;
+      state.isTrackListLoading = false;
+      state.trackList = [];
+      state.hasMoreTrackList = true;
+      state.trackListOffset = 0;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(getAlbumById.pending, (state) => {
@@ -46,7 +58,7 @@ export const albumSlice = createSlice({
         state.trackListOffset = offset + limit;
         state.hasMoreTrackList = total > offset + limit;
 
-        if (action.payload?.offset == 0) {
+        if (offset == 0) {
           state.trackList = [...(action.payload?.items ?? [])];
         } else {
           state.trackList = [...state.trackList, ...(action.payload?.items ?? [])];
@@ -61,5 +73,7 @@ export const albumSlice = createSlice({
       });
   },
 });
+
+export const { resetAlbumState } = albumSlice.actions;
 
 export default albumSlice.reducer;

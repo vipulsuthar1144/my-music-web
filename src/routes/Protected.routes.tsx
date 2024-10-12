@@ -4,6 +4,7 @@ import ArtistProfile from "@/pages/artist/ArtistProfile";
 import RelatedArtist from "@/pages/artist/RelatedArtist";
 import SeeAll from "@/pages/details/SeeAll";
 import Home from "@/pages/home/Home";
+import CategoryPlaylists from "@/pages/playlist/CategoryPlaylists";
 import PlaylistDetails from "@/pages/playlist/PlaylistDetails";
 import Search from "@/pages/search/Search";
 import SeeAllSearch from "@/pages/search/SeeAllSearch";
@@ -54,11 +55,11 @@ const ProtectedRoutes: RouteObject[] = [
     path: "playlist/:playlistId",
     element: <PlaylistDetails />,
   },
-
   {
-    path: "section/",
-    element: <SeeAll />,
+    path: "category/:categoryId/playlists",
+    element: <CategoryPlaylists />,
   },
+
   {
     path: "favorites",
     element: (

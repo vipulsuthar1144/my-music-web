@@ -1,3 +1,4 @@
+import { resetArtistState } from "@/store/slices/artist.slice";
 import { useAppDispatch, useAppSelector } from "@/store/store";
 import { getAlbumsOfArtist, getArtistById, getRelatedArtists, getTopTracksOfArtist } from "@/store/thunkServices/artist.thunksevices";
 import { useEffect } from "react";
@@ -25,6 +26,7 @@ const useArtistProfileController = () => {
 
   useEffect(() => {
     if (artistId) {
+      dispatch(resetArtistState());
       dispatch(getArtistById({ artistId: artistId }))
         .unwrap()
         .then(async () => {

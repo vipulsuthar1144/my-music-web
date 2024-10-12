@@ -45,4 +45,11 @@ export interface IPlaylistSlice {
   isPlaylistTrackListError: boolean;
   hasMorePlaylistTrackList: boolean;
   playlistTrackListOffset: number;
+
+  isCategoryPlaylistsLoading: boolean;
+  categoryTitle: string;
+  categoryPlaylists: IPlaylistSchema[];
+  isCategoryPlaylistsError: boolean;
+  hasMoreCategoryPlaylists: boolean;
+  categoryPlaylistsOffset: number;
 }

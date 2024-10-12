@@ -21,7 +21,7 @@ export const formatFollowersCount = (followers: number): string => {
 };
 
 export const formatDate = (dateString?: string) => {
-  if (!dateString) return "";
+  if (!dateString || dateString == "1970-01-01T00:00:00Z") return "";
   const date = new Date(dateString);
   const formattedDate = date.toLocaleDateString("en-US", {
     year: "numeric",

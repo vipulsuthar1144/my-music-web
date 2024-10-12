@@ -11,3 +11,9 @@ export const getPlaylistTracksAPI = async (playlistId: string, offset: number, s
     signal,
   });
 };
+
+export const getPlaylistsByCategoryIdAPI = async (categoryId: string, offset: number, signal: AbortSignal) => {
+  return await apiInstance.get(`browse/categories/${categoryId}/playlists?limit=20&offset=${offset}`, {
+    signal,
+  });
+};

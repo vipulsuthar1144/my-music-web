@@ -26,7 +26,25 @@ const intialState: IArtistSlice = {
 export const artistSlice = createSlice({
   name: "artist",
   initialState: intialState,
-  reducers: {},
+  reducers: {
+    resetArtistState: (state) => {
+      state.isArtistDataLoading = false;
+      state.artistData = null;
+      state.isArtistDataError = false;
+      state.bgColor = "#9759a8";
+      state.isArtistAlbumsListLoading = false;
+      state.artistAlbumsList = [];
+      state.isArtistAlbumsListError = false;
+      state.hasMoreArtistAlbumsList = true;
+      state.artistAlbumsListOffset = 0;
+      state.isArtistTopTracksListLoading = false;
+      state.artistTopTrackList = [];
+      state.isArtistTopTracksListError = false;
+      state.isRelatedArtistListLoading = false;
+      state.relatedArtistList = [];
+      state.isRelatedArtistListError = false;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(getArtistById.pending, (state) => {
@@ -88,5 +106,7 @@ export const artistSlice = createSlice({
       });
   },
 });
+
+export const { resetArtistState } = artistSlice.actions;
 
 export default artistSlice.reducer;

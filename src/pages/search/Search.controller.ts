@@ -1,5 +1,5 @@
 import useLoadMore from "@/config/hooks/useLoadMore.hooks";
-import { emptySearchData } from "@/store/slices/search.slice";
+import { emptySearchData, resetSearchState } from "@/store/slices/search.slice";
 import { useAppDispatch, useAppSelector } from "@/store/store";
 import { getAllCategories } from "@/store/thunkServices/category.thunksevices";
 import { getSearchResult } from "@/store/thunkServices/search.thunksevices";
@@ -59,9 +59,13 @@ const useSearchController = () => {
   const listenerGoToPlaylistDetails = (playlistId?: string) => {
     playlistId && navigate(`/playlist/${playlistId}`);
   };
+  const listenerGoToCategoryDetails = (categoryId?: string) => {
+    categoryId && navigate(`/category/${categoryId}/playlists`);
+  };
 
   return {
     listenerGoToAlbumDetails,
+    listenerGoToCategoryDetails,
     listenerGoToArtistDetails,
     listenerGoToPlaylistDetails,
     lastCategoryItemRef,

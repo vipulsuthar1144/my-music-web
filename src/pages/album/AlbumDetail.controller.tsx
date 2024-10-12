@@ -1,4 +1,5 @@
 import useLoadMore from "@/config/hooks/useLoadMore.hooks";
+import { resetAlbumState } from "@/store/slices/album.slice";
 import { useAppDispatch, useAppSelector } from "@/store/store";
 import { getAlbumById, getAlbumTracks } from "@/store/thunkServices/album.thunksevices";
 import { useEffect } from "react";
@@ -12,6 +13,7 @@ const useAlbumDetailController = () => {
 
   useEffect(() => {
     if (albumId) {
+      dispatch(resetAlbumState());
       dispatch(getAlbumById({ albumId: albumId }))
         .unwrap()
         .then(() => {

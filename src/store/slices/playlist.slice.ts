@@ -4,7 +4,7 @@ import { getAlbumById, getAlbumTracks } from "../thunkServices/album.thunksevice
 import { getRandomColor } from "@utils/genaralFunctions";
 import { getAlbumsTracksAPI } from "@/services/album.services";
 import { IPlaylistSlice } from "@/schemas/playlist.schema";
-import { getPlaylistById, getPlaylistTracks } from "../thunkServices/playlist.thunkservices";
+import { getPlaylistById, getPlaylistsByCategoryId, getPlaylistTracks } from "../thunkServices/playlist.thunkservices";
 
 const intialState: IPlaylistSlice = {
   bgColor: "#9759a8",
@@ -16,12 +16,36 @@ const intialState: IPlaylistSlice = {
   playlistTrackList: [],
   hasMorePlaylistTrackList: true,
   playlistTrackListOffset: 0,
+  isCategoryPlaylistsLoading: false,
+  categoryTitle: "Playlists",
+  categoryPlaylists: [],
+  isCategoryPlaylistsError: false,
+  hasMoreCategoryPlaylists: true,
+  categoryPlaylistsOffset: 0,
 };
 
 export const playlistSlice = createSlice({
   name: "playlist",
   initialState: intialState,
-  reducers: {},
+  reducers: {
+    resetPlaylistState: (state) => {
+      state.bgColor = "#9759a8";
+      state.isPlaylistDataLoading = false;
+      state.isPlaylistDataError = false;
+      state.playlistData = null;
+      state.isPlaylistTrackListError = false;
+      state.isPlaylistTrackListLoading = false;
+      state.playlistTrackList = [];
+      state.hasMorePlaylistTrackList = true;
+      state.playlistTrackListOffset = 0;
+      state.categoryTitle = "Playlists";
+      state.isCategoryPlaylistsLoading = false;
+      state.isCategoryPlaylistsError = false;
+      state.categoryPlaylists = [];
+      state.hasMoreCategoryPlaylists = true;
+      state.categoryPlaylistsOffset = 0;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(getPlaylistById.pending, (state) => {
@@ -48,20 +72,47 @@ export const playlistSlice = createSlice({
         state.playlistTrackListOffset = offset + limit;
         state.hasMorePlaylistTrackList = total > offset + limit;
 
-        if (action.payload?.offset == 0) {
+        if (offset == 0) {
           state.playlistTrackList = [...(action.payload?.items?.filter((item) => item.track?.name != "") ?? [])];
         } else {
           state.playlistTrackList = [...state.playlistTrackList, ...(action.payload?.items?.filter((item) => item.track?.name != "") ?? [])];
         }
-        // if (offset >= 90) {
-        //   state.hasMorePlaylistTrackList = false;
-        // }
       })
       .addCase(getPlaylistTracks.rejected, (state) => {
         state.isPlaylistTrackListLoading = false;
         state.isPlaylistTrackListError = true;
+      })
+      .addCase(getPlaylistsByCategoryId.pending, (state) => {
+        state.isCategoryPlaylistsLoading = true;
+      })
+      .addCase(getPlaylistsByCategoryId.fulfilled, (state, action) => {
+        let offset = action.payload?.playlists?.offset ?? 0;
+        let limit = action.payload?.playlists?.limit ?? 0;
+        let total = action.payload?.playlists?.total ?? 0;
+
+        state.isCategoryPlaylistsLoading = false;
+        state.categoryTitle = action.payload.message;
+
+        state.categoryPlaylistsOffset = offset + limit;
+        state.hasMoreCategoryPlaylists = total > offset + limit;
+
+        if (offset == 0) {
+          state.categoryPlaylists = [...(action.payload?.playlists?.items ?? [])];
+        } else {
+          state.categoryPlaylists = [...state.categoryPlaylists, ...(action.payload?.playlists?.items ?? [])];
+        }
+
+        if (offset >= 80) {
+          state.hasMoreCategoryPlaylists = false;
+        }
+      })
+      .addCase(getPlaylistsByCategoryId.rejected, (state) => {
+        state.isCategoryPlaylistsLoading = false;
+        state.isCategoryPlaylistsError = true;
       });
   },
 });
+
+export const { resetPlaylistState } = playlistSlice.actions;
 
 export default playlistSlice.reducer;

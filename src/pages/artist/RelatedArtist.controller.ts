@@ -1,3 +1,4 @@
+import { resetArtistState } from "@/store/slices/artist.slice";
 import { useAppDispatch, useAppSelector } from "@/store/store";
 import { getRelatedArtists } from "@/store/thunkServices/artist.thunksevices";
 import { useEffect } from "react";
@@ -10,7 +11,10 @@ const useRelatedArtistController = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    artistId && dispatch(getRelatedArtists({ artistId }));
+    if (artistId) {
+      dispatch(resetArtistState());
+      dispatch(getRelatedArtists({ artistId }));
+    }
   }, [dispatch, artistId]);
 
   const listenerGoToArtistDetails = (artistId?: string) => {

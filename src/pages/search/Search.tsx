@@ -12,6 +12,7 @@ const Search = () => {
   const {
     listenerGoToAlbumDetails,
     listenerGoToPlaylistDetails,
+    listenerGoToCategoryDetails,
     lastCategoryItemRef,
     listenerSeeAllTracks,
     listenerSeeAllArtists,
@@ -43,7 +44,7 @@ const Search = () => {
           {categories.map((item, index) => (
             <Grid item xs={12} sm={6} md={4} lg={3} key={item.id}>
               <Box key={item.id} component={"div"} ref={index === categories.length - 1 ? lastCategoryItemRef : null}>
-                <ItemCategoryList category={item} />
+                <ItemCategoryList onClick={() => listenerGoToCategoryDetails(item.id)} category={item} />
               </Box>
             </Grid>
           ))}

@@ -21,6 +21,17 @@ export const searchSlice = createSlice({
     emptySearchData: (state) => {
       state.searchData = null;
     },
+    resetSearchState: (state) => {
+      state.isSearchDataError = false;
+      state.isSearchDataLoading = false;
+      state.searchData = null;
+      state.searchQuery = "";
+      state.isSeeAllDataListError = false;
+      state.isSeeAllDataListLoading = false;
+      state.seeAllDataList = [];
+      state.hasMoreSeeAllDataList = true;
+      state.seeAllDataListOffset = 0;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -62,7 +73,7 @@ export const searchSlice = createSlice({
   },
 });
 
-export const { emptySearchData } = searchSlice.actions;
+export const { emptySearchData, resetSearchState } = searchSlice.actions;
 export default searchSlice.reducer;
 
 const updateSeeAllData = (state: ISearchSlice, payloadKey: keyof ISearchSchema, payload: ISearchSchema) => {

@@ -7,9 +7,10 @@ import { useMemo, useState } from "react";
 
 type ItemCategoryListProps = {
   category: ICategory;
+  onClick: () => void;
 };
 
-const ItemCategoryList = ({ category }: ItemCategoryListProps) => {
+const ItemCategoryList = ({ category, onClick }: ItemCategoryListProps) => {
   const [isHovered, setIsHovered] = useState(false);
   const bgColor = useMemo(() => {
     return getRandomColor();
@@ -31,6 +32,7 @@ const ItemCategoryList = ({ category }: ItemCategoryListProps) => {
       }}
     >
       <CardActionArea
+        onClick={onClick}
         onMouseEnter={() => {
           setIsHovered(true);
         }}

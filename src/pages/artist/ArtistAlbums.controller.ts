@@ -1,4 +1,5 @@
 import useLoadMore from "@/config/hooks/useLoadMore.hooks";
+import { resetArtistState } from "@/store/slices/artist.slice";
 import { useAppDispatch, useAppSelector } from "@/store/store";
 import { getAlbumsOfArtist } from "@/store/thunkServices/artist.thunksevices";
 import { useEffect } from "react";
@@ -11,7 +12,10 @@ const useArtistAlbumsController = () => {
   const { artistAlbumsListOffset, isArtistAlbumsListLoading, isArtistAlbumsListError, artistAlbumsList, hasMoreArtistAlbumsList } = useAppSelector((state) => state.artist);
 
   useEffect(() => {
-    if (artistId) dispatch(getAlbumsOfArtist({ artistId: artistId, offset: 0, limit: 20 }));
+    if (artistId) {
+      dispatch(resetArtistState());
+      dispatch(getAlbumsOfArtist({ artistId: artistId, offset: 0, limit: 20 }));
+    }
   }, [dispatch, artistId]);
 
   const handleGetAlbumsOfArtist = () => {
