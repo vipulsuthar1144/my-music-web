@@ -16,7 +16,7 @@ const SearchPageSkeleton = () => {
       </Grid>
       <Skeleton variant="text" animation="wave" sx={{ width: "20%", height: `50px`, marginBottom: "10px" }} />
       <ContainerWithoutScrollbar sx={{ gap: "10px" }}>
-        {Array.from({ length: 20 }, (_, index) => (
+        {Array.from({ length: 10 }, (_, index) => (
           // <Box width={"200px"}>
           <ItemArtistAlbumListSkeleton isArtist={true} key={index} />
           // </Box>

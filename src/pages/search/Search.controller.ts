@@ -56,9 +56,14 @@ const useSearchController = () => {
     albumId && navigate(`/album/${albumId}`);
   };
 
+  const listenerGoToPlaylistDetails = (playlistId?: string) => {
+    playlistId && navigate(`/playlist/${playlistId}`);
+  };
+
   return {
     listenerGoToAlbumDetails,
     listenerGoToArtistDetails,
+    listenerGoToPlaylistDetails,
     lastCategoryItemRef,
     listenerSeeAllTracks,
     listenerSeeAllArtists,

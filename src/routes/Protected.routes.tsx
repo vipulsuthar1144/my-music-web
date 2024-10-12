@@ -4,6 +4,7 @@ import ArtistProfile from "@/pages/artist/ArtistProfile";
 import RelatedArtist from "@/pages/artist/RelatedArtist";
 import SeeAll from "@/pages/details/SeeAll";
 import Home from "@/pages/home/Home";
+import PlaylistDetails from "@/pages/playlist/PlaylistDetails";
 import Search from "@/pages/search/Search";
 import SeeAllSearch from "@/pages/search/SeeAllSearch";
 import { RootContainer } from "@components/styledComponents";
@@ -49,6 +50,11 @@ const ProtectedRoutes: RouteObject[] = [
     path: "album/:albumId",
     element: <AlbumDetail />,
   },
+  {
+    path: "playlist/:playlistId",
+    element: <PlaylistDetails />,
+  },
+
   {
     path: "section/",
     element: <SeeAll />,

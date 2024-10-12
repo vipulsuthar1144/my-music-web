@@ -19,3 +19,14 @@ export const formatFollowersCount = (followers: number): string => {
   const numStr = followers.toString();
   return numStr.replace(/\B(?=(\d{3})+(?!\d))/g, ",").replace(/^(\d+)(\d{3})(?=\d)/, "$1,$2");
 };
+
+export const formatDate = (dateString?: string) => {
+  if (!dateString) return "";
+  const date = new Date(dateString);
+  const formattedDate = date.toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+  });
+  return formattedDate;
+};

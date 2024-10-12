@@ -29,10 +29,14 @@ const useSeeAllSearchController = () => {
   const listenerGoToAlbumDetails = (albumId?: string) => {
     albumId && navigate(`/album/${albumId}`);
   };
+  const listenerGoToPlaylistDetails = (playlistId?: string) => {
+    playlistId && navigate(`/playlist/${playlistId}`);
+  };
 
   return {
     listenerGoToAlbumDetails,
     listenerGoToArtistDetails,
+    listenerGoToPlaylistDetails,
     isSeeAllDataListLoading,
     seeAllDataList,
     isSeeAllDataListError,

@@ -11,6 +11,7 @@ import ItemSongList from "./utilityComp/ItemSongList";
 const Search = () => {
   const {
     listenerGoToAlbumDetails,
+    listenerGoToPlaylistDetails,
     lastCategoryItemRef,
     listenerSeeAllTracks,
     listenerSeeAllArtists,
@@ -83,7 +84,7 @@ const Search = () => {
     return (
       <>
         <TitleSeeAll title="Songs" onSeeAllClick={listenerSeeAllTracks} />
-        <Grid container spacing={1} mb={"10px"}>
+        <Grid container spacing={1} padding={"10px"} mb={"10px"}>
           {searchData?.tracks?.items?.map((track, _) => (
             <Grid item xs={12} lg={6} key={track.id}>
               <ItemSongList key={track.id} img={track?.album?.images && track?.album?.images[0]?.url} title={track?.name} subtitleArr={track.artists} trackDuration={track.duration_ms} />
@@ -142,7 +143,13 @@ const Search = () => {
         <TitleSeeAll title="Playlist" onSeeAllClick={listenerSeeAllPlaylists} />
         <ContainerWithoutScrollbar>
           {searchData?.playlists?.items?.map((item, _) => (
-            <ItemArtistAlbumsList key={item.id} subtitle={`By ${item.owner?.display_name}`} title={item.name} img={(item.images && item?.images[0]?.url) || ""} />
+            <ItemArtistAlbumsList
+              key={item.id}
+              onClick={() => listenerGoToPlaylistDetails(item.id)}
+              subtitle={`By ${item.owner?.display_name}`}
+              title={item.name}
+              img={(item.images && item?.images[0]?.url) || ""}
+            />
           ))}
         </ContainerWithoutScrollbar>
       </>
@@ -150,7 +157,7 @@ const Search = () => {
   };
   return (
     <>
-      <RootContainer>
+      <RootContainer style={{ padding: "10px 0px" }}>
         {renderCategoriesData()}
         {renderSearchResultData()}
       </RootContainer>

@@ -1,14 +1,13 @@
 import { IArtistSchema } from "@/schemas/artist.schema";
 import { MGradientsDarkTheme } from "@/theme/utils/mGredient";
-import { img1, imgCar, imgDefaultArtist, imgDefaultSong, imgPlayBtnGreen } from "@assets/images";
+import { imgDefaultArtist, imgDefaultSong, imgPlayBtnGreen } from "@assets/images";
 import ImageComp, { ImageCompWithLoader } from "@components/Image";
-import { SingleLineTypo, TwoLineTypo } from "@components/styledComponents";
-import { Box, Card, CardActionArea, CardContent, CardMedia } from "@mui/material";
+import { TwoLineTypo } from "@components/styledComponents";
+import { Box, Card, CardActionArea, CardContent } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { globleEaseInOutTransitionTime } from "@utils/globleStyle";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
 
 type ItemArtistAlbumsListProps = {
   isArtist?: boolean;
@@ -23,6 +22,9 @@ const ItemArtistAlbumsList: React.FC<ItemArtistAlbumsListProps> = ({ title, subt
   const [isHovered, setIsHovered] = useState(false);
   const classes = useStyle();
   const navigate = useNavigate();
+  const listenerGoToArtistDetails = (artistId?: string) => {
+    artistId && navigate(`/artist/${artistId}`);
+  };
   return (
     <Card
       className={classes.root}
@@ -66,9 +68,9 @@ const ItemArtistAlbumsList: React.FC<ItemArtistAlbumsListProps> = ({ title, subt
               right: 0,
               transition: `opacity ${globleEaseInOutTransitionTime}, transform ${globleEaseInOutTransitionTime},bottom ${globleEaseInOutTransitionTime}`,
               opacity: isHovered ? 1 : 0,
-              "&:hover": {
-                transform: "scale(1.1)",
-              },
+              // "&:hover": {
+              //   transform: "scale(1.1)",
+              // },
             }}
           />
         </Box>
@@ -80,15 +82,21 @@ const ItemArtistAlbumsList: React.FC<ItemArtistAlbumsListProps> = ({ title, subt
             {subtitle}
 
             {subtitleArr?.map((item) => (
-              <Box
-                component={"span"}
-                onMouseDown={(event) => event.stopPropagation()}
-                key={item.id}
-                onClick={() => navigate(`/artist/${item.id}`)}
-                sx={{ cursor: "pointer", "&:hover": { textDecoration: "underline", color: "text.primary" } }}
-              >
-                {` • ${item.name}`}
-              </Box>
+              <>
+                {` • `}
+                <Box
+                  component={"span"}
+                  onMouseDown={(event) => event.stopPropagation()}
+                  key={item.id}
+                  onClick={(event) => {
+                    event.stopPropagation();
+                    listenerGoToArtistDetails(item.id);
+                  }}
+                  sx={{ cursor: "pointer", "&:hover": { textDecoration: "underline", color: "text.primary" } }}
+                >
+                  {item.name}
+                </Box>
+              </>
             ))}
           </TwoLineTypo>
         </CardContent>

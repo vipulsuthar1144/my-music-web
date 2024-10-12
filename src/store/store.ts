@@ -1,6 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import artistReducer from "./slices/artist.slice";
 import albumReducer from "./slices/album.slice";
+import playlistReducer from "./slices/playlist.slice";
 import categoryReducer from "./slices/category.slice";
 import searchReducer from "./slices/search.slice";
 import globelLoaderReducer from "./slices/globleLoader.slice";
@@ -10,6 +11,7 @@ export const store = configureStore({
   reducer: {
     artist: artistReducer,
     album: albumReducer,
+    playlist: playlistReducer,
     category: categoryReducer,
     search: searchReducer,
     globleLoader: globelLoaderReducer,

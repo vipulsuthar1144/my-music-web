@@ -1,6 +1,5 @@
 import { ICategory } from "@/schemas/category.schema";
-import { imgDefaultSong } from "@assets/images";
-import ImageComp, { ImageCompWithLoader } from "@components/Image";
+import { ImageCompWithLoader } from "@components/Image";
 import { Box, CardActionArea, Typography } from "@mui/material";
 import { getRandomColor } from "@utils/genaralFunctions";
 import { globleEaseInOutTransitionTime } from "@utils/globleStyle";

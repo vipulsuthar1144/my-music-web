@@ -113,8 +113,9 @@ const ArtistProfile = () => {
                 key={track.id}
                 img={track?.album?.images && track?.album?.images[0]?.url}
                 title={track?.name}
-                subtitle={` From ${track.album?.name}`}
-                // subtitleArr={track.artists?.filter((artist, index) => artist.id != artistId)}
+                subtitle={`From `}
+                subtitleArr={[track?.album ?? {}]}
+                isAlbumArr={true}
                 trackDuration={track.duration_ms}
               />
             </Grid>

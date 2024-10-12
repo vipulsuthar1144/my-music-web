@@ -74,16 +74,16 @@ const AlbumDetail = () => {
   const renderAlbumsTracks = () => {
     return (
       <>
-        <Typography variant="h3" sx={{ margin: "20px 0 0 10px", zIndex: 1 }}>
+        {/* <Typography variant="h3" sx={{ margin: "20px 0 10px 10px", zIndex: 1 }}>
           Tracks
-        </Typography>
-        <Grid container spacing={1} mb={"10px"} paddingX={"10px"} sx={{ zIndex: 1 }}>
+        </Typography> */}
+        <Grid container spacing={1} mt={"20px"} mb={"10px"} paddingX={"10px"} sx={{ zIndex: 1 }}>
           {trackList?.map((track, index) => (
             <Grid item xs={12} key={track.id}>
               <Box key={track.id} component={"div"} sx={{ width: "100%" }} ref={index === trackList.length - 1 ? lastTrackListItemRef : null}>
                 <ItemSongList
                   key={track.id}
-                  img={imgDefaultSong}
+                  img={albumData?.images && albumData?.images[0]?.url}
                   title={track?.name}
                   track_no={index + 1}
                   // subtitle={` From ${track.album?.name}`}
