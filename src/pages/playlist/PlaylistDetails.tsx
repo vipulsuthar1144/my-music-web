@@ -20,7 +20,7 @@ const PlaylistDetails = () => {
   const { listenerGoToAlbumDetails, lastTrackListItemRef, isPlaylistDataError, isPlaylistDataLoading, playlistData, bgColor, isPlaylistTrackListLoading, playlistTrackList } =
     usePlaylistDetailsController();
 
-  const renderAlbumProfile = () => {
+  const renderPlaylistProfile = () => {
     if (isPlaylistDataLoading) return <CircularProgress size={30} thickness={5} sx={{ color: "loader.main", alignSelf: "center", margin: "auto" }} />;
     if (isPlaylistDataError)
       return (
@@ -72,12 +72,12 @@ const PlaylistDetails = () => {
             </Typography>
           </Box>
         </Box>
-        {renderAlbumsTracks()}
+        {renderPlaylistTracks()}
       </>
     );
   };
 
-  const renderAlbumsTracks = () => {
+  const renderPlaylistTracks = () => {
     return (
       <>
         {/* <Typography variant="h3" sx={{ margin: "20px 0 10px 10px", zIndex: 11 }}>
@@ -85,11 +85,10 @@ const PlaylistDetails = () => {
         </Typography> */}
         <Grid container spacing={1} mt={"20px"} mb={"10px"} paddingX={"10px"} sx={{ zIndex: 1 }}>
           {playlistTrackList?.map((item, index) => (
-            <Grid item xs={12} key={item?.track?.id}>
-              <Box key={item?.track?.id} component={"div"} sx={{ width: "100%" }} ref={index === playlistTrackList.length - 1 ? lastTrackListItemRef : null}>
+            <Grid item xs={12} key={`${item?.track?.id}${index}`}>
+              <Box component={"div"} sx={{ width: "100%" }} ref={index === playlistTrackList.length - 1 ? lastTrackListItemRef : null}>
                 {isSmallScreen ? (
                   <ItemSongList
-                    key={item?.track?.id}
                     img={item?.track?.album?.images && item?.track?.album?.images[0]?.url}
                     title={item?.track?.name}
                     track_no={index + 1}
@@ -98,7 +97,6 @@ const PlaylistDetails = () => {
                   />
                 ) : (
                   <ItemPlaylistTrackList
-                    key={item?.track?.id}
                     img={item?.track?.album?.images && item?.track?.album?.images[0]?.url}
                     title={item?.track?.name}
                     track_no={index + 1}
@@ -126,7 +124,7 @@ const PlaylistDetails = () => {
     ));
   };
 
-  return <RootContainer style={{ padding: 0 }}>{renderAlbumProfile()}</RootContainer>;
+  return <RootContainer style={{ padding: 0 }}>{renderPlaylistProfile()}</RootContainer>;
 };
 
 export default PlaylistDetails;

@@ -1,57 +1,52 @@
 import ItemArtistAlbumListSkeleton from "@components/skeletons/ItemArtistAlbumsList.skeleton";
 import { RootContainer } from "@components/styledComponents";
 import { Box, Grid, Typography } from "@mui/material";
-import React from "react";
 import ItemArtistAlbumsList from "../search/utilityComp/ItemArtistAlbumsList";
-import useCategoryPlaylistsController from "./CategoryPlaylists.controller";
+import useAlbumNewReleaseController from "./AlbumNewRelease.controller";
 
-const CategoryPlaylists = () => {
-  const {
-    lastPlaylistListItemRef,
-    listenerGoToPlaylistDetails,
-    isCategoryPlaylistsError,
-    isCategoryPlaylistsLoading,
-    categoryPlaylists,
-    categoryTitle,
-    categoryPlaylistsOffset,
-    hasMoreCategoryPlaylists,
-  } = useCategoryPlaylistsController();
-  const renderPlaylistList = () => {
-    if (isCategoryPlaylistsError)
+const AlbumNewRelease = () => {
+  const { listenerGoToAlbumDetails, lastAlbumListItemRef, isNewReleaseAlbumListError, isNewReleaseAlbumListLoading, newReleaseAlbumList } = useAlbumNewReleaseController();
+  const renderAlbums = () => {
+    if (isNewReleaseAlbumListError)
       return (
         <Typography variant="h3" sx={{ alignSelf: "center", margin: "auto" }}>
-          Error Occurred
+          Error Occurred while fetching new release albums. Please try again later.
         </Typography>
       );
-    if (categoryPlaylists.length == 0 && !isCategoryPlaylistsError && !isCategoryPlaylistsLoading)
+
+    if (newReleaseAlbumList.length == 0 && !isNewReleaseAlbumListLoading && !isNewReleaseAlbumListError)
       return (
         <Typography variant="h3" sx={{ alignSelf: "center", margin: "auto" }}>
-          Playlist Not Found
+          No New Release Albums Available.
         </Typography>
       );
+
     return (
       <>
         <Typography variant="h3" my={"20px"}>
-          {categoryTitle}
+          Albums
         </Typography>
         <Grid container spacing={1}>
-          {categoryPlaylists.map((item, index) => (
+          {newReleaseAlbumList.map((item, index) => (
             <Grid item xs={6} sm={4} md={3} lg={1.5} key={`${item.id}${index}`}>
-              <Box component={"div"} sx={{ width: "100%" }} ref={index === categoryPlaylists.length - 1 ? lastPlaylistListItemRef : null}>
+              <Box key={item.id} component={"div"} sx={{ width: "100%" }} ref={index === newReleaseAlbumList.length - 1 ? lastAlbumListItemRef : null}>
                 <ItemArtistAlbumsList
-                  onClick={() => listenerGoToPlaylistDetails(item.id)}
-                  subtitle={`By ${item.owner?.display_name}`}
+                  key={item.id}
+                  onClick={() => listenerGoToAlbumDetails(item.id)}
+                  subtitleArr={item.artists}
+                  subtitle={item.release_date?.slice(0, 4)}
                   title={item.name}
                   img={(item.images && item?.images[0]?.url) || ""}
                 />
               </Box>
             </Grid>
           ))}
-          {isCategoryPlaylistsLoading && renderSkeleton()}
+          {isNewReleaseAlbumListLoading && renderSkeleton()}
         </Grid>
       </>
     );
   };
+
   const renderSkeleton = () => {
     return Array.from({ length: 20 }, (_, index) => (
       <Grid item xs={6} sm={4} md={3} lg={1.5} key={index}>
@@ -59,7 +54,7 @@ const CategoryPlaylists = () => {
       </Grid>
     ));
   };
-  return <RootContainer>{renderPlaylistList()}</RootContainer>;
+  return <RootContainer>{renderAlbums()}</RootContainer>;
 };
 
-export default CategoryPlaylists;
+export default AlbumNewRelease;

@@ -3,7 +3,8 @@ import { getSearchResultAPI, getSeeAllDataBySearchQueryAPI } from "@/services/se
 import getAsyncThunk from "../getAsyncThunk";
 
 export const getSearchResult = getAsyncThunk<ISearchSchema, string>("GET/searchResult", async (searchQuery, signal) => {
-  const result = await getSearchResultAPI(searchQuery, signal);
+  const type = ["artist", "album", "playlist", "track"];
+  const result = await getSearchResultAPI(searchQuery, type, 10, signal);
   if (result.data) return result.data;
   return result;
 });

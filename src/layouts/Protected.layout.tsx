@@ -1,4 +1,5 @@
 import useLocalStorage from "@/config/hooks/useLocalStorage.hooks";
+import TrackPlayer from "@/pages/player/TrackPlayer";
 import { MGradientsDarkTheme } from "@/theme/utils/mGredient";
 import AppSideBar from "@components/SideBar";
 import TopBar from "@components/TopBar";

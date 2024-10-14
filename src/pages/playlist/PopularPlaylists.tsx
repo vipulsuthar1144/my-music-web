@@ -3,27 +3,19 @@ import { RootContainer } from "@components/styledComponents";
 import { Box, Grid, Typography } from "@mui/material";
 import React from "react";
 import ItemArtistAlbumsList from "../search/utilityComp/ItemArtistAlbumsList";
-import useCategoryPlaylistsController from "./CategoryPlaylists.controller";
+import usePopularPlaylistsController from "./PopularPlaylists.controller";
 
-const CategoryPlaylists = () => {
-  const {
-    lastPlaylistListItemRef,
-    listenerGoToPlaylistDetails,
-    isCategoryPlaylistsError,
-    isCategoryPlaylistsLoading,
-    categoryPlaylists,
-    categoryTitle,
-    categoryPlaylistsOffset,
-    hasMoreCategoryPlaylists,
-  } = useCategoryPlaylistsController();
+const PopularPlaylists = () => {
+  const { lastPlaylistListItemRef, listenerGoToPlaylistDetails, isPopularPlaylistsError, isPopularPlaylistsLoading, hasMorePopularPlaylists, popularPlaylists, popularPlaylistsOffset } =
+    usePopularPlaylistsController();
   const renderPlaylistList = () => {
-    if (isCategoryPlaylistsError)
+    if (isPopularPlaylistsError)
       return (
         <Typography variant="h3" sx={{ alignSelf: "center", margin: "auto" }}>
           Error Occurred
         </Typography>
       );
-    if (categoryPlaylists.length == 0 && !isCategoryPlaylistsError && !isCategoryPlaylistsLoading)
+    if (popularPlaylists.length == 0 && !isPopularPlaylistsError && !isPopularPlaylistsLoading)
       return (
         <Typography variant="h3" sx={{ alignSelf: "center", margin: "auto" }}>
           Playlist Not Found
@@ -32,12 +24,12 @@ const CategoryPlaylists = () => {
     return (
       <>
         <Typography variant="h3" my={"20px"}>
-          {categoryTitle}
+          Popular Playlists
         </Typography>
         <Grid container spacing={1}>
-          {categoryPlaylists.map((item, index) => (
+          {popularPlaylists.map((item, index) => (
             <Grid item xs={6} sm={4} md={3} lg={1.5} key={`${item.id}${index}`}>
-              <Box component={"div"} sx={{ width: "100%" }} ref={index === categoryPlaylists.length - 1 ? lastPlaylistListItemRef : null}>
+              <Box component={"div"} sx={{ width: "100%" }} ref={index === popularPlaylists.length - 1 ? lastPlaylistListItemRef : null}>
                 <ItemArtistAlbumsList
                   onClick={() => listenerGoToPlaylistDetails(item.id)}
                   subtitle={`By ${item.owner?.display_name}`}
@@ -47,7 +39,7 @@ const CategoryPlaylists = () => {
               </Box>
             </Grid>
           ))}
-          {isCategoryPlaylistsLoading && renderSkeleton()}
+          {isPopularPlaylistsLoading && renderSkeleton()}
         </Grid>
       </>
     );
@@ -62,4 +54,4 @@ const CategoryPlaylists = () => {
   return <RootContainer>{renderPlaylistList()}</RootContainer>;
 };
 
-export default CategoryPlaylists;
+export default PopularPlaylists;

@@ -7,6 +7,8 @@ export const useIsSmallScreen = (theme: Theme) => {
   return useMediaQuery(theme.breakpoints.down("md"));
 };
 
+export const scopes = ["user-read-currently-playing", "user-read-recently-played", "user-read-playback-state", "user-top-read", "user-modify-playback-state", "playlist-read-private"];
+
 export const LocalStorageKeys = {
   IS_LOGGED_IN: "IS_LOGGED_IN",
   ACCESS_TOKEN: "ACCESS_TOKEN",

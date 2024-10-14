@@ -39,7 +39,7 @@ const ArtistProfile = () => {
     if (isArtistDataError)
       return (
         <Typography variant="h3" sx={{ alignSelf: "center", margin: "auto" }}>
-          Error Occurred
+          Error Occurred while fetching Artist. Please try again later.
         </Typography>
       );
     if (!artistData)
@@ -82,7 +82,7 @@ const ArtistProfile = () => {
                 />
               )}
               <Typography variant="h6" sx={{ textTransform: "capitalize", verticalAlign: "center" }}>
-                {artistData?.followers?.total ?? 0 > 1000 ? `Verified ${artistData.type} ` : artistData.type}
+                {(artistData?.followers?.total ?? 0) > 1000 ? `Verified ${artistData.type} ` : artistData.type}
               </Typography>
             </Box>
 

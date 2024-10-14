@@ -27,6 +27,12 @@ const useSearchController = () => {
     };
   }, [dispatch, searchQuery]);
 
+  useEffect(() => {
+    return () => {
+      dispatch(resetSearchState());
+    };
+  }, []);
+
   const handleSearchResult = () => {
     searchQuery == "" ? dispatch(emptySearchData()) : dispatch(getSearchResult(searchQuery));
   };

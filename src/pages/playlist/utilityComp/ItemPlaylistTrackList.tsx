@@ -8,6 +8,7 @@ import { makeStyles } from "@mui/styles";
 import { useIsSmallScreen } from "@utils/constants";
 import { msToTimeConvert } from "@utils/genaralFunctions";
 import { globleEaseInOutTransitionTime } from "@utils/globleStyle";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 
 type ItemPlaylistTrackListProps = {
@@ -67,10 +68,9 @@ const ItemPlaylistTrackList = ({ title, track_no = 0, img, subtitleArr, onClick,
             </SingleLineTypo>
             <SingleLineTypo variant="subtitle2" color="text.secondary">
               {subtitleArr?.map((item, index) => (
-                <>
+                <React.Fragment key={item.id}>
                   <Box
                     component={"span"}
-                    key={item.id}
                     onMouseDown={(event) => event.stopPropagation()}
                     onClick={(event) => {
                       event.stopPropagation();
@@ -81,7 +81,7 @@ const ItemPlaylistTrackList = ({ title, track_no = 0, img, subtitleArr, onClick,
                     {item.name}
                   </Box>
                   {subtitleArr.length - 1 == index ? `` : ` • `}
-                </>
+                </React.Fragment>
               ))}
             </SingleLineTypo>
           </Box>

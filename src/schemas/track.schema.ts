@@ -31,3 +31,15 @@ export interface IExternalIds {
 export interface IRestrictions {
   reason?: string;
 }
+
+export interface IRecentPlayedTrackSchema {
+  track?: ITrackSchema;
+  played_at?: string;
+  context?: any | null;
+}
+
+export interface ITrackSlice {
+  isRecentPlayedTrackListLoading: boolean;
+  recentPlayedTrackList: IRecentPlayedTrackSchema[];
+  isRecentPlayedTrackListError: boolean;
+}

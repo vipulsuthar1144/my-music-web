@@ -11,8 +11,17 @@ import ItemArtistAlbumsList from "./utilityComp/ItemArtistAlbumsList";
 import ItemSongList from "./utilityComp/ItemSongList";
 
 const SeeAllSearch = () => {
-  const { listenerGoToArtistDetails, listenerGoToAlbumDetails, listenerGoToPlaylistDetails, isSeeAllDataListLoading, seeAllDataList, searchQuery, searchType, lastArtistListItemRef } =
-    useSeeAllSearchController();
+  const {
+    listenerGoToArtistDetails,
+    listenerGoToAlbumDetails,
+    listenerGoToPlaylistDetails,
+    isSeeAllDataListError,
+    isSeeAllDataListLoading,
+    seeAllDataList,
+    searchQuery,
+    searchType,
+    lastArtistListItemRef,
+  } = useSeeAllSearchController();
 
   const renderDataList = () => {
     if (seeAllDataList.length == 0 && !isSeeAllDataListLoading) {
@@ -22,6 +31,14 @@ const SeeAllSearch = () => {
         </Typography>
       );
     }
+    if (isSeeAllDataListError) {
+      return (
+        <Typography variant="h3" sx={{ alignSelf: "center", margin: "auto" }}>
+          Error Occurred while fetching Search Result. Please try again later.
+        </Typography>
+      );
+    }
+
     switch (searchType) {
       case "track":
         return renderTrackList();

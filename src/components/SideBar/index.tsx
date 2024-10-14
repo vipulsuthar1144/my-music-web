@@ -30,7 +30,7 @@ const AppSideBar = () => {
     },
     { id: "/search", name: "Search", icon: <SearchOutlined />, filledIcon: <Search /> },
     { id: "/favorites", name: "Favorite Songs", icon: <FavoriteBorder />, filledIcon: <Favorite /> },
-    { id: "/recents", name: "Recently Played", icon: <HeadphonesOutlined />, filledIcon: <Headphones /> },
+    { id: "/track/recent-played", name: "Recent Played", icon: <HeadphonesOutlined />, filledIcon: <Headphones /> },
     { id: "/profile", name: "My Profile", icon: <AccountCircleOutlined />, filledIcon: <AccountCircle /> },
   ];
 

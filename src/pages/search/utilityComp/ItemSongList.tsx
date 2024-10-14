@@ -8,6 +8,7 @@ import { Box, Card, CardActionArea, CardContent, Theme, Typography } from "@mui/
 import { makeStyles } from "@mui/styles";
 import { msToTimeConvert } from "@utils/genaralFunctions";
 import { globleEaseInOutTransitionTime } from "@utils/globleStyle";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 
 type ItemSongListProps = {
@@ -72,10 +73,9 @@ const ItemSongList = ({ title, track_no = 0, img, subtitleArr, isAlbumArr = fals
             <SingleLineTypo variant="subtitle2" color="text.secondary">
               {subtitle}
               {subtitleArr?.map((item, index) => (
-                <>
+                <React.Fragment key={item.id}>
                   <Box
                     component={"span"}
-                    key={item.id}
                     onMouseDown={(event) => event.stopPropagation()}
                     onClick={(event) => {
                       event.stopPropagation();
@@ -87,7 +87,7 @@ const ItemSongList = ({ title, track_no = 0, img, subtitleArr, isAlbumArr = fals
                     {item.name}
                   </Box>
                   {subtitleArr.length - 1 == index ? `` : ` • `}
-                </>
+                </React.Fragment>
               ))}
             </SingleLineTypo>
           </Box>

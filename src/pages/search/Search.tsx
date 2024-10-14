@@ -23,6 +23,7 @@ const Search = () => {
     isSearchDataLoading,
     searchData,
     isCategoriesLoading,
+    isCategoriesError,
     categories,
   } = useSearchController();
 
@@ -35,6 +36,15 @@ const Search = () => {
         </Typography>
       );
     }
+
+    if (isCategoriesError) {
+      return (
+        <Typography variant="h3" sx={{ alignSelf: "center", margin: "auto" }}>
+          Error Occurred while fetching Category. Please try again later.
+        </Typography>
+      );
+    }
+
     return (
       <>
         <Typography variant="h1" my={"20px"}>
@@ -67,8 +77,8 @@ const Search = () => {
     if (searchQuery == "" || searchData == null) return;
     if (searchData?.tracks?.items?.length == 0 && searchData?.artists?.items?.length == 0 && searchData?.albums?.items?.length == 0 && searchData?.playlists?.items?.length == 0)
       return (
-        <Typography variant="h3" my={"20px"}>
-          No Result Found
+        <Typography variant="h3" sx={{ alignSelf: "center", margin: "auto" }}>
+          Error Occurred while fetching Search Result. Please try again later.
         </Typography>
       );
     return (

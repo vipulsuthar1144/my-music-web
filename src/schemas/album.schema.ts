@@ -32,4 +32,10 @@ export interface IAlbumSlice {
   isTrackListError: boolean;
   hasMoreTrackList: boolean;
   trackListOffset: number;
+
+  isNewReleaseAlbumListLoading: boolean;
+  newReleaseAlbumList: IAlbumSchema[];
+  isNewReleaseAlbumListError: boolean;
+  hasMoreNewReleaseAlbumList: boolean;
+  newReleaseAlbumListOffset: number;
 }

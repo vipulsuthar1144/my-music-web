@@ -6,7 +6,7 @@ import { TwoLineTypo } from "@components/styledComponents";
 import { Box, Card, CardActionArea, CardContent } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { globleEaseInOutTransitionTime } from "@utils/globleStyle";
-import { useState } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 type ItemArtistAlbumsListProps = {
@@ -82,12 +82,11 @@ const ItemArtistAlbumsList: React.FC<ItemArtistAlbumsListProps> = ({ title, subt
             {subtitle}
 
             {subtitleArr?.map((item) => (
-              <>
+              <React.Fragment key={item.id}>
                 {` • `}
                 <Box
                   component={"span"}
                   onMouseDown={(event) => event.stopPropagation()}
-                  key={item.id}
                   onClick={(event) => {
                     event.stopPropagation();
                     listenerGoToArtistDetails(item.id);
@@ -96,7 +95,7 @@ const ItemArtistAlbumsList: React.FC<ItemArtistAlbumsListProps> = ({ title, subt
                 >
                   {item.name}
                 </Box>
-              </>
+              </React.Fragment>
             ))}
           </TwoLineTypo>
         </CardContent>

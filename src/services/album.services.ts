@@ -11,3 +11,8 @@ export const getAlbumsTracksAPI = async (albumId: string, offset: number, signal
     signal,
   });
 };
+export const getNewReleaseAlbumsAPI = async (limit: number, offset: number, signal: AbortSignal) => {
+  return await apiInstance.get(`browse/new-releases?limit=${limit}&offset=${offset}`, {
+    signal,
+  });
+};

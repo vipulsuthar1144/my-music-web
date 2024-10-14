@@ -1,6 +1,6 @@
 import { IAlbumSlice } from "@/schemas/album.schema";
 import { createSlice } from "@reduxjs/toolkit";
-import { getAlbumById, getAlbumTracks } from "../thunkServices/album.thunksevices";
+import { getAlbumById, getAlbumTracks, getNewReleaseAlbums } from "../thunkServices/album.thunksevices";
 import { getRandomColor } from "@utils/genaralFunctions";
 import { getAlbumsTracksAPI } from "@/services/album.services";
 
@@ -14,6 +14,12 @@ const intialState: IAlbumSlice = {
   trackList: [],
   hasMoreTrackList: true,
   trackListOffset: 0,
+
+  isNewReleaseAlbumListError: false,
+  isNewReleaseAlbumListLoading: false,
+  newReleaseAlbumList: [],
+  hasMoreNewReleaseAlbumList: true,
+  newReleaseAlbumListOffset: 0,
 };
 
 export const albumSlice = createSlice({
@@ -30,6 +36,11 @@ export const albumSlice = createSlice({
       state.trackList = [];
       state.hasMoreTrackList = true;
       state.trackListOffset = 0;
+      state.isNewReleaseAlbumListError = false;
+      state.isNewReleaseAlbumListLoading = false;
+      state.newReleaseAlbumList = [];
+      state.hasMoreNewReleaseAlbumList = true;
+      state.newReleaseAlbumListOffset = 0;
     },
   },
   extraReducers: (builder) => {
@@ -70,6 +81,31 @@ export const albumSlice = createSlice({
       .addCase(getAlbumTracks.rejected, (state) => {
         state.isTrackListLoading = false;
         state.isTrackListError = true;
+      })
+      .addCase(getNewReleaseAlbums.pending, (state) => {
+        state.isNewReleaseAlbumListLoading = true;
+      })
+      .addCase(getNewReleaseAlbums.fulfilled, (state, action) => {
+        let offset = action.payload?.albums?.offset ?? 0;
+        let limit = action.payload?.albums?.limit ?? 0;
+        let total = action.payload?.albums?.total ?? 0;
+
+        state.isNewReleaseAlbumListLoading = false;
+        state.newReleaseAlbumListOffset = offset + limit;
+        state.hasMoreNewReleaseAlbumList = total > offset + limit;
+
+        if (offset == 0) {
+          state.newReleaseAlbumList = [...(action.payload?.albums?.items ?? [])];
+        } else {
+          state.newReleaseAlbumList = [...state.newReleaseAlbumList, ...(action.payload?.albums?.items ?? [])];
+        }
+        if (offset >= 80) {
+          state.hasMoreNewReleaseAlbumList = false;
+        }
+      })
+      .addCase(getNewReleaseAlbums.rejected, (state) => {
+        state.isNewReleaseAlbumListLoading = false;
+        state.isNewReleaseAlbumListError = true;
       });
   },
 });

@@ -4,24 +4,32 @@ import { getAlbumById, getAlbumTracks } from "../thunkServices/album.thunksevice
 import { getRandomColor } from "@utils/genaralFunctions";
 import { getAlbumsTracksAPI } from "@/services/album.services";
 import { IPlaylistSlice } from "@/schemas/playlist.schema";
-import { getPlaylistById, getPlaylistsByCategoryId, getPlaylistTracks } from "../thunkServices/playlist.thunkservices";
+import { getPlaylistById, getPlaylistsByCategoryId, getPlaylistTracks, getPopularPlaylists } from "../thunkServices/playlist.thunkservices";
 
 const intialState: IPlaylistSlice = {
   bgColor: "#9759a8",
   isPlaylistDataLoading: false,
   isPlaylistDataError: false,
   playlistData: null,
+
   isPlaylistTrackListError: false,
   isPlaylistTrackListLoading: false,
   playlistTrackList: [],
   hasMorePlaylistTrackList: true,
   playlistTrackListOffset: 0,
+
   isCategoryPlaylistsLoading: false,
   categoryTitle: "Playlists",
   categoryPlaylists: [],
   isCategoryPlaylistsError: false,
   hasMoreCategoryPlaylists: true,
   categoryPlaylistsOffset: 0,
+
+  isPopularPlaylistsError: false,
+  isPopularPlaylistsLoading: false,
+  popularPlaylists: [],
+  hasMorePopularPlaylists: true,
+  popularPlaylistsOffset: 0,
 };
 
 export const playlistSlice = createSlice({
@@ -44,6 +52,11 @@ export const playlistSlice = createSlice({
       state.categoryPlaylists = [];
       state.hasMoreCategoryPlaylists = true;
       state.categoryPlaylistsOffset = 0;
+      state.isPopularPlaylistsError = false;
+      state.isPopularPlaylistsLoading = false;
+      state.popularPlaylists = [];
+      state.hasMorePopularPlaylists = true;
+      state.popularPlaylistsOffset = 0;
     },
   },
   extraReducers: (builder) => {
@@ -109,6 +122,33 @@ export const playlistSlice = createSlice({
       .addCase(getPlaylistsByCategoryId.rejected, (state) => {
         state.isCategoryPlaylistsLoading = false;
         state.isCategoryPlaylistsError = true;
+      })
+      .addCase(getPopularPlaylists.pending, (state) => {
+        state.isPopularPlaylistsLoading = true;
+      })
+      .addCase(getPopularPlaylists.fulfilled, (state, action) => {
+        let offset = action.payload?.playlists?.offset ?? 0;
+        let limit = action.payload?.playlists?.limit ?? 0;
+        let total = action.payload?.playlists?.total ?? 0;
+
+        state.isPopularPlaylistsLoading = false;
+
+        state.popularPlaylistsOffset = offset + limit;
+        state.hasMorePopularPlaylists = total > offset + limit;
+
+        if (offset == 0) {
+          state.popularPlaylists = [...(action.payload?.playlists?.items ?? [])];
+        } else {
+          state.popularPlaylists = [...state.popularPlaylists, ...(action.payload?.playlists?.items ?? [])];
+        }
+
+        if (offset >= 80) {
+          state.hasMorePopularPlaylists = false;
+        }
+      })
+      .addCase(getPopularPlaylists.rejected, (state) => {
+        state.isPopularPlaylistsLoading = false;
+        state.isPopularPlaylistsError = true;
       });
   },
 });
