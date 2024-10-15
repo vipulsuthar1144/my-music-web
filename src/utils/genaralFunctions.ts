@@ -20,6 +20,13 @@ export const formatFollowersCount = (followers: number): string => {
   return numStr.replace(/\B(?=(\d{3})+(?!\d))/g, ",").replace(/^(\d+)(\d{3})(?=\d)/, "$1,$2");
 };
 
+export const getFollowers = (followers: number, attachedString: string = "followers") => {
+  if (followers == 0) {
+    return "";
+  }
+  return `${formatFollowersCount(followers)} ${attachedString}`;
+};
+
 export const formatDate = (dateString?: string) => {
   if (!dateString) return "";
   const date = new Date(dateString);

@@ -44,10 +44,14 @@ const usePlaylistDetailsController = () => {
   const listenerGoToAlbumDetails = (albumId?: string) => {
     albumId && navigate(`/album/${albumId}`);
   };
+  const listenerGoToUserProfile = (userId?: string) => {
+    userId && navigate(`/user/${userId}`);
+  };
 
   return {
     listenerGoToArtistDetails,
     listenerGoToAlbumDetails,
+    listenerGoToUserProfile,
     lastTrackListItemRef,
     isPlaylistDataError,
     isPlaylistDataLoading,

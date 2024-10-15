@@ -5,6 +5,7 @@ import playlistReducer from "./slices/playlist.slice";
 import trackReducer from "./slices/track.slice";
 import homeReducer from "./slices/home.slice";
 import categoryReducer from "./slices/category.slice";
+import userReducer from "./slices/user.slice";
 import searchReducer from "./slices/search.slice";
 import globelLoaderReducer from "./slices/globleLoader.slice";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
@@ -16,6 +17,7 @@ export const store = configureStore({
     playlist: playlistReducer,
     home: homeReducer,
     track: trackReducer,
+    user: userReducer,
     category: categoryReducer,
     search: searchReducer,
     globleLoader: globelLoaderReducer,

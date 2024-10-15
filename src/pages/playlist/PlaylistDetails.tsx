@@ -17,7 +17,7 @@ const PlaylistDetails = () => {
 
   const theme = useTheme();
   const isSmallScreen = useIsSmallScreen(theme);
-  const { listenerGoToAlbumDetails, lastTrackListItemRef, isPlaylistDataError, isPlaylistDataLoading, playlistData, bgColor, isPlaylistTrackListLoading, playlistTrackList } =
+  const { listenerGoToAlbumDetails, listenerGoToUserProfile, lastTrackListItemRef, isPlaylistDataError, isPlaylistDataLoading, playlistData, bgColor, isPlaylistTrackListLoading, playlistTrackList } =
     usePlaylistDetailsController();
 
   const renderPlaylistProfile = () => {
@@ -65,7 +65,13 @@ const PlaylistDetails = () => {
               {playlistData?.description?.includes("href") ? "" : playlistData?.description}
             </Typography>
             <Typography variant="h6" color="text.primary">
-              <Box component={"span"} onClick={() => {}} sx={{ cursor: "pointer", "&:hover": { textDecoration: "underline", color: "text.primary" } }}>
+              <Box
+                component={"span"}
+                onClick={() => {
+                  listenerGoToUserProfile(playlistData.owner?.id);
+                }}
+                sx={{ cursor: "pointer", "&:hover": { textDecoration: "underline", color: "text.primary" } }}
+              >
                 {`${playlistData.owner?.display_name}`}
               </Box>
               {` • ${playlistData.tracks?.total} songs • ${formatFollowersCount(playlistData.followers?.total ?? 0)} saves`}

@@ -17,6 +17,7 @@ export const ContainerWithoutScrollbar = styled(Box)({
   overflowX: "auto",
   marginBottom: "10px",
   scrollbarWidth: "none",
+  zIndex: 1,
   "&::-webkit-scrollbar": {
     display: "none",
   },

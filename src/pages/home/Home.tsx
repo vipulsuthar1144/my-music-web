@@ -9,6 +9,7 @@ import useHomeController from "./Home.controller";
 import ItemSongListSkeleton from "@components/skeletons/ItemSongLIst.skeleton";
 import { img1 } from "@assets/images";
 import { MGradientsDarkTheme } from "@/theme/utils/mGredient";
+import { useNavigate } from "react-router-dom";
 
 const Home: React.FC = () => {
   const classes = useStyle();
@@ -40,6 +41,7 @@ const Home: React.FC = () => {
     isDailyMixListLoading,
     dailyMixList,
   } = useHomeController();
+  const navigate = useNavigate();
 
   const renderMadeForYouList = () => {
     if (isDailyMixListLoading) return renderSkeletons();
@@ -55,8 +57,9 @@ const Home: React.FC = () => {
             <ItemArtistAlbumsList
               key={item.id}
               onClick={() => listenerGoToPlaylistDetails(item.id)}
-              subtitle={`By ${item.owner?.display_name}`}
-              title={item.name}
+              // subtitle={`By ${item.owner?.display_name}`}
+              subtitle={`${item.description}`}
+              // title={item.name}
               img={(item.images && item?.images[0]?.url) || ""}
             />
           ))}
@@ -108,6 +111,9 @@ const Home: React.FC = () => {
           {punjabiTrackList?.map((item, index) => (
             <Grid item xs={12} key={`${item?.track?.id}${index}`}>
               <ItemSongList
+                onClick={() => {
+                  navigate("/user/mee");
+                }}
                 img={item?.track?.album?.images && item?.track?.album?.images[0]?.url}
                 title={item?.track?.name}
                 // track_no={index + 1}
@@ -175,13 +181,14 @@ const Home: React.FC = () => {
     if ((popularPlaylists.length == 0 && !isPopularPlaylistsLoading) || isPopularPlaylistsError) return;
     return (
       <>
-        <TitleSeeAll title="Popular Playlist" onSeeAllClick={listenerSeeAllPopularPlaylist} />
+        <TitleSeeAll title="More of what you like" onSeeAllClick={listenerSeeAllPopularPlaylist} />
         <ContainerWithoutScrollbar>
           {popularPlaylists.map((item, index) => (
             <ItemArtistAlbumsList
               key={item.id}
               onClick={() => listenerGoToPlaylistDetails(item.id)}
-              subtitle={`By ${item.owner?.display_name}`}
+              // subtitle={`By ${item.owner?.display_name}`}
+              subtitle={`${item.description}`}
               title={item.name}
               img={(item.images && item?.images[0]?.url) || ""}
             />

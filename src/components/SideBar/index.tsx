@@ -29,9 +29,9 @@ const AppSideBar = () => {
       filledIcon: <Home />,
     },
     { id: "/search", name: "Search", icon: <SearchOutlined />, filledIcon: <Search /> },
-    { id: "/favorites", name: "Favorite Songs", icon: <FavoriteBorder />, filledIcon: <Favorite /> },
-    { id: "/track/recent-played", name: "Recent Played", icon: <HeadphonesOutlined />, filledIcon: <Headphones /> },
-    { id: "/profile", name: "My Profile", icon: <AccountCircleOutlined />, filledIcon: <AccountCircle /> },
+    // { id: "/favorites", name: "Favorite Songs", icon: <FavoriteBorder />, filledIcon: <Favorite /> },
+    // { id: "/track/recent-played", name: "Recent Played", icon: <HeadphonesOutlined />, filledIcon: <Headphones /> },
+    { id: "/user/me", name: "My Profile", icon: <AccountCircleOutlined />, filledIcon: <AccountCircle /> },
   ];
 
   const handleMenuItemClick = (to: string) => navigate(to);

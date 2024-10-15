@@ -17,6 +17,7 @@ export interface IArtistSchema {
   type?: string;
   uri?: string;
   display_name?: string;
+  email?: string;
 }
 
 export interface IImage {

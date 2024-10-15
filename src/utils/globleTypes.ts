@@ -26,6 +26,7 @@ export interface IGlobleTitleSeeAllProps {
   varient?: Variant | "inherit";
   title: string;
   btnText?: string;
+  isSeeAllBtnVisible?: boolean;
   style?: CSSProperties;
   onSeeAllClick?: (e: any) => void;
 }

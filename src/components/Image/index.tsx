@@ -68,11 +68,11 @@ const ImageCompWithLoader = ({ img, alt, style, onClick, errorImage = imgDefault
   );
 };
 
-const TitleSeeAll = ({ varient = "h3", title, btnText = "See all", onSeeAllClick, style }: IGlobleTitleSeeAllProps) => {
+const TitleSeeAll = ({ varient = "h3", title, btnText = "See all", onSeeAllClick, style, isSeeAllBtnVisible = true }: IGlobleTitleSeeAllProps) => {
   return (
-    <Box sx={{ display: "flex", width: "100%", justifyContent: "space-between", alignItems: "center", ...style }}>
+    <Box sx={{ display: "flex", width: "100%", justifyContent: "space-between", alignItems: "center", zIndex: 1, ...style }}>
       <Typography variant={varient}>{title}</Typography>
-      <TextButtonPrimary label={btnText} onClick={onSeeAllClick} />
+      {isSeeAllBtnVisible && <TextButtonPrimary label={btnText} onClick={onSeeAllClick} />}
     </Box>
   );
 };

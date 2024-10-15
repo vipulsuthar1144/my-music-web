@@ -11,6 +11,9 @@ import PopularPlaylists from "@/pages/playlist/PopularPlaylists";
 import Search from "@/pages/search/Search";
 import SeeAllSearch from "@/pages/search/SeeAllSearch";
 import RecentPlayed from "@/pages/track/RecentPlayed";
+import MyProfile from "@/pages/user/MyProfile";
+import SeeAllMyProfile from "@/pages/user/SeeAllMyProfile";
+import UserProfile from "@/pages/user/UserProfile";
 import { RootContainer } from "@components/styledComponents";
 import { Box } from "@mui/material";
 import { RouteObject } from "react-router-dom";
@@ -51,7 +54,7 @@ const ProtectedRoutes: RouteObject[] = [
     ],
   },
   {
-    path: "albums/new-release",
+    path: "album/new-release",
     element: <AlbumNewRelease />,
   },
   {
@@ -59,7 +62,7 @@ const ProtectedRoutes: RouteObject[] = [
     element: <AlbumDetail />,
   },
   {
-    path: "playlists/popular",
+    path: "playlist/popular",
     element: <PopularPlaylists />,
   },
   {
@@ -73,6 +76,31 @@ const ProtectedRoutes: RouteObject[] = [
   {
     path: "track/recent-played",
     element: <RecentPlayed />,
+  },
+  {
+    path: "user/me",
+    children: [
+      {
+        index: true,
+        element: <MyProfile />,
+      },
+      {
+        path: "top-tracks",
+        element: <SeeAllMyProfile />,
+      },
+      {
+        path: "top-artists",
+        element: <SeeAllMyProfile />,
+      },
+      {
+        path: "following",
+        element: <SeeAllMyProfile />,
+      },
+    ],
+  },
+  {
+    path: "user/:userId",
+    element: <UserProfile />,
   },
   {
     path: "favorites",

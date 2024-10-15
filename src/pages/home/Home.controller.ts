@@ -75,11 +75,11 @@ const useHomeController = () => {
   };
 
   const listenerSeeAllNewRelease = () => {
-    navigate(`/albums/new-release`);
+    navigate(`/album/new-release`);
   };
 
   const listenerSeeAllPopularPlaylist = () => {
-    navigate(`/playlists/popular`);
+    navigate(`/playlist/popular`);
   };
 
   return {
