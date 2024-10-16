@@ -1,15 +1,15 @@
 import { imgDefaultSong } from "@assets/images";
-import { ImageCompWithLoader } from "@components/Image";
+import { ImageCompWithLoader } from "@components/design/Image";
 import ItemPlaylistTrackListSkeleton from "@components/skeletons/ItemPlaylistTrackLIst.skeleton";
 import ItemSongListSkeleton from "@components/skeletons/ItemSongLIst.skeleton";
-import { RootContainer } from "@components/styledComponents";
+import { RootContainer } from "@components/design/styledComponents";
 import { Box, CircularProgress, Grid, Theme, Typography, useTheme } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { useIsSmallScreen } from "@utils/constants";
 import { formatDate, formatFollowersCount } from "@utils/genaralFunctions";
-import { globleEaseInOutTransitionTime } from "@utils/globleStyle";
-import ItemSongList from "../search/utilityComp/ItemSongList";
-import ItemPlaylistTrackList from "./utilityComp/ItemPlaylistTrackList";
+import { globleEaseInOutTransitionTime } from "@/theme/utils/globalTransitions";
+import ItemSongList from "../../components/ItemSongList";
+import ItemPlaylistTrackList from "../../components/ItemPlaylistTrackList";
 import usePlaylistDetailsController from "./PlaylistDetails.controller";
 
 const PlaylistDetails = () => {

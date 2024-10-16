@@ -1,13 +1,11 @@
+import { RootContainer } from "@components/design/styledComponents";
 import ItemArtistAlbumListSkeleton from "@components/skeletons/ItemArtistAlbumsList.skeleton";
-import { RootContainer } from "@components/styledComponents";
 import { Box, Grid, Typography } from "@mui/material";
-import React from "react";
-import ItemArtistAlbumsList from "../search/utilityComp/ItemArtistAlbumsList";
+import ItemArtistAlbumsList from "../../components/ItemArtistAlbumsList";
 import usePopularPlaylistsController from "./PopularPlaylists.controller";
 
 const PopularPlaylists = () => {
-  const { lastPlaylistListItemRef, listenerGoToPlaylistDetails, isPopularPlaylistsError, isPopularPlaylistsLoading, hasMorePopularPlaylists, popularPlaylists, popularPlaylistsOffset } =
-    usePopularPlaylistsController();
+  const { lastPlaylistListItemRef, listenerGoToPlaylistDetails, isPopularPlaylistsError, isPopularPlaylistsLoading, popularPlaylists } = usePopularPlaylistsController();
   const renderPlaylistList = () => {
     if (isPopularPlaylistsError)
       return (

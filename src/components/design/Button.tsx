@@ -1,5 +1,20 @@
 import { Box, Button, CircularProgress } from "@mui/material";
-import { IGlobalButtonProps, ILoaderButtonProps } from "@utils/globleTypes";
+import { CSSProperties } from "react";
+
+export interface IGlobalButtonProps {
+  label: string;
+  sublabel?: string | React.ReactNode;
+  disabled?: boolean;
+  onClick?: (e: any) => void;
+  style?: CSSProperties;
+  type?: "submit" | "reset";
+  startIcon?: React.ReactElement;
+}
+export interface ILoaderButtonProps extends IGlobalButtonProps {
+  variant: "text" | "outlined" | "contained";
+  color: "primary" | "success" | "secondary";
+  loading?: boolean;
+}
 
 export const ContainedButton = ({ label, onClick, disabled, style, type }: IGlobalButtonProps) => {
   const buttonType = type === "reset" || type === "submit" ? type : "button";

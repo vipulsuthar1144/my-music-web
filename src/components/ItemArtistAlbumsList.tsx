@@ -1,11 +1,11 @@
 import { IArtistSchema } from "@/schemas/artist.schema";
 import { MGradientsDarkTheme } from "@/theme/utils/mGredient";
 import { imgDefaultArtist, imgDefaultSong, imgPlayBtnGreen } from "@assets/images";
-import ImageComp, { ImageCompWithLoader } from "@components/Image";
-import { TwoLineTypo } from "@components/styledComponents";
+import ImageComp, { ImageCompWithLoader } from "@components/design/Image";
+import { TwoLineTypo } from "@components/design/styledComponents";
 import { Box, Card, CardActionArea, CardContent } from "@mui/material";
 import { makeStyles } from "@mui/styles";
-import { globleEaseInOutTransitionTime } from "@utils/globleStyle";
+import { globleEaseInOutTransitionTime } from "@/theme/utils/globalTransitions";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 

@@ -1,5 +1,4 @@
 import { apiInstance } from "@/config/axios.config";
-import { TSeeAllSearchTypeAttribute } from "@/schemas/search.schema";
 
 export const getSearchResultAPI = async (q: string, type: string[], limit: number = 10, signal: AbortSignal) => {
   // const type = ["artist", "album", "playlist", "track"];

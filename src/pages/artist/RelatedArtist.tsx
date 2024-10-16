@@ -1,7 +1,7 @@
 import ItemArtistAlbumListSkeleton from "@components/skeletons/ItemArtistAlbumsList.skeleton";
-import { RootContainer } from "@components/styledComponents";
+import { RootContainer } from "@components/design/styledComponents";
 import { Grid, Skeleton, Typography } from "@mui/material";
-import ItemArtistAlbumsList from "../search/utilityComp/ItemArtistAlbumsList";
+import ItemArtistAlbumsList from "../../components/ItemArtistAlbumsList";
 import useRelatedArtistController from "./RelatedArtist.controller";
 
 const RelatedArtist = () => {

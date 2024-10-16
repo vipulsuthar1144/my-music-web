@@ -1,12 +1,12 @@
 import { imgDefaultArtist, imgVerifiedTick } from "@assets/images";
-import ImageComp, { ImageCompWithLoader } from "@components/Image";
+import ImageComp, { ImageCompWithLoader } from "@components/design/Image";
 import ItemArtistAlbumListSkeleton from "@components/skeletons/ItemArtistAlbumsList.skeleton";
-import { RootContainer } from "@components/styledComponents";
+import { RootContainer } from "@components/design/styledComponents";
 import { Box, CircularProgress, Grid, Theme, Typography } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { formatFollowersCount } from "@utils/genaralFunctions";
-import { globleEaseInOutTransitionTime } from "@utils/globleStyle";
-import ItemArtistAlbumsList from "../search/utilityComp/ItemArtistAlbumsList";
+import { globleEaseInOutTransitionTime } from "@/theme/utils/globalTransitions";
+import ItemArtistAlbumsList from "../../components/ItemArtistAlbumsList";
 import useUserProfileController from "./UserProfile.controller";
 
 const UserProfile = () => {

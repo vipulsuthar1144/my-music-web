@@ -1,7 +1,7 @@
 import ItemArtistAlbumListSkeleton from "@components/skeletons/ItemArtistAlbumsList.skeleton";
-import { RootContainer } from "@components/styledComponents";
+import { RootContainer } from "@components/design/styledComponents";
 import { Grid, Typography } from "@mui/material";
-import ItemArtistAlbumsList from "../search/utilityComp/ItemArtistAlbumsList";
+import ItemArtistAlbumsList from "../../components/ItemArtistAlbumsList";
 import useRecentPlayedController from "./RecentPlayed.controller";
 
 const RecentPlayed = () => {
@@ -24,7 +24,7 @@ const RecentPlayed = () => {
           {recentPlayedTrackList.map((item, index) => (
             <Grid item xs={6} sm={4} md={3} lg={1.5} key={`${item.track?.id}${index}`}>
               <ItemArtistAlbumsList
-                // onClick={() => listenerGoToAlbumDetails(item.id)}
+                // onClick={() => listenerGoToArtistDetails(item.id)}
                 subtitleArr={item.track?.artists}
                 subtitle={"--"}
                 title={item.track?.name}

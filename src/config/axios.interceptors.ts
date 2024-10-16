@@ -1,5 +1,3 @@
-import { setTopLoadingProgress } from "@/store/slices/globleLoader.slice";
-import { store } from "@/store/store";
 import { LocalStorageKeys } from "@utils/constants";
 import axios from "axios";
 import { toast } from "react-toastify";

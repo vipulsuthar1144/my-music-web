@@ -1,8 +1,8 @@
 import { ICategory } from "@/schemas/category.schema";
-import { ImageCompWithLoader } from "@components/Image";
+import { ImageCompWithLoader } from "@components/design/Image";
 import { Box, CardActionArea, Typography } from "@mui/material";
 import { getRandomColor } from "@utils/genaralFunctions";
-import { globleEaseInOutTransitionTime } from "@utils/globleStyle";
+import { globleEaseInOutTransitionTime } from "@/theme/utils/globalTransitions";
 import { useMemo, useState } from "react";
 
 type ItemCategoryListProps = {

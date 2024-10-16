@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const ListItem = ({ item }: any) => {
   const ref = useRef(null);

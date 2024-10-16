@@ -1,12 +1,12 @@
-import { TitleSeeAll } from "@components/Image";
+import { TitleSeeAll } from "@components/design/Image";
 import ItemCategoryListSkeleton from "@components/skeletons/ItemCategoryList.skeleton";
 import SearchPageSkeleton from "@components/skeletons/SearchPage.skeleton";
-import { ContainerWithoutScrollbar, RootContainer } from "@components/styledComponents";
+import { ContainerWithoutScrollbar, RootContainer } from "@components/design/styledComponents";
 import { Box, Grid, Typography } from "@mui/material";
 import useSearchController from "./Search.controller";
-import ItemArtistAlbumsList from "./utilityComp/ItemArtistAlbumsList";
-import ItemCategoryList from "./utilityComp/ItemCategoryList";
-import ItemSongList from "./utilityComp/ItemSongList";
+import ItemArtistAlbumsList from "../../components/ItemArtistAlbumsList";
+import ItemCategoryList from "../../components/ItemCategoryList";
+import ItemSongList from "../../components/ItemSongList";
 
 const Search = () => {
   const {

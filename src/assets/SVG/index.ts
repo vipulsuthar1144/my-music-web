@@ -17,7 +17,6 @@ import {
   ShuffleRounded,
   SkipNextRounded,
   SkipPreviousRounded,
-  Twitter,
   X,
 } from "@mui/icons-material";
 
@@ -36,6 +35,6 @@ export const StyledNextIconFilled = withIconStyles(SkipNextRounded);
 export const StyledPreviousIconFilled = withIconStyles(SkipPreviousRounded);
 export const StyledPlayIconOutlined = withIconStyles(PlayCircleOutlineRounded, "", "40px");
 export const StyledPauseIconOutlined = withIconStyles(PauseCircleOutlineRounded, "", "40px");
-export const StyledInstagramIconOutlined = withIconStyles(Instagram, "Instagram", "24px");
-export const StyledFacebookIconOutlined = withIconStyles(FacebookOutlined, "Facebook", "26px");
-export const StyledTwitterIconOutlined = withIconStyles(X, "X", "20px");
+export const StyledInstagramIconOutlined = withIconStyles(Instagram, "", "24px");
+export const StyledFacebookIconOutlined = withIconStyles(FacebookOutlined, "", "26px");
+export const StyledTwitterIconOutlined = withIconStyles(X, "", "20px");

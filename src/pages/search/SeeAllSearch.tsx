@@ -4,11 +4,11 @@ import { IPlaylistSchema } from "@/schemas/playlist.schema";
 import { ITrackSchema } from "@/schemas/track.schema";
 import ItemArtistAlbumListSkeleton from "@components/skeletons/ItemArtistAlbumsList.skeleton";
 import ItemSongListSkeleton from "@components/skeletons/ItemSongLIst.skeleton";
-import { RootContainer } from "@components/styledComponents";
+import { RootContainer } from "@components/design/styledComponents";
 import { Box, Grid, Typography } from "@mui/material";
 import useSeeAllSearchController from "./SeeAllSearch.controller";
-import ItemArtistAlbumsList from "./utilityComp/ItemArtistAlbumsList";
-import ItemSongList from "./utilityComp/ItemSongList";
+import ItemArtistAlbumsList from "../../components/ItemArtistAlbumsList";
+import ItemSongList from "../../components/ItemSongList";
 
 const SeeAllSearch = () => {
   const {

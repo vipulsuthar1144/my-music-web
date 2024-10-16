@@ -1,10 +1,27 @@
-import { img1, imgDefaultArtist, imgDefaultSong } from "@assets/images";
-import { TextButtonPrimary } from "@components/Button";
-import { Box, Skeleton, Typography } from "@mui/material";
+import { imgDefaultSong } from "@assets/images";
+import { TextButtonPrimary } from "@components/design/Button";
+import { Box, SxProps, Theme, Typography } from "@mui/material";
+import { Variant } from "@mui/material/styles/createTypography";
 import { getRandomColor } from "@utils/genaralFunctions";
-import { IGlobleImageProps, IGlobleTitleSeeAllProps } from "@utils/globleTypes";
-import { useMemo, useState } from "react";
-import { toast } from "react-toastify";
+import { CSSProperties, useMemo, useState } from "react";
+
+export interface IGlobleImageProps {
+  img?: string;
+  alt: string;
+  errorImage?: string;
+  style?: SxProps<Theme>;
+  isPreventClickEffect?: boolean;
+  onClick?: (e: any) => void;
+}
+
+export interface IGlobleTitleSeeAllProps {
+  varient?: Variant | "inherit";
+  title: string;
+  btnText?: string;
+  isSeeAllBtnVisible?: boolean;
+  style?: CSSProperties;
+  onSeeAllClick?: (e: any) => void;
+}
 
 const ImageComp = ({ img, alt, style, onClick, isPreventClickEffect = false }: IGlobleImageProps) => {
   return (
@@ -76,4 +93,4 @@ const TitleSeeAll = ({ varient = "h3", title, btnText = "See all", onSeeAllClick
     </Box>
   );
 };
-export { TitleSeeAll, ImageCompWithLoader };
+export { ImageCompWithLoader, TitleSeeAll };

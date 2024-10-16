@@ -1,14 +1,13 @@
 import useLocalStorage from "@/config/hooks/useLocalStorage.hooks";
-import TrackPlayer from "@/pages/player/TrackPlayer";
 import { MGradientsDarkTheme } from "@/theme/utils/mGredient";
-import AppFooter from "@components/Footer";
-import AppSideBar from "@components/SideBar";
-import TopBar from "@components/TopBar";
+import AppFooter from "@components/AppFooter";
+import AppSideBar from "@components/AppSideBar";
+import AppTopBar from "@components/AppTopBar";
 import TopLoader from "@components/TopLoader";
 import { Box, styled, Theme, useTheme } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { LocalStorageKeys, useIsSmallScreen } from "@utils/constants";
-import { sidebarWidth } from "@utils/globleStyle";
+import { sidebarWidth } from "@/theme/utils/globalTransitions";
 import { useEffect, useRef } from "react";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 
@@ -28,7 +27,6 @@ const ProtectedLayout = () => {
   }, [location]);
 
   useEffect(() => {
-    console.log("Protected Wrapper");
     if (!accessToken) {
       setIsLoggedIn(false);
       navigate("/auth", { replace: true });
@@ -53,7 +51,7 @@ const ProtectedLayout = () => {
               },
             }}
           >
-            <TopBar />
+            <AppTopBar />
             <Outlet />
             <AppFooter />
           </CustomScrollBox>
@@ -65,7 +63,7 @@ const ProtectedLayout = () => {
 
 export default ProtectedLayout;
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles((_: Theme) => ({
   root: {
     height: "100vh",
     background: MGradientsDarkTheme.backroundBlue,

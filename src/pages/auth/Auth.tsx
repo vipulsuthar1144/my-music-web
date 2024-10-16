@@ -1,7 +1,7 @@
 import { imgSpotifyGreenLogin } from "@assets/images";
-import { LoaderButton } from "@components/Button";
-import ImageComp from "@components/Image";
-import { RootContainer } from "@components/styledComponents";
+import { LoaderButton } from "@components/design/Button";
+import ImageComp from "@components/design/Image";
+import { RootContainer } from "@components/design/styledComponents";
 import useAuthController from "./Auth.controller";
 import LoadingBar from "react-top-loading-bar";
 import { mColors } from "@/theme/utils/mColors";

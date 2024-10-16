@@ -1,9 +1,6 @@
-import { IAlbumSlice } from "@/schemas/album.schema";
-import { createSlice } from "@reduxjs/toolkit";
-import { getAlbumById, getAlbumTracks } from "../thunkServices/album.thunksevices";
-import { getRandomColor } from "@utils/genaralFunctions";
-import { getAlbumsTracksAPI } from "@/services/album.services";
 import { IPlaylistSlice } from "@/schemas/playlist.schema";
+import { createSlice } from "@reduxjs/toolkit";
+import { getRandomColor } from "@utils/genaralFunctions";
 import { getPlaylistById, getPlaylistsByCategoryId, getPlaylistTracks, getPopularPlaylists } from "../thunkServices/playlist.thunkservices";
 
 const intialState: IPlaylistSlice = {

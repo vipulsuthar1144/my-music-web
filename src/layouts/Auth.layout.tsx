@@ -11,7 +11,6 @@ const AuthLayout = () => {
   const [isLoggedIn, setIsLoggedIn] = useLocalStorage(LocalStorageKeys.IS_LOGGED_IN, false);
 
   useEffect(() => {
-    console.log("AUth Wrapper");
     if (accessToken) {
       setIsLoggedIn(true);
       navigate("/", { replace: true });

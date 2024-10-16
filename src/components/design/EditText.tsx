@@ -1,6 +1,14 @@
 import { CloseRounded, SearchRounded } from "@mui/icons-material";
 import { InputAdornment, TextField } from "@mui/material";
-import { IGlobalEditTextProps } from "@utils/globleTypes";
+
+export interface IGlobalEditTextProps {
+  ref?: any;
+  text?: string;
+  onTextChange?: (e: any) => void;
+  onFocus?: () => void;
+  onCrossBtnClick?: (e: any) => void;
+  hasCrossIcon?: boolean;
+}
 
 const EditText = ({ onFocus, ref, onTextChange, text, onCrossBtnClick, hasCrossIcon = false }: IGlobalEditTextProps) => {
   return (

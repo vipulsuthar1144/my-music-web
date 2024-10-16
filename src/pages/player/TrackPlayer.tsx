@@ -8,7 +8,7 @@ import {
   StyledRepeatIconFilled,
   StyledShuffleIconUnFilled,
 } from "@assets/SVG";
-import ImageComp from "@components/Image";
+import ImageComp from "@components/design/Image";
 import { Box, Slider, sliderClasses, Theme, Typography } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { useState } from "react";

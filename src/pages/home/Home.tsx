@@ -1,20 +1,17 @@
-import ItemArtistAlbumsList from "@/pages/search/utilityComp/ItemArtistAlbumsList";
-import { TitleSeeAll } from "@components/Image";
+import ItemArtistAlbumsList from "@components/ItemArtistAlbumsList";
+import { TitleSeeAll } from "@components/design/Image";
+import { ContainerWithoutScrollbar, RootContainer } from "@components/design/styledComponents";
 import ItemArtistAlbumListSkeleton from "@components/skeletons/ItemArtistAlbumsList.skeleton";
-import { ContainerWithoutScrollbar, RootContainer } from "@components/styledComponents";
+import ItemSongListSkeleton from "@components/skeletons/ItemSongLIst.skeleton";
 import { Box, Grid, Skeleton, Theme, Typography } from "@mui/material";
 import { makeStyles } from "@mui/styles";
-import ItemSongList from "../search/utilityComp/ItemSongList";
-import useHomeController from "./Home.controller";
-import ItemSongListSkeleton from "@components/skeletons/ItemSongLIst.skeleton";
-import { img1 } from "@assets/images";
-import { MGradientsDarkTheme } from "@/theme/utils/mGredient";
 import { useNavigate } from "react-router-dom";
+import ItemSongList from "../../components/ItemSongList";
+import useHomeController from "./Home.controller";
 
 const Home: React.FC = () => {
   const classes = useStyle();
   const {
-    listenerGoToArtistDetails,
     listenerGoToAlbumDetails,
     listenerGoToPlaylistDetails,
     listenerSeeAllNewRelease,
@@ -51,17 +48,9 @@ const Home: React.FC = () => {
         <Typography variant="h3" my={"10px"}>
           Made For You
         </Typography>
-        {/* <TitleSeeAll title="Recent Played" /> */}
         <ContainerWithoutScrollbar>
-          {dailyMixList.map((item, index) => (
-            <ItemArtistAlbumsList
-              key={item.id}
-              onClick={() => listenerGoToPlaylistDetails(item.id)}
-              // subtitle={`By ${item.owner?.display_name}`}
-              subtitle={`${item.description}`}
-              // title={item.name}
-              img={(item.images && item?.images[0]?.url) || ""}
-            />
+          {dailyMixList.map((item) => (
+            <ItemArtistAlbumsList key={item.id} onClick={() => listenerGoToPlaylistDetails(item.id)} subtitle={`${item.description}`} img={(item.images && item?.images[0]?.url) || ""} />
           ))}
         </ContainerWithoutScrollbar>
       </>
@@ -183,7 +172,7 @@ const Home: React.FC = () => {
       <>
         <TitleSeeAll title="More of what you like" onSeeAllClick={listenerSeeAllPopularPlaylist} />
         <ContainerWithoutScrollbar>
-          {popularPlaylists.map((item, index) => (
+          {popularPlaylists.map((item) => (
             <ItemArtistAlbumsList
               key={item.id}
               onClick={() => listenerGoToPlaylistDetails(item.id)}
@@ -252,15 +241,11 @@ const Home: React.FC = () => {
       </Typography>
       <ContainerWithoutScrollbar sx={{ scrollSnapType: "x mandatory" }} gap={"10px"}>
         {renderHindiTracks()}
-
         {renderPunjabiTracks()}
-
         {renderEnglishTracks()}
       </ContainerWithoutScrollbar>
       {renderRecentPlayedTrackList()}
-
       {renderPopularPlaylistsList()}
-
       {renderNewReleaseAlbumsList()}
     </RootContainer>
   );
@@ -268,7 +253,7 @@ const Home: React.FC = () => {
 
 export default Home;
 
-const useStyle = makeStyles((theme: Theme) => ({
+const useStyle = makeStyles((_: Theme) => ({
   mainContainer: {
     flex: 1,
     display: "flex",

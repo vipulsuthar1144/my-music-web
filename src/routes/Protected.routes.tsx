@@ -3,7 +3,6 @@ import AlbumNewRelease from "@/pages/album/AlbumNewRelease";
 import ArtistAlbums from "@/pages/artist/ArtistAlbums";
 import ArtistProfile from "@/pages/artist/ArtistProfile";
 import RelatedArtist from "@/pages/artist/RelatedArtist";
-import SeeAll from "@/pages/details/SeeAll";
 import Home from "@/pages/home/Home";
 import CategoryPlaylists from "@/pages/playlist/CategoryPlaylists";
 import PlaylistDetails from "@/pages/playlist/PlaylistDetails";
@@ -14,8 +13,6 @@ import RecentPlayed from "@/pages/track/RecentPlayed";
 import MyProfile from "@/pages/user/MyProfile";
 import SeeAllMyProfile from "@/pages/user/SeeAllMyProfile";
 import UserProfile from "@/pages/user/UserProfile";
-import { RootContainer } from "@components/styledComponents";
-import { Box } from "@mui/material";
 import { RouteObject } from "react-router-dom";
 
 const ProtectedRoutes: RouteObject[] = [
@@ -102,36 +99,6 @@ const ProtectedRoutes: RouteObject[] = [
     path: "user/:userId",
     element: <UserProfile />,
   },
-  {
-    path: "favorites",
-    element: (
-      <RootContainer>
-        <Box>Favorites</Box>
-      </RootContainer>
-    ),
-  },
-  {
-    path: "settings",
-    element: (
-      <RootContainer>
-        <Box>settings</Box>
-      </RootContainer>
-    ),
-  },
-
-  {
-    path: "profile",
-    element: (
-      <RootContainer>
-        <Box>Profile</Box>
-      </RootContainer>
-    ),
-  },
-
-  // {
-  //   path: "*",
-  //   element: <Navigate to={"/"} replace />,
-  // },
 ];
 
 export default ProtectedRoutes;

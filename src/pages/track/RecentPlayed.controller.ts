@@ -5,6 +5,7 @@ import { useEffect } from "react";
 const useRecentPlayedController = () => {
   const dispatch = useAppDispatch();
   const { isRecentPlayedTrackListError, isRecentPlayedTrackListLoading, recentPlayedTrackList } = useAppSelector((state) => state.track);
+
   useEffect(() => {
     dispatch(getRecentPlayedTracks({ limit: 50 }));
   }, [dispatch]);

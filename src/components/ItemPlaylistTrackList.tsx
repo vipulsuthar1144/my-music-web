@@ -1,37 +1,35 @@
-import { IAlbumSchema } from "@/schemas/album.schema";
 import { IArtistSchema } from "@/schemas/artist.schema";
 import { MGradientsDarkTheme } from "@/theme/utils/mGredient";
-import { ImageCompWithLoader } from "@components/Image";
-import { SingleLineTypo } from "@components/styledComponents";
+import { ImageCompWithLoader } from "@components/design/Image";
+import { SingleLineTypo } from "@components/design/styledComponents";
 import { AccessTimeRounded } from "@mui/icons-material";
 import { Box, Card, CardActionArea, CardContent, Theme, Typography } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { msToTimeConvert } from "@utils/genaralFunctions";
-import { globleEaseInOutTransitionTime } from "@utils/globleStyle";
+import { globleEaseInOutTransitionTime } from "@/theme/utils/globalTransitions";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
-type ItemSongListProps = {
+type ItemPlaylistTrackListProps = {
   title?: string;
-  subtitle?: string;
-  subtitleArr?: IArtistSchema[] | IAlbumSchema[];
-  isAlbumArr?: boolean;
+  subtitleArr?: IArtistSchema[];
   trackDuration?: number;
   img?: string;
   track_no?: number;
   onClick?: () => void;
+  onAlbumClick?: () => void;
+  albumName?: string;
+  dateAdded?: string;
 };
 
-const ItemSongList = ({ title, track_no = 0, img, subtitleArr, isAlbumArr = false, subtitle, onClick, trackDuration }: ItemSongListProps) => {
+const ItemPlaylistTrackList = ({ title, track_no = 0, img, subtitleArr, onClick, onAlbumClick, trackDuration, albumName, dateAdded }: ItemPlaylistTrackListProps) => {
   const classes = useStyle();
   const navigate = useNavigate();
 
   const listenerGoToArtistDetails = (artistId?: string) => {
     artistId && navigate(`/artist/${artistId}`);
   };
-  const listenerGoToAlbumDetails = (albumId?: string) => {
-    albumId && navigate(`/album/${albumId}`);
-  };
+
   return (
     <Card sx={{ backgroundColor: "transparent", backgroundImage: "none", boxShadow: "none" }} className={classes.root}>
       <CardActionArea
@@ -45,16 +43,13 @@ const ItemSongList = ({ title, track_no = 0, img, subtitleArr, isAlbumArr = fals
           alignItems: "center",
           gap: "12px",
           paddingY: "8px",
-          paddingX: "12px",
+          paddingX: "20px",
           boxSizing: "border-box",
         }}
       >
-        {track_no > 0 && (
-          <Typography variant="subtitle1" color="text.primary" mr={"2px"} width={"20px"}>
-            {track_no}
-          </Typography>
-        )}
-
+        <Typography variant="subtitle1" color="text.primary" mr={"2px"} width={"20px"}>
+          {track_no}
+        </Typography>
         <ImageCompWithLoader
           img={img}
           alt={"track"}
@@ -66,12 +61,11 @@ const ItemSongList = ({ title, track_no = 0, img, subtitleArr, isAlbumArr = fals
           }}
         />
         <CardContent sx={{ padding: 0, m: 0, flex: 1, width: "calc(100% - 80px)", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-          <Box component={"div"} sx={{ flex: 1, maxWidth: "70%" }}>
+          <Box component={"div"} sx={{ flex: 1, maxWidth: "40%" }}>
             <SingleLineTypo variant="subtitle1" color="text.primary" mb={"2px"}>
               {title}
             </SingleLineTypo>
             <SingleLineTypo variant="subtitle2" color="text.secondary">
-              {subtitle}
               {subtitleArr?.map((item, index) => (
                 <React.Fragment key={item.id}>
                   <Box
@@ -79,11 +73,10 @@ const ItemSongList = ({ title, track_no = 0, img, subtitleArr, isAlbumArr = fals
                     onMouseDown={(event) => event.stopPropagation()}
                     onClick={(event) => {
                       event.stopPropagation();
-                      isAlbumArr ? listenerGoToAlbumDetails(item.id) : listenerGoToArtistDetails(item.id);
+                      listenerGoToArtistDetails(item.id);
                     }}
                     sx={{ cursor: "pointer", "&:hover": { textDecoration: "underline", color: "text.primary" } }}
                   >
-                    {/* {subtitleArr.length - 1 == index ? `${item.name}` : `${item.name} • `} */}
                     {item.name}
                   </Box>
                   {subtitleArr.length - 1 == index ? `` : ` • `}
@@ -91,6 +84,24 @@ const ItemSongList = ({ title, track_no = 0, img, subtitleArr, isAlbumArr = fals
               ))}
             </SingleLineTypo>
           </Box>
+
+          <SingleLineTypo
+            variant="subtitle2"
+            color="text.secondary"
+            onMouseDown={(event) => event.stopPropagation()}
+            onClick={onAlbumClick}
+            sx={{ cursor: "pointer", flex: 1, maxWidth: "40%", "&:hover": { textDecoration: "underline", color: "text.primary" } }}
+          >
+            {albumName}
+          </SingleLineTypo>
+
+          <Typography variant="subtitle2" color="text.secondary" sx={{ flex: 1, maxWidth: "10%" }}>
+            {dateAdded}
+          </Typography>
+
+          {/* <Typography variant="subtitle2" color="text.secondary">
+            {msToTimeConvert(trackDuration || 0)}
+          </Typography> */}
           <Box sx={{ display: "flex", gap: "10px", alignItems: "center" }}>
             <AccessTimeRounded sx={{ fontSize: "20px", color: "text.secondary" }} />
             <Typography variant="body2" color="text.secondary">
@@ -103,7 +114,7 @@ const ItemSongList = ({ title, track_no = 0, img, subtitleArr, isAlbumArr = fals
   );
 };
 
-export default ItemSongList;
+export default ItemPlaylistTrackList;
 
 const useStyle = makeStyles((_: Theme) => ({
   root: {

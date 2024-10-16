@@ -1,7 +1,7 @@
 import { MGradientsDarkTheme } from "@/theme/utils/mGredient";
 import { IconButton, SvgIconProps, Theme, Tooltip } from "@mui/material";
 import { makeStyles } from "@mui/styles";
-import { globleTransitionTime } from "@utils/globleStyle";
+import { globleTransitionTime } from "@/theme/utils/globalTransitions";
 import React, { ComponentType, MouseEvent } from "react";
 
 type WithIconStylesProps = {

@@ -1,7 +1,5 @@
-import { ICategorySlice } from "@/schemas/category.schema";
-import { createSlice } from "@reduxjs/toolkit";
-import { getAllCategories } from "../thunkServices/category.thunksevices";
 import { ITrackSlice } from "@/schemas/track.schema";
+import { createSlice } from "@reduxjs/toolkit";
 import { getRecentPlayedTracks } from "../thunkServices/track.thunksevices";
 
 const intialState: ITrackSlice = {

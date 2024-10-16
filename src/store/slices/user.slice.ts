@@ -1,13 +1,9 @@
-import { img1 } from "@assets/images";
-import { ICategorySlice } from "@/schemas/category.schema";
-import { createSlice } from "@reduxjs/toolkit";
-import { getAllCategories } from "../thunkServices/category.thunksevices";
-import { ITrackSchema, ITrackSlice } from "@/schemas/track.schema";
-import { getRecentPlayedTracks } from "../thunkServices/track.thunksevices";
 import { IArtistSchema } from "@/schemas/artist.schema";
-import { getMyProfile, getMyProfileFollowedArtists, getMyProfileTopArtists, getMyProfileTopTracks, getUserPlaylist, getUserProfileById } from "../thunkServices/user.thunksevices";
-import { getRandomColor } from "@utils/genaralFunctions";
 import { IPlaylistSchema } from "@/schemas/playlist.schema";
+import { ITrackSchema } from "@/schemas/track.schema";
+import { createSlice } from "@reduxjs/toolkit";
+import { getRandomColor } from "@utils/genaralFunctions";
+import { getMyProfile, getMyProfileFollowedArtists, getMyProfileTopArtists, getMyProfileTopTracks, getUserPlaylist, getUserProfileById } from "../thunkServices/user.thunksevices";
 
 interface IUserSlice {
   isUserProfileLoading: boolean;

@@ -1,9 +1,9 @@
 import { MGradientsDarkTheme } from "@/theme/utils/mGredient";
 import { img1, imgCar, imgPlayBtnGreen } from "@assets/images";
-import ImageComp from "@components/Image";
+import ImageComp from "@components/design/Image";
 import { Card, CardActionArea, CardContent, CardMedia, Theme, Typography } from "@mui/material";
 import { makeStyles } from "@mui/styles";
-import { globleEaseInOutTransitionTime } from "@utils/globleStyle";
+import { globleEaseInOutTransitionTime } from "@/theme/utils/globalTransitions";
 import { useState } from "react";
 
 type ItemTopResultProps = {

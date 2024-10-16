@@ -1,7 +1,7 @@
 import ItemArtistAlbumListSkeleton from "@components/skeletons/ItemArtistAlbumsList.skeleton";
-import { RootContainer } from "@components/styledComponents";
+import { RootContainer } from "@components/design/styledComponents";
 import { Box, Grid, Typography } from "@mui/material";
-import ItemArtistAlbumsList from "../search/utilityComp/ItemArtistAlbumsList";
+import ItemArtistAlbumsList from "../../components/ItemArtistAlbumsList";
 import useArtistAlbumsController from "./ArtistAlbums.controller";
 
 const ArtistAlbums = () => {

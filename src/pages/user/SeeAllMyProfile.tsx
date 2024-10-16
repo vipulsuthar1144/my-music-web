@@ -1,9 +1,9 @@
 import ItemArtistAlbumListSkeleton from "@components/skeletons/ItemArtistAlbumsList.skeleton";
 import ItemSongListSkeleton from "@components/skeletons/ItemSongLIst.skeleton";
-import { RootContainer } from "@components/styledComponents";
+import { RootContainer } from "@components/design/styledComponents";
 import { Box, Grid, Skeleton, Typography } from "@mui/material";
-import ItemArtistAlbumsList from "../search/utilityComp/ItemArtistAlbumsList";
-import ItemSongList from "../search/utilityComp/ItemSongList";
+import ItemArtistAlbumsList from "../../components/ItemArtistAlbumsList";
+import ItemSongList from "../../components/ItemSongList";
 import useSeeAllMyProfileController from "./SeeAllMyProfile.controller";
 
 const SeeAllMyProfile = () => {

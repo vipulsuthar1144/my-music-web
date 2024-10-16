@@ -1,12 +1,12 @@
 import { imgDefaultSong } from "@assets/images";
-import { ImageCompWithLoader } from "@components/Image";
+import { ImageCompWithLoader } from "@components/design/Image";
 import ItemSongListSkeleton from "@components/skeletons/ItemSongLIst.skeleton";
-import { RootContainer } from "@components/styledComponents";
+import { RootContainer } from "@components/design/styledComponents";
 import { Box, CircularProgress, Grid, Typography } from "@mui/material";
 import { makeStyles } from "@mui/styles";
-import { globleEaseInOutTransitionTime } from "@utils/globleStyle";
+import { globleEaseInOutTransitionTime } from "@/theme/utils/globalTransitions";
 import { Theme } from "react-toastify";
-import ItemSongList from "../search/utilityComp/ItemSongList";
+import ItemSongList from "../../components/ItemSongList";
 import useAlbumDetailController from "./AlbumDetail.controller";
 
 const AlbumDetail = () => {

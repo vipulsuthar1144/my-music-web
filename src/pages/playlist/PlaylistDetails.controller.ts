@@ -1,7 +1,6 @@
 import useLoadMore from "@/config/hooks/useLoadMore.hooks";
 import { resetPlaylistState } from "@/store/slices/playlist.slice";
 import { useAppDispatch, useAppSelector } from "@/store/store";
-import { getAlbumById, getAlbumTracks } from "@/store/thunkServices/album.thunksevices";
 import { getPlaylistById, getPlaylistTracks } from "@/store/thunkServices/playlist.thunkservices";
 import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";

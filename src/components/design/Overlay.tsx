@@ -1,6 +1,6 @@
 import { MGradientsDarkTheme } from "@/theme/utils/mGredient";
 import { Box } from "@mui/material";
-import { globleTransitionTime } from "@utils/globleStyle";
+import { globleTransitionTime } from "@/theme/utils/globalTransitions";
 
 type OverlayProps = {
   isShown: boolean;

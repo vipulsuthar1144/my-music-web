@@ -1,10 +1,7 @@
-import { ICategorySlice } from "@/schemas/category.schema";
-import { createSlice } from "@reduxjs/toolkit";
-import { getAllCategories } from "../thunkServices/category.thunksevices";
-import { ITrackSlice } from "@/schemas/track.schema";
-import { getRecentPlayedTracks, getTop5TrendingEnglishTracks, getTop5TrendingHindiTracks, getTop5TrendingPunjabiTracks } from "../thunkServices/track.thunksevices";
 import { IPlaylistSchema, IPlaylistTrackSchema } from "@/schemas/playlist.schema";
+import { createSlice } from "@reduxjs/toolkit";
 import { getTop2DailyMixPlaylist } from "../thunkServices/playlist.thunkservices";
+import { getTop5TrendingEnglishTracks, getTop5TrendingHindiTracks, getTop5TrendingPunjabiTracks } from "../thunkServices/track.thunksevices";
 
 interface IHomeSlice {
   isHindiTrackListLoading: boolean;

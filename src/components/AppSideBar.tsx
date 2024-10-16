@@ -1,10 +1,9 @@
-import useLoadMore from "@/config/hooks/useLoadMore.hooks";
+import ImageComp from "@components/design/Image";
+import OverlaySidebar from "@components/design/Overlay";
 import { imgSpotifyGreenSideBarLogo } from "@assets/images";
-import ImageComp from "@components/Image";
-import OverlaySidebar from "@components/Overlay";
-import { AccountCircle, AccountCircleOutlined, Favorite, FavoriteBorder, Headphones, HeadphonesOutlined, Home, HomeOutlined, Search, SearchOutlined } from "@mui/icons-material";
+import { AccountCircle, AccountCircleOutlined, Home, HomeOutlined, Search, SearchOutlined } from "@mui/icons-material";
 import { Box, useTheme } from "@mui/material";
-import { globleTransitionTime } from "@utils/globleStyle";
+import { globleTransitionTime } from "@/theme/utils/globalTransitions";
 import { useEffect, useState } from "react";
 import { Menu, MenuItem, Sidebar, sidebarClasses } from "react-pro-sidebar";
 import { useLocation, useNavigate } from "react-router-dom";

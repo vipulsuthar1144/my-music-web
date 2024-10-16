@@ -1,14 +1,14 @@
 import { imgDefaultArtist } from "@assets/images";
-import { ImageCompWithLoader, TitleSeeAll } from "@components/Image";
+import { ImageCompWithLoader, TitleSeeAll } from "@components/design/Image";
 import ItemArtistAlbumListSkeleton from "@components/skeletons/ItemArtistAlbumsList.skeleton";
 import ItemSongListSkeleton from "@components/skeletons/ItemSongLIst.skeleton";
-import { ContainerWithoutScrollbar, RootContainer } from "@components/styledComponents";
+import { ContainerWithoutScrollbar, RootContainer } from "@components/design/styledComponents";
 import { Box, CircularProgress, Grid, Skeleton, Theme, Typography } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { getFollowers } from "@utils/genaralFunctions";
-import { globleEaseInOutTransitionTime } from "@utils/globleStyle";
-import ItemArtistAlbumsList from "../search/utilityComp/ItemArtistAlbumsList";
-import ItemSongList from "../search/utilityComp/ItemSongList";
+import { globleEaseInOutTransitionTime } from "@/theme/utils/globalTransitions";
+import ItemArtistAlbumsList from "../../components/ItemArtistAlbumsList";
+import ItemSongList from "../../components/ItemSongList";
 import useMyProfileController from "./MyProfile.controller";
 
 const MyProfile = () => {

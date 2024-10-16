@@ -2,7 +2,7 @@
 import { Theme, ComponentsProps, ComponentsOverrides, ComponentsVariants } from "@mui/material";
 import { MGradientsDarkTheme } from "../utils/mGredient";
 import { mColors } from "../utils/mColors";
-import { globleTransitionTime } from "@utils/globleStyle";
+import { globleTransitionTime } from "@/theme/utils/globalTransitions";
 
 declare module "@mui/material/Button" {
   interface ButtonPropsVariantOverrides {

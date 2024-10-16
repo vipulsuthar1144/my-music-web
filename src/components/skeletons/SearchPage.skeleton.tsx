@@ -1,6 +1,6 @@
 import { Box, Grid, Skeleton } from "@mui/material";
 import ItemSongListSkeleton from "./ItemSongLIst.skeleton";
-import { ContainerWithoutScrollbar } from "@components/styledComponents";
+import { ContainerWithoutScrollbar } from "@components/design/styledComponents";
 import ItemArtistAlbumListSkeleton from "./ItemArtistAlbumsList.skeleton";
 
 const SearchPageSkeleton = () => {

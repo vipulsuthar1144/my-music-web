@@ -1,14 +1,14 @@
 import { mColors } from "@/theme/utils/mColors";
 import { StyledBackIcon, StyledForwardIcon, StyledNotificationIconFilled, StyledSettingIconFilled, StyledThemeModeIconFilled } from "@assets/SVG";
-import { LoaderButton } from "@components/Button";
-import EditText from "@components/EditText";
+import { LoaderButton } from "@components/design/Button";
+import EditText from "@components/design/EditText";
 import { LogoutRounded } from "@mui/icons-material";
 import { AppBar, Stack, Toolbar } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { ChangeEvent, useEffect, useRef, useState } from "react";
 import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 
-const TopBar = () => {
+const AppTopBar = () => {
   const [loading, setLoading] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
   const [searchedQuery, setSearchedQuery] = useState(searchParams.get("q") || "");
@@ -106,7 +106,7 @@ const TopBar = () => {
   );
 };
 
-export default TopBar;
+export default AppTopBar;
 
 const useStyles = makeStyles(() => ({
   appbar: {

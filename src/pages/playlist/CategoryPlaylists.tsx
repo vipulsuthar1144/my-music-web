@@ -1,21 +1,11 @@
+import { RootContainer } from "@components/design/styledComponents";
 import ItemArtistAlbumListSkeleton from "@components/skeletons/ItemArtistAlbumsList.skeleton";
-import { RootContainer } from "@components/styledComponents";
 import { Box, Grid, Typography } from "@mui/material";
-import React from "react";
-import ItemArtistAlbumsList from "../search/utilityComp/ItemArtistAlbumsList";
+import ItemArtistAlbumsList from "../../components/ItemArtistAlbumsList";
 import useCategoryPlaylistsController from "./CategoryPlaylists.controller";
 
 const CategoryPlaylists = () => {
-  const {
-    lastPlaylistListItemRef,
-    listenerGoToPlaylistDetails,
-    isCategoryPlaylistsError,
-    isCategoryPlaylistsLoading,
-    categoryPlaylists,
-    categoryTitle,
-    categoryPlaylistsOffset,
-    hasMoreCategoryPlaylists,
-  } = useCategoryPlaylistsController();
+  const { lastPlaylistListItemRef, listenerGoToPlaylistDetails, isCategoryPlaylistsError, isCategoryPlaylistsLoading, categoryPlaylists, categoryTitle } = useCategoryPlaylistsController();
   const renderPlaylistList = () => {
     if (isCategoryPlaylistsError)
       return (
