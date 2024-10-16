@@ -158,7 +158,7 @@ const MyProfile = () => {
           title={`Your Following`}
           isSeeAllBtnVisible={followedArtistList.length == 10}
           onSeeAllClick={listenerSeeAllFollowedArtists}
-          style={{ width: "100%", marginTop: "0px", padding: "10px 0", zIndex: 1 }}
+          style={{ width: "100%", marginTop: "0px", padding: " 20px 0 10px 0", zIndex: 1 }}
         />
         <ContainerWithoutScrollbar>
           {followedArtistList?.map(

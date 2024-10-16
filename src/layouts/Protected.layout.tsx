@@ -1,6 +1,7 @@
 import useLocalStorage from "@/config/hooks/useLocalStorage.hooks";
 import TrackPlayer from "@/pages/player/TrackPlayer";
 import { MGradientsDarkTheme } from "@/theme/utils/mGredient";
+import AppFooter from "@components/Footer";
 import AppSideBar from "@components/SideBar";
 import TopBar from "@components/TopBar";
 import TopLoader from "@components/TopLoader";
@@ -54,7 +55,7 @@ const ProtectedLayout = () => {
           >
             <TopBar />
             <Outlet />
-            <Box className={classes.footer}>this is footer</Box>
+            <AppFooter />
           </CustomScrollBox>
         </>
       )}
@@ -70,14 +71,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     background: MGradientsDarkTheme.backroundBlue,
     display: "flex",
     justifyContent: "center",
-  },
-  footer: {
-    zIndex: 1,
-    marginTop: "10px",
-    backgroundColor: theme.palette.secondary.main,
-    width: "100%",
-    height: "400px",
-    borderRadius: "10px",
   },
 }));
 
