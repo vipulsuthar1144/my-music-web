@@ -4,7 +4,6 @@ import LoadingBar from "react-top-loading-bar";
 
 const TopLoader = () => {
   const { topLoadingProgress } = useAppSelector((state) => state.globleLoader);
-
   return <LoadingBar color={mColors.loaderPrimary} progress={topLoadingProgress} />;
 };
 

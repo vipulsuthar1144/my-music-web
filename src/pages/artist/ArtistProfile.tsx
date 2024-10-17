@@ -5,7 +5,7 @@ import ItemSongListSkeleton from "@components/skeletons/ItemSongLIst.skeleton";
 import { ContainerWithoutScrollbar, RootContainer } from "@components/design/styledComponents";
 import { Box, CircularProgress, Grid, Skeleton, Theme, Typography } from "@mui/material";
 import { makeStyles } from "@mui/styles";
-import { formatFollowersCount } from "@utils/genaralFunctions";
+import { formatFollowersCount, getFollowers } from "@utils/genaralFunctions";
 import { globleEaseInOutTransitionTime } from "@/theme/utils/globalTransitions";
 import ItemArtistAlbumsList from "../../components/ItemArtistAlbumsList";
 import ItemSongList from "../../components/ItemSongList";
@@ -80,7 +80,7 @@ const ArtistProfile = () => {
               {artistData?.name}
             </Typography>
             <Typography variant="h6" mb={"2px"}>
-              {formatFollowersCount(artistData?.followers?.total ?? 0)} monthly listeners
+              {getFollowers(artistData?.followers?.total ?? 0, "monthly listeners")}
             </Typography>
           </Box>
         </Box>

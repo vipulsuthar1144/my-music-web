@@ -9,7 +9,7 @@ import { makeStyles } from "@mui/styles";
 import { LocalStorageKeys, useIsSmallScreen } from "@utils/constants";
 import { sidebarWidth } from "@/theme/utils/globalTransitions";
 import { useEffect, useRef } from "react";
-import { Outlet, ScrollRestoration, useLocation, useNavigate } from "react-router-dom";
+import { Outlet, useLocation, useNavigate } from "react-router-dom";
 
 const ProtectedLayout = () => {
   const navigate = useNavigate();
@@ -52,7 +52,6 @@ const ProtectedLayout = () => {
               },
             }}
           >
-            <ScrollRestoration getKey={(location, matches) => location.key} />
             <AppTopBar />
             <Outlet />
             <AppFooter />

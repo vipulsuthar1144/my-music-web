@@ -6,7 +6,7 @@ import { RootContainer } from "@components/design/styledComponents";
 import { Box, CircularProgress, Grid, Theme, Typography, useTheme } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { useIsSmallScreen } from "@utils/constants";
-import { formatDate, formatFollowersCount } from "@utils/genaralFunctions";
+import { formatDate, formatFollowersCount, getFollowers } from "@utils/genaralFunctions";
 import { globleEaseInOutTransitionTime } from "@/theme/utils/globalTransitions";
 import ItemSongList from "../../components/ItemSongList";
 import ItemPlaylistTrackList from "../../components/ItemPlaylistTrackList";
@@ -75,7 +75,7 @@ const PlaylistDetails = () => {
               >
                 {`${playlistData.owner?.display_name}`}
               </Box>
-              {` • ${playlistData.tracks?.total} songs • ${formatFollowersCount(playlistData.followers?.total ?? 0)} saves`}
+              {` • ${playlistData.tracks?.total} songs • ${getFollowers(playlistData.followers?.total ?? 0, "saves")}`}
             </Typography>
           </Box>
         </Box>

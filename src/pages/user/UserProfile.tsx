@@ -4,7 +4,7 @@ import ItemArtistAlbumListSkeleton from "@components/skeletons/ItemArtistAlbumsL
 import { RootContainer } from "@components/design/styledComponents";
 import { Box, CircularProgress, Grid, Theme, Typography } from "@mui/material";
 import { makeStyles } from "@mui/styles";
-import { formatFollowersCount } from "@utils/genaralFunctions";
+import { formatFollowersCount, getFollowers } from "@utils/genaralFunctions";
 import { globleEaseInOutTransitionTime } from "@/theme/utils/globalTransitions";
 import ItemArtistAlbumsList from "../../components/ItemArtistAlbumsList";
 import useUserProfileController from "./UserProfile.controller";
@@ -61,7 +61,7 @@ const UserProfile = () => {
               {userProfileData?.display_name}
             </Typography>
             <Typography variant="h6" mb={"2px"}>
-              {formatFollowersCount(userProfileData?.followers?.total ?? 0)} followers
+              {getFollowers(userProfileData?.followers?.total ?? 0, "followers")}
             </Typography>
           </Box>
         </Box>

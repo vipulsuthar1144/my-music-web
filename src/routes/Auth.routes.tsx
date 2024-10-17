@@ -13,3 +13,12 @@ const AuthRoutes: RouteObject[] = [
 ];
 
 export default AuthRoutes;
+
+// return (
+//   <Routes>
+//     <Route path="/" element={<AuthLayout />}>
+//       <Route index element={<Auth />} />
+//       <Route path="*" element={<FallbackError type="page_not_found" />} />
+//     </Route>
+//   </Routes>
+// );
