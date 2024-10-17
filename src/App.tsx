@@ -1,16 +1,21 @@
-import "./App.css";
-import "react-toastify/dist/ReactToastify.css";
-import AppTheme from "./theme/AppTheme";
-import AppRoutes from "./routes";
+import FallbackError from "@components/FallbackError";
+import { ErrorBoundary } from "react-error-boundary";
 import { Provider } from "react-redux";
+import "react-toastify/dist/ReactToastify.css";
+import "./App.css";
+import AppRoutes from "./routes";
 import { store } from "./store/store";
+import AppTheme from "./theme/AppTheme";
+
 function App() {
   return (
-    <Provider store={store}>
-      <AppTheme>
-        <AppRoutes />
-      </AppTheme>
-    </Provider>
+    <ErrorBoundary fallback={<FallbackError type="error_boundry" />}>
+      <Provider store={store}>
+        <AppTheme>
+          <AppRoutes />
+        </AppTheme>
+      </Provider>
+    </ErrorBoundary>
   );
 }
 

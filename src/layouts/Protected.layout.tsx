@@ -9,7 +9,7 @@ import { makeStyles } from "@mui/styles";
 import { LocalStorageKeys, useIsSmallScreen } from "@utils/constants";
 import { sidebarWidth } from "@/theme/utils/globalTransitions";
 import { useEffect, useRef } from "react";
-import { Outlet, useLocation, useNavigate } from "react-router-dom";
+import { Outlet, ScrollRestoration, useLocation, useNavigate } from "react-router-dom";
 
 const ProtectedLayout = () => {
   const navigate = useNavigate();
@@ -24,7 +24,7 @@ const ProtectedLayout = () => {
 
   useEffect(() => {
     containerRef.current && containerRef.current.scrollTo(0, 0);
-  }, [location]);
+  }, [location.pathname]);
 
   useEffect(() => {
     if (!accessToken) {
@@ -38,6 +38,7 @@ const ProtectedLayout = () => {
   return (
     <Box className={classes.root}>
       <TopLoader />
+
       {isLoggedIn && (
         <>
           {/* {!isSmallScreen && <TrackPlayer />} */}
@@ -51,6 +52,7 @@ const ProtectedLayout = () => {
               },
             }}
           >
+            <ScrollRestoration getKey={(location, matches) => location.key} />
             <AppTopBar />
             <Outlet />
             <AppFooter />

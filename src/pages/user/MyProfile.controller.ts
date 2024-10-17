@@ -1,11 +1,10 @@
 import { useAppDispatch, useAppSelector } from "@/store/store";
 import { getMyProfile, getMyProfileFollowedArtists, getMyProfileTopArtists, getMyProfileTopTracks } from "@/store/thunkServices/user.thunksevices";
 import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 
 const useMyProfileController = () => {
   const dispatch = useAppDispatch();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const {
     isMyProfileLoading,
     isMyProfileError,
@@ -35,16 +34,16 @@ const useMyProfileController = () => {
   }, [dispatch]);
 
   const listenerSeeAllTopTracks = () => {
-    navigate(`/user/me/top-tracks`);
+    // navigate(`/user/me/top-tracks`);
   };
   const listenerSeeAllTopArtists = () => {
-    navigate(`/user/me/top-artists`);
+    // navigate(`/user/me/top-artists`);
   };
   const listenerSeeAllFollowedArtists = () => {
-    navigate(`/user/me/following`);
+    // navigate(`/user/me/following`);
   };
   const listenerGoToArtistDetails = (artistId?: string) => {
-    artistId && navigate(`/artist/${artistId}`);
+    // artistId && navigate(`/artist/${artistId}`);
   };
 
   return {

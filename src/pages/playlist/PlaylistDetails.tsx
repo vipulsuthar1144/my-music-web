@@ -11,29 +11,30 @@ import { globleEaseInOutTransitionTime } from "@/theme/utils/globalTransitions";
 import ItemSongList from "../../components/ItemSongList";
 import ItemPlaylistTrackList from "../../components/ItemPlaylistTrackList";
 import usePlaylistDetailsController from "./PlaylistDetails.controller";
+import FallbackError from "@components/FallbackError";
 
 const PlaylistDetails = () => {
   const classes = useStyles();
 
   const theme = useTheme();
   const isSmallScreen = useIsSmallScreen(theme);
-  const { listenerGoToAlbumDetails, listenerGoToUserProfile, lastTrackListItemRef, isPlaylistDataError, isPlaylistDataLoading, playlistData, bgColor, isPlaylistTrackListLoading, playlistTrackList } =
-    usePlaylistDetailsController();
+  const {
+    listenerGoToAlbumDetails,
+    listenerGoToUserProfile,
+    lastTrackListItemRef,
+    isPlaylistDataError,
+    isPlaylistDataLoading,
+    playlistData,
+    bgColor,
+    isPlaylistTrackListLoading,
+    isPlaylistTrackListError,
+    playlistTrackList,
+  } = usePlaylistDetailsController();
 
   const renderPlaylistProfile = () => {
     if (isPlaylistDataLoading) return <CircularProgress size={30} thickness={5} sx={{ color: "loader.main", alignSelf: "center", margin: "auto" }} />;
-    if (isPlaylistDataError)
-      return (
-        <Typography variant="h3" sx={{ alignSelf: "center", margin: "auto" }}>
-          Error Occurred
-        </Typography>
-      );
-    if (!playlistData)
-      return (
-        <Typography variant="h3" sx={{ alignSelf: "center", margin: "auto" }}>
-          Playlist Not Found
-        </Typography>
-      );
+    if (isPlaylistDataError) return <FallbackError type="something_went_wrong" />;
+    if (!playlistData) return <FallbackError message="Playlist Not Found" type="data_not_found" />;
     return (
       <>
         <Box className={classes.details} sx={{ backgroundColor: `${bgColor}`, zIndex: 1 }}>
@@ -84,11 +85,9 @@ const PlaylistDetails = () => {
   };
 
   const renderPlaylistTracks = () => {
+    if ((playlistTrackList.length == 0 && !isPlaylistTrackListLoading && !isPlaylistTrackListError) || isPlaylistTrackListError) return;
     return (
       <>
-        {/* <Typography variant="h3" sx={{ margin: "20px 0 10px 10px", zIndex: 11 }}>
-          Tracks
-        </Typography> */}
         <Grid container spacing={1} mt={"20px"} mb={"10px"} paddingX={"10px"} sx={{ zIndex: 1 }}>
           {playlistTrackList?.map((item, index) => (
             <Grid item xs={12} key={`${item?.track?.id}${index}`}>

@@ -1,8 +1,8 @@
 import { CloseRounded, SearchRounded } from "@mui/icons-material";
 import { InputAdornment, TextField } from "@mui/material";
+import { forwardRef } from "react";
 
 export interface IGlobalEditTextProps {
-  ref?: any;
   text?: string;
   onTextChange?: (e: any) => void;
   onFocus?: () => void;
@@ -10,7 +10,7 @@ export interface IGlobalEditTextProps {
   hasCrossIcon?: boolean;
 }
 
-const EditText = ({ onFocus, ref, onTextChange, text, onCrossBtnClick, hasCrossIcon = false }: IGlobalEditTextProps) => {
+const EditText = forwardRef<HTMLInputElement, IGlobalEditTextProps>(({ onFocus, onTextChange, text, onCrossBtnClick, hasCrossIcon = false }, ref) => {
   return (
     <TextField
       ref={ref}
@@ -77,6 +77,6 @@ const EditText = ({ onFocus, ref, onTextChange, text, onCrossBtnClick, hasCrossI
       }}
     />
   );
-};
+});
 
 export default EditText;

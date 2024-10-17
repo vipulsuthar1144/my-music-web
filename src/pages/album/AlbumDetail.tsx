@@ -8,32 +8,24 @@ import { globleEaseInOutTransitionTime } from "@/theme/utils/globalTransitions";
 import { Theme } from "react-toastify";
 import ItemSongList from "../../components/ItemSongList";
 import useAlbumDetailController from "./AlbumDetail.controller";
+import FallbackError from "@components/FallbackError";
 
 const AlbumDetail = () => {
   const classes = useStyles();
 
-  const { listenerGoToArtistDetails, lastTrackListItemRef, isAlbumDataError, isAlbumDataLoading, albumData, bgColor, isTrackListLoading, trackList } = useAlbumDetailController();
+  const { listenerGoToArtistDetails, lastTrackListItemRef, isAlbumDataError, isAlbumDataLoading, albumData, bgColor, isTrackListLoading, isTrackListError, trackList } = useAlbumDetailController();
 
   const renderAlbumProfile = () => {
     if (isAlbumDataLoading) return <CircularProgress size={30} thickness={5} sx={{ color: "loader.main", alignSelf: "center", margin: "auto" }} />;
-    if (isAlbumDataError)
-      return (
-        <Typography variant="h3" sx={{ alignSelf: "center", margin: "auto" }}>
-          Error Occurred
-        </Typography>
-      );
-    if (!albumData)
-      return (
-        <Typography variant="h3" sx={{ alignSelf: "center", margin: "auto" }}>
-          Album Not Found
-        </Typography>
-      );
+    if (isAlbumDataLoading) return <FallbackError type="something_went_wrong" />;
+    if (!albumData && !isAlbumDataError && !isAlbumDataLoading) return <FallbackError message="Album Not Found" type="data_not_found" />;
+
     return (
       <>
         <Box className={classes.details} sx={{ backgroundColor: `${bgColor}`, zIndex: 1 }}>
           <Box sx={{ width: "100%", background: `linear-gradient(to bottom, ${bgColor}b0  10%, ${bgColor}05  )`, position: "absolute", height: "100%", left: 0, bottom: "-100%", zIndex: -1 }} />
           <ImageCompWithLoader
-            img={(albumData.images && albumData?.images[0]?.url) || ""}
+            img={(albumData?.images && albumData?.images[0]?.url) || ""}
             alt={"album"}
             errorImage={imgDefaultSong}
             style={{
@@ -50,19 +42,19 @@ const AlbumDetail = () => {
           />
           <Box sx={{ flex: "1 1 auto" }}>
             <Typography variant="h6" sx={{ textTransform: "capitalize" }}>
-              {albumData.type}
+              {albumData?.type}
             </Typography>
             <Typography variant="h1" style={{ fontSize: "clamp(2rem,1rem + 4vw, 4rem)", fontWeight: "bolder" }} mb={"15px"}>
               {albumData?.name}
             </Typography>
             <Typography variant="h6" color="text.primary">
-              {`${albumData.release_date?.slice(0, 4)} • `}
-              {albumData.artists?.map((item, index) => (
+              {`${albumData?.release_date?.slice(0, 4)} • `}
+              {albumData?.artists?.map((item, index) => (
                 <Box component={"span"} key={item.id} onClick={() => listenerGoToArtistDetails(item.id)} sx={{ cursor: "pointer", "&:hover": { textDecoration: "underline", color: "text.primary" } }}>
-                  {(albumData.artists?.length ?? 0) - 1 == index ? `${item.name}` : `${item.name}, `}
+                  {(albumData?.artists?.length ?? 0) - 1 == index ? `${item.name}` : `${item.name}, `}
                 </Box>
               ))}
-              {` • ${albumData.total_tracks} songs • ${albumData.album_type}`}
+              {` • ${albumData?.total_tracks} songs • ${albumData?.album_type}`}
             </Typography>
           </Box>
         </Box>
@@ -72,6 +64,7 @@ const AlbumDetail = () => {
   };
 
   const renderAlbumsTracks = () => {
+    if ((trackList.length == 0 && !isTrackListLoading && !isTrackListError) || isTrackListError) return;
     return (
       <>
         {/* <Typography variant="h3" sx={{ margin: "20px 0 10px 10px", zIndex: 1 }}>

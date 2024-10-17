@@ -58,8 +58,7 @@ const Home: React.FC = () => {
   };
   const renderHindiTracks = () => {
     if (isHindiTrackListLoading) return renderSkeletons(true);
-    if (isHindiTrackListError) return;
-    if (hindiTrackList.length == 0 && !isHindiTrackListError && !isHindiTrackListLoading) return;
+    if ((hindiTrackList.length == 0 && !isHindiTrackListError && !isHindiTrackListLoading) || isHindiTrackListError) return;
 
     return (
       <Box className={classes.trendingContainer} sx={{ backgroundImage: `url(${hindiTrackList[0].track?.album?.images && hindiTrackList[0].track?.album?.images[0].url})` }}>
@@ -86,8 +85,7 @@ const Home: React.FC = () => {
   };
   const renderPunjabiTracks = () => {
     if (isPunjabiTrackListLoading) return renderSkeletons(true);
-    if (isPunjabiTrackListError) return;
-    if (punjabiTrackList.length == 0 && !isPunjabiTrackListLoading && !isPunjabiTrackListError) return;
+    if ((punjabiTrackList.length == 0 && !isPunjabiTrackListLoading && !isPunjabiTrackListError) || isPunjabiTrackListError) return;
 
     return (
       <Box className={classes.trendingContainer} sx={{ backgroundImage: `url(${punjabiTrackList[0].track?.album?.images && punjabiTrackList[0].track?.album?.images[0].url})` }}>
@@ -117,8 +115,7 @@ const Home: React.FC = () => {
   };
   const renderEnglishTracks = () => {
     if (isEnglishTrackListLoading) return renderSkeletons(true);
-    if (isEnglishTrackListError) return;
-    if (englishTrackList.length == 0 && !isEnglishTrackListError && !isEnglishTrackListLoading) return;
+    if ((englishTrackList.length == 0 && !isEnglishTrackListError && !isEnglishTrackListLoading) || isEnglishTrackListError) return;
     return (
       <Box className={classes.trendingContainer} sx={{ backgroundImage: `url(${englishTrackList[0].track?.album?.images && englishTrackList[0].track?.album?.images[0].url})` }}>
         <Box className={classes.trendingContainerBgImage} />
@@ -144,7 +141,7 @@ const Home: React.FC = () => {
   };
   const renderRecentPlayedTrackList = () => {
     if (isRecentPlayedTrackListLoading) return renderSkeletons();
-    if ((recentPlayedTrackList.length == 0 && !isRecentPlayedTrackListLoading) || isRecentPlayedTrackListError) return;
+    if ((recentPlayedTrackList.length == 0 && !isRecentPlayedTrackListLoading && !isRecentPlayedTrackListError) || isRecentPlayedTrackListError) return;
     return (
       <>
         <Typography variant="h3" my={"10px"}>
@@ -167,10 +164,10 @@ const Home: React.FC = () => {
   };
   const renderPopularPlaylistsList = () => {
     if (isPopularPlaylistsLoading) return renderSkeletons();
-    if ((popularPlaylists.length == 0 && !isPopularPlaylistsLoading) || isPopularPlaylistsError) return;
+    if ((popularPlaylists.length == 0 && !isPopularPlaylistsLoading && !isPopularPlaylistsError) || isPopularPlaylistsError) return;
     return (
       <>
-        <TitleSeeAll title="More of what you like" onSeeAllClick={listenerSeeAllPopularPlaylist} />
+        <TitleSeeAll title="More of what you like" isSeeAllBtnVisible={popularPlaylists.length == 10} onSeeAllClick={listenerSeeAllPopularPlaylist} />
         <ContainerWithoutScrollbar>
           {popularPlaylists.map((item) => (
             <ItemArtistAlbumsList
@@ -188,10 +185,10 @@ const Home: React.FC = () => {
   };
   const renderNewReleaseAlbumsList = () => {
     if (isNewReleaseAlbumListLoading) return renderSkeletons();
-    if ((newReleaseAlbumList.length == 0 && !isNewReleaseAlbumListLoading) || isNewReleaseAlbumListError) return;
+    if ((newReleaseAlbumList.length == 0 && !isNewReleaseAlbumListLoading && !isNewReleaseAlbumListError) || isNewReleaseAlbumListError) return;
     return (
       <>
-        <TitleSeeAll title="New Release" onSeeAllClick={listenerSeeAllNewRelease} />
+        <TitleSeeAll title="New Release" isSeeAllBtnVisible={newReleaseAlbumList.length == 10} onSeeAllClick={listenerSeeAllNewRelease} />
         <ContainerWithoutScrollbar>
           {newReleaseAlbumList.map((item, index) => (
             <ItemArtistAlbumsList

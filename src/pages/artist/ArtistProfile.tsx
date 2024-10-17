@@ -10,6 +10,7 @@ import { globleEaseInOutTransitionTime } from "@/theme/utils/globalTransitions";
 import ItemArtistAlbumsList from "../../components/ItemArtistAlbumsList";
 import ItemSongList from "../../components/ItemSongList";
 import useArtistProfileController from "./ArtistProfile.controller";
+import FallbackError from "@components/FallbackError";
 
 const ArtistProfile = () => {
   const classes = useStyles();
@@ -36,19 +37,8 @@ const ArtistProfile = () => {
 
   const renderArtistProfile = () => {
     if (isArtistDataLoading) return <CircularProgress size={30} thickness={5} sx={{ color: "loader.main", alignSelf: "center", margin: "auto" }} />;
-    if (isArtistDataError)
-      return (
-        <Typography variant="h3" sx={{ alignSelf: "center", margin: "auto" }}>
-          Error Occurred while fetching Artist. Please try again later.
-        </Typography>
-      );
-    if (!artistData)
-      return (
-        <Typography variant="h3" sx={{ alignSelf: "center", margin: "auto" }}>
-          Artist Not Found
-        </Typography>
-      );
-
+    if (isArtistDataError) return <FallbackError type="something_went_wrong" />;
+    if (!artistData) return <FallbackError message="Artist Not Found" type="data_not_found" />;
     return (
       <>
         <Box className={classes.details} sx={{ backgroundColor: `${bgColor}`, zIndex: 1 }}>
@@ -102,10 +92,15 @@ const ArtistProfile = () => {
   };
   const renderArtistTopTracks = () => {
     if (isArtistTopTracksListLoading) return renderSkeletons("top-tracks");
-    if (artistTopTrackList.length == 0 || isArtistTopTracksListError) return;
+    if ((artistTopTrackList.length == 0 && !isArtistTopTracksListLoading && !isArtistTopTracksListError) || isArtistTopTracksListError) return;
     return (
       <>
-        <TitleSeeAll title="Popular Tracks" style={{ width: "100%", marginTop: "20px", padding: "0 10px", zIndex: 1 }} onSeeAllClick={listenerSeeAllTopTracks} />
+        <TitleSeeAll
+          title="Popular Tracks"
+          isSeeAllBtnVisible={artistTopTrackList.length == 10}
+          style={{ width: "100%", marginTop: "20px", padding: "0 10px", zIndex: 1 }}
+          onSeeAllClick={listenerSeeAllTopTracks}
+        />
         <Grid container spacing={1} mb={"10px"} paddingX={"10px"} sx={{ zIndex: 1 }}>
           {artistTopTrackList.map((track, _) => (
             <Grid item xs={12} lg={6} key={track.id}>
@@ -126,10 +121,15 @@ const ArtistProfile = () => {
   };
   const renderArtistAlbum = () => {
     if (isArtistAlbumsListLoading) return renderSkeletons("albums");
-    if (artistAlbumsList.length == 0 || isArtistAlbumsListError) return;
+    if ((artistAlbumsList.length == 0 && !isArtistAlbumsListLoading && !isArtistAlbumsListError) || isArtistAlbumsListError) return;
     return (
       <>
-        <TitleSeeAll title={`Albums By ${artistData?.name}`} style={{ width: "100%", marginTop: "20px", padding: "0 10px", zIndex: 1 }} onSeeAllClick={listenerSeeAllAlbums} />
+        <TitleSeeAll
+          title={`Albums By ${artistData?.name}`}
+          isSeeAllBtnVisible={artistAlbumsList.length == 10}
+          style={{ width: "100%", marginTop: "20px", padding: "0 10px", zIndex: 1 }}
+          onSeeAllClick={listenerSeeAllAlbums}
+        />
         <ContainerWithoutScrollbar>
           {artistAlbumsList?.map((item, _) => (
             <ItemArtistAlbumsList
@@ -147,10 +147,16 @@ const ArtistProfile = () => {
   };
   const renderRelatedArtists = () => {
     if (isRelatedArtistListLoading) return renderSkeletons("relatedArtists");
-    if (relatedArtistList.length == 0 || isRelatedArtistListError) return;
+    if ((relatedArtistList.length == 0 && !isRelatedArtistListLoading && !isRelatedArtistListError) || isRelatedArtistListError) return;
+
     return (
       <>
-        <TitleSeeAll title={`Fans Also like`} style={{ width: "100%", marginTop: "0px", padding: "0 10px", zIndex: 1 }} onSeeAllClick={listenerSeeAllRelatedArtist} />
+        <TitleSeeAll
+          title={`Fans Also like`}
+          isSeeAllBtnVisible={relatedArtistList.length >= 10}
+          style={{ width: "100%", marginTop: "0px", padding: "0 10px", zIndex: 1 }}
+          onSeeAllClick={listenerSeeAllRelatedArtist}
+        />
         <ContainerWithoutScrollbar>
           {relatedArtistList?.map((item, _) => (
             <ItemArtistAlbumsList

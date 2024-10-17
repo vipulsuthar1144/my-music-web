@@ -80,7 +80,7 @@ const ItemTopResult: React.FC<ItemTopResultProps> = ({ isArtist = false }) => {
 
 export default ItemTopResult;
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles((_: Theme) => ({
   root: {
     width: "100%",
     overflow: "hidden",

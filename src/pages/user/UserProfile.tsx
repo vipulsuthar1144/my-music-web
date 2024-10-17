@@ -8,6 +8,7 @@ import { formatFollowersCount } from "@utils/genaralFunctions";
 import { globleEaseInOutTransitionTime } from "@/theme/utils/globalTransitions";
 import ItemArtistAlbumsList from "../../components/ItemArtistAlbumsList";
 import useUserProfileController from "./UserProfile.controller";
+import FallbackError from "@components/FallbackError";
 
 const UserProfile = () => {
   const classes = useStyles();
@@ -16,25 +17,15 @@ const UserProfile = () => {
 
   const renderUserProfile = () => {
     if (isUserProfileLoading) return <CircularProgress size={30} thickness={5} sx={{ color: "loader.main", alignSelf: "center", margin: "auto" }} />;
-    if (isUserProfileError)
-      return (
-        <Typography variant="h3" sx={{ alignSelf: "center", margin: "auto" }}>
-          Error Occurred while fetching User. Please try again later.
-        </Typography>
-      );
-    if (!userProfileData)
-      return (
-        <Typography variant="h3" sx={{ alignSelf: "center", margin: "auto" }}>
-          User Not Found
-        </Typography>
-      );
+    if (isUserProfileError) return <FallbackError type="something_went_wrong" />;
+    if (!userProfileData && !isUserProfileError && !isUserProfileLoading) return <FallbackError message="User Not Found" type="data_not_found" />;
 
     return (
       <>
         <Box className={classes.details} sx={{ backgroundColor: `${bgColor}`, zIndex: 1 }}>
           <Box sx={{ width: "100%", background: `linear-gradient(to bottom, ${bgColor}b0  10%, ${bgColor}05  )`, position: "absolute", height: "100%", left: 0, bottom: "-100%", zIndex: -1 }} />
           <ImageCompWithLoader
-            img={(userProfileData.images && userProfileData?.images[1]?.url) || ""}
+            img={(userProfileData?.images && userProfileData?.images[1]?.url) || ""}
             alt={"user"}
             errorImage={imgDefaultArtist}
             style={{
@@ -79,18 +70,7 @@ const UserProfile = () => {
     );
   };
   const renderPlaylistList = () => {
-    if (isUserPlaylistsError)
-      return (
-        <Typography variant="h3" sx={{ alignSelf: "center", margin: "auto" }}>
-          Error Occurred
-        </Typography>
-      );
-    if (userPlaylists.length == 0 && !isUserPlaylistsError && !isUserPlaylistsLoading)
-      return (
-        <Typography variant="h3" sx={{ alignSelf: "center", margin: "auto" }}>
-          Playlist Not Found
-        </Typography>
-      );
+    if ((userPlaylists.length == 0 && !isUserPlaylistsError && !isUserPlaylistsLoading) || isUserPlaylistsError) return;
     return (
       <>
         <Typography variant="h3" sx={{ zIndex: 1, margin: "20px 0px 0px 10px" }}>

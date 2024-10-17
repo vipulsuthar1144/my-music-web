@@ -5,6 +5,7 @@ import { Box, Grid, Skeleton, Typography } from "@mui/material";
 import ItemArtistAlbumsList from "../../components/ItemArtistAlbumsList";
 import ItemSongList from "../../components/ItemSongList";
 import useSeeAllMyProfileController from "./SeeAllMyProfile.controller";
+import FallbackError from "@components/FallbackError";
 
 const SeeAllMyProfile = () => {
   const {
@@ -15,11 +16,13 @@ const SeeAllMyProfile = () => {
     isTopArtistRoute,
     isFollowedArtistRoute,
     isMyProfileTopTrackListLoading,
+    isMyProfileTopTrackListError,
     myProfileTopTrackList,
     isFollowedArtistListError,
     isFollowedArtistListLoading,
     followedArtistList,
     isMyProfileTopArtistListLoading,
+    isMyProfileTopArtistListError,
     myProfileTopArtistList,
   } = useSeeAllMyProfileController();
   const renderData = () => {
@@ -32,6 +35,8 @@ const SeeAllMyProfile = () => {
     }
   };
   const renderTopArtistList = () => {
+    if (isMyProfileTopArtistListError) return <FallbackError type="something_went_wrong" />;
+    if (myProfileTopArtistList.length == 0 && !isMyProfileTopArtistListError && !isMyProfileTopArtistListLoading) return <FallbackError type="data_not_found" />;
     return (
       <>
         <Typography variant="h3" my={"10px"}>
@@ -58,6 +63,8 @@ const SeeAllMyProfile = () => {
     );
   };
   const renderTopTrackList = () => {
+    if (isMyProfileTopTrackListError) return <FallbackError type="something_went_wrong" />;
+    if (myProfileTopTrackList.length == 0 && !isMyProfileTopTrackListError && !isMyProfileTopTrackListLoading) return <FallbackError type="data_not_found" />;
     return (
       <>
         <Typography variant="h3" my={"10px"}>
@@ -78,18 +85,8 @@ const SeeAllMyProfile = () => {
   };
   const renderFollowedArtistsList = () => {
     if (isFollowedArtistListLoading) return renderSkeleton();
-    if (isFollowedArtistListError)
-      return (
-        <Typography variant="h3" sx={{ alignSelf: "center", margin: "auto" }}>
-          Error Occurred while fetching followed artists. Please try again later.
-        </Typography>
-      );
-    if (followedArtistList.length == 0 && !isFollowedArtistListError && !isFollowedArtistListLoading)
-      return (
-        <Typography variant="h3" sx={{ alignSelf: "center", margin: "auto" }}>
-          No artist available
-        </Typography>
-      );
+    if (isFollowedArtistListError) return <FallbackError type="something_went_wrong" />;
+    if (followedArtistList.length == 0 && !isFollowedArtistListError && !isFollowedArtistListLoading) return <FallbackError type="data_not_found" />;
     return (
       <>
         <Typography variant="h3" my={"10px"}>

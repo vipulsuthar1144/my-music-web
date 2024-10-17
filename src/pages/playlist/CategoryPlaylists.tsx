@@ -3,22 +3,14 @@ import ItemArtistAlbumListSkeleton from "@components/skeletons/ItemArtistAlbumsL
 import { Box, Grid, Typography } from "@mui/material";
 import ItemArtistAlbumsList from "../../components/ItemArtistAlbumsList";
 import useCategoryPlaylistsController from "./CategoryPlaylists.controller";
+import FallbackError from "@components/FallbackError";
 
 const CategoryPlaylists = () => {
   const { lastPlaylistListItemRef, listenerGoToPlaylistDetails, isCategoryPlaylistsError, isCategoryPlaylistsLoading, categoryPlaylists, categoryTitle } = useCategoryPlaylistsController();
   const renderPlaylistList = () => {
-    if (isCategoryPlaylistsError)
-      return (
-        <Typography variant="h3" sx={{ alignSelf: "center", margin: "auto" }}>
-          Error Occurred
-        </Typography>
-      );
-    if (categoryPlaylists.length == 0 && !isCategoryPlaylistsError && !isCategoryPlaylistsLoading)
-      return (
-        <Typography variant="h3" sx={{ alignSelf: "center", margin: "auto" }}>
-          Playlist Not Found
-        </Typography>
-      );
+    if (isCategoryPlaylistsError) return <FallbackError type="something_went_wrong" />;
+    if (categoryPlaylists.length == 0 && !isCategoryPlaylistsError && !isCategoryPlaylistsLoading) return <FallbackError message="Playlist not found" type="data_not_found" />;
+
     return (
       <>
         <Typography variant="h3" my={"20px"}>

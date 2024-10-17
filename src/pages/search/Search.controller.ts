@@ -7,7 +7,7 @@ import { useEffect } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 
 const useSearchController = () => {
-  const { isSearchDataLoading, searchData } = useAppSelector((state) => state.search);
+  const { isSearchDataLoading, searchData, isSearchDataError } = useAppSelector((state) => state.search);
   const { isCategoriesLoading, isCategoriesError, categories, hasMoreCategoriesData, categoriesOffset } = useAppSelector((state) => state.category);
   const [searchParams] = useSearchParams();
   const searchQuery = searchParams.get("q") || "";
@@ -81,6 +81,7 @@ const useSearchController = () => {
     listenerSeeAllPlaylists,
     searchQuery,
     isSearchDataLoading,
+    isSearchDataError,
     searchData,
     isCategoriesLoading,
     isCategoriesError,

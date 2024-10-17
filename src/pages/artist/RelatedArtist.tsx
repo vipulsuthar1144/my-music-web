@@ -3,18 +3,16 @@ import { RootContainer } from "@components/design/styledComponents";
 import { Grid, Skeleton, Typography } from "@mui/material";
 import ItemArtistAlbumsList from "../../components/ItemArtistAlbumsList";
 import useRelatedArtistController from "./RelatedArtist.controller";
+import FallbackError from "@components/FallbackError";
 
 const RelatedArtist = () => {
   const { isRelatedArtistListError, isRelatedArtistListLoading, relatedArtistList, listenerGoToArtistDetails } = useRelatedArtistController();
 
   const renderArtistsList = () => {
     if (isRelatedArtistListLoading) return renderSkeleton();
-    if (isRelatedArtistListError)
-      return (
-        <Typography variant="h3" sx={{ alignSelf: "center", margin: "auto" }}>
-          Error Occurred while fetching related artists. Please try again later.
-        </Typography>
-      );
+    if (isRelatedArtistListError) return <FallbackError type="something_went_wrong" />;
+    if (relatedArtistList.length == 0 && !isRelatedArtistListError && !isRelatedArtistListLoading) return <FallbackError message="No Related Artists Found." type="data_not_found" />;
+
     return (
       <>
         <Typography variant="h3" my={"20px"}>

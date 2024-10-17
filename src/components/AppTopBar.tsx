@@ -9,7 +9,6 @@ import { ChangeEvent, useEffect, useRef, useState } from "react";
 import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 
 const AppTopBar = () => {
-  const [loading, setLoading] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
   const [searchedQuery, setSearchedQuery] = useState(searchParams.get("q") || "");
   const searchTextFieldRef = useRef<HTMLInputElement>(null);
@@ -90,15 +89,9 @@ const AppTopBar = () => {
               fontSize: "14px",
             }}
             onClick={() => {
-              setLoading(true);
-              setTimeout(() => {
-                setLoading(false);
-                localStorage.clear();
-                navigate("/auth", { replace: true });
-                // showCustomToast("Oops! LogOut Failed.", "error");
-              }, 2000);
+              localStorage.clear();
+              navigate("/auth", { replace: true });
             }}
-            loading={loading}
           />
         </Stack>
       </Toolbar>

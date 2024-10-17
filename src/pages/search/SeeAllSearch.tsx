@@ -9,6 +9,7 @@ import { Box, Grid, Typography } from "@mui/material";
 import useSeeAllSearchController from "./SeeAllSearch.controller";
 import ItemArtistAlbumsList from "../../components/ItemArtistAlbumsList";
 import ItemSongList from "../../components/ItemSongList";
+import FallbackError from "@components/FallbackError";
 
 const SeeAllSearch = () => {
   const {
@@ -24,20 +25,8 @@ const SeeAllSearch = () => {
   } = useSeeAllSearchController();
 
   const renderDataList = () => {
-    if (seeAllDataList.length == 0 && !isSeeAllDataListLoading) {
-      return (
-        <Typography variant="h3" my={"20px"}>
-          No {searchType} Found
-        </Typography>
-      );
-    }
-    if (isSeeAllDataListError) {
-      return (
-        <Typography variant="h3" sx={{ alignSelf: "center", margin: "auto" }}>
-          Error Occurred while fetching Search Result. Please try again later.
-        </Typography>
-      );
-    }
+    if (isSeeAllDataListError) return <FallbackError type="something_went_wrong" />;
+    if (seeAllDataList.length == 0 && !isSeeAllDataListError && !isSeeAllDataListLoading) return <FallbackError message={`No ${searchType} Found`} type="data_not_found" />;
 
     switch (searchType) {
       case "track":
@@ -49,11 +38,7 @@ const SeeAllSearch = () => {
       case "album":
         return renderAlbumList();
       default:
-        return (
-          <Typography variant="h3" my={"20px"}>
-            No {searchType} Found
-          </Typography>
-        );
+        return <FallbackError message={`No ${searchType} Found`} type="data_not_found" />;
     }
   };
   const renderTrackList = () => {

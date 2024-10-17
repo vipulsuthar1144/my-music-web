@@ -3,17 +3,14 @@ import { RootContainer } from "@components/design/styledComponents";
 import { Box, Grid, Typography } from "@mui/material";
 import ItemArtistAlbumsList from "../../components/ItemArtistAlbumsList";
 import useArtistAlbumsController from "./ArtistAlbums.controller";
+import FallbackError from "@components/FallbackError";
 
 const ArtistAlbums = () => {
   const { lastAlbumListItemRef, isArtistAlbumsListLoading, isArtistAlbumsListError, artistAlbumsList, listenerGoToAlbumDetails } = useArtistAlbumsController();
 
   const renderAlbums = () => {
-    if (isArtistAlbumsListError)
-      return (
-        <Typography variant="h3" sx={{ alignSelf: "center", margin: "auto" }}>
-          Error Occurred while fetching albums. Please try again later.
-        </Typography>
-      );
+    if (isArtistAlbumsListError) return <FallbackError type="something_went_wrong" />;
+    if (artistAlbumsList.length == 0 && !isArtistAlbumsListError && !isArtistAlbumsListLoading) return <FallbackError message="No Albums Available." type="data_not_found" />;
 
     return (
       <>

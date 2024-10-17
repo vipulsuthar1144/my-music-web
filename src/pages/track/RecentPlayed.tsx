@@ -3,18 +3,15 @@ import { RootContainer } from "@components/design/styledComponents";
 import { Grid, Typography } from "@mui/material";
 import ItemArtistAlbumsList from "../../components/ItemArtistAlbumsList";
 import useRecentPlayedController from "./RecentPlayed.controller";
+import FallbackError from "@components/FallbackError";
 
 const RecentPlayed = () => {
   const { isRecentPlayedTrackListError, isRecentPlayedTrackListLoading, recentPlayedTrackList } = useRecentPlayedController();
 
   const renderRecentPlayedTracks = () => {
-    if (isRecentPlayedTrackListError) {
-      return (
-        <Typography variant="h3" sx={{ alignSelf: "center", margin: "auto" }}>
-          Error Occurred while fetching Recent Played Tracks. Please try again later.
-        </Typography>
-      );
-    }
+    if (isRecentPlayedTrackListError) return <FallbackError type="something_went_wrong" />;
+    if (recentPlayedTrackList.length == 0 && !isRecentPlayedTrackListError && !isRecentPlayedTrackListLoading) return <FallbackError message="No Recent Played Tracks Found" type="data_not_found" />;
+
     return (
       <>
         <Typography variant="h3" sx={{ margin: "10px" }}>

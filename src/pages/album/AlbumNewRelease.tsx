@@ -3,23 +3,13 @@ import { RootContainer } from "@components/design/styledComponents";
 import { Box, Grid, Typography } from "@mui/material";
 import ItemArtistAlbumsList from "../../components/ItemArtistAlbumsList";
 import useAlbumNewReleaseController from "./AlbumNewRelease.controller";
+import FallbackError from "@components/FallbackError";
 
 const AlbumNewRelease = () => {
   const { listenerGoToAlbumDetails, lastAlbumListItemRef, isNewReleaseAlbumListError, isNewReleaseAlbumListLoading, newReleaseAlbumList } = useAlbumNewReleaseController();
   const renderAlbums = () => {
-    if (isNewReleaseAlbumListError)
-      return (
-        <Typography variant="h3" sx={{ alignSelf: "center", margin: "auto" }}>
-          Error Occurred while fetching new release albums. Please try again later.
-        </Typography>
-      );
-
-    if (newReleaseAlbumList.length == 0 && !isNewReleaseAlbumListLoading && !isNewReleaseAlbumListError)
-      return (
-        <Typography variant="h3" sx={{ alignSelf: "center", margin: "auto" }}>
-          No New Release Albums Available.
-        </Typography>
-      );
+    if (isNewReleaseAlbumListError) return <FallbackError type="something_went_wrong" />;
+    if (newReleaseAlbumList.length == 0 && !isNewReleaseAlbumListError && !isNewReleaseAlbumListLoading) return <FallbackError message="No New Release Albums Available." type="data_not_found" />;
 
     return (
       <>

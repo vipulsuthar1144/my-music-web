@@ -10,6 +10,7 @@ import { globleEaseInOutTransitionTime } from "@/theme/utils/globalTransitions";
 import ItemArtistAlbumsList from "../../components/ItemArtistAlbumsList";
 import ItemSongList from "../../components/ItemSongList";
 import useMyProfileController from "./MyProfile.controller";
+import FallbackError from "@components/FallbackError";
 
 const MyProfile = () => {
   const classes = useStyles();
@@ -35,25 +36,14 @@ const MyProfile = () => {
 
   const renderUserProfile = () => {
     if (isMyProfileLoading) return <CircularProgress size={30} thickness={5} sx={{ color: "loader.main", alignSelf: "center", margin: "auto" }} />;
-    if (isMyProfileError)
-      return (
-        <Typography variant="h3" sx={{ alignSelf: "center", margin: "auto" }}>
-          Error Occurred while fetching Profile. Please try again later.
-        </Typography>
-      );
-    if (!myProfileData)
-      return (
-        <Typography variant="h3" sx={{ alignSelf: "center", margin: "auto" }}>
-          Profile Not Found
-        </Typography>
-      );
-
+    if (isMyProfileError) return <FallbackError type="something_went_wrong" />;
+    if (!myProfileData && !isMyProfileError && !isMyProfileLoading) return <FallbackError message="Profile Not Found" type="data_not_found" />;
     return (
       <>
         <Box className={classes.details} sx={{ backgroundColor: `${bgColor}`, zIndex: 1 }}>
           <Box sx={{ width: "100%", background: `linear-gradient(to bottom, ${bgColor}b0  10%, ${bgColor}05  )`, position: "absolute", height: "100%", left: 0, bottom: "-100%", zIndex: -1 }} />
           <ImageCompWithLoader
-            img={(myProfileData.images && myProfileData?.images[0]?.url) || ""}
+            img={(myProfileData?.images && myProfileData?.images[0]?.url) || ""}
             alt={"user"}
             errorImage={imgDefaultArtist}
             style={{
@@ -76,7 +66,7 @@ const MyProfile = () => {
               {myProfileData?.display_name}
             </Typography>
             <Typography variant="h6" mb={"2px"}>
-              {`${myProfileData.email}  ${getFollowers(myProfileData?.followers?.total ?? 0)}`}
+              {`${myProfileData?.email}  ${getFollowers(myProfileData?.followers?.total ?? 0)}`}
             </Typography>
           </Box>
         </Box>

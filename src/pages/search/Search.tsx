@@ -7,6 +7,7 @@ import useSearchController from "./Search.controller";
 import ItemArtistAlbumsList from "../../components/ItemArtistAlbumsList";
 import ItemCategoryList from "../../components/ItemCategoryList";
 import ItemSongList from "../../components/ItemSongList";
+import FallbackError from "@components/FallbackError";
 
 const Search = () => {
   const {
@@ -21,6 +22,7 @@ const Search = () => {
     listenerGoToArtistDetails,
     searchQuery,
     isSearchDataLoading,
+    isSearchDataError,
     searchData,
     isCategoriesLoading,
     isCategoriesError,
@@ -29,22 +31,8 @@ const Search = () => {
 
   const renderCategoriesData = () => {
     if (searchQuery != "") return;
-    if (categories.length == 0 && !isCategoriesLoading) {
-      return (
-        <Typography variant="h3" my={"20px"}>
-          No Category Found
-        </Typography>
-      );
-    }
-
-    if (isCategoriesError) {
-      return (
-        <Typography variant="h3" sx={{ alignSelf: "center", margin: "auto" }}>
-          Error Occurred while fetching Category. Please try again later.
-        </Typography>
-      );
-    }
-
+    if (isCategoriesError) return <FallbackError type="something_went_wrong" />;
+    if (categories.length == 0 && !isCategoriesError && !isCategoriesLoading) return <FallbackError message="No Category Available." type="data_not_found" />;
     return (
       <>
         <Typography variant="h1" my={"20px"}>
@@ -70,17 +58,11 @@ const Search = () => {
     );
   };
   const renderSearchResultData = () => {
-    if (isSearchDataLoading) {
-      // return <CircularProgress size={30} thickness={5} sx={{ color: "loader.main", alignSelf: "center", margin: "0 auto" }} />;
-      return <SearchPageSkeleton />;
-    }
-    if (searchQuery == "" || searchData == null) return;
+    if (isSearchDataLoading) return <SearchPageSkeleton />;
+    if (searchQuery == "" || !searchData) return;
+    if (isSearchDataError) return <FallbackError type="something_went_wrong" />;
     if (searchData?.tracks?.items?.length == 0 && searchData?.artists?.items?.length == 0 && searchData?.albums?.items?.length == 0 && searchData?.playlists?.items?.length == 0)
-      return (
-        <Typography variant="h3" sx={{ alignSelf: "center", margin: "auto" }}>
-          Error Occurred while fetching Search Result. Please try again later.
-        </Typography>
-      );
+      return <FallbackError message=" No Search Result Found" type="data_not_found" />;
     return (
       <>
         {renderTracksData()}
@@ -94,7 +76,7 @@ const Search = () => {
     if (searchData?.tracks?.items?.length == 0) return;
     return (
       <>
-        <TitleSeeAll title="Songs" onSeeAllClick={listenerSeeAllTracks} />
+        <TitleSeeAll title="Songs" isSeeAllBtnVisible={searchData?.tracks?.items?.length == 10} onSeeAllClick={listenerSeeAllTracks} />
         <Grid container spacing={1} padding={"10px"} mb={"10px"}>
           {searchData?.tracks?.items?.map((track, _) => (
             <Grid item xs={12} lg={6} key={track.id}>
@@ -109,7 +91,7 @@ const Search = () => {
     if (searchData?.artists?.items?.length == 0) return;
     return (
       <>
-        <TitleSeeAll title="Artist" onSeeAllClick={listenerSeeAllArtists} />
+        <TitleSeeAll title="Artist" isSeeAllBtnVisible={searchData?.artists?.items?.length == 10} onSeeAllClick={listenerSeeAllArtists} />
         <ContainerWithoutScrollbar>
           {searchData?.artists?.items?.map((item, _) => (
             <ItemArtistAlbumsList
@@ -131,7 +113,7 @@ const Search = () => {
     if (searchData?.albums?.items?.length == 0) return;
     return (
       <>
-        <TitleSeeAll title="Album" onSeeAllClick={listenerSeeAllAlbums} />
+        <TitleSeeAll title="Album" isSeeAllBtnVisible={searchData?.albums?.items?.length == 10} onSeeAllClick={listenerSeeAllAlbums} />
         <ContainerWithoutScrollbar>
           {searchData?.albums?.items?.map((item, _) => (
             <ItemArtistAlbumsList
@@ -151,7 +133,7 @@ const Search = () => {
     if (searchData?.playlists?.items?.length == 0) return;
     return (
       <>
-        <TitleSeeAll title="Playlist" onSeeAllClick={listenerSeeAllPlaylists} />
+        <TitleSeeAll title="Playlist" isSeeAllBtnVisible={searchData?.playlists?.items?.length == 10} onSeeAllClick={listenerSeeAllPlaylists} />
         <ContainerWithoutScrollbar>
           {searchData?.playlists?.items?.map((item, _) => (
             <ItemArtistAlbumsList

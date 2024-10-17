@@ -3,7 +3,7 @@ import AlbumNewRelease from "@/pages/album/AlbumNewRelease";
 import ArtistAlbums from "@/pages/artist/ArtistAlbums";
 import ArtistProfile from "@/pages/artist/ArtistProfile";
 import RelatedArtist from "@/pages/artist/RelatedArtist";
-import Home from "@/pages/home/Home";
+
 import CategoryPlaylists from "@/pages/playlist/CategoryPlaylists";
 import PlaylistDetails from "@/pages/playlist/PlaylistDetails";
 import PopularPlaylists from "@/pages/playlist/PopularPlaylists";
@@ -13,12 +13,19 @@ import RecentPlayed from "@/pages/track/RecentPlayed";
 import MyProfile from "@/pages/user/MyProfile";
 import SeeAllMyProfile from "@/pages/user/SeeAllMyProfile";
 import UserProfile from "@/pages/user/UserProfile";
-import { RouteObject } from "react-router-dom";
+import { lazy } from "react";
+import { Link, Navigate, redirect, RouteObject } from "react-router-dom";
+
+const Home = lazy(() => import("@/pages/home/Home"));
 
 const ProtectedRoutes: RouteObject[] = [
   {
     index: true,
     element: <Home />,
+  },
+  {
+    path: "home",
+    element: <Navigate to={"/"} replace={true} />,
   },
   {
     path: "search",

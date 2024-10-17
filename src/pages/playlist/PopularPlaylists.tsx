@@ -3,22 +3,13 @@ import ItemArtistAlbumListSkeleton from "@components/skeletons/ItemArtistAlbumsL
 import { Box, Grid, Typography } from "@mui/material";
 import ItemArtistAlbumsList from "../../components/ItemArtistAlbumsList";
 import usePopularPlaylistsController from "./PopularPlaylists.controller";
+import FallbackError from "@components/FallbackError";
 
 const PopularPlaylists = () => {
   const { lastPlaylistListItemRef, listenerGoToPlaylistDetails, isPopularPlaylistsError, isPopularPlaylistsLoading, popularPlaylists } = usePopularPlaylistsController();
   const renderPlaylistList = () => {
-    if (isPopularPlaylistsError)
-      return (
-        <Typography variant="h3" sx={{ alignSelf: "center", margin: "auto" }}>
-          Error Occurred
-        </Typography>
-      );
-    if (popularPlaylists.length == 0 && !isPopularPlaylistsError && !isPopularPlaylistsLoading)
-      return (
-        <Typography variant="h3" sx={{ alignSelf: "center", margin: "auto" }}>
-          Playlist Not Found
-        </Typography>
-      );
+    if (isPopularPlaylistsError) return <FallbackError type="something_went_wrong" />;
+    if (popularPlaylists.length == 0 && !isPopularPlaylistsError && !isPopularPlaylistsLoading) return <FallbackError message=" No Playlist Available" type="data_not_found" />;
     return (
       <>
         <Typography variant="h3" my={"20px"}>
