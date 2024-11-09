@@ -25,6 +25,8 @@ const responseHandler = (response: any) => {
 };
 
 const responseErrorHandler = (error: any) => {
+  console.log(error);
+
   if (axios.isCancel(error)) {
     console.log("responseErrorHandler error " + error);
     return Promise.reject(error);
@@ -38,7 +40,14 @@ const responseErrorHandler = (error: any) => {
     if (error.response.status === 401) {
       localStorage.clear();
       showCustomToast("Session Expired", "info");
-      window.location.href = `/auth?message=${encodeURIComponent("Session timeout")}&&path=${JSON.stringify(window.location)}`;
+      window.location.href = "/auth";
+      // window.location.href = `/auth?message=${encodeURIComponent("Session timeout")}&&path=${JSON.stringify(window.location)}`;
+    } else if (error.code === "ERR_BAD_REQUEST" && error.response.status === 403) {
+      localStorage.clear();
+      showCustomToast("Unautherized contact to Admin", "error");
+      window.location.href = "/auth";
+      // window.history.replaceState
+      // window.location.href = `/auth?message=${encodeURIComponent("Session timeout")}&&path=${JSON.stringify(window.location)}`;
     } else if (error.response?.data?.Message) {
       error.code = "RES_ERROR";
     }

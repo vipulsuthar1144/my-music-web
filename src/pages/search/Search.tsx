@@ -59,8 +59,8 @@ const Search = () => {
   };
   const renderSearchResultData = () => {
     if (isSearchDataLoading) return <SearchPageSkeleton />;
-    if (searchQuery == "" || !searchData) return;
     if (isSearchDataError) return <FallbackError type="something_went_wrong" />;
+    if (searchQuery == "" || !searchData) return;
     if (searchData?.tracks?.items?.length == 0 && searchData?.artists?.items?.length == 0 && searchData?.albums?.items?.length == 0 && searchData?.playlists?.items?.length == 0)
       return <FallbackError message=" No Search Result Found" type="data_not_found" />;
     return (

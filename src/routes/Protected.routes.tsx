@@ -3,6 +3,7 @@ import AlbumNewRelease from "@/pages/album/AlbumNewRelease";
 import ArtistAlbums from "@/pages/artist/ArtistAlbums";
 import ArtistProfile from "@/pages/artist/ArtistProfile";
 import RelatedArtist from "@/pages/artist/RelatedArtist";
+import CurrentRoute from "@/pages/dummy/CurrentRoute";
 import Home from "@/pages/home/Home";
 
 import CategoryPlaylists from "@/pages/playlist/CategoryPlaylists";
@@ -26,6 +27,10 @@ const ProtectedRoutes: RouteObject[] = [
   {
     path: "home",
     element: <Navigate to={"/"} replace={true} />,
+  },
+  {
+    path: "current",
+    element: <CurrentRoute />,
   },
   {
     path: "search",

@@ -8,6 +8,7 @@ import { makeStyles } from "@mui/styles";
 import { useNavigate } from "react-router-dom";
 import ItemSongList from "../../components/ItemSongList";
 import useHomeController from "./Home.controller";
+import FallbackError from "@components/FallbackError";
 
 const Home: React.FC = () => {
   const classes = useStyle();
@@ -230,22 +231,28 @@ const Home: React.FC = () => {
       </Box>
     );
   };
-  return (
-    <RootContainer>
-      {renderMadeForYouList()}
-      <Typography variant="h3" my={"10px"}>
-        Tranding Songs
-      </Typography>
-      <ContainerWithoutScrollbar sx={{ scrollSnapType: "x mandatory" }} gap={"10px"}>
-        {renderHindiTracks()}
-        {renderPunjabiTracks()}
-        {renderEnglishTracks()}
-      </ContainerWithoutScrollbar>
-      {renderRecentPlayedTrackList()}
-      {renderPopularPlaylistsList()}
-      {renderNewReleaseAlbumsList()}
-    </RootContainer>
-  );
+
+  const renderUI = () => {
+    if (isDailyMixListError || isEnglishTrackListError || isHindiTrackListError || isPunjabiTrackListError || isRecentPlayedTrackListError || isPopularPlaylistsError || isNewReleaseAlbumListError)
+      return <FallbackError type="something_went_wrong" />;
+    return (
+      <>
+        {renderMadeForYouList()}
+        <Typography variant="h3" my={"10px"}>
+          Tranding Songs
+        </Typography>
+        <ContainerWithoutScrollbar sx={{ scrollSnapType: "x mandatory" }} gap={"10px"}>
+          {renderHindiTracks()}
+          {renderPunjabiTracks()}
+          {renderEnglishTracks()}
+        </ContainerWithoutScrollbar>
+        {renderRecentPlayedTrackList()}
+        {renderPopularPlaylistsList()}
+        {renderNewReleaseAlbumsList()}
+      </>
+    );
+  };
+  return <RootContainer style={{ padding: 0 }}>{renderUI()}</RootContainer>;
 };
 
 export default Home;

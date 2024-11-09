@@ -2,7 +2,7 @@ import useLocalStorage from "@/config/hooks/useLocalStorage.hooks";
 import { MGradientsDarkTheme } from "@/theme/utils/mGredient";
 import { Box } from "@mui/material";
 import { LocalStorageKeys } from "@utils/constants";
-import { useEffect } from "react";
+import { useEffect, useLayoutEffect } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 
 const AuthLayout = () => {
@@ -10,7 +10,7 @@ const AuthLayout = () => {
   const [accessToken, _] = useLocalStorage(LocalStorageKeys.ACCESS_TOKEN, "");
   const [isLoggedIn, setIsLoggedIn] = useLocalStorage(LocalStorageKeys.IS_LOGGED_IN, false);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (accessToken) {
       setIsLoggedIn(true);
       navigate("/", { replace: true });

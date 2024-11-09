@@ -110,7 +110,8 @@ const useStyles = makeStyles(() => ({
   },
   toolBar: {
     display: "flex",
-    justifyContent: "space-between",
+    alignItems: "center",
+    justifyContent: "center",
     position: "relative",
   },
 }));

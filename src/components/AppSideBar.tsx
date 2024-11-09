@@ -33,7 +33,7 @@ const AppSideBar = () => {
     { id: "/user/me", name: "My Profile", icon: <AccountCircleOutlined />, filledIcon: <AccountCircle /> },
   ];
 
-  const handleMenuItemClick = (to: string) => navigate(to);
+  const handleMenuItemClick = (to: string) => navigate(to, { replace: false });
 
   return (
     <>

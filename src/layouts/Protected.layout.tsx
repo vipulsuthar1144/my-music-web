@@ -1,14 +1,13 @@
 import useLocalStorage from "@/config/hooks/useLocalStorage.hooks";
+import { sidebarWidth } from "@/theme/utils/globalTransitions";
 import { MGradientsDarkTheme } from "@/theme/utils/mGredient";
 import AppFooter from "@components/AppFooter";
 import AppSideBar from "@components/AppSideBar";
 import AppTopBar from "@components/AppTopBar";
-import TopLoader from "@components/TopLoader";
 import { Box, styled, Theme, useTheme } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { LocalStorageKeys, useIsSmallScreen } from "@utils/constants";
-import { sidebarWidth } from "@/theme/utils/globalTransitions";
-import { useEffect, useRef } from "react";
+import { useEffect, useLayoutEffect, useRef } from "react";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 
 const ProtectedLayout = () => {
@@ -26,7 +25,7 @@ const ProtectedLayout = () => {
     containerRef.current && containerRef.current.scrollTo(0, 0);
   }, [location.pathname]);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (!accessToken) {
       setIsLoggedIn(false);
       navigate("/auth", { replace: true });
@@ -35,9 +34,11 @@ const ProtectedLayout = () => {
     setIsLoggedIn(true);
   }, [isLoggedIn]);
 
+  console.log("protected routes");
+
   return (
     <Box className={classes.root}>
-      <TopLoader />
+      {/* <TopLoader /> */}
 
       {isLoggedIn && (
         <>

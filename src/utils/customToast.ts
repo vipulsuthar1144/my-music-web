@@ -4,14 +4,14 @@ export type ToastTypes = "success" | "warning" | "error" | "info";
 
 export const showCustomToast = (message: string, toastType: ToastTypes) => {
   const toastOptions: ToastOptions = {
-    position: "bottom-center",
-    autoClose: 1000,
+    position: "top-center",
+    autoClose: 1500,
     toastId: message,
     isLoading: false,
-    hideProgressBar: true,
+    // hideProgressBar: true,
     closeButton: false,
-    draggable: true,
-    progress: undefined,
+    // draggable: true,
+    // progress: undefined,
     pauseOnHover: true,
     closeOnClick: true,
   };

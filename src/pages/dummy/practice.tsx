@@ -1,4 +1,5 @@
-import { useEffect, useRef, useState } from "react";
+import { Box } from "@mui/material";
+import React, { useEffect, useRef, useState } from "react";
 
 const ListItem = ({ item }: any) => {
   const ref = useRef(null);
@@ -35,7 +36,12 @@ const MyList = ({ items }: any) => {
   );
 };
 
-export default function Practice() {
-  const items = Array.from({ length: 100 }, (_, i) => `Item ${i + 1}`);
-  return <MyList items={items} />;
-}
+const Practice = React.memo(() => {
+  // useEffect(() => {
+  //   console.log("this is practice route");
+  // });
+  // const items = Array.from({ length: 10 }, (_, i) => `Item ${i + 1}`);
+  return <Box>child component</Box>;
+});
+
+export default Practice;

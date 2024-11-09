@@ -27,34 +27,27 @@ const useHomeController = () => {
   } = useAppSelector((state) => state.home);
 
   useEffect(() => {
-    dailyMixList.length == 0 && dispatch(getTop2DailyMixPlaylist());
-    handleTrendingTracksAPIcall();
-    dispatch(getRecentPlayedTracks({ limit: 10 }));
-    popularPlaylists.length == 0 && dispatch(getPopularPlaylists({ limit: 10, offset: 0 }));
-    newReleaseAlbumList.length == 0 && dispatch(getNewReleaseAlbums({ limit: 10, offset: 0 }));
+    handleAPIcall();
   }, [dispatch]);
 
-  const handleTrendingTracksAPIcall = () => {
+  const handleAPIcall = () => {
     try {
       const promises = [];
-
-      if (hindiTrackList.length === 0) {
-        promises.push(dispatch(getTop5TrendingHindiTracks()));
-      }
-      if (punjabiTrackList.length === 0) {
-        promises.push(dispatch(getTop5TrendingPunjabiTracks()));
-      }
-      if (englishTrackList.length === 0) {
-        promises.push(dispatch(getTop5TrendingEnglishTracks()));
-      }
+      dailyMixList.length == 0 && promises.push(dispatch(getTop2DailyMixPlaylist()));
+      hindiTrackList.length === 0 && promises.push(dispatch(getTop5TrendingHindiTracks()));
+      punjabiTrackList.length === 0 && promises.push(dispatch(getTop5TrendingPunjabiTracks()));
+      englishTrackList.length === 0 && promises.push(dispatch(getTop5TrendingEnglishTracks()));
+      popularPlaylists.length == 0 && promises.push(dispatch(getPopularPlaylists({ limit: 10, offset: 0 })));
+      newReleaseAlbumList.length == 0 && promises.push(dispatch(getNewReleaseAlbums({ limit: 10, offset: 0 })));
+      promises.push(dispatch(getRecentPlayedTracks({ limit: 10 })));
 
       if (promises.length > 0) {
         Promise.all(promises)
           .then((results) => {
-            console.log("All track lists fetched successfully", results);
+            console.log("Home API's fatch successfully", results);
           })
           .catch((error) => {
-            console.error("Error fetching track lists:", error);
+            console.error("Error Home API's fatch successfully:", error);
           });
       }
     } catch (error) {
