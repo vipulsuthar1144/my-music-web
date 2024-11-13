@@ -14,6 +14,8 @@ import FallbackError from "@components/FallbackError";
 
 const MyProfile = () => {
   const classes = useStyles();
+  console.log("MY Profile Page");
+
   const {
     listenerSeeAllTopTracks,
     listenerSeeAllTopArtists,

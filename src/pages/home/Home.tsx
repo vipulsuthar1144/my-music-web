@@ -40,6 +40,7 @@ const Home: React.FC = () => {
     dailyMixList,
   } = useHomeController();
   const navigate = useNavigate();
+  console.log("HOME PAGE");
 
   const renderMadeForYouList = () => {
     if (isDailyMixListLoading) return renderSkeletons();

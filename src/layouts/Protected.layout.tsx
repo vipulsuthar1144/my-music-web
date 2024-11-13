@@ -1,23 +1,21 @@
 import useLocalStorage from "@/config/hooks/useLocalStorage.hooks";
 import { sidebarWidth } from "@/theme/utils/globalTransitions";
 import { MGradientsDarkTheme } from "@/theme/utils/mGredient";
+import AppBottomNavigation from "@components/AppBottomNavigation";
 import AppFooter from "@components/AppFooter";
 import AppSideBar from "@components/AppSideBar";
 import AppTopBar from "@components/AppTopBar";
 import { Box, styled, Theme, useTheme } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { LocalStorageKeys, useIsSmallScreen } from "@utils/constants";
-import { useEffect, useLayoutEffect, useRef } from "react";
-import { Outlet, useLocation, useNavigate } from "react-router-dom";
+import { useEffect, useRef } from "react";
+import { Navigate, Outlet, useLocation } from "react-router-dom";
 
 const ProtectedLayout = () => {
-  const navigate = useNavigate();
   const theme = useTheme();
   const isSmallScreen = useIsSmallScreen(theme);
   const classes = useStyles();
-
   const [accessToken, _] = useLocalStorage(LocalStorageKeys.ACCESS_TOKEN, "");
-  const [isLoggedIn, setIsLoggedIn] = useLocalStorage(LocalStorageKeys.IS_LOGGED_IN, false);
   const location = useLocation();
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -25,40 +23,29 @@ const ProtectedLayout = () => {
     containerRef.current && containerRef.current.scrollTo(0, 0);
   }, [location.pathname]);
 
-  useLayoutEffect(() => {
-    if (!accessToken) {
-      setIsLoggedIn(false);
-      navigate("/auth", { replace: true });
-      return;
-    }
-    setIsLoggedIn(true);
-  }, [isLoggedIn]);
-
-  console.log("protected routes");
+  if (!accessToken) {
+    return <Navigate to="/auth" replace={true} />;
+  }
 
   return (
     <Box className={classes.root}>
-      {/* <TopLoader /> */}
+      {/* {!isSmallScreen && <TrackPlayer />} */}
+      {!isSmallScreen && <AppSideBar />}
+      {isSmallScreen && <AppBottomNavigation />}
 
-      {isLoggedIn && (
-        <>
-          {/* {!isSmallScreen && <TrackPlayer />} */}
-          {!isSmallScreen && <AppSideBar />}
-          <CustomScrollBox
-            ref={containerRef}
-            ml={isSmallScreen ? 0 : sidebarWidth}
-            sx={{
-              "::-webkit-scrollbar": {
-                width: isSmallScreen ? "0px" : "5px",
-              },
-            }}
-          >
-            <AppTopBar />
-            <Outlet />
-            <AppFooter />
-          </CustomScrollBox>
-        </>
-      )}
+      <CustomScrollBox
+        ref={containerRef}
+        ml={isSmallScreen ? 0 : sidebarWidth}
+        sx={{
+          "::-webkit-scrollbar": {
+            width: isSmallScreen ? "0px" : "5px",
+          },
+        }}
+      >
+        {!isSmallScreen && <AppTopBar />}
+        <Outlet />
+        <AppFooter />
+      </CustomScrollBox>
     </Box>
   );
 };
@@ -76,6 +63,7 @@ const useStyles = makeStyles((_: Theme) => ({
 
 export const CustomScrollBox = styled(Box)(({ theme }) => ({
   width: "100%",
+  // flex: 1,
   maxWidth: "1800px",
   // overflow: "hidden",
   overflow: "hidden  auto",

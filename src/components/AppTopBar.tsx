@@ -1,56 +1,17 @@
 import { mColors } from "@/theme/utils/mColors";
 import { StyledBackIcon, StyledForwardIcon, StyledNotificationIconFilled, StyledSettingIconFilled, StyledThemeModeIconFilled } from "@assets/SVG";
 import { LoaderButton } from "@components/design/Button";
-import EditText from "@components/design/EditText";
 import { LogoutRounded } from "@mui/icons-material";
 import { AppBar, Stack, Toolbar } from "@mui/material";
 import { makeStyles } from "@mui/styles";
-import { ChangeEvent, useEffect, useRef, useState } from "react";
-import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
+import { showCustomToast } from "@utils/customToast";
+import { useNavigate } from "react-router-dom";
+import SearchBar from "./SearchBar";
 
 const AppTopBar = () => {
-  const [searchParams, setSearchParams] = useSearchParams();
-  const [searchedQuery, setSearchedQuery] = useState(searchParams.get("q") || "");
-  const searchTextFieldRef = useRef<HTMLInputElement>(null);
-  const navigate = useNavigate();
-  const location = useLocation();
   const classes = useStyles();
+  const navigate = useNavigate();
 
-  useEffect(() => {
-    listenerRemoveFocus();
-    if (location.pathname != "/search") {
-      setSearchedQuery("");
-      setSearchParams({});
-    } else {
-      setSearchedQuery(searchParams.get("q") || "");
-    }
-    return () => {
-      listenerRemoveFocus();
-    };
-  }, [location.pathname, searchParams]);
-
-  const listenerOnTextChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const { value } = e.target;
-    if (value.length <= 30) {
-      setSearchedQuery(value);
-      value.trim() == "" ? setSearchParams({}) : setSearchParams({ q: value.trim() });
-    }
-  };
-
-  const listenerOnFocus = () => {
-    if (location.pathname != "/search") {
-      navigate("/search");
-    }
-  };
-
-  const listenerRemoveFocus = () => {
-    if (searchTextFieldRef.current) searchTextFieldRef.current?.blur();
-  };
-
-  const listenerOnCrossBtnClick = () => {
-    setSearchParams({});
-    setSearchedQuery("");
-  };
   return (
     <AppBar position="sticky" sx={{ backgroundColor: mColors.EbonyBlack, backgroundImage: "none", boxShadow: "none", zIndex: 10 }} className={classes.appbar}>
       <Toolbar disableGutters sx={{ paddingX: 1 }} className={classes.toolBar}>
@@ -65,19 +26,13 @@ const AppTopBar = () => {
               navigate(1);
             }}
           />
-          <EditText
-            text={searchedQuery}
-            ref={searchTextFieldRef}
-            onFocus={listenerOnFocus}
-            onTextChange={listenerOnTextChange}
-            onCrossBtnClick={listenerOnCrossBtnClick}
-            hasCrossIcon={searchedQuery ? true : false}
-          />
+          <SearchBar />
         </Stack>
         <Stack direction={"row"} justifyContent={"flex-end"} alignItems={"center"} width={"50%"}>
           <StyledNotificationIconFilled />
           <StyledThemeModeIconFilled />
-          <StyledSettingIconFilled />
+          <StyledSettingIconFilled onClick={() => showCustomToast("clicked", "info")} />
+          {/* <StyledSettingIconFilled onClick={showToast} /> */}
           <LoaderButton
             startIcon={<LogoutRounded />}
             label={"LogOut"}

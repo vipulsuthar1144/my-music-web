@@ -2,14 +2,19 @@ import { TitleSeeAll } from "@components/design/Image";
 import ItemCategoryListSkeleton from "@components/skeletons/ItemCategoryList.skeleton";
 import SearchPageSkeleton from "@components/skeletons/SearchPage.skeleton";
 import { ContainerWithoutScrollbar, RootContainer } from "@components/design/styledComponents";
-import { Box, Grid, Typography } from "@mui/material";
+import { Box, Grid, Typography, useTheme } from "@mui/material";
 import useSearchController from "./Search.controller";
 import ItemArtistAlbumsList from "../../components/ItemArtistAlbumsList";
 import ItemCategoryList from "../../components/ItemCategoryList";
 import ItemSongList from "../../components/ItemSongList";
 import FallbackError from "@components/FallbackError";
+import { useIsSmallScreen } from "@utils/constants";
+import SearchBar from "@components/SearchBar";
+import { mColors } from "@/theme/utils/mColors";
 
 const Search = () => {
+  const theme = useTheme();
+  const isSmallScreen = useIsSmallScreen(theme);
   const {
     listenerGoToAlbumDetails,
     listenerGoToPlaylistDetails,
@@ -35,10 +40,10 @@ const Search = () => {
     if (categories.length == 0 && !isCategoriesError && !isCategoriesLoading) return <FallbackError message="No Category Available." type="data_not_found" />;
     return (
       <>
-        <Typography variant="h1" my={"20px"}>
+        <Typography variant="h3" m={"0 0 10px 10px"}>
           Browse All
         </Typography>
-        <Grid container spacing={2}>
+        <Grid container spacing={2} padding={"10px"}>
           {categories.map((item, index) => (
             <Grid item xs={12} sm={6} md={4} lg={3} key={item.id}>
               <Box key={item.id} component={"div"} ref={index === categories.length - 1 ? lastCategoryItemRef : null}>
@@ -150,6 +155,11 @@ const Search = () => {
   };
   return (
     <>
+      {isSmallScreen && (
+        <Box sx={{ position: "sticky", top: 0, left: 0, zIndex: 10, padding: "10px", backgroundColor: mColors.EbonyBlack }}>
+          <SearchBar isFullWidth />
+        </Box>
+      )}
       <RootContainer style={{ padding: "10px 0px" }}>
         {renderCategoriesData()}
         {renderSearchResultData()}

@@ -1,5 +1,5 @@
 import { CloseRounded, SearchRounded } from "@mui/icons-material";
-import { InputAdornment, TextField } from "@mui/material";
+import { InputAdornment, SxProps, TextField, Theme } from "@mui/material";
 import { forwardRef } from "react";
 
 export interface IGlobalEditTextProps {
@@ -8,9 +8,10 @@ export interface IGlobalEditTextProps {
   onFocus?: () => void;
   onCrossBtnClick?: (e: any) => void;
   hasCrossIcon?: boolean;
+  sx?: SxProps<Theme>;
 }
 
-const EditText = forwardRef<HTMLInputElement, IGlobalEditTextProps>(({ onFocus, onTextChange, text, onCrossBtnClick, hasCrossIcon = false }, ref) => {
+const EditText = forwardRef<HTMLInputElement, IGlobalEditTextProps>(({ sx, onFocus, onTextChange, text, onCrossBtnClick, hasCrossIcon = false }, ref) => {
   return (
     <TextField
       ref={ref}
@@ -49,7 +50,6 @@ const EditText = forwardRef<HTMLInputElement, IGlobalEditTextProps>(({ onFocus, 
       sx={{
         width: "300px",
         height: "40px",
-        marginLeft: 1.5,
         "& .MuiOutlinedInput-root": {
           borderRadius: "8px",
           height: "100%",
@@ -74,6 +74,7 @@ const EditText = forwardRef<HTMLInputElement, IGlobalEditTextProps>(({ onFocus, 
           height: "100%",
           backgroundColor: "secondary.main",
         },
+        ...sx,
       }}
     />
   );

@@ -1,6 +1,4 @@
-import Callback from "@/pages/auth/Callback";
 import FallbackError from "@components/FallbackError";
-import FallbackErrorBoundary from "@components/FallbackErrorBoundary";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import AuthLayout from "../layouts/Auth.layout";
 import ProtectedLayout from "../layouts/Protected.layout";
@@ -11,28 +9,38 @@ const AppRoutes = () => {
   const rootRoutes = createBrowserRouter(
     [
       {
-        path: "/auth/",
+        path: "/auth",
         element: <AuthLayout />,
-        errorElement: <FallbackErrorBoundary />,
         children: AuthRoutes,
+        errorElement: <FallbackError type="error_boundary" />,
       },
       {
-        path: "/callback",
-        element: <Callback />,
-        errorElement: <FallbackErrorBoundary />,
+        path: "/access_denied",
+        element: <FallbackError type="access_denied" />,
+        errorElement: <FallbackError type="error_boundary" />,
       },
       {
         path: "/",
         element: <ProtectedLayout />,
-        errorElement: <FallbackErrorBoundary />,
         children: ProtectedRoutes,
+        errorElement: <FallbackError type="error_boundary" />,
       },
       {
         path: "*",
         element: <FallbackError type="page_not_found" />,
       },
     ],
-    { basename: "/" }
+    {
+      basename: "/",
+      future: {
+        // v7_startTransition: true,
+        v7_relativeSplatPath: true,
+        v7_fetcherPersist: true,
+        v7_normalizeFormMethod: true,
+        v7_partialHydration: true,
+        v7_skipActionErrorRevalidation: true,
+      },
+    }
   );
 
   return <RouterProvider router={rootRoutes} />;

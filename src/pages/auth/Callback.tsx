@@ -8,7 +8,6 @@ import { useNavigate } from "react-router-dom";
 
 const Callback = () => {
   const [accessToken, setAccessToken] = useLocalStorage(LocalStorageKeys.ACCESS_TOKEN, "");
-  const [__, setIsLoggedIn] = useLocalStorage(LocalStorageKeys.IS_LOGGED_IN, false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -19,12 +18,10 @@ const Callback = () => {
     const token = getAccessTokenFromURL();
     window.history.replaceState(null, "", window.location.pathname);
     if (token) {
-      setIsLoggedIn(true);
       setAccessToken(token);
       navigate("/", { replace: true });
       return;
     } else {
-      setIsLoggedIn(false);
       navigate("/auth", { replace: true });
     }
   }, []);

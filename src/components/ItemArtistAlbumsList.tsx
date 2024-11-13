@@ -3,11 +3,12 @@ import { MGradientsDarkTheme } from "@/theme/utils/mGredient";
 import { imgDefaultArtist, imgDefaultSong, imgPlayBtnGreen } from "@assets/images";
 import ImageComp, { ImageCompWithLoader } from "@components/design/Image";
 import { TwoLineTypo } from "@components/design/styledComponents";
-import { Box, Card, CardActionArea, CardContent } from "@mui/material";
+import { Box, Card, CardActionArea, CardContent, useTheme } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { globleEaseInOutTransitionTime } from "@/theme/utils/globalTransitions";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useIsSmallScreen } from "@utils/constants";
 
 type ItemArtistAlbumsListProps = {
   isArtist?: boolean;
@@ -21,6 +22,8 @@ type ItemArtistAlbumsListProps = {
 const ItemArtistAlbumsList: React.FC<ItemArtistAlbumsListProps> = ({ title, subtitleArr, subtitle, img, isArtist = false, onClick }) => {
   const [isHovered, setIsHovered] = useState(false);
   const classes = useStyle();
+  const theme = useTheme();
+  const isSmallScreen = useIsSmallScreen(theme);
   const navigate = useNavigate();
   const listenerGoToArtistDetails = (artistId?: string) => {
     artistId && navigate(`/artist/${artistId}`);
@@ -29,6 +32,8 @@ const ItemArtistAlbumsList: React.FC<ItemArtistAlbumsListProps> = ({ title, subt
     <Card
       className={classes.root}
       sx={{
+        flexShrink: 0,
+        flexBasis: isSmallScreen ? "160px" : "200px",
         backgroundColor: "transparent",
         backgroundImage: "none",
         boxShadow: "none",
@@ -108,8 +113,6 @@ export default ItemArtistAlbumsList;
 
 const useStyle = makeStyles({
   root: {
-    flexShrink: 0,
-    flexBasis: "195px",
     // width: "100%",
     height: "auto",
     overflow: "hidden",

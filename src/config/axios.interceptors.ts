@@ -44,10 +44,8 @@ const responseErrorHandler = (error: any) => {
       // window.location.href = `/auth?message=${encodeURIComponent("Session timeout")}&&path=${JSON.stringify(window.location)}`;
     } else if (error.code === "ERR_BAD_REQUEST" && error.response.status === 403) {
       localStorage.clear();
-      showCustomToast("Unautherized contact to Admin", "error");
-      window.location.href = "/auth";
-      // window.history.replaceState
-      // window.location.href = `/auth?message=${encodeURIComponent("Session timeout")}&&path=${JSON.stringify(window.location)}`;
+      // showCustomToast("Unautherized contact to Admin", "error");
+      window.location.href = "/access_denied";
     } else if (error.response?.data?.Message) {
       error.code = "RES_ERROR";
     }

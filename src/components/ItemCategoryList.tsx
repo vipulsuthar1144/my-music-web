@@ -41,7 +41,7 @@ const ItemCategoryList = ({ category, onClick }: ItemCategoryListProps) => {
         }}
         sx={{ height: "100%", display: "flex", justifyContent: "flex-start", alignItems: "flex-start" }}
       >
-        <Typography variant="h3" position={"relative"} style={{ fontSize: "clamp(0.6em,5em, 1.7em)", zIndex: 2 }} m={"20px"}>
+        <Typography variant="h4" position={"relative"} style={{ zIndex: 2 }} m={"20px"}>
           {category.name}
         </Typography>
         <ImageCompWithLoader
