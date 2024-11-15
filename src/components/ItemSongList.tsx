@@ -1,13 +1,13 @@
 import { IAlbumSchema } from "@/schemas/album.schema";
 import { IArtistSchema } from "@/schemas/artist.schema";
+import { globleEaseInOutTransitionTime } from "@/theme/utils/globalTransitions";
 import { MGradientsDarkTheme } from "@/theme/utils/mGredient";
 import { ImageCompWithLoader } from "@components/design/Image";
 import { SingleLineTypo } from "@components/design/styledComponents";
 import { AccessTimeRounded } from "@mui/icons-material";
-import { Box, Card, CardActionArea, CardContent, Theme, Typography } from "@mui/material";
+import { Box, Card, CardActionArea, Theme, Typography } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { msToTimeConvert } from "@utils/genaralFunctions";
-import { globleEaseInOutTransitionTime } from "@/theme/utils/globalTransitions";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -50,7 +50,7 @@ const ItemSongList = ({ title, track_no = 0, img, subtitleArr, isAlbumArr = fals
         }}
       >
         {track_no > 0 && (
-          <Typography variant="subtitle1" color="text.primary" mr={"2px"} width={"20px"}>
+          <Typography variant="subtitle1" minWidth={"25px"} color="text.primary" mr={"2px"}>
             {track_no}
           </Typography>
         )}
@@ -60,44 +60,44 @@ const ItemSongList = ({ title, track_no = 0, img, subtitleArr, isAlbumArr = fals
           alt={"track"}
           style={{
             width: "50px",
+            minWidth: "50px",
             aspectRatio: 1,
+            // flex: 1,
             borderRadius: "5px",
             boxShadow: "0px 10px 10px 2px rgba(0,0,0,0.2)",
           }}
         />
-        <CardContent sx={{ padding: 0, m: 0, flex: 1, width: "calc(100% - 80px)", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-          <Box component={"div"} sx={{ flex: 1, maxWidth: "70%" }}>
-            <SingleLineTypo variant="subtitle1" color="text.primary" mb={"2px"}>
-              {title}
-            </SingleLineTypo>
-            <SingleLineTypo variant="subtitle2" color="text.secondary">
-              {subtitle}
-              {subtitleArr?.map((item, index) => (
-                <React.Fragment key={item.id}>
-                  <Box
-                    component={"span"}
-                    onMouseDown={(event) => event.stopPropagation()}
-                    onClick={(event) => {
-                      event.stopPropagation();
-                      isAlbumArr ? listenerGoToAlbumDetails(item.id) : listenerGoToArtistDetails(item.id);
-                    }}
-                    sx={{ cursor: "pointer", "&:hover": { textDecoration: "underline", color: "text.primary" } }}
-                  >
-                    {/* {subtitleArr.length - 1 == index ? `${item.name}` : `${item.name} • `} */}
-                    {item.name}
-                  </Box>
-                  {subtitleArr.length - 1 == index ? `` : ` • `}
-                </React.Fragment>
-              ))}
-            </SingleLineTypo>
-          </Box>
-          <Box sx={{ display: "flex", gap: "10px", alignItems: "center" }}>
-            <AccessTimeRounded sx={{ fontSize: "20px", color: "text.secondary" }} />
-            <Typography variant="body2" color="text.secondary">
-              {msToTimeConvert(trackDuration || 0)}
-            </Typography>
-          </Box>
-        </CardContent>
+        <Box component={"div"} sx={{ flex: 1, overflow: "hidden" }}>
+          <SingleLineTypo variant="subtitle1" color="text.primary" mb={"2px"}>
+            {title}
+          </SingleLineTypo>
+          <SingleLineTypo variant="subtitle2" color="text.secondary">
+            {subtitle}
+            {subtitleArr?.map((item, index) => (
+              <React.Fragment key={item.id}>
+                <Box
+                  component={"span"}
+                  onMouseDown={(event) => event.stopPropagation()}
+                  onClick={(event) => {
+                    event.stopPropagation();
+                    isAlbumArr ? listenerGoToAlbumDetails(item.id) : listenerGoToArtistDetails(item.id);
+                  }}
+                  sx={{ cursor: "pointer", "&:hover": { textDecoration: "underline", color: "text.primary" } }}
+                >
+                  {/* {subtitleArr.length - 1 == index ? `${item.name}` : `${item.name} • `} */}
+                  {item.name}
+                </Box>
+                {subtitleArr.length - 1 == index ? `` : ` • `}
+              </React.Fragment>
+            ))}
+          </SingleLineTypo>
+        </Box>
+        <Box sx={{ display: "flex", gap: "10px", alignItems: "flex-end" }}>
+          <AccessTimeRounded sx={{ fontSize: "20px", color: "text.secondary" }} />
+          <Typography variant="body2" color="text.secondary">
+            {msToTimeConvert(trackDuration || 0)}
+          </Typography>
+        </Box>
       </CardActionArea>
     </Card>
   );

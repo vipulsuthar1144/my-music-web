@@ -15,9 +15,10 @@ export const ContainerWithoutScrollbar = styled(Box)({
   // minHeight: "150px",
   display: "flex",
   overflowX: "auto",
-  marginBottom: "10px",
+  // marginBottom: "10px",
   scrollbarWidth: "none",
   zIndex: 1,
+  // backgroundColor: "red",
   "&::-webkit-scrollbar": {
     display: "none",
   },

@@ -1,7 +1,7 @@
 import useLocalStorage from "@/config/hooks/useLocalStorage.hooks";
 import { MGradientsDarkTheme } from "@/theme/utils/mGredient";
+import AppLoader from "@components/AppLoader";
 import { RootContainer } from "@components/design/styledComponents";
-import { CircularProgress } from "@mui/material";
 import { LocalStorageKeys } from "@utils/constants";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
@@ -41,7 +41,7 @@ const Callback = () => {
         background: MGradientsDarkTheme.backroundBlue,
       }}
     >
-      <CircularProgress size={30} thickness={5} sx={{ color: "loader.main", alignSelf: "center", margin: "auto" }} />
+      <AppLoader />
     </RootContainer>
   );
 };

@@ -1,6 +1,6 @@
 import { IArtistSchema } from "@/schemas/artist.schema";
 import { MGradientsDarkTheme } from "@/theme/utils/mGredient";
-import { imgDefaultArtist, imgDefaultSong, imgPlayBtnGreen } from "@assets/images";
+import { imgDefaultArtist, imgDefaultSong, imgPlay } from "@assets/images";
 import ImageComp, { ImageCompWithLoader } from "@components/design/Image";
 import { TwoLineTypo } from "@components/design/styledComponents";
 import { Box, Card, CardActionArea, CardContent, useTheme } from "@mui/material";
@@ -63,14 +63,14 @@ const ItemArtistAlbumsList: React.FC<ItemArtistAlbumsListProps> = ({ title, subt
             }}
           />
           <ImageComp
-            img={imgPlayBtnGreen}
+            img={imgPlay}
             alt="Spotify"
             style={{
-              width: "60px",
-              aspectRatio: 1.06,
+              width: "45px",
+              aspectRatio: 1,
               position: "absolute",
-              bottom: isHovered ? 0 : -20,
-              right: 0,
+              bottom: isHovered ? 10 : -20,
+              right: 10,
               transition: `opacity ${globleEaseInOutTransitionTime}, transform ${globleEaseInOutTransitionTime},bottom ${globleEaseInOutTransitionTime}`,
               opacity: isHovered ? 1 : 0,
               // "&:hover": {

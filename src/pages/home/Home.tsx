@@ -47,7 +47,7 @@ const Home: React.FC = () => {
     if ((dailyMixList.length == 0 && !isDailyMixListLoading && !isDailyMixListError) || isDailyMixListError) return;
     return (
       <>
-        <Typography variant="h3" my={"10px"}>
+        <Typography variant="h3" ml={"10px"}>
           Made For You
         </Typography>
         <ContainerWithoutScrollbar>
@@ -146,7 +146,7 @@ const Home: React.FC = () => {
     if ((recentPlayedTrackList.length == 0 && !isRecentPlayedTrackListLoading && !isRecentPlayedTrackListError) || isRecentPlayedTrackListError) return;
     return (
       <>
-        <Typography variant="h3" my={"10px"}>
+        <Typography variant="h3" ml={"10px"}>
           Recent Played
         </Typography>
         {/* <TitleSeeAll title="Recent Played" /> */}
@@ -169,7 +169,7 @@ const Home: React.FC = () => {
     if ((popularPlaylists.length == 0 && !isPopularPlaylistsLoading && !isPopularPlaylistsError) || isPopularPlaylistsError) return;
     return (
       <>
-        <TitleSeeAll title="More of what you like" isSeeAllBtnVisible={popularPlaylists.length == 10} onSeeAllClick={listenerSeeAllPopularPlaylist} />
+        <TitleSeeAll title="More of what you like" style={{ paddingLeft: "10px" }} isSeeAllBtnVisible={popularPlaylists.length == 10} onSeeAllClick={listenerSeeAllPopularPlaylist} />
         <ContainerWithoutScrollbar>
           {popularPlaylists.map((item) => (
             <ItemArtistAlbumsList
@@ -190,7 +190,7 @@ const Home: React.FC = () => {
     if ((newReleaseAlbumList.length == 0 && !isNewReleaseAlbumListLoading && !isNewReleaseAlbumListError) || isNewReleaseAlbumListError) return;
     return (
       <>
-        <TitleSeeAll title="New Release" isSeeAllBtnVisible={newReleaseAlbumList.length == 10} onSeeAllClick={listenerSeeAllNewRelease} />
+        <TitleSeeAll title="New Release" style={{ paddingLeft: "10px" }} isSeeAllBtnVisible={newReleaseAlbumList.length == 10} onSeeAllClick={listenerSeeAllNewRelease} />
         <ContainerWithoutScrollbar>
           {newReleaseAlbumList.map((item, index) => (
             <ItemArtistAlbumsList
@@ -239,10 +239,10 @@ const Home: React.FC = () => {
     return (
       <>
         {renderMadeForYouList()}
-        <Typography variant="h3" my={"10px"}>
+        <Typography variant="h3" ml={"10px"}>
           Tranding Songs
         </Typography>
-        <ContainerWithoutScrollbar sx={{ scrollSnapType: "x mandatory" }} gap={"10px"}>
+        <ContainerWithoutScrollbar sx={{ scrollSnapType: "x mandatory", paddingX: "10px" }} gap={"10px"}>
           {renderHindiTracks()}
           {renderPunjabiTracks()}
           {renderEnglishTracks()}
@@ -253,7 +253,7 @@ const Home: React.FC = () => {
       </>
     );
   };
-  return <RootContainer style={{ padding: 0 }}>{renderUI()}</RootContainer>;
+  return <RootContainer style={{ padding: "10px 0", gap: "20px" }}>{renderUI()}</RootContainer>;
 };
 
 export default Home;
@@ -271,7 +271,7 @@ const useStyle = makeStyles((_: Theme) => ({
     minWidth: "330px",
     // backgroundColor: theme.palette.secondary.main,
     borderRadius: "10px",
-    padding: "10px",
+    padding: "10px 5px",
     // background: `linear-gradient(to top, rgba(12,11,26,0.95) 40%, rgba(12,11,26,0.6)  )`,
     scrollSnapAlign: "start",
     backgroundSize: "cover",
@@ -290,6 +290,6 @@ const useStyle = makeStyles((_: Theme) => ({
     bottom: 0,
     zIndex: -1,
     // opacity: 0.3,
-    background: `linear-gradient(to top, rgba(12,11,26,0.95) 40%, rgba(12,11,26,0.6)  )`,
+    background: `linear-gradient(to top, rgba(12,11,26,0.95) 30%, rgba(12,11,26,0.6)  )`,
   },
 }));

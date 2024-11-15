@@ -1,17 +1,18 @@
+import { globleEaseInOutTransitionTime } from "@/theme/utils/globalTransitions";
 import { imgDefaultSong } from "@assets/images";
+import AppLoader from "@components/AppLoader";
 import { ImageCompWithLoader } from "@components/design/Image";
+import { RootContainer } from "@components/design/styledComponents";
+import FallbackError from "@components/FallbackError";
 import ItemPlaylistTrackListSkeleton from "@components/skeletons/ItemPlaylistTrackLIst.skeleton";
 import ItemSongListSkeleton from "@components/skeletons/ItemSongLIst.skeleton";
-import { RootContainer } from "@components/design/styledComponents";
-import { Box, CircularProgress, Grid, Theme, Typography, useTheme } from "@mui/material";
+import { Box, Grid, Theme, Typography, useTheme } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { useIsSmallScreen } from "@utils/constants";
-import { formatDate, formatFollowersCount, getFollowers } from "@utils/genaralFunctions";
-import { globleEaseInOutTransitionTime } from "@/theme/utils/globalTransitions";
-import ItemSongList from "../../components/ItemSongList";
+import { formatDate, getFollowers } from "@utils/genaralFunctions";
 import ItemPlaylistTrackList from "../../components/ItemPlaylistTrackList";
+import ItemSongList from "../../components/ItemSongList";
 import usePlaylistDetailsController from "./PlaylistDetails.controller";
-import FallbackError from "@components/FallbackError";
 
 const PlaylistDetails = () => {
   const classes = useStyles();
@@ -32,7 +33,7 @@ const PlaylistDetails = () => {
   } = usePlaylistDetailsController();
 
   const renderPlaylistProfile = () => {
-    if (isPlaylistDataLoading) return <CircularProgress size={30} thickness={5} sx={{ color: "loader.main", alignSelf: "center", margin: "auto" }} />;
+    if (isPlaylistDataLoading) return <AppLoader />;
     if (isPlaylistDataError) return <FallbackError type="something_went_wrong" />;
     if (!playlistData) return <FallbackError message="Playlist Not Found" type="data_not_found" />;
     return (
@@ -124,7 +125,7 @@ const PlaylistDetails = () => {
   const renderSkeleton = () => {
     return Array.from({ length: 10 }, (_, index) => (
       <Grid item xs={12} key={index}>
-        {isSmallScreen ? <ItemSongListSkeleton key={index} /> : <ItemPlaylistTrackListSkeleton key={index} />}
+        {isSmallScreen ? <ItemSongListSkeleton haveIndex key={index} /> : <ItemPlaylistTrackListSkeleton key={index} />}
       </Grid>
     ));
   };

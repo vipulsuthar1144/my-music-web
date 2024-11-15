@@ -7,6 +7,7 @@ import {
   FacebookOutlined,
   FavoriteBorder,
   Instagram,
+  MoreVert,
   Notifications,
   PauseCircleOutlineRounded,
   PlayCircleOutlineRounded,
@@ -23,7 +24,7 @@ import {
 export const StyledBackIcon = withIconStyles(ArrowBackIosNewRounded, "Go Back");
 export const StyledForwardIcon = withIconStyles(ArrowForwardIosRounded, "Go Forward");
 export const StyledSettingIconFilled = withIconStyles(Settings, "Settings");
-export const StyledNotificationIconFilled = withIconStyles(Notifications, "What's New");
+export const StyledNotificationIconFilled = withIconStyles(Notifications, "What's New", "24px");
 export const StyledThemeModeIconFilled = withIconStyles(ContrastRounded, "Theme");
 export const StyledSearchIconFilled = withIconStyles(SearchRounded, "Theme");
 export const StyledCloseIconFilled = withIconStyles(CloseRounded);
@@ -38,3 +39,4 @@ export const StyledPauseIconOutlined = withIconStyles(PauseCircleOutlineRounded,
 export const StyledInstagramIconOutlined = withIconStyles(Instagram, "", "24px");
 export const StyledFacebookIconOutlined = withIconStyles(FacebookOutlined, "", "26px");
 export const StyledTwitterIconOutlined = withIconStyles(X, "", "20px");
+export const StyledMenuIcon = withIconStyles(MoreVert, "", "24px");

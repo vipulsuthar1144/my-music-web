@@ -1,4 +1,4 @@
-import { img1 } from "@assets/images";
+import { imgDefaultSong } from "@assets/images";
 import {
   StyledCloseIconFilled,
   StyledFavoriteIconOutlined,
@@ -48,7 +48,7 @@ const TrackPlayer = () => {
         <Box className={classes.dragIndigator} />
         {/* song image */}
         <ImageComp
-          img={img1}
+          img={imgDefaultSong}
           alt="album image"
           style={{
             width: 150,

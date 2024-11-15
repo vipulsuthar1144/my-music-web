@@ -1,12 +1,12 @@
-import { Box, Button, CircularProgress } from "@mui/material";
-import { CSSProperties } from "react";
+import AppLoader from "@components/AppLoader";
+import { Box, Button, SxProps, Theme } from "@mui/material";
 
 export interface IGlobalButtonProps {
   label: string;
   sublabel?: string | React.ReactNode;
   disabled?: boolean;
   onClick?: (e: any) => void;
-  style?: CSSProperties;
+  style?: SxProps<Theme>;
   type?: "submit" | "reset";
   startIcon?: React.ReactElement;
 }
@@ -19,7 +19,7 @@ export interface ILoaderButtonProps extends IGlobalButtonProps {
 export const ContainedButton = ({ label, onClick, disabled, style, type }: IGlobalButtonProps) => {
   const buttonType = type === "reset" || type === "submit" ? type : "button";
   return (
-    <Button variant="contained" color="primary" type={buttonType} disabled={disabled} onClick={onClick} style={{ ...style }}>
+    <Button variant="contained" color="primary" type={buttonType} disabled={disabled} onClick={onClick} sx={{ ...style }}>
       {label}
     </Button>
   );
@@ -28,7 +28,7 @@ export const ContainedButton = ({ label, onClick, disabled, style, type }: IGlob
 export const ContainedGreenButton = ({ label, onClick, disabled, style, type }: IGlobalButtonProps) => {
   const buttonType = type === "reset" || type === "submit" ? type : "button";
   return (
-    <Button variant="contained" color="success" type={buttonType} disabled={disabled} onClick={onClick} style={{ ...style }}>
+    <Button variant="contained" color="success" type={buttonType} disabled={disabled} onClick={onClick} sx={{ ...style }}>
       {label}
     </Button>
   );
@@ -37,7 +37,7 @@ export const ContainedGreenButton = ({ label, onClick, disabled, style, type }: 
 export const TextButtonPrimary = ({ label, onClick, disabled, style, type }: IGlobalButtonProps) => {
   const buttonType = type === "reset" || type === "submit" ? type : "button";
   return (
-    <Button variant="text" sx={{ color: "text.primary" }} type={buttonType} disabled={disabled} onClick={onClick} style={{ ...style }}>
+    <Button variant="text" type={buttonType} disabled={disabled} onClick={onClick} sx={{ color: "text.primary", ...style }}>
       {label}
     </Button>
   );
@@ -67,7 +67,7 @@ export const LoaderButton = ({ variant, color, type, onClick, label, loading = f
       >
         {label}
       </Button>
-      {loading && <CircularProgress size={24} thickness={5} sx={{ color: "loader.main", position: "absolute" }} />}
+      {loading && <AppLoader size={24} sx={{ position: "absolute" }} />}
     </Box>
   );
 };

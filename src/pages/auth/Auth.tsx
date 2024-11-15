@@ -1,4 +1,4 @@
-import { imgSpotifyGreenLogin } from "@assets/images";
+import { appLogoMyMusic } from "@assets/images";
 import { LoaderButton } from "@components/design/Button";
 import ImageComp from "@components/design/Image";
 import { RootContainer } from "@components/design/styledComponents";
@@ -19,11 +19,13 @@ const Auth = () => {
         }}
       >
         <ImageComp
-          img={imgSpotifyGreenLogin}
+          img={appLogoMyMusic}
           alt="Spotify"
           style={{
-            width: "30%",
+            width: "25%",
+            height: "auto",
             userSelect: "none",
+            marginBottom: "30px",
             [theme.breakpoints.down("lg")]: {
               width: "40%",
             },
@@ -35,7 +37,22 @@ const Auth = () => {
             },
           }}
         />
-        <LoaderButton label={"Login With Spotify"} variant={"contained"} color={"success"} onClick={listenerGoToLoginURL} />
+        <LoaderButton
+          label={"Continue With Spotify"}
+          variant={"contained"}
+          color={"primary"}
+          style={{
+            background: "none",
+            backgroundColor: "loader.main",
+            color: "black",
+            borderRadius: "20px",
+            "&:hover": {
+              backgroundColor: "loader.main",
+              color: "black",
+            },
+          }}
+          onClick={listenerGoToLoginURL}
+        />
       </RootContainer>
     </>
   );

@@ -137,9 +137,7 @@ const SeeAllSearch = () => {
   };
   return (
     <RootContainer>
-      <Typography variant="h3" my={"20px"}>
-        Search result of "{searchQuery}"
-      </Typography>
+      <Typography variant="h3">Search result of "{searchQuery}"</Typography>
       {renderDataList()}
     </RootContainer>
   );

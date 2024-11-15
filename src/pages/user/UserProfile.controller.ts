@@ -39,6 +39,7 @@ const useUserProfileController = () => {
     isUserProfileLoading,
     userProfileData,
     bgColor,
+    userId,
     isUserPlaylistsError,
     isUserPlaylistsLoading,
     hasMoreUserPlaylists,

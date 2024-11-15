@@ -13,9 +13,7 @@ const AlbumNewRelease = () => {
 
     return (
       <>
-        <Typography variant="h3" my={"20px"}>
-          Albums
-        </Typography>
+        <Typography variant="h3">Albums</Typography>
         <Grid container spacing={1}>
           {newReleaseAlbumList.map((item, index) => (
             <Grid item xs={6} sm={4} md={3} lg={1.5} key={`${item.id}${index}`}>

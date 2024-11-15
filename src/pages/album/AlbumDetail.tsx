@@ -1,14 +1,15 @@
-import { imgDefaultSong } from "@assets/images";
-import { ImageCompWithLoader } from "@components/design/Image";
-import ItemSongListSkeleton from "@components/skeletons/ItemSongLIst.skeleton";
-import { RootContainer } from "@components/design/styledComponents";
-import { Box, CircularProgress, Grid, Typography } from "@mui/material";
-import { makeStyles } from "@mui/styles";
 import { globleEaseInOutTransitionTime } from "@/theme/utils/globalTransitions";
+import { imgDefaultSong } from "@assets/images";
+import AppLoader from "@components/AppLoader";
+import { ImageCompWithLoader } from "@components/design/Image";
+import { RootContainer } from "@components/design/styledComponents";
+import FallbackError from "@components/FallbackError";
+import ItemSongListSkeleton from "@components/skeletons/ItemSongLIst.skeleton";
+import { Box, Grid, Typography } from "@mui/material";
+import { makeStyles } from "@mui/styles";
 import { Theme } from "react-toastify";
 import ItemSongList from "../../components/ItemSongList";
 import useAlbumDetailController from "./AlbumDetail.controller";
-import FallbackError from "@components/FallbackError";
 
 const AlbumDetail = () => {
   const classes = useStyles();
@@ -16,7 +17,7 @@ const AlbumDetail = () => {
   const { listenerGoToArtistDetails, lastTrackListItemRef, isAlbumDataError, isAlbumDataLoading, albumData, bgColor, isTrackListLoading, isTrackListError, trackList } = useAlbumDetailController();
 
   const renderAlbumProfile = () => {
-    if (isAlbumDataLoading) return <CircularProgress size={30} thickness={5} sx={{ color: "loader.main", alignSelf: "center", margin: "auto" }} />;
+    if (isAlbumDataLoading) return <AppLoader />;
     if (isAlbumDataLoading) return <FallbackError type="something_went_wrong" />;
     if (!albumData && !isAlbumDataError && !isAlbumDataLoading) return <FallbackError message="Album Not Found" type="data_not_found" />;
 
@@ -95,7 +96,7 @@ const AlbumDetail = () => {
   const renderSkeleton = () => {
     return Array.from({ length: 10 }, (_, index) => (
       <Grid item xs={12} key={index}>
-        <ItemSongListSkeleton key={index} />
+        <ItemSongListSkeleton haveIndex key={index} />
       </Grid>
     ));
   };

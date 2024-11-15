@@ -3,11 +3,13 @@ import { createSlice } from "@reduxjs/toolkit";
 type TGlobleLoader = {
   isTopLoading: boolean;
   topLoadingProgress: number;
+  openMoreOptionBottomSheet: boolean;
 };
 
 const intialState: TGlobleLoader = {
   isTopLoading: false,
   topLoadingProgress: 0,
+  openMoreOptionBottomSheet: false,
 };
 
 export const globleLoaderSlice = createSlice({
@@ -17,9 +19,12 @@ export const globleLoaderSlice = createSlice({
     setTopLoadingProgress: (state, action) => {
       state.topLoadingProgress = action.payload;
     },
+    toggleMoreOptionBottomSheet: (state, action) => {
+      state.openMoreOptionBottomSheet = action.payload;
+    },
   },
 });
 
-export const { setTopLoadingProgress } = globleLoaderSlice.actions;
+export const { setTopLoadingProgress, toggleMoreOptionBottomSheet } = globleLoaderSlice.actions;
 
 export default globleLoaderSlice.reducer;

@@ -76,7 +76,7 @@ const FallbackError = ({ type, message = "", description = "" }: IFallbackErrorP
         <Typography variant="h1">Page Not Found</Typography>
         <Typography variant="h6">Oops! The page you're looking for doesn't exist.</Typography>
         <Button variant="contained" color="primary" onClick={listenerGoBack}>
-          Go Home
+          Go Back
         </Button>
       </Box>
     );

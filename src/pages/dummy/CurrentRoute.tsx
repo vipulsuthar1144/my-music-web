@@ -1,12 +1,7 @@
 import { ThemeModeContext } from "@/theme/hooks/ThemeModeProvider";
+import { Box } from "@mui/material";
 import React, { useContext, useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import Practice from "./practice";
-import { Box } from "@mui/material";
-type prop = {
-  count: number;
-};
-
 const ChildComponent = React.memo(() => {
   useEffect(() => {
     console.log("this is practice route");

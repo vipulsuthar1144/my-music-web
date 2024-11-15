@@ -1,14 +1,15 @@
-import { imgDefaultArtist, imgVerifiedTick } from "@assets/images";
-import ImageComp, { ImageCompWithLoader } from "@components/design/Image";
-import ItemArtistAlbumListSkeleton from "@components/skeletons/ItemArtistAlbumsList.skeleton";
-import { RootContainer } from "@components/design/styledComponents";
-import { Box, CircularProgress, Grid, Theme, Typography } from "@mui/material";
-import { makeStyles } from "@mui/styles";
-import { formatFollowersCount, getFollowers } from "@utils/genaralFunctions";
 import { globleEaseInOutTransitionTime } from "@/theme/utils/globalTransitions";
+import { imgDefaultArtist, imgVerifiedTick } from "@assets/images";
+import AppLoader from "@components/AppLoader";
+import ImageComp, { ImageCompWithLoader } from "@components/design/Image";
+import { RootContainer } from "@components/design/styledComponents";
+import FallbackError from "@components/FallbackError";
+import ItemArtistAlbumListSkeleton from "@components/skeletons/ItemArtistAlbumsList.skeleton";
+import { Box, Grid, Theme, Typography } from "@mui/material";
+import { makeStyles } from "@mui/styles";
+import { getFollowers } from "@utils/genaralFunctions";
 import ItemArtistAlbumsList from "../../components/ItemArtistAlbumsList";
 import useUserProfileController from "./UserProfile.controller";
-import FallbackError from "@components/FallbackError";
 
 const UserProfile = () => {
   const classes = useStyles();
@@ -16,7 +17,7 @@ const UserProfile = () => {
     useUserProfileController();
 
   const renderUserProfile = () => {
-    if (isUserProfileLoading) return <CircularProgress size={30} thickness={5} sx={{ color: "loader.main", alignSelf: "center", margin: "auto" }} />;
+    if (isUserProfileLoading) return <AppLoader />;
     if (isUserProfileError) return <FallbackError type="something_went_wrong" />;
     if (!userProfileData && !isUserProfileError && !isUserProfileLoading) return <FallbackError message="User Not Found" type="data_not_found" />;
 
@@ -25,7 +26,7 @@ const UserProfile = () => {
         <Box className={classes.details} sx={{ backgroundColor: `${bgColor}`, zIndex: 1 }}>
           <Box sx={{ width: "100%", background: `linear-gradient(to bottom, ${bgColor}b0  10%, ${bgColor}05  )`, position: "absolute", height: "100%", left: 0, bottom: "-100%", zIndex: -1 }} />
           <ImageCompWithLoader
-            img={(userProfileData?.images && userProfileData?.images[1]?.url) || ""}
+            img={userProfileData?.images && userProfileData?.images[1]?.url}
             alt={"user"}
             errorImage={imgDefaultArtist}
             style={{

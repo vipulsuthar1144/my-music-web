@@ -1,6 +1,6 @@
 import ImageComp from "@components/design/Image";
 import OverlaySidebar from "@components/design/Overlay";
-import { imgSpotifyGreenSideBarLogo } from "@assets/images";
+import { appLogo } from "@assets/images";
 import { AccountCircle, AccountCircleOutlined, Home, HomeOutlined, Search, SearchOutlined } from "@mui/icons-material";
 import { Box, useTheme } from "@mui/material";
 import { globleTransitionTime } from "@/theme/utils/globalTransitions";
@@ -54,7 +54,7 @@ const AppSideBar = () => {
       >
         <Box sx={{ display: "flex", flexDirection: "column", justifyContent: "center", height: "100%", position: "relative" }}>
           <ImageComp
-            img={imgSpotifyGreenSideBarLogo}
+            img={appLogo}
             alt="Spotify"
             style={{
               width: "40px",

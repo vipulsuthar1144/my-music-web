@@ -35,11 +35,13 @@ const useStyles = makeStyles((theme: Theme) => ({
     padding: "10px",
     boxSizing: "border-box",
     borderRadius: "50%",
+    backgroundImage: "transparent",
     "&:hover": {
       backgroundImage: MGradientsDarkTheme.hoverBgColor,
     },
     "&:active": {
       transform: "scale(0.8)",
+      backgroundImage: "transparent",
     },
   },
 }));

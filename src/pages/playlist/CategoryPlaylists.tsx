@@ -13,9 +13,7 @@ const CategoryPlaylists = () => {
 
     return (
       <>
-        <Typography variant="h3" my={"20px"}>
-          {categoryTitle}
-        </Typography>
+        <Typography variant="h3">{categoryTitle}</Typography>
         <Grid container spacing={1}>
           {categoryPlaylists.map((item, index) => (
             <Grid item xs={6} sm={4} md={3} lg={1.5} key={`${item.id}${index}`}>

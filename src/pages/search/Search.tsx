@@ -40,10 +40,10 @@ const Search = () => {
     if (categories.length == 0 && !isCategoriesError && !isCategoriesLoading) return <FallbackError message="No Category Available." type="data_not_found" />;
     return (
       <>
-        <Typography variant="h3" m={"0 0 10px 10px"}>
+        <Typography variant="h3" m={"10px 0 0 10px"}>
           Browse All
         </Typography>
-        <Grid container spacing={2} padding={"10px"}>
+        <Grid container spacing={2} padding={"0 10px"}>
           {categories.map((item, index) => (
             <Grid item xs={12} sm={6} md={4} lg={3} key={item.id}>
               <Box key={item.id} component={"div"} ref={index === categories.length - 1 ? lastCategoryItemRef : null}>
@@ -81,8 +81,8 @@ const Search = () => {
     if (searchData?.tracks?.items?.length == 0) return;
     return (
       <>
-        <TitleSeeAll title="Songs" isSeeAllBtnVisible={searchData?.tracks?.items?.length == 10} onSeeAllClick={listenerSeeAllTracks} />
-        <Grid container spacing={1} padding={"10px"} mb={"10px"}>
+        <TitleSeeAll title="Songs" style={{ paddingLeft: "10px" }} isSeeAllBtnVisible={searchData?.tracks?.items?.length == 10} onSeeAllClick={listenerSeeAllTracks} />
+        <Grid container spacing={1} padding={"0 10px"}>
           {searchData?.tracks?.items?.map((track, _) => (
             <Grid item xs={12} lg={6} key={track.id}>
               <ItemSongList key={track.id} img={track?.album?.images && track?.album?.images[0]?.url} title={track?.name} subtitleArr={track.artists} trackDuration={track.duration_ms} />
@@ -96,7 +96,7 @@ const Search = () => {
     if (searchData?.artists?.items?.length == 0) return;
     return (
       <>
-        <TitleSeeAll title="Artist" isSeeAllBtnVisible={searchData?.artists?.items?.length == 10} onSeeAllClick={listenerSeeAllArtists} />
+        <TitleSeeAll title="Artist" style={{ paddingLeft: "10px" }} isSeeAllBtnVisible={searchData?.artists?.items?.length == 10} onSeeAllClick={listenerSeeAllArtists} />
         <ContainerWithoutScrollbar>
           {searchData?.artists?.items?.map((item, _) => (
             <ItemArtistAlbumsList
@@ -118,7 +118,7 @@ const Search = () => {
     if (searchData?.albums?.items?.length == 0) return;
     return (
       <>
-        <TitleSeeAll title="Album" isSeeAllBtnVisible={searchData?.albums?.items?.length == 10} onSeeAllClick={listenerSeeAllAlbums} />
+        <TitleSeeAll title="Album" style={{ paddingLeft: "10px" }} isSeeAllBtnVisible={searchData?.albums?.items?.length == 10} onSeeAllClick={listenerSeeAllAlbums} />
         <ContainerWithoutScrollbar>
           {searchData?.albums?.items?.map((item, _) => (
             <ItemArtistAlbumsList
@@ -138,7 +138,7 @@ const Search = () => {
     if (searchData?.playlists?.items?.length == 0) return;
     return (
       <>
-        <TitleSeeAll title="Playlist" isSeeAllBtnVisible={searchData?.playlists?.items?.length == 10} onSeeAllClick={listenerSeeAllPlaylists} />
+        <TitleSeeAll title="Playlist" style={{ paddingLeft: "10px" }} isSeeAllBtnVisible={searchData?.playlists?.items?.length == 10} onSeeAllClick={listenerSeeAllPlaylists} />
         <ContainerWithoutScrollbar>
           {searchData?.playlists?.items?.map((item, _) => (
             <ItemArtistAlbumsList
@@ -156,11 +156,11 @@ const Search = () => {
   return (
     <>
       {isSmallScreen && (
-        <Box sx={{ position: "sticky", top: 0, left: 0, zIndex: 10, padding: "10px", backgroundColor: mColors.EbonyBlack }}>
+        <Box sx={{ position: "sticky", top: "56px", left: 0, zIndex: 10, padding: "10px", backgroundColor: mColors.EbonyBlack }}>
           <SearchBar isFullWidth />
         </Box>
       )}
-      <RootContainer style={{ padding: "10px 0px" }}>
+      <RootContainer style={{ padding: "10px 0px", gap: "20px" }}>
         {renderCategoriesData()}
         {renderSearchResultData()}
       </RootContainer>

@@ -14,9 +14,7 @@ const RecentPlayed = () => {
 
     return (
       <>
-        <Typography variant="h3" sx={{ margin: "10px" }}>
-          Recent Played Tracks
-        </Typography>
+        <Typography variant="h3">Recent Played Tracks</Typography>
         <Grid container spacing={1}>
           {recentPlayedTrackList.map((item, index) => (
             <Grid item xs={6} sm={4} md={3} lg={1.5} key={`${item.track?.id}${index}`}>

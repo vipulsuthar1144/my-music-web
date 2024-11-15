@@ -15,9 +15,7 @@ const RelatedArtist = () => {
 
     return (
       <>
-        <Typography variant="h3" my={"20px"}>
-          Related Artists
-        </Typography>
+        <Typography variant="h3">Related Artists</Typography>
         <Grid container spacing={1}>
           {relatedArtistList.map((item, _) => (
             <Grid item xs={6} sm={4} md={3} lg={1.5}>

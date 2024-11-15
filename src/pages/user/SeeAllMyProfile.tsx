@@ -39,9 +39,7 @@ const SeeAllMyProfile = () => {
     if (myProfileTopArtistList.length == 0 && !isMyProfileTopArtistListError && !isMyProfileTopArtistListLoading) return <FallbackError type="data_not_found" />;
     return (
       <>
-        <Typography variant="h3" my={"10px"}>
-          Top artists this month
-        </Typography>
+        <Typography variant="h3">Top artists this month</Typography>
         <Grid container spacing={1}>
           {myProfileTopArtistList.map((item, index) => (
             <Grid item xs={6} sm={4} md={3} lg={1.5} key={item.id}>
@@ -67,9 +65,7 @@ const SeeAllMyProfile = () => {
     if (myProfileTopTrackList.length == 0 && !isMyProfileTopTrackListError && !isMyProfileTopTrackListLoading) return <FallbackError type="data_not_found" />;
     return (
       <>
-        <Typography variant="h3" my={"10px"}>
-          Top tracks this month
-        </Typography>
+        <Typography variant="h3">Top tracks this month</Typography>
         <Grid container spacing={1}>
           {myProfileTopTrackList.map((track, index) => (
             <Grid item xs={12} lg={6} key={track.id}>
@@ -89,9 +85,7 @@ const SeeAllMyProfile = () => {
     if (followedArtistList.length == 0 && !isFollowedArtistListError && !isFollowedArtistListLoading) return <FallbackError type="data_not_found" />;
     return (
       <>
-        <Typography variant="h3" my={"10px"}>
-          Followed Artists
-        </Typography>
+        <Typography variant="h3">Followed Artists</Typography>
         <Grid container spacing={1}>
           {followedArtistList.map((item, _) => (
             <Grid item xs={6} sm={4} md={3} lg={1.5}>

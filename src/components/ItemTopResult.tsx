@@ -1,9 +1,9 @@
+import { globleEaseInOutTransitionTime } from "@/theme/utils/globalTransitions";
 import { MGradientsDarkTheme } from "@/theme/utils/mGredient";
-import { img1, imgCar, imgPlayBtnGreen } from "@assets/images";
+import { imgDefaultSong, imgPlay } from "@assets/images";
 import ImageComp from "@components/design/Image";
 import { Card, CardActionArea, CardContent, CardMedia, Theme, Typography } from "@mui/material";
 import { makeStyles } from "@mui/styles";
-import { globleEaseInOutTransitionTime } from "@/theme/utils/globalTransitions";
 import { useState } from "react";
 
 type ItemTopResultProps = {
@@ -33,7 +33,7 @@ const ItemTopResult: React.FC<ItemTopResultProps> = ({ isArtist = false }) => {
       >
         <CardMedia
           component="img"
-          image={isArtist ? imgCar : img1}
+          image={imgDefaultSong}
           alt="green iguana"
           sx={{
             userSelect: "none",
@@ -49,7 +49,7 @@ const ItemTopResult: React.FC<ItemTopResultProps> = ({ isArtist = false }) => {
           onClick={() => {
             // showCustomToast("Oops! LogOut Failed.", "error");
           }}
-          img={imgPlayBtnGreen}
+          img={imgPlay}
           alt="Spotify"
           style={{
             width: "20%",

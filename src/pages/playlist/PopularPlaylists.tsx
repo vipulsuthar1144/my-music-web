@@ -12,9 +12,7 @@ const PopularPlaylists = () => {
     if (popularPlaylists.length == 0 && !isPopularPlaylistsError && !isPopularPlaylistsLoading) return <FallbackError message=" No Playlist Available" type="data_not_found" />;
     return (
       <>
-        <Typography variant="h3" my={"20px"}>
-          Popular Playlists
-        </Typography>
+        <Typography variant="h3">Popular Playlists</Typography>
         <Grid container spacing={1}>
           {popularPlaylists.map((item, index) => (
             <Grid item xs={6} sm={4} md={3} lg={1.5} key={`${item.id}${index}`}>

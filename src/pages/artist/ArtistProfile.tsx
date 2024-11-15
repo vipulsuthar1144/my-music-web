@@ -1,16 +1,17 @@
+import { globleEaseInOutTransitionTime } from "@/theme/utils/globalTransitions";
 import { imgDefaultArtist, imgVerifiedTick } from "@assets/images";
+import AppLoader from "@components/AppLoader";
 import ImageComp, { ImageCompWithLoader, TitleSeeAll } from "@components/design/Image";
+import { ContainerWithoutScrollbar, RootContainer } from "@components/design/styledComponents";
+import FallbackError from "@components/FallbackError";
 import ItemArtistAlbumListSkeleton from "@components/skeletons/ItemArtistAlbumsList.skeleton";
 import ItemSongListSkeleton from "@components/skeletons/ItemSongLIst.skeleton";
-import { ContainerWithoutScrollbar, RootContainer } from "@components/design/styledComponents";
-import { Box, CircularProgress, Grid, Skeleton, Theme, Typography } from "@mui/material";
+import { Box, Grid, Skeleton, Theme, Typography } from "@mui/material";
 import { makeStyles } from "@mui/styles";
-import { formatFollowersCount, getFollowers } from "@utils/genaralFunctions";
-import { globleEaseInOutTransitionTime } from "@/theme/utils/globalTransitions";
+import { getFollowers } from "@utils/genaralFunctions";
 import ItemArtistAlbumsList from "../../components/ItemArtistAlbumsList";
 import ItemSongList from "../../components/ItemSongList";
 import useArtistProfileController from "./ArtistProfile.controller";
-import FallbackError from "@components/FallbackError";
 
 const ArtistProfile = () => {
   const classes = useStyles();
@@ -36,7 +37,7 @@ const ArtistProfile = () => {
   } = useArtistProfileController();
 
   const renderArtistProfile = () => {
-    if (isArtistDataLoading) return <CircularProgress size={30} thickness={5} sx={{ color: "loader.main", alignSelf: "center", margin: "auto" }} />;
+    if (isArtistDataLoading) return <AppLoader />;
     if (isArtistDataError) return <FallbackError type="something_went_wrong" />;
     if (!artistData) return <FallbackError message="Artist Not Found" type="data_not_found" />;
     return (

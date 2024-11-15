@@ -35,8 +35,12 @@ export const getButton = (theme: Theme): MButton => {
         root: {
           borderRadius: "8px",
           textTransform: "none",
+          cursor: "pointer",
           padding: "10px 24px",
           boxSizing: "border-box",
+          marginLeft: 1.5,
+          // padding: "6px 20px",
+          fontSize: "14px",
           transition: `transform ${globleTransitionTime}`,
           "&:hover": {
             transform: "scale(1.05)",
@@ -105,6 +109,20 @@ export const getButton = (theme: Theme): MButton => {
             "&.Mui-disabled": {
               color: mColors.black,
               backgroundColor: theme.palette.success.main,
+            },
+            // },
+          },
+        },
+        {
+          props: { variant: "outlined", color: "primary" },
+          style: {
+            color: theme.palette.text.secondary,
+            borderColor: theme.palette.text.secondary,
+            "&:hover": {
+              borderColor: theme.palette.text.secondary,
+            },
+            "&.Mui-disabled": {
+              borderColor: theme.palette.text.secondary,
             },
             // },
           },

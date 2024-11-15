@@ -67,7 +67,7 @@ export default AppFooter;
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
     zIndex: 1,
-    marginTop: "50px",
+    marginTop: "30px",
     padding: "20px",
     width: "100%",
     height: "auto",
