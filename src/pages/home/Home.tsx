@@ -1,6 +1,9 @@
 import ItemArtistAlbumsList from "@components/ItemArtistAlbumsList";
 import { TitleSeeAll } from "@components/design/Image";
-import { ContainerWithoutScrollbar, RootContainer } from "@components/design/styledComponents";
+import {
+  ContainerWithoutScrollbar,
+  RootContainer,
+} from "@components/design/styledComponents";
 import ItemArtistAlbumListSkeleton from "@components/skeletons/ItemArtistAlbumsList.skeleton";
 import ItemSongListSkeleton from "@components/skeletons/ItemSongLIst.skeleton";
 import { Box, Grid, Skeleton, Theme, Typography } from "@mui/material";
@@ -44,7 +47,13 @@ const Home: React.FC = () => {
 
   const renderMadeForYouList = () => {
     if (isDailyMixListLoading) return renderSkeletons();
-    if ((dailyMixList.length == 0 && !isDailyMixListLoading && !isDailyMixListError) || isDailyMixListError) return;
+    if (
+      (dailyMixList.length == 0 &&
+        !isDailyMixListLoading &&
+        !isDailyMixListError) ||
+      isDailyMixListError
+    )
+      return;
     return (
       <>
         <Typography variant="h3" ml={"10px"}>
@@ -52,7 +61,12 @@ const Home: React.FC = () => {
         </Typography>
         <ContainerWithoutScrollbar>
           {dailyMixList.map((item) => (
-            <ItemArtistAlbumsList key={item.id} onClick={() => listenerGoToPlaylistDetails(item.id)} subtitle={`${item.description}`} img={(item.images && item?.images[0]?.url) || ""} />
+            <ItemArtistAlbumsList
+              key={item.id}
+              onClick={() => listenerGoToPlaylistDetails(item.id)}
+              subtitle={`${item.description}`}
+              img={(item.images && item?.images[0]?.url) || ""}
+            />
           ))}
         </ContainerWithoutScrollbar>
       </>
@@ -60,10 +74,24 @@ const Home: React.FC = () => {
   };
   const renderHindiTracks = () => {
     if (isHindiTrackListLoading) return renderSkeletons(true);
-    if ((hindiTrackList.length == 0 && !isHindiTrackListError && !isHindiTrackListLoading) || isHindiTrackListError) return;
+    if (
+      (hindiTrackList.length == 0 &&
+        !isHindiTrackListError &&
+        !isHindiTrackListLoading) ||
+      isHindiTrackListError
+    )
+      return;
 
     return (
-      <Box className={classes.trendingContainer} sx={{ backgroundImage: `url(${hindiTrackList[0].track?.album?.images && hindiTrackList[0].track?.album?.images[0].url})` }}>
+      <Box
+        className={classes.trendingContainer}
+        sx={{
+          backgroundImage: `url(${
+            hindiTrackList[0].track?.album?.images &&
+            hindiTrackList[0].track?.album?.images[0].url
+          })`,
+        }}
+      >
         <Box className={classes.trendingContainerBgImage} />
         <Typography variant="h4" m={"10px"}>
           Hindi
@@ -73,7 +101,10 @@ const Home: React.FC = () => {
           {hindiTrackList?.map((item, index) => (
             <Grid item xs={12} key={`${item?.track?.id}${index}`}>
               <ItemSongList
-                img={item?.track?.album?.images && item?.track?.album?.images[0]?.url}
+                img={
+                  item?.track?.album?.images &&
+                  item?.track?.album?.images[0]?.url
+                }
                 title={item?.track?.name}
                 // track_no={index + 1}
                 subtitleArr={item?.track?.artists}
@@ -87,10 +118,24 @@ const Home: React.FC = () => {
   };
   const renderPunjabiTracks = () => {
     if (isPunjabiTrackListLoading) return renderSkeletons(true);
-    if ((punjabiTrackList.length == 0 && !isPunjabiTrackListLoading && !isPunjabiTrackListError) || isPunjabiTrackListError) return;
+    if (
+      (punjabiTrackList.length == 0 &&
+        !isPunjabiTrackListLoading &&
+        !isPunjabiTrackListError) ||
+      isPunjabiTrackListError
+    )
+      return;
 
     return (
-      <Box className={classes.trendingContainer} sx={{ backgroundImage: `url(${punjabiTrackList[0].track?.album?.images && punjabiTrackList[0].track?.album?.images[0].url})` }}>
+      <Box
+        className={classes.trendingContainer}
+        sx={{
+          backgroundImage: `url(${
+            punjabiTrackList[0].track?.album?.images &&
+            punjabiTrackList[0].track?.album?.images[0].url
+          })`,
+        }}
+      >
         <Box className={classes.trendingContainerBgImage} />
         <Typography variant="h4" m={"10px"}>
           Punjabi
@@ -103,7 +148,10 @@ const Home: React.FC = () => {
                 onClick={() => {
                   navigate("/user/mee");
                 }}
-                img={item?.track?.album?.images && item?.track?.album?.images[0]?.url}
+                img={
+                  item?.track?.album?.images &&
+                  item?.track?.album?.images[0]?.url
+                }
                 title={item?.track?.name}
                 // track_no={index + 1}
                 subtitleArr={item?.track?.artists}
@@ -117,9 +165,23 @@ const Home: React.FC = () => {
   };
   const renderEnglishTracks = () => {
     if (isEnglishTrackListLoading) return renderSkeletons(true);
-    if ((englishTrackList.length == 0 && !isEnglishTrackListError && !isEnglishTrackListLoading) || isEnglishTrackListError) return;
+    if (
+      (englishTrackList.length == 0 &&
+        !isEnglishTrackListError &&
+        !isEnglishTrackListLoading) ||
+      isEnglishTrackListError
+    )
+      return;
     return (
-      <Box className={classes.trendingContainer} sx={{ backgroundImage: `url(${englishTrackList[0].track?.album?.images && englishTrackList[0].track?.album?.images[0].url})` }}>
+      <Box
+        className={classes.trendingContainer}
+        sx={{
+          backgroundImage: `url(${
+            englishTrackList[0].track?.album?.images &&
+            englishTrackList[0].track?.album?.images[0].url
+          })`,
+        }}
+      >
         <Box className={classes.trendingContainerBgImage} />
         <Typography variant="h4" m={"10px"}>
           English
@@ -129,7 +191,10 @@ const Home: React.FC = () => {
           {englishTrackList?.map((item, index) => (
             <Grid item xs={12} key={`${item?.track?.id}${index}`}>
               <ItemSongList
-                img={item?.track?.album?.images && item?.track?.album?.images[0]?.url}
+                img={
+                  item?.track?.album?.images &&
+                  item?.track?.album?.images[0]?.url
+                }
                 title={item?.track?.name}
                 // track_no={index + 1}
                 subtitleArr={item?.track?.artists}
@@ -143,7 +208,13 @@ const Home: React.FC = () => {
   };
   const renderRecentPlayedTrackList = () => {
     if (isRecentPlayedTrackListLoading) return renderSkeletons();
-    if ((recentPlayedTrackList.length == 0 && !isRecentPlayedTrackListLoading && !isRecentPlayedTrackListError) || isRecentPlayedTrackListError) return;
+    if (
+      (recentPlayedTrackList.length == 0 &&
+        !isRecentPlayedTrackListLoading &&
+        !isRecentPlayedTrackListError) ||
+      isRecentPlayedTrackListError
+    )
+      return;
     return (
       <>
         <Typography variant="h3" ml={"10px"}>
@@ -157,7 +228,11 @@ const Home: React.FC = () => {
               subtitleArr={item.track?.artists}
               subtitle={"--"}
               title={item.track?.name}
-              img={(item.track?.album?.images && item.track?.album?.images[0]?.url) || ""}
+              img={
+                (item.track?.album?.images &&
+                  item.track?.album?.images[0]?.url) ||
+                ""
+              }
             />
           ))}
         </ContainerWithoutScrollbar>
@@ -166,42 +241,70 @@ const Home: React.FC = () => {
   };
   const renderPopularPlaylistsList = () => {
     if (isPopularPlaylistsLoading) return renderSkeletons();
-    if ((popularPlaylists.length == 0 && !isPopularPlaylistsLoading && !isPopularPlaylistsError) || isPopularPlaylistsError) return;
+    if (
+      (popularPlaylists.length == 0 &&
+        !isPopularPlaylistsLoading &&
+        !isPopularPlaylistsError) ||
+      isPopularPlaylistsError
+    )
+      return;
     return (
       <>
-        <TitleSeeAll title="More of what you like" style={{ paddingLeft: "10px" }} isSeeAllBtnVisible={popularPlaylists.length == 10} onSeeAllClick={listenerSeeAllPopularPlaylist} />
+        <TitleSeeAll
+          title="More of what you like"
+          style={{ paddingLeft: "10px" }}
+          isSeeAllBtnVisible={popularPlaylists.length >= 10}
+          onSeeAllClick={listenerSeeAllPopularPlaylist}
+        />
         <ContainerWithoutScrollbar>
-          {popularPlaylists.map((item) => (
-            <ItemArtistAlbumsList
-              key={item.id}
-              onClick={() => listenerGoToPlaylistDetails(item.id)}
-              // subtitle={`By ${item.owner?.display_name}`}
-              subtitle={`${item.description}`}
-              title={item.name}
-              img={(item.images && item?.images[0]?.url) || ""}
-            />
-          ))}
+          {popularPlaylists.map(
+            (item, index) =>
+              index < 10 && (
+                <ItemArtistAlbumsList
+                  key={item.id}
+                  onClick={() => listenerGoToPlaylistDetails(item.id)}
+                  // subtitle={`By ${item.owner?.display_name}`}
+                  subtitle={`${item.description}`}
+                  title={item.name}
+                  img={(item.images && item?.images[0]?.url) || ""}
+                />
+              )
+          )}
         </ContainerWithoutScrollbar>
       </>
     );
   };
   const renderNewReleaseAlbumsList = () => {
     if (isNewReleaseAlbumListLoading) return renderSkeletons();
-    if ((newReleaseAlbumList.length == 0 && !isNewReleaseAlbumListLoading && !isNewReleaseAlbumListError) || isNewReleaseAlbumListError) return;
+    if (
+      (newReleaseAlbumList.length == 0 &&
+        !isNewReleaseAlbumListLoading &&
+        !isNewReleaseAlbumListError) ||
+      isNewReleaseAlbumListError
+    )
+      return;
     return (
       <>
-        <TitleSeeAll title="New Release" style={{ paddingLeft: "10px" }} isSeeAllBtnVisible={newReleaseAlbumList.length == 10} onSeeAllClick={listenerSeeAllNewRelease} />
+        <TitleSeeAll
+          title="New Release"
+          style={{ paddingLeft: "10px" }}
+          isSeeAllBtnVisible={newReleaseAlbumList.length >= 10}
+          onSeeAllClick={listenerSeeAllNewRelease}
+        />
         <ContainerWithoutScrollbar>
-          {newReleaseAlbumList.map((item, index) => (
-            <ItemArtistAlbumsList
-              key={`${item?.id}${index}`}
-              subtitleArr={item?.artists}
-              onClick={() => listenerGoToAlbumDetails(item.id)}
-              subtitle={item.release_date?.slice(0, 4)}
-              title={item?.name}
-              img={(item?.images && item?.images[0]?.url) || ""}
-            />
-          ))}
+          {newReleaseAlbumList.map(
+            (item, index) =>
+              index < 10 && (
+                <ItemArtistAlbumsList
+                  key={`${item?.id}${index}`}
+                  subtitleArr={item?.artists}
+                  onClick={() => listenerGoToAlbumDetails(item.id)}
+                  subtitle={item.release_date?.slice(0, 4)}
+                  title={item?.name}
+                  img={(item?.images && item?.images[0]?.url) || ""}
+                />
+              )
+          )}
         </ContainerWithoutScrollbar>
       </>
     );
@@ -210,7 +313,11 @@ const Home: React.FC = () => {
     if (isTrack) {
       return (
         <Box className={classes.trendingContainer}>
-          <Skeleton variant="text" animation="wave" sx={{ width: "20%", height: `30px`, margin: "10px" }} />
+          <Skeleton
+            variant="text"
+            animation="wave"
+            sx={{ width: "20%", height: `30px`, margin: "10px" }}
+          />
           <Grid container spacing={1} paddingX={"10px"} sx={{ zIndex: 1 }}>
             {Array.from({ length: 5 }, (_, index) => (
               <Grid item xs={12} key={index}>
@@ -223,7 +330,11 @@ const Home: React.FC = () => {
     }
     return (
       <Box sx={{ width: "100%" }}>
-        <Skeleton variant="text" animation="wave" sx={{ width: "20%", height: `50px`, marginBottom: "10px" }} />
+        <Skeleton
+          variant="text"
+          animation="wave"
+          sx={{ width: "20%", height: `50px`, marginBottom: "10px" }}
+        />
         <ContainerWithoutScrollbar sx={{ gap: "10px" }}>
           {Array.from({ length: 10 }, (_, index) => (
             <ItemArtistAlbumListSkeleton isArtist={false} key={index} />
@@ -234,7 +345,15 @@ const Home: React.FC = () => {
   };
 
   const renderUI = () => {
-    if (isDailyMixListError || isEnglishTrackListError || isHindiTrackListError || isPunjabiTrackListError || isRecentPlayedTrackListError || isPopularPlaylistsError || isNewReleaseAlbumListError)
+    if (
+      isDailyMixListError ||
+      isEnglishTrackListError ||
+      isHindiTrackListError ||
+      isPunjabiTrackListError ||
+      isRecentPlayedTrackListError ||
+      isPopularPlaylistsError ||
+      isNewReleaseAlbumListError
+    )
       return <FallbackError type="something_went_wrong" />;
     return (
       <>
@@ -242,7 +361,10 @@ const Home: React.FC = () => {
         <Typography variant="h3" ml={"10px"}>
           Tranding Songs
         </Typography>
-        <ContainerWithoutScrollbar sx={{ scrollSnapType: "x mandatory", paddingX: "10px" }} gap={"10px"}>
+        <ContainerWithoutScrollbar
+          sx={{ scrollSnapType: "x mandatory", paddingX: "10px" }}
+          gap={"10px"}
+        >
           {renderHindiTracks()}
           {renderPunjabiTracks()}
           {renderEnglishTracks()}
@@ -253,7 +375,11 @@ const Home: React.FC = () => {
       </>
     );
   };
-  return <RootContainer style={{ padding: "10px 0", gap: "20px" }}>{renderUI()}</RootContainer>;
+  return (
+    <RootContainer style={{ padding: "10px 0", gap: "20px" }}>
+      {renderUI()}
+    </RootContainer>
+  );
 };
 
 export default Home;

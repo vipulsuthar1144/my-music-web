@@ -1,8 +1,15 @@
 import { globleEaseInOutTransitionTime } from "@/theme/utils/globalTransitions";
 import { imgDefaultArtist, imgVerifiedTick } from "@assets/images";
 import AppLoader from "@components/AppLoader";
-import ImageComp, { ImageCompWithLoader, TitleSeeAll } from "@components/design/Image";
-import { ContainerWithoutScrollbar, RootContainer } from "@components/design/styledComponents";
+import { LoaderButton } from "@components/design/Button";
+import ImageComp, {
+  ImageCompWithLoader,
+  TitleSeeAll,
+} from "@components/design/Image";
+import {
+  ContainerWithoutScrollbar,
+  RootContainer,
+} from "@components/design/styledComponents";
 import FallbackError from "@components/FallbackError";
 import ItemArtistAlbumListSkeleton from "@components/skeletons/ItemArtistAlbumsList.skeleton";
 import ItemSongListSkeleton from "@components/skeletons/ItemSongLIst.skeleton";
@@ -21,6 +28,7 @@ const ArtistProfile = () => {
     listenerGoToAlbumDetails,
     listenerSeeAllRelatedArtist,
     listenerSeeAllAlbums,
+    handleFollowUnfollowArtistAPICall,
     isArtistDataLoading,
     isArtistDataError,
     artistData,
@@ -34,16 +42,31 @@ const ArtistProfile = () => {
     isArtistAlbumsListError,
     isArtistAlbumsListLoading,
     artistAlbumsList,
+    isfollowUnfollowArtistLoading,
   } = useArtistProfileController();
 
   const renderArtistProfile = () => {
     if (isArtistDataLoading) return <AppLoader />;
     if (isArtistDataError) return <FallbackError type="something_went_wrong" />;
-    if (!artistData) return <FallbackError message="Artist Not Found" type="data_not_found" />;
+    if (!artistData)
+      return <FallbackError message="Artist Not Found" type="data_not_found" />;
     return (
       <>
-        <Box className={classes.details} sx={{ backgroundColor: `${bgColor}`, zIndex: 1 }}>
-          <Box sx={{ width: "100%", background: `linear-gradient(to bottom, ${bgColor}b0  10%, ${bgColor}05  )`, position: "absolute", height: "100%", left: 0, bottom: "-100%", zIndex: -1 }} />
+        <Box
+          className={classes.details}
+          sx={{ backgroundColor: `${bgColor}`, zIndex: 1 }}
+        >
+          <Box
+            sx={{
+              width: "100%",
+              background: `linear-gradient(to bottom, ${bgColor}b0  10%, ${bgColor}05  )`,
+              position: "absolute",
+              height: "100%",
+              left: 0,
+              bottom: "-100%",
+              zIndex: -1,
+            }}
+          />
           <ImageCompWithLoader
             img={(artistData.images && artistData?.images[0]?.url) || ""}
             alt={"artist"}
@@ -61,7 +84,15 @@ const ArtistProfile = () => {
             }}
           />
           <Box sx={{ flex: "1 1 auto" }}>
-            <Box sx={{ display: "flex", flex: 1, alignItems: "center", gap: "3px", marginBottom: "10px" }}>
+            <Box
+              sx={{
+                display: "flex",
+                flex: 1,
+                alignItems: "center",
+                gap: "3px",
+                marginBottom: "10px",
+              }}
+            >
               {(artistData?.followers?.total ?? 0) > 1000 && (
                 <ImageComp
                   img={imgVerifiedTick}
@@ -72,17 +103,51 @@ const ArtistProfile = () => {
                   }}
                 />
               )}
-              <Typography variant="h6" sx={{ textTransform: "capitalize", verticalAlign: "center" }}>
-                {(artistData?.followers?.total ?? 0) > 1000 ? `Verified ${artistData.type} ` : artistData.type}
+              <Typography
+                variant="h6"
+                sx={{ textTransform: "capitalize", verticalAlign: "center" }}
+              >
+                {(artistData?.followers?.total ?? 0) > 1000
+                  ? `Verified ${artistData.type} `
+                  : artistData.type}
               </Typography>
             </Box>
 
-            <Typography variant="h1" style={{ fontSize: "clamp(2rem,1rem + 4vw, 4rem)", fontWeight: "bolder" }} mb={"15px"}>
+            <Typography
+              variant="h1"
+              style={{
+                fontSize: "clamp(2rem,1rem + 4vw, 4rem)",
+                fontWeight: "bolder",
+              }}
+              mb={"15px"}
+            >
               {artistData?.name}
             </Typography>
-            <Typography variant="h6" mb={"2px"}>
-              {getFollowers(artistData?.followers?.total ?? 0, "monthly listeners")}
+            <Typography variant="h6" mb={"20px"}>
+              {getFollowers(
+                artistData?.followers?.total ?? 0,
+                "monthly listeners"
+              )}
             </Typography>
+            <LoaderButton
+              // startIcon={<Download />}
+              label={artistData.isFollowed ? "Following" : "Follow"}
+              loading={isfollowUnfollowArtistLoading}
+              variant={"outlined"}
+              color={"primary"}
+              style={{
+                padding: "5px 18px",
+                fontSize: "13px",
+                borderRadius: "20px",
+                borderColor: "text.primary",
+                color: "text.primary",
+                "&:hover": {
+                  borderColor: "text.primary",
+                  color: "text.primary",
+                },
+              }}
+              onClick={handleFollowUnfollowArtistAPICall}
+            />
           </Box>
         </Box>
         {renderArtistTopTracks()}
@@ -93,16 +158,33 @@ const ArtistProfile = () => {
   };
   const renderArtistTopTracks = () => {
     if (isArtistTopTracksListLoading) return renderSkeletons("top-tracks");
-    if ((artistTopTrackList.length == 0 && !isArtistTopTracksListLoading && !isArtistTopTracksListError) || isArtistTopTracksListError) return;
+    if (
+      (artistTopTrackList.length == 0 &&
+        !isArtistTopTracksListLoading &&
+        !isArtistTopTracksListError) ||
+      isArtistTopTracksListError
+    )
+      return;
     return (
       <>
         <TitleSeeAll
           title="Popular Tracks"
           isSeeAllBtnVisible={artistTopTrackList.length == 10}
-          style={{ width: "100%", marginTop: "20px", padding: "0 10px", zIndex: 1 }}
+          style={{
+            width: "100%",
+            marginTop: "20px",
+            padding: "0 10px",
+            zIndex: 1,
+          }}
           onSeeAllClick={listenerSeeAllTopTracks}
         />
-        <Grid container spacing={1} mb={"10px"} paddingX={"10px"} sx={{ zIndex: 1 }}>
+        <Grid
+          container
+          spacing={1}
+          mb={"10px"}
+          paddingX={"10px"}
+          sx={{ zIndex: 1 }}
+        >
           {artistTopTrackList.map((track, _) => (
             <Grid item xs={12} lg={6} key={track.id}>
               <ItemSongList
@@ -122,13 +204,24 @@ const ArtistProfile = () => {
   };
   const renderArtistAlbum = () => {
     if (isArtistAlbumsListLoading) return renderSkeletons("albums");
-    if ((artistAlbumsList.length == 0 && !isArtistAlbumsListLoading && !isArtistAlbumsListError) || isArtistAlbumsListError) return;
+    if (
+      (artistAlbumsList.length == 0 &&
+        !isArtistAlbumsListLoading &&
+        !isArtistAlbumsListError) ||
+      isArtistAlbumsListError
+    )
+      return;
     return (
       <>
         <TitleSeeAll
           title={`Albums By ${artistData?.name}`}
           isSeeAllBtnVisible={artistAlbumsList.length == 10}
-          style={{ width: "100%", marginTop: "20px", padding: "0 10px", zIndex: 1 }}
+          style={{
+            width: "100%",
+            marginTop: "20px",
+            padding: "0 10px",
+            zIndex: 1,
+          }}
           onSeeAllClick={listenerSeeAllAlbums}
         />
         <ContainerWithoutScrollbar>
@@ -148,14 +241,25 @@ const ArtistProfile = () => {
   };
   const renderRelatedArtists = () => {
     if (isRelatedArtistListLoading) return renderSkeletons("relatedArtists");
-    if ((relatedArtistList.length == 0 && !isRelatedArtistListLoading && !isRelatedArtistListError) || isRelatedArtistListError) return;
+    if (
+      (relatedArtistList.length == 0 &&
+        !isRelatedArtistListLoading &&
+        !isRelatedArtistListError) ||
+      isRelatedArtistListError
+    )
+      return;
 
     return (
       <>
         <TitleSeeAll
           title={`Fans Also like`}
           isSeeAllBtnVisible={relatedArtistList.length >= 10}
-          style={{ width: "100%", marginTop: "0px", padding: "0 10px", zIndex: 1 }}
+          style={{
+            width: "100%",
+            marginTop: "0px",
+            padding: "0 10px",
+            zIndex: 1,
+          }}
           onSeeAllClick={listenerSeeAllRelatedArtist}
         />
         <ContainerWithoutScrollbar>
@@ -177,8 +281,23 @@ const ArtistProfile = () => {
     if (seleletonsType == "top-tracks") {
       return (
         <>
-          <Skeleton variant="text" animation="wave" sx={{ width: "20%", height: `50px`, margin: "10px 0 0 10px", zIndex: 1 }} />
-          <Grid container spacing={1} mb={"10px"} paddingX={"10px"} sx={{ zIndex: 1 }}>
+          <Skeleton
+            variant="text"
+            animation="wave"
+            sx={{
+              width: "20%",
+              height: `50px`,
+              margin: "10px 0 0 10px",
+              zIndex: 1,
+            }}
+          />
+          <Grid
+            container
+            spacing={1}
+            mb={"10px"}
+            paddingX={"10px"}
+            sx={{ zIndex: 1 }}
+          >
             {Array.from({ length: 10 }, (_, index) => (
               <Grid item xs={12} lg={6} key={index}>
                 <ItemSongListSkeleton key={index} />
@@ -191,17 +310,28 @@ const ArtistProfile = () => {
 
     return (
       <Box sx={{ width: "100%" }}>
-        <Skeleton variant="text" animation="wave" sx={{ width: "20%", height: `50px`, marginBottom: "10px" }} />
+        <Skeleton
+          variant="text"
+          animation="wave"
+          sx={{ width: "20%", height: `50px`, marginBottom: "10px" }}
+        />
         <ContainerWithoutScrollbar sx={{ gap: "10px" }}>
           {Array.from({ length: 10 }, (_, index) => (
-            <ItemArtistAlbumListSkeleton isArtist={seleletonsType != "albums"} key={index} />
+            <ItemArtistAlbumListSkeleton
+              isArtist={seleletonsType != "albums"}
+              key={index}
+            />
           ))}
         </ContainerWithoutScrollbar>
       </Box>
     );
   };
 
-  return <RootContainer style={{ padding: 0 }}>{renderArtistProfile()}</RootContainer>;
+  return (
+    <RootContainer style={{ padding: 0 }}>
+      {renderArtistProfile()}
+    </RootContainer>
+  );
 };
 
 export default ArtistProfile;

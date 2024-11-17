@@ -1,6 +1,12 @@
 import { resetArtistState } from "@/store/slices/artist.slice";
 import { useAppDispatch, useAppSelector } from "@/store/store";
-import { getAlbumsOfArtist, getArtistById, getRelatedArtists, getTopTracksOfArtist } from "@/store/thunkServices/artist.thunksevices";
+import {
+  followUnfollowArtist,
+  getAlbumsOfArtist,
+  getArtistById,
+  getRelatedArtists,
+  getTopTracksOfArtist,
+} from "@/store/thunkServices/artist.thunksevices";
 import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
@@ -21,6 +27,7 @@ const useArtistProfileController = () => {
     isArtistAlbumsListError,
     isArtistAlbumsListLoading,
     artistAlbumsList,
+    isfollowUnfollowArtistLoading,
   } = useAppSelector((state) => state.artist);
   const dispatch = useAppDispatch();
 
@@ -33,13 +40,24 @@ const useArtistProfileController = () => {
           try {
             await Promise.all([
               dispatch(getTopTracksOfArtist({ artistId: artistId })),
+              dispatch(
+                getAlbumsOfArtist({ artistId: artistId, offset: 0, limit: 10 })
+              ),
               dispatch(getRelatedArtists({ artistId: artistId })),
-              dispatch(getAlbumsOfArtist({ artistId: artistId, offset: 0, limit: 10 })),
             ]);
           } catch {}
         });
     }
   }, [dispatch, artistId]);
+
+  const handleFollowUnfollowArtistAPICall = () => {
+    dispatch(
+      followUnfollowArtist({
+        forFollow: artistData?.isFollowed ? !artistData.isFollowed : true,
+        artistId: artistId ?? "",
+      })
+    );
+  };
 
   const listenerSeeAllTopTracks = () => {
     navigate(`/search/track/${artistData?.name}`);
@@ -62,6 +80,7 @@ const useArtistProfileController = () => {
     listenerGoToArtistDetails,
     listenerGoToAlbumDetails,
     listenerSeeAllRelatedArtist,
+    handleFollowUnfollowArtistAPICall,
     listenerSeeAllAlbums,
     isArtistDataLoading,
     isArtistDataError,
@@ -77,6 +96,7 @@ const useArtistProfileController = () => {
     isArtistAlbumsListError,
     isArtistAlbumsListLoading,
     artistAlbumsList,
+    isfollowUnfollowArtistLoading,
   };
 };
 

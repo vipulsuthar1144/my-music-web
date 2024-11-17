@@ -1,7 +1,13 @@
 import { toggleMoreOptionBottomSheet } from "@/store/slices/globleLoader.slice";
 import { useAppDispatch } from "@/store/store";
 import { mColors } from "@/theme/utils/mColors";
-import { StyledBackIcon, StyledForwardIcon, StyledMenuIcon, StyledNotificationIconFilled, StyledThemeModeIconFilled } from "@assets/SVG";
+import {
+  StyledBackIcon,
+  StyledForwardIcon,
+  StyledMenuIcon,
+  StyledNotificationIconFilled,
+  StyledThemeModeIconFilled,
+} from "@assets/SVG";
 import { appLogo } from "@assets/images";
 import { LoaderButton } from "@components/design/Button";
 import { Download, LogoutRounded } from "@mui/icons-material";
@@ -20,7 +26,16 @@ const AppTopBar = () => {
   const isSmallScreen = useIsSmallScreen(theme);
 
   return (
-    <AppBar position="sticky" sx={{ backgroundColor: mColors.EbonyBlack, backgroundImage: "none", boxShadow: "none", zIndex: 10 }} className={classes.appbar}>
+    <AppBar
+      position="sticky"
+      sx={{
+        backgroundColor: mColors.EbonyBlack,
+        backgroundImage: "none",
+        boxShadow: "none",
+        zIndex: 10,
+      }}
+      className={classes.appbar}
+    >
       <Toolbar disableGutters sx={{ paddingX: 1 }} className={classes.toolBar}>
         {/* <StyledMenuIcon onClick={() => dispatch(toggleMoreOptionBottomSheet(true))} /> */}
 
@@ -35,9 +50,19 @@ const AppTopBar = () => {
                 // ml: "5px",
               }}
             />
-            <Stack direction={"row"} justifyContent={"flex-end"} alignItems={"center"}>
-              <StyledNotificationIconFilled />
-              <StyledMenuIcon onClick={() => dispatch(toggleMoreOptionBottomSheet(true))} />
+            <Stack
+              direction={"row"}
+              justifyContent={"flex-end"}
+              alignItems={"center"}
+            >
+              <StyledNotificationIconFilled
+                onClick={() => {
+                  navigate("/notification");
+                }}
+              />
+              <StyledMenuIcon
+                onClick={() => dispatch(toggleMoreOptionBottomSheet(true))}
+              />
             </Stack>
           </>
         ) : (
@@ -55,8 +80,17 @@ const AppTopBar = () => {
               />
               <SearchBar />
             </Stack>
-            <Stack direction={"row"} justifyContent={"flex-end"} alignItems={"center"} flex={1}>
-              <StyledNotificationIconFilled />
+            <Stack
+              direction={"row"}
+              justifyContent={"flex-end"}
+              alignItems={"center"}
+              flex={1}
+            >
+              <StyledNotificationIconFilled
+                onClick={() => {
+                  navigate("/notification");
+                }}
+              />
               <StyledThemeModeIconFilled />
               {/* <StyledSettingIconFilled onClick={() => showCustomToast("clicked", "info")} /> */}
               {/* <StyledSettingIconFilled onClick={showToast} /> */}

@@ -13,18 +13,44 @@ import useUserProfileController from "./UserProfile.controller";
 
 const UserProfile = () => {
   const classes = useStyles();
-  const { lastPlaylistListItemRef, listenerGoToPlaylistDetails, isUserProfileError, isUserProfileLoading, userProfileData, bgColor, isUserPlaylistsError, isUserPlaylistsLoading, userPlaylists } =
-    useUserProfileController();
+  const {
+    lastPlaylistListItemRef,
+    listenerGoToPlaylistDetails,
+    // handleFollowUnfollowUserAPICall,
+    // isfollowUnfollowUserLoading,
+    isUserProfileError,
+    isUserProfileLoading,
+    userProfileData,
+    bgColor,
+    isUserPlaylistsError,
+    isUserPlaylistsLoading,
+    userPlaylists,
+  } = useUserProfileController();
 
   const renderUserProfile = () => {
     if (isUserProfileLoading) return <AppLoader />;
-    if (isUserProfileError) return <FallbackError type="something_went_wrong" />;
-    if (!userProfileData && !isUserProfileError && !isUserProfileLoading) return <FallbackError message="User Not Found" type="data_not_found" />;
+    if (isUserProfileError)
+      return <FallbackError type="something_went_wrong" />;
+    if (!userProfileData && !isUserProfileError && !isUserProfileLoading)
+      return <FallbackError message="User Not Found" type="data_not_found" />;
 
     return (
       <>
-        <Box className={classes.details} sx={{ backgroundColor: `${bgColor}`, zIndex: 1 }}>
-          <Box sx={{ width: "100%", background: `linear-gradient(to bottom, ${bgColor}b0  10%, ${bgColor}05  )`, position: "absolute", height: "100%", left: 0, bottom: "-100%", zIndex: -1 }} />
+        <Box
+          className={classes.details}
+          sx={{ backgroundColor: `${bgColor}`, zIndex: 1 }}
+        >
+          <Box
+            sx={{
+              width: "100%",
+              background: `linear-gradient(to bottom, ${bgColor}b0  10%, ${bgColor}05  )`,
+              position: "absolute",
+              height: "100%",
+              left: 0,
+              bottom: "-100%",
+              zIndex: -1,
+            }}
+          />
           <ImageCompWithLoader
             img={userProfileData?.images && userProfileData?.images[1]?.url}
             alt={"user"}
@@ -42,7 +68,15 @@ const UserProfile = () => {
             }}
           />
           <Box sx={{ flex: "1 1 auto" }}>
-            <Box sx={{ display: "flex", flex: 1, alignItems: "center", gap: "3px", marginBottom: "10px" }}>
+            <Box
+              sx={{
+                display: "flex",
+                flex: 1,
+                alignItems: "center",
+                gap: "3px",
+                marginBottom: "10px",
+              }}
+            >
               {(userProfileData?.followers?.total ?? 0) > 1000 && (
                 <ImageComp
                   img={imgVerifiedTick}
@@ -53,17 +87,49 @@ const UserProfile = () => {
                   }}
                 />
               )}
-              <Typography variant="h6" sx={{ textTransform: "capitalize", verticalAlign: "center" }}>
+              <Typography
+                variant="h6"
+                sx={{ textTransform: "capitalize", verticalAlign: "center" }}
+              >
                 Profile
               </Typography>
             </Box>
 
-            <Typography variant="h1" style={{ fontSize: "clamp(2rem,1rem + 4vw, 4rem)", fontWeight: "bolder" }} mb={"15px"}>
+            <Typography
+              variant="h1"
+              style={{
+                fontSize: "clamp(2rem,1rem + 4vw, 4rem)",
+                fontWeight: "bolder",
+              }}
+              mb={"15px"}
+            >
               {userProfileData?.display_name}
             </Typography>
-            <Typography variant="h6" mb={"2px"}>
-              {getFollowers(userProfileData?.followers?.total ?? 0, "followers")}
+            <Typography variant="h6" mb={"15px"}>
+              {getFollowers(
+                userProfileData?.followers?.total ?? 0,
+                "followers"
+              )}
             </Typography>
+            {/* <LoaderButton
+              // startIcon={<Download />}
+              label={userProfileData?.isFollowed ? "Following" : "Follow"}
+              loading={isfollowUnfollowUserLoading}
+              variant={"outlined"}
+              color={"primary"}
+              style={{
+                padding: "5px 18px",
+                fontSize: "13px",
+                borderRadius: "20px",
+                borderColor: "text.primary",
+                color: "text.primary",
+                "&:hover": {
+                  borderColor: "text.primary",
+                  color: "text.primary",
+                },
+              }}
+              onClick={handleFollowUnfollowUserAPICall}
+            /> */}
           </Box>
         </Box>
         {renderPlaylistList()}
@@ -71,17 +137,39 @@ const UserProfile = () => {
     );
   };
   const renderPlaylistList = () => {
-    if ((userPlaylists.length == 0 && !isUserPlaylistsError && !isUserPlaylistsLoading) || isUserPlaylistsError) return;
+    if (
+      (userPlaylists.length == 0 &&
+        !isUserPlaylistsError &&
+        !isUserPlaylistsLoading) ||
+      isUserPlaylistsError
+    )
+      return;
     return (
       <>
-        <Typography variant="h3" sx={{ zIndex: 1, margin: "20px 0px 0px 10px" }}>
+        <Typography
+          variant="h3"
+          sx={{ zIndex: 1, margin: "20px 0px 0px 10px" }}
+        >
           Public Playlist
         </Typography>
         <Grid container spacing={1} px={"10px"} sx={{ zIndex: 1 }}>
           {userPlaylists.map((item, index) => (
             <Grid item xs={6} sm={4} md={3} lg={1.5} key={`${item.id}${index}`}>
-              <Box component={"div"} sx={{ width: "100%" }} ref={index === userPlaylists.length - 1 ? lastPlaylistListItemRef : null}>
-                <ItemArtistAlbumsList onClick={() => listenerGoToPlaylistDetails(item.id)} subtitle={`${item.description}`} title={item.name} img={(item.images && item?.images[0]?.url) || ""} />
+              <Box
+                component={"div"}
+                sx={{ width: "100%" }}
+                ref={
+                  index === userPlaylists.length - 1
+                    ? lastPlaylistListItemRef
+                    : null
+                }
+              >
+                <ItemArtistAlbumsList
+                  onClick={() => listenerGoToPlaylistDetails(item.id)}
+                  subtitle={`${item.description}`}
+                  title={item.name}
+                  img={(item.images && item?.images[0]?.url) || ""}
+                />
               </Box>
             </Grid>
           ))}
@@ -97,7 +185,9 @@ const UserProfile = () => {
       </Grid>
     ));
   };
-  return <RootContainer style={{ padding: 0 }}>{renderUserProfile()}</RootContainer>;
+  return (
+    <RootContainer style={{ padding: 0 }}>{renderUserProfile()}</RootContainer>
+  );
 };
 
 export default UserProfile;

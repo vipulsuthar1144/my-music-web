@@ -1,7 +1,13 @@
 import { IArtistSlice } from "@/schemas/artist.schema";
 import { createSlice } from "@reduxjs/toolkit";
 import { getRandomColor } from "@utils/genaralFunctions";
-import { getAlbumsOfArtist, getArtistById, getRelatedArtists, getTopTracksOfArtist } from "../thunkServices/artist.thunksevices";
+import {
+  followUnfollowArtist,
+  getAlbumsOfArtist,
+  getArtistById,
+  getRelatedArtists,
+  getTopTracksOfArtist,
+} from "../thunkServices/artist.thunksevices";
 
 const intialState: IArtistSlice = {
   isArtistDataLoading: false,
@@ -21,6 +27,8 @@ const intialState: IArtistSlice = {
   isRelatedArtistListLoading: false,
   relatedArtistList: [],
   isRelatedArtistListError: false,
+
+  isfollowUnfollowArtistLoading: false,
 };
 
 export const artistSlice = createSlice({
@@ -74,7 +82,10 @@ export const artistSlice = createSlice({
         if (offset == 0) {
           state.artistAlbumsList = [...(action.payload?.items ?? [])];
         } else {
-          state.artistAlbumsList = [...state.artistAlbumsList, ...(action.payload?.items ?? [])];
+          state.artistAlbumsList = [
+            ...state.artistAlbumsList,
+            ...(action.payload?.items ?? []),
+          ];
         }
         if (offset >= 80) state.hasMoreArtistAlbumsList = false;
       })
@@ -103,6 +114,16 @@ export const artistSlice = createSlice({
       .addCase(getRelatedArtists.rejected, (state) => {
         state.isRelatedArtistListLoading = false;
         state.isRelatedArtistListError = true;
+      })
+      .addCase(followUnfollowArtist.pending, (state) => {
+        state.isfollowUnfollowArtistLoading = true;
+      })
+      .addCase(followUnfollowArtist.fulfilled, (state, action) => {
+        state.isfollowUnfollowArtistLoading = false;
+        state.artistData && (state.artistData.isFollowed = action.payload);
+      })
+      .addCase(followUnfollowArtist.rejected, (state) => {
+        state.isfollowUnfollowArtistLoading = false;
       });
   },
 });

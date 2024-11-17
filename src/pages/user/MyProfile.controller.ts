@@ -1,5 +1,10 @@
 import { useAppDispatch, useAppSelector } from "@/store/store";
-import { getMyProfile, getMyProfileFollowedArtists, getMyProfileTopArtists, getMyProfileTopTracks } from "@/store/thunkServices/user.thunksevices";
+import {
+  getMyProfile,
+  getMyProfileFollowedArtists,
+  getMyProfileTopArtists,
+  getMyProfileTopTracks,
+} from "@/store/thunkServices/user.thunksevices";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -23,15 +28,13 @@ const useMyProfileController = () => {
   } = useAppSelector((state) => state.user);
 
   useEffect(() => {
-    if (!myProfileData) {
-      dispatch(getMyProfile())
-        .unwrap()
-        .then(() => {
-          dispatch(getMyProfileTopArtists({ limit: 10, offset: 0 }));
-          dispatch(getMyProfileTopTracks({ limit: 10, offset: 0 }));
-          dispatch(getMyProfileFollowedArtists({ limit: 10 }));
-        });
-    }
+    dispatch(getMyProfile())
+      .unwrap()
+      .then(() => {
+        dispatch(getMyProfileTopArtists({ limit: 10, offset: 0 }));
+        dispatch(getMyProfileTopTracks({ limit: 10, offset: 0 }));
+        dispatch(getMyProfileFollowedArtists({ limit: 10 }));
+      });
   }, [dispatch]);
 
   const listenerSeeAllTopTracks = () => {

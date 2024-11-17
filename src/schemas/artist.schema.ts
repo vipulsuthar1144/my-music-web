@@ -4,6 +4,7 @@ import { ITrackSchema } from "./track.schema";
 
 export interface IArtistSchema {
   external_urls?: IExternalUrls;
+  isFollowed?: boolean;
   followers?: {
     href?: string;
     total?: number;
@@ -51,4 +52,6 @@ export interface IArtistSlice {
   isRelatedArtistListLoading: boolean;
   relatedArtistList: IArtistSchema[];
   isRelatedArtistListError: boolean;
+
+  isfollowUnfollowArtistLoading: boolean;
 }

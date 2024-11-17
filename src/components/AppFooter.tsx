@@ -1,12 +1,22 @@
-import { StyledFacebookIconOutlined, StyledInstagramIconOutlined, StyledTwitterIconOutlined } from "@assets/SVG";
-import { Box, Theme, Typography } from "@mui/material";
+import {
+  StyledFacebookIconOutlined,
+  StyledInstagramIconOutlined,
+  StyledTwitterIconOutlined,
+} from "@assets/SVG";
+import { Box, Theme, Typography, useTheme } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import footerData from "../config/jsons/footerLinks.json";
+import { useIsSmallScreen } from "@utils/constants";
 
 const AppFooter = () => {
   const classes = useStyles();
+  const theme = useTheme();
+  const isSmallScreen = useIsSmallScreen(theme);
 
-  const renderFooterLinks = (title: string, links: { title: string; url: string }[]) => {
+  const renderFooterLinks = (
+    title: string,
+    links: { title: string; url: string }[]
+  ) => {
     return (
       <Box className={classes.container}>
         <Typography variant="h5" fontWeight={"900"} mb={"5px"}>
@@ -25,16 +35,42 @@ const AppFooter = () => {
     );
   };
   return (
-    <Box className={classes.root}>
+    <Box
+      component={"footer"}
+      className={classes.root}
+      style={{ padding: isSmallScreen ? "20px 20px 50px 20px" : "20px" }}
+    >
       <Box className={classes.firstContainer}>
         {renderFooterLinks(footerData.company.title, footerData.company.links)}
-        {renderFooterLinks(footerData.communities.title, footerData.communities.links)}
-        {renderFooterLinks(footerData.useful_links.title, footerData.useful_links.links)}
-        {renderFooterLinks(footerData.spotify_plans.title, footerData.spotify_plans.links)}
-        <Box className={classes.container} sx={{ flex: 1, padding: "0", display: "flex", justifyContent: "flex-end" }}>
+        {renderFooterLinks(
+          footerData.communities.title,
+          footerData.communities.links
+        )}
+        {renderFooterLinks(
+          footerData.useful_links.title,
+          footerData.useful_links.links
+        )}
+        {renderFooterLinks(
+          footerData.spotify_plans.title,
+          footerData.spotify_plans.links
+        )}
+        <Box
+          className={classes.container}
+          sx={{
+            flex: 1,
+            padding: "0",
+            display: "flex",
+            justifyContent: "flex-end",
+          }}
+        >
           <Typography variant="subtitle1">
             {footerData.social_media_links.map((item, index) => (
-              <a className={classes.link} target="_blank" href={item.url} key={index}>
+              <a
+                className={classes.link}
+                target="_blank"
+                href={item.url}
+                key={index}
+              >
                 {item.title == "Instagram" && <StyledInstagramIconOutlined />}
                 {item.title == "Facebook" && <StyledFacebookIconOutlined />}
                 {item.title == "Twitter" && <StyledTwitterIconOutlined />}
@@ -48,7 +84,13 @@ const AppFooter = () => {
         <Box className={classes.container}>
           <Typography variant="subtitle1">
             {footerData.other_links.map((item, index) => (
-              <a className={classes.link} target="_blank" style={{ paddingRight: "10px" }} href={item.url} key={index}>
+              <a
+                className={classes.link}
+                target="_blank"
+                style={{ paddingRight: "10px" }}
+                href={item.url}
+                key={index}
+              >
                 {item.title}
               </a>
             ))}
@@ -66,12 +108,13 @@ export default AppFooter;
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
-    zIndex: 1,
+    zIndex: 8,
     marginTop: "30px",
     padding: "20px",
     width: "100%",
     height: "auto",
     borderRadius: "10px",
+    position: "relative",
   },
   firstContainer: {
     width: "100%",
@@ -89,6 +132,9 @@ const useStyles = makeStyles((theme: Theme) => ({
     color: theme.palette.text.secondary,
     textDecoration: "none",
     cursor: "pointer",
-    "&:hover": { textDecoration: "underline", color: theme.palette.text.primary },
+    "&:hover": {
+      textDecoration: "underline",
+      color: theme.palette.text.primary,
+    },
   },
 }));

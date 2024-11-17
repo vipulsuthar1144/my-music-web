@@ -3,7 +3,15 @@ import { IPlaylistSchema } from "@/schemas/playlist.schema";
 import { ITrackSchema } from "@/schemas/track.schema";
 import { createSlice } from "@reduxjs/toolkit";
 import { getRandomColor } from "@utils/genaralFunctions";
-import { getMyProfile, getMyProfileFollowedArtists, getMyProfileTopArtists, getMyProfileTopTracks, getUserPlaylist, getUserProfileById } from "../thunkServices/user.thunksevices";
+import {
+  followUnfollowUser,
+  getMyProfile,
+  getMyProfileFollowedArtists,
+  getMyProfileTopArtists,
+  getMyProfileTopTracks,
+  getUserPlaylist,
+  getUserProfileById,
+} from "../thunkServices/user.thunksevices";
 
 interface IUserSlice {
   isUserProfileLoading: boolean;
@@ -36,6 +44,8 @@ interface IUserSlice {
   isFollowedArtistListLoading: boolean;
   followedArtistList: IArtistSchema[];
   isFollowedArtistListError: boolean;
+
+  isfollowUnfollowUserLoading: boolean;
 }
 
 const intialState: IUserSlice = {
@@ -64,6 +74,7 @@ const intialState: IUserSlice = {
   isFollowedArtistListLoading: false,
   followedArtistList: [],
   isFollowedArtistListError: false,
+  isfollowUnfollowUserLoading: false,
 };
 
 export const userSlice = createSlice({
@@ -111,7 +122,10 @@ export const userSlice = createSlice({
         if (offset == 0) {
           state.userPlaylists = [...(action.payload?.items ?? [])];
         } else {
-          state.userPlaylists = [...state.userPlaylists, ...(action.payload?.items ?? [])];
+          state.userPlaylists = [
+            ...state.userPlaylists,
+            ...(action.payload?.items ?? []),
+          ];
         }
 
         if (offset >= 80) {
@@ -150,7 +164,10 @@ export const userSlice = createSlice({
         if (offset == 0) {
           state.myProfileTopArtistList = [...(action.payload?.items ?? [])];
         } else {
-          state.myProfileTopArtistList = [...state.myProfileTopArtistList, ...(action.payload?.items ?? [])];
+          state.myProfileTopArtistList = [
+            ...state.myProfileTopArtistList,
+            ...(action.payload?.items ?? []),
+          ];
         }
 
         if (offset >= 80) {
@@ -177,7 +194,10 @@ export const userSlice = createSlice({
         if (offset == 0) {
           state.myProfileTopTrackList = [...(action.payload?.items ?? [])];
         } else {
-          state.myProfileTopTrackList = [...state.myProfileTopTrackList, ...(action.payload?.items ?? [])];
+          state.myProfileTopTrackList = [
+            ...state.myProfileTopTrackList,
+            ...(action.payload?.items ?? []),
+          ];
         }
 
         if (offset >= 80) {
@@ -198,6 +218,17 @@ export const userSlice = createSlice({
       .addCase(getMyProfileFollowedArtists.rejected, (state) => {
         state.isFollowedArtistListLoading = false;
         state.isFollowedArtistListError = true;
+      })
+      .addCase(followUnfollowUser.pending, (state) => {
+        state.isfollowUnfollowUserLoading = true;
+      })
+      .addCase(followUnfollowUser.fulfilled, (state, action) => {
+        state.isfollowUnfollowUserLoading = false;
+        state.userProfileData &&
+          (state.userProfileData.isFollowed = action.payload);
+      })
+      .addCase(followUnfollowUser.rejected, (state) => {
+        state.isfollowUnfollowUserLoading = false;
       });
   },
 });

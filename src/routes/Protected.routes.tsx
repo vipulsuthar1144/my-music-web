@@ -5,6 +5,7 @@ import ArtistProfile from "@/pages/artist/ArtistProfile";
 import RelatedArtist from "@/pages/artist/RelatedArtist";
 import CurrentRoute from "@/pages/dummy/CurrentRoute";
 import Home from "@/pages/home/Home";
+import Notification from "@/pages/notification/Notification";
 
 import CategoryPlaylists from "@/pages/playlist/CategoryPlaylists";
 import PlaylistDetails from "@/pages/playlist/PlaylistDetails";
@@ -31,6 +32,10 @@ const ProtectedRoutes: RouteObject[] = [
   {
     path: "current",
     element: <CurrentRoute />,
+  },
+  {
+    path: "notification",
+    element: <Notification />,
   },
   {
     path: "search",
