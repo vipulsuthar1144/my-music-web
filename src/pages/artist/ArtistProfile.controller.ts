@@ -1,4 +1,5 @@
 import { resetArtistState } from "@/store/slices/artist.slice";
+import { toggleDialogImagePreview } from "@/store/slices/globleLoader.slice";
 import { useAppDispatch, useAppSelector } from "@/store/store";
 import {
   followUnfollowArtist,
@@ -74,6 +75,9 @@ const useArtistProfileController = () => {
   const listenerGoToAlbumDetails = (albumId?: string) => {
     albumId && navigate(`/album/${albumId}`);
   };
+  const listenerOpenDialogImagePreview = () => {
+    dispatch(toggleDialogImagePreview(true));
+  };
 
   return {
     listenerSeeAllTopTracks,
@@ -81,6 +85,7 @@ const useArtistProfileController = () => {
     listenerGoToAlbumDetails,
     listenerSeeAllRelatedArtist,
     handleFollowUnfollowArtistAPICall,
+    listenerOpenDialogImagePreview,
     listenerSeeAllAlbums,
     isArtistDataLoading,
     isArtistDataError,

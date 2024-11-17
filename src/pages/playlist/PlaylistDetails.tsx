@@ -13,6 +13,7 @@ import { formatDate, getFollowers } from "@utils/genaralFunctions";
 import ItemPlaylistTrackList from "../../components/ItemPlaylistTrackList";
 import ItemSongList from "../../components/ItemSongList";
 import usePlaylistDetailsController from "./PlaylistDetails.controller";
+import DialogImagePreview from "@components/dialog/DialogImagePreview";
 
 const PlaylistDetails = () => {
   const classes = useStyles();
@@ -23,6 +24,7 @@ const PlaylistDetails = () => {
     listenerGoToAlbumDetails,
     listenerGoToUserProfile,
     lastTrackListItemRef,
+    listenerOpenDialogImagePreview,
     isPlaylistDataError,
     isPlaylistDataLoading,
     playlistData,
@@ -34,15 +36,38 @@ const PlaylistDetails = () => {
 
   const renderPlaylistProfile = () => {
     if (isPlaylistDataLoading) return <AppLoader />;
-    if (isPlaylistDataError) return <FallbackError type="something_went_wrong" />;
-    if (!playlistData) return <FallbackError message="Playlist Not Found" type="data_not_found" />;
+    if (isPlaylistDataError)
+      return <FallbackError type="something_went_wrong" />;
+    if (!playlistData)
+      return (
+        <FallbackError message="Playlist Not Found" type="data_not_found" />
+      );
     return (
       <>
-        <Box className={classes.details} sx={{ backgroundColor: `${bgColor}`, zIndex: 1 }}>
-          <Box sx={{ width: "100%", background: `linear-gradient(to bottom, ${bgColor}b0  10%, ${bgColor}05  )`, position: "absolute", height: "100%", left: 0, bottom: "-100%", zIndex: -1 }} />
+        <Box
+          className={classes.details}
+          sx={{ backgroundColor: `${bgColor}`, zIndex: 1 }}
+        >
+          <Box
+            sx={{
+              width: "100%",
+              background: `linear-gradient(to bottom, ${bgColor}b0  10%, ${bgColor}05  )`,
+              position: "absolute",
+              height: "100%",
+              left: 0,
+              bottom: "-100%",
+              zIndex: -1,
+            }}
+          />
+          <DialogImagePreview
+            previewImageUrl={
+              (playlistData.images && playlistData?.images[0]?.url) || ""
+            }
+          />
           <ImageCompWithLoader
             img={(playlistData.images && playlistData?.images[0]?.url) || ""}
             alt={"album"}
+            onClick={listenerOpenDialogImagePreview}
             errorImage={imgDefaultSong}
             style={{
               // flex: "0 0 200px",
@@ -60,11 +85,20 @@ const PlaylistDetails = () => {
             <Typography variant="h6" sx={{ textTransform: "capitalize" }}>
               {playlistData.type}
             </Typography>
-            <Typography variant="h1" style={{ fontSize: "clamp(2rem,1rem + 4vw, 4rem)", fontWeight: "bolder" }} mb={"15px"}>
+            <Typography
+              variant="h1"
+              style={{
+                fontSize: "clamp(2rem,1rem + 4vw, 4rem)",
+                fontWeight: "bolder",
+              }}
+              mb={"15px"}
+            >
               {playlistData?.name}
             </Typography>
             <Typography variant="subtitle1" mb={"5px"}>
-              {playlistData?.description?.includes("href") ? "" : playlistData?.description}
+              {playlistData?.description?.includes("href")
+                ? ""
+                : playlistData?.description}
             </Typography>
             <Typography variant="h6" color="text.primary">
               <Box
@@ -72,11 +106,20 @@ const PlaylistDetails = () => {
                 onClick={() => {
                   listenerGoToUserProfile(playlistData.owner?.id);
                 }}
-                sx={{ cursor: "pointer", "&:hover": { textDecoration: "underline", color: "text.primary" } }}
+                sx={{
+                  cursor: "pointer",
+                  "&:hover": {
+                    textDecoration: "underline",
+                    color: "text.primary",
+                  },
+                }}
               >
                 {`${playlistData.owner?.display_name}`}
               </Box>
-              {` • ${playlistData.tracks?.total} songs • ${getFollowers(playlistData.followers?.total ?? 0, "saves")}`}
+              {` • ${playlistData.tracks?.total} songs • ${getFollowers(
+                playlistData.followers?.total ?? 0,
+                "saves"
+              )}`}
             </Typography>
           </Box>
         </Box>
@@ -86,16 +129,40 @@ const PlaylistDetails = () => {
   };
 
   const renderPlaylistTracks = () => {
-    if ((playlistTrackList.length == 0 && !isPlaylistTrackListLoading && !isPlaylistTrackListError) || isPlaylistTrackListError) return;
+    if (
+      (playlistTrackList.length == 0 &&
+        !isPlaylistTrackListLoading &&
+        !isPlaylistTrackListError) ||
+      isPlaylistTrackListError
+    )
+      return;
     return (
       <>
-        <Grid container spacing={1} mt={"20px"} mb={"10px"} paddingX={"10px"} sx={{ zIndex: 1 }}>
+        <Grid
+          container
+          spacing={1}
+          mt={"20px"}
+          mb={"10px"}
+          paddingX={"10px"}
+          sx={{ zIndex: 1 }}
+        >
           {playlistTrackList?.map((item, index) => (
             <Grid item xs={12} key={`${item?.track?.id}${index}`}>
-              <Box component={"div"} sx={{ width: "100%" }} ref={index === playlistTrackList.length - 1 ? lastTrackListItemRef : null}>
+              <Box
+                component={"div"}
+                sx={{ width: "100%" }}
+                ref={
+                  index === playlistTrackList.length - 1
+                    ? lastTrackListItemRef
+                    : null
+                }
+              >
                 {isSmallScreen ? (
                   <ItemSongList
-                    img={item?.track?.album?.images && item?.track?.album?.images[0]?.url}
+                    img={
+                      item?.track?.album?.images &&
+                      item?.track?.album?.images[0]?.url
+                    }
                     title={item?.track?.name}
                     track_no={index + 1}
                     subtitleArr={item?.track?.artists}
@@ -103,11 +170,16 @@ const PlaylistDetails = () => {
                   />
                 ) : (
                   <ItemPlaylistTrackList
-                    img={item?.track?.album?.images && item?.track?.album?.images[0]?.url}
+                    img={
+                      item?.track?.album?.images &&
+                      item?.track?.album?.images[0]?.url
+                    }
                     title={item?.track?.name}
                     track_no={index + 1}
                     albumName={item?.track?.album?.name}
-                    onAlbumClick={() => listenerGoToAlbumDetails(item?.track?.album?.id)}
+                    onAlbumClick={() =>
+                      listenerGoToAlbumDetails(item?.track?.album?.id)
+                    }
                     dateAdded={formatDate(item.added_at ?? "")}
                     subtitleArr={item?.track?.artists}
                     trackDuration={item?.track?.duration_ms}
@@ -125,12 +197,20 @@ const PlaylistDetails = () => {
   const renderSkeleton = () => {
     return Array.from({ length: 10 }, (_, index) => (
       <Grid item xs={12} key={index}>
-        {isSmallScreen ? <ItemSongListSkeleton haveIndex key={index} /> : <ItemPlaylistTrackListSkeleton key={index} />}
+        {isSmallScreen ? (
+          <ItemSongListSkeleton haveIndex key={index} />
+        ) : (
+          <ItemPlaylistTrackListSkeleton key={index} />
+        )}
       </Grid>
     ));
   };
 
-  return <RootContainer style={{ padding: 0 }}>{renderPlaylistProfile()}</RootContainer>;
+  return (
+    <RootContainer style={{ padding: 0 }}>
+      {renderPlaylistProfile()}
+    </RootContainer>
+  );
 };
 
 export default PlaylistDetails;

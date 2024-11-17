@@ -1,7 +1,11 @@
 import useLoadMore from "@/config/hooks/useLoadMore.hooks";
+import { toggleDialogImagePreview } from "@/store/slices/globleLoader.slice";
 import { resetPlaylistState } from "@/store/slices/playlist.slice";
 import { useAppDispatch, useAppSelector } from "@/store/store";
-import { getPlaylistById, getPlaylistTracks } from "@/store/thunkServices/playlist.thunkservices";
+import {
+  getPlaylistById,
+  getPlaylistTracks,
+} from "@/store/thunkServices/playlist.thunkservices";
 import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
@@ -33,9 +37,20 @@ const usePlaylistDetailsController = () => {
   }, [dispatch, playlistId]);
 
   const handleGetPlaylistTracks = () => {
-    playlistId && dispatch(getPlaylistTracks({ playlistId: playlistId, offset: playlistTrackListOffset }));
+    playlistId &&
+      dispatch(
+        getPlaylistTracks({
+          playlistId: playlistId,
+          offset: playlistTrackListOffset,
+        })
+      );
   };
-  const lastTrackListItemRef = useLoadMore(handleGetPlaylistTracks, isPlaylistTrackListLoading, hasMorePlaylistTrackList, isPlaylistTrackListError);
+  const lastTrackListItemRef = useLoadMore(
+    handleGetPlaylistTracks,
+    isPlaylistTrackListLoading,
+    hasMorePlaylistTrackList,
+    isPlaylistTrackListError
+  );
 
   const listenerGoToArtistDetails = (artistId?: string) => {
     artistId && navigate(`/artist/${artistId}`);
@@ -47,11 +62,16 @@ const usePlaylistDetailsController = () => {
     userId && navigate(`/user/${userId}`);
   };
 
+  const listenerOpenDialogImagePreview = () => {
+    dispatch(toggleDialogImagePreview(true));
+  };
+
   return {
     listenerGoToArtistDetails,
     listenerGoToAlbumDetails,
     listenerGoToUserProfile,
     lastTrackListItemRef,
+    listenerOpenDialogImagePreview,
     isPlaylistDataError,
     isPlaylistDataLoading,
     playlistData,

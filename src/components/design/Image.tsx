@@ -23,7 +23,13 @@ export interface IGlobleTitleSeeAllProps {
   onSeeAllClick?: (e: any) => void;
 }
 
-const ImageComp = ({ img, alt, style, onClick, isPreventClickEffect = false }: IGlobleImageProps) => {
+const ImageComp = ({
+  img,
+  alt,
+  style,
+  onClick,
+  isPreventClickEffect = false,
+}: IGlobleImageProps) => {
   return (
     <>
       <Box
@@ -33,6 +39,7 @@ const ImageComp = ({ img, alt, style, onClick, isPreventClickEffect = false }: I
         src={img}
         alt={alt}
         // loading="lazy"
+        draggable={false}
         sx={{
           width: "30%",
           maxWidth: "100%",
@@ -49,7 +56,14 @@ const ImageComp = ({ img, alt, style, onClick, isPreventClickEffect = false }: I
 
 export default ImageComp;
 
-const ImageCompWithLoader = ({ img, alt, style, onClick, errorImage = imgDefaultSong, isPreventClickEffect = false }: IGlobleImageProps) => {
+const ImageCompWithLoader = ({
+  img,
+  alt,
+  style,
+  onClick,
+  errorImage = imgDefaultSong,
+  isPreventClickEffect = false,
+}: IGlobleImageProps) => {
   const [imgSrc, setImgSrc] = useState(img);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -57,11 +71,21 @@ const ImageCompWithLoader = ({ img, alt, style, onClick, errorImage = imgDefault
     return getRandomColor();
   }, []);
   return (
-    <Box sx={{ width: "30%", height: "auto", overflow: "hidden", boxSizing: "border-box", ...style, backgroundColor: color }}>
+    <Box
+      sx={{
+        width: "30%",
+        height: "auto",
+        overflow: "hidden",
+        boxSizing: "border-box",
+        ...style,
+        backgroundColor: color,
+      }}
+    >
       <Box
         onClick={onClick}
         onMouseDown={(event) => isPreventClickEffect && event.stopPropagation()}
         component="img"
+        draggable={false}
         src={imgSrc}
         alt={alt}
         onLoad={() => {
@@ -85,11 +109,29 @@ const ImageCompWithLoader = ({ img, alt, style, onClick, errorImage = imgDefault
   );
 };
 
-const TitleSeeAll = ({ varient = "h3", title, btnText = "See all", onSeeAllClick, style, isSeeAllBtnVisible = true }: IGlobleTitleSeeAllProps) => {
+const TitleSeeAll = ({
+  varient = "h3",
+  title,
+  btnText = "See all",
+  onSeeAllClick,
+  style,
+  isSeeAllBtnVisible = true,
+}: IGlobleTitleSeeAllProps) => {
   return (
-    <Box sx={{ display: "flex", width: "100%", justifyContent: "space-between", alignItems: "center", zIndex: 1, ...style }}>
+    <Box
+      sx={{
+        display: "flex",
+        width: "100%",
+        justifyContent: "space-between",
+        alignItems: "center",
+        zIndex: 1,
+        ...style,
+      }}
+    >
       <Typography variant={varient}>{title}</Typography>
-      {isSeeAllBtnVisible && <TextButtonPrimary label={btnText} onClick={onSeeAllClick} />}
+      {isSeeAllBtnVisible && (
+        <TextButtonPrimary label={btnText} onClick={onSeeAllClick} />
+      )}
     </Box>
   );
 };

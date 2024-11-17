@@ -1,4 +1,5 @@
 import useLoadMore from "@/config/hooks/useLoadMore.hooks";
+import { toggleDialogImagePreview } from "@/store/slices/globleLoader.slice";
 import { resetUserState } from "@/store/slices/user.slice";
 import { useAppDispatch, useAppSelector } from "@/store/store";
 import {
@@ -63,11 +64,15 @@ const useUserProfileController = () => {
   const listenerGoToPlaylistDetails = (playlistId?: string) => {
     playlistId && navigate(`/playlist/${playlistId}`);
   };
+  const listenerOpenDialogImagePreview = () => {
+    dispatch(toggleDialogImagePreview(true));
+  };
 
   return {
     lastPlaylistListItemRef,
     listenerGoToPlaylistDetails,
     handleFollowUnfollowUserAPICall,
+    listenerOpenDialogImagePreview,
     isUserProfileError,
     isUserProfileLoading,
     userProfileData,

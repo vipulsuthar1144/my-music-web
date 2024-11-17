@@ -10,12 +10,14 @@ import { makeStyles } from "@mui/styles";
 import { getFollowers } from "@utils/genaralFunctions";
 import ItemArtistAlbumsList from "../../components/ItemArtistAlbumsList";
 import useUserProfileController from "./UserProfile.controller";
+import DialogImagePreview from "@components/dialog/DialogImagePreview";
 
 const UserProfile = () => {
   const classes = useStyles();
   const {
     lastPlaylistListItemRef,
     listenerGoToPlaylistDetails,
+    listenerOpenDialogImagePreview,
     // handleFollowUnfollowUserAPICall,
     // isfollowUnfollowUserLoading,
     isUserProfileError,
@@ -51,9 +53,16 @@ const UserProfile = () => {
               zIndex: -1,
             }}
           />
+          <DialogImagePreview
+            previewImageUrl={
+              (userProfileData?.images && userProfileData?.images[1]?.url) || ""
+            }
+            isArtist
+          />
           <ImageCompWithLoader
             img={userProfileData?.images && userProfileData?.images[1]?.url}
             alt={"user"}
+            onClick={listenerOpenDialogImagePreview}
             errorImage={imgDefaultArtist}
             style={{
               // flex: "0 0 200px",

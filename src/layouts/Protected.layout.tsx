@@ -1,4 +1,5 @@
 import useLocalStorage from "@/config/hooks/useLocalStorage.hooks";
+import TrackPlayer from "@/pages/player/TrackPlayer";
 import { sidebarWidth } from "@/theme/utils/globalTransitions";
 import { MGradientsDarkTheme } from "@/theme/utils/mGredient";
 import AppBottomNavigation from "@components/AppBottomNavigation";
@@ -30,7 +31,7 @@ const ProtectedLayout = () => {
 
   return (
     <Box className={classes.root}>
-      {/* {!isSmallScreen && <TrackPlayer />} */}
+      {!isSmallScreen && <TrackPlayer />}
       {!isSmallScreen && <AppSideBar />}
       {isSmallScreen && <AppBottomNavigation />}
 

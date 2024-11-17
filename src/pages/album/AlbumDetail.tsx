@@ -10,25 +10,58 @@ import { makeStyles } from "@mui/styles";
 import { Theme } from "react-toastify";
 import ItemSongList from "../../components/ItemSongList";
 import useAlbumDetailController from "./AlbumDetail.controller";
+import DialogImagePreview from "@components/dialog/DialogImagePreview";
 
 const AlbumDetail = () => {
   const classes = useStyles();
 
-  const { listenerGoToArtistDetails, lastTrackListItemRef, isAlbumDataError, isAlbumDataLoading, albumData, bgColor, isTrackListLoading, isTrackListError, trackList } = useAlbumDetailController();
+  const {
+    listenerGoToArtistDetails,
+    lastTrackListItemRef,
+    listenerOpenDialogImagePreview,
+    isAlbumDataError,
+    isAlbumDataLoading,
+    albumData,
+    bgColor,
+    isTrackListLoading,
+    isTrackListError,
+    trackList,
+  } = useAlbumDetailController();
 
   const renderAlbumProfile = () => {
     if (isAlbumDataLoading) return <AppLoader />;
-    if (isAlbumDataLoading) return <FallbackError type="something_went_wrong" />;
-    if (!albumData && !isAlbumDataError && !isAlbumDataLoading) return <FallbackError message="Album Not Found" type="data_not_found" />;
+    if (isAlbumDataLoading)
+      return <FallbackError type="something_went_wrong" />;
+    if (!albumData && !isAlbumDataError && !isAlbumDataLoading)
+      return <FallbackError message="Album Not Found" type="data_not_found" />;
 
     return (
       <>
-        <Box className={classes.details} sx={{ backgroundColor: `${bgColor}`, zIndex: 1 }}>
-          <Box sx={{ width: "100%", background: `linear-gradient(to bottom, ${bgColor}b0  10%, ${bgColor}05  )`, position: "absolute", height: "100%", left: 0, bottom: "-100%", zIndex: -1 }} />
+        <Box
+          className={classes.details}
+          sx={{ backgroundColor: `${bgColor}`, zIndex: 1 }}
+        >
+          <Box
+            sx={{
+              width: "100%",
+              background: `linear-gradient(to bottom, ${bgColor}b0  10%, ${bgColor}05  )`,
+              position: "absolute",
+              height: "100%",
+              left: 0,
+              bottom: "-100%",
+              zIndex: -1,
+            }}
+          />
+          <DialogImagePreview
+            previewImageUrl={
+              (albumData?.images && albumData?.images[0]?.url) || ""
+            }
+          />
           <ImageCompWithLoader
             img={(albumData?.images && albumData?.images[0]?.url) || ""}
             alt={"album"}
             errorImage={imgDefaultSong}
+            onClick={listenerOpenDialogImagePreview}
             style={{
               // flex: "0 0 200px",
               width: "250px",
@@ -45,14 +78,34 @@ const AlbumDetail = () => {
             <Typography variant="h6" sx={{ textTransform: "capitalize" }}>
               {albumData?.type}
             </Typography>
-            <Typography variant="h1" style={{ fontSize: "clamp(2rem,1rem + 4vw, 4rem)", fontWeight: "bolder" }} mb={"15px"}>
+            <Typography
+              variant="h1"
+              style={{
+                fontSize: "clamp(2rem,1rem + 4vw, 4rem)",
+                fontWeight: "bolder",
+              }}
+              mb={"15px"}
+            >
               {albumData?.name}
             </Typography>
             <Typography variant="h6" color="text.primary">
               {`${albumData?.release_date?.slice(0, 4)} • `}
               {albumData?.artists?.map((item, index) => (
-                <Box component={"span"} key={item.id} onClick={() => listenerGoToArtistDetails(item.id)} sx={{ cursor: "pointer", "&:hover": { textDecoration: "underline", color: "text.primary" } }}>
-                  {(albumData?.artists?.length ?? 0) - 1 == index ? `${item.name}` : `${item.name}, `}
+                <Box
+                  component={"span"}
+                  key={item.id}
+                  onClick={() => listenerGoToArtistDetails(item.id)}
+                  sx={{
+                    cursor: "pointer",
+                    "&:hover": {
+                      textDecoration: "underline",
+                      color: "text.primary",
+                    },
+                  }}
+                >
+                  {(albumData?.artists?.length ?? 0) - 1 == index
+                    ? `${item.name}`
+                    : `${item.name}, `}
                 </Box>
               ))}
               {` • ${albumData?.total_tracks} songs • ${albumData?.album_type}`}
@@ -65,16 +118,34 @@ const AlbumDetail = () => {
   };
 
   const renderAlbumsTracks = () => {
-    if ((trackList.length == 0 && !isTrackListLoading && !isTrackListError) || isTrackListError) return;
+    if (
+      (trackList.length == 0 && !isTrackListLoading && !isTrackListError) ||
+      isTrackListError
+    )
+      return;
     return (
       <>
         {/* <Typography variant="h3" sx={{ margin: "20px 0 10px 10px", zIndex: 1 }}>
           Tracks
         </Typography> */}
-        <Grid container spacing={1} mt={"20px"} mb={"10px"} paddingX={"10px"} sx={{ zIndex: 1 }}>
+        <Grid
+          container
+          spacing={1}
+          mt={"20px"}
+          mb={"10px"}
+          paddingX={"10px"}
+          sx={{ zIndex: 1 }}
+        >
           {trackList?.map((track, index) => (
             <Grid item xs={12} key={track.id}>
-              <Box key={track.id} component={"div"} sx={{ width: "100%" }} ref={index === trackList.length - 1 ? lastTrackListItemRef : null}>
+              <Box
+                key={track.id}
+                component={"div"}
+                sx={{ width: "100%" }}
+                ref={
+                  index === trackList.length - 1 ? lastTrackListItemRef : null
+                }
+              >
                 <ItemSongList
                   key={track.id}
                   img={albumData?.images && albumData?.images[0]?.url}
@@ -101,7 +172,9 @@ const AlbumDetail = () => {
     ));
   };
 
-  return <RootContainer style={{ padding: 0 }}>{renderAlbumProfile()}</RootContainer>;
+  return (
+    <RootContainer style={{ padding: 0 }}>{renderAlbumProfile()}</RootContainer>
+  );
 };
 
 export default AlbumDetail;

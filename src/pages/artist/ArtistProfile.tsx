@@ -19,6 +19,7 @@ import { getFollowers } from "@utils/genaralFunctions";
 import ItemArtistAlbumsList from "../../components/ItemArtistAlbumsList";
 import ItemSongList from "../../components/ItemSongList";
 import useArtistProfileController from "./ArtistProfile.controller";
+import DialogImagePreview from "@components/dialog/DialogImagePreview";
 
 const ArtistProfile = () => {
   const classes = useStyles();
@@ -27,6 +28,7 @@ const ArtistProfile = () => {
     listenerGoToArtistDetails,
     listenerGoToAlbumDetails,
     listenerSeeAllRelatedArtist,
+    listenerOpenDialogImagePreview,
     listenerSeeAllAlbums,
     handleFollowUnfollowArtistAPICall,
     isArtistDataLoading,
@@ -67,10 +69,17 @@ const ArtistProfile = () => {
               zIndex: -1,
             }}
           />
+          <DialogImagePreview
+            previewImageUrl={
+              (artistData.images && artistData?.images[0]?.url) || ""
+            }
+            isArtist
+          />
           <ImageCompWithLoader
             img={(artistData.images && artistData?.images[0]?.url) || ""}
             alt={"artist"}
             errorImage={imgDefaultArtist}
+            onClick={listenerOpenDialogImagePreview}
             style={{
               // flex: "0 0 200px",
               width: "250px",

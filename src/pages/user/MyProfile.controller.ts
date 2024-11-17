@@ -1,3 +1,4 @@
+import { toggleDialogImagePreview } from "@/store/slices/globleLoader.slice";
 import { useAppDispatch, useAppSelector } from "@/store/store";
 import {
   getMyProfile,
@@ -49,11 +50,15 @@ const useMyProfileController = () => {
   const listenerGoToArtistDetails = (artistId?: string) => {
     artistId && navigate(`/artist/${artistId}`);
   };
+  const listenerOpenDialogImagePreview = () => {
+    dispatch(toggleDialogImagePreview(true));
+  };
 
   return {
     listenerSeeAllTopTracks,
     listenerSeeAllTopArtists,
     listenerSeeAllFollowedArtists,
+    listenerOpenDialogImagePreview,
     listenerGoToArtistDetails,
     isMyProfileLoading,
     isMyProfileError,
