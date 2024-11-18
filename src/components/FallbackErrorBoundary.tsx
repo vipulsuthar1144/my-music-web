@@ -1,16 +1,20 @@
 import { MGradientsDarkTheme } from "@/theme/utils/mGredient";
-import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
-import { Box, Button, Typography } from "@mui/material";
+import { appLogoMyMusic } from "@assets/images";
+import "@components/css/FallbackErrorBoundary.css";
+import ImageComp from "./design/Image";
 
 interface IFallbackErrorProps {
   message?: string;
   description?: string;
 }
 
-const FallbackErrorBoundary = ({ message = "", description = "" }: IFallbackErrorProps) => {
+const FallbackErrorBoundary = ({
+  message = "",
+  description = "",
+}: IFallbackErrorProps) => {
   return (
-    <Box
-      sx={{
+    <div
+      style={{
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
@@ -20,16 +24,29 @@ const FallbackErrorBoundary = ({ message = "", description = "" }: IFallbackErro
         height: "100vh",
         background: MGradientsDarkTheme.backroundBlue,
         textAlign: "center",
-        p: "10px",
+        padding: "10px",
       }}
     >
-      <ErrorOutlineIcon sx={{ fontSize: 80, color: "error.main" }} />
-      <Typography variant="h1">{message == "" ? "Something went wrong with application." : message}</Typography>
-      <Typography variant="h6">{description == "" ? "Oops! Please try again later." : description}</Typography>
-      <Button variant="contained" color="primary" onClick={() => window.location.reload()}>
+      <ImageComp
+        img={appLogoMyMusic}
+        alt="My Music"
+        style={{
+          width: "200px",
+          height: "auto",
+          userSelect: "none",
+          marginBottom: "10px",
+        }}
+      />
+      <h2 style={{ fontSize: "35px" }}>
+        {message == "" ? "Something went wrong with application." : message}
+      </h2>
+      <h6 style={{ fontSize: "20px" }}>
+        {description == "" ? "Oops! Please try again later." : description}
+      </h6>
+      <button onClick={() => window.location.reload()} className="button">
         Try Again
-      </Button>
-    </Box>
+      </button>
+    </div>
   );
 };
 

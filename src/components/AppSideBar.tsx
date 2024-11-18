@@ -1,7 +1,16 @@
 import ImageComp from "@components/design/Image";
 import OverlaySidebar from "@components/design/Overlay";
 import { appLogo } from "@assets/images";
-import { AccountCircle, AccountCircleOutlined, Home, HomeOutlined, Search, SearchOutlined } from "@mui/icons-material";
+import {
+  AccountCircle,
+  AccountCircleOutlined,
+  FeaturedPlayList,
+  FeaturedPlayListOutlined,
+  Home,
+  HomeOutlined,
+  Search,
+  SearchOutlined,
+} from "@mui/icons-material";
 import { Box, useTheme } from "@mui/material";
 import { globleTransitionTime } from "@/theme/utils/globalTransitions";
 import { useEffect, useState } from "react";
@@ -27,10 +36,24 @@ const AppSideBar = () => {
       icon: <HomeOutlined />,
       filledIcon: <Home />,
     },
-    { id: "/search", name: "Search", icon: <SearchOutlined />, filledIcon: <Search /> },
-    // { id: "/favorites", name: "Favorite Songs", icon: <FavoriteBorder />, filledIcon: <Favorite /> },
-    // { id: "/track/recent-played", name: "Recent Played", icon: <HeadphonesOutlined />, filledIcon: <Headphones /> },
-    { id: "/user/me", name: "My Profile", icon: <AccountCircleOutlined />, filledIcon: <AccountCircle /> },
+    {
+      id: "/search",
+      name: "Search",
+      icon: <SearchOutlined />,
+      filledIcon: <Search />,
+    },
+    {
+      id: "/user/me/playlist",
+      name: "Playlist",
+      icon: <FeaturedPlayListOutlined />,
+      filledIcon: <FeaturedPlayList />,
+    },
+    {
+      id: "/user/me",
+      name: "My Profile",
+      icon: <AccountCircleOutlined />,
+      filledIcon: <AccountCircle />,
+    },
   ];
 
   const handleMenuItemClick = (to: string) => navigate(to, { replace: false });
@@ -52,7 +75,15 @@ const AppSideBar = () => {
         }}
         collapsed={isCollapse}
       >
-        <Box sx={{ display: "flex", flexDirection: "column", justifyContent: "center", height: "100%", position: "relative" }}>
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            height: "100%",
+            position: "relative",
+          }}
+        >
           <ImageComp
             img={appLogo}
             alt="Spotify"
@@ -92,11 +123,21 @@ const AppSideBar = () => {
             {menuItems.map((item, index) => (
               <MenuItem
                 key={index}
-                icon={hoveredItem === index || selectedItem === item.id ? item.filledIcon : item.icon}
+                icon={
+                  hoveredItem === index || selectedItem === item.id
+                    ? item.filledIcon
+                    : item.icon
+                }
                 style={{
                   userSelect: "none",
-                  color: hoveredItem === index || selectedItem === item.id ? `${theme.palette.text.primary}` : `${theme.palette.text.secondary}`,
-                  fontFamily: hoveredItem === index || selectedItem === item.id ? "Ubuntu-medium" : "Ubuntu-regular",
+                  color:
+                    hoveredItem === index || selectedItem === item.id
+                      ? `${theme.palette.text.primary}`
+                      : `${theme.palette.text.secondary}`,
+                  fontFamily:
+                    hoveredItem === index || selectedItem === item.id
+                      ? "Ubuntu-medium"
+                      : "Ubuntu-regular",
                 }}
                 onClick={() => {
                   handleMenuItemClick(item.id);

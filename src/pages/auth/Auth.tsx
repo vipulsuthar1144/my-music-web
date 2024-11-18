@@ -20,7 +20,7 @@ const Auth = () => {
       >
         <ImageComp
           img={appLogoMyMusic}
-          alt="Spotify"
+          alt="My Music"
           style={{
             width: "25%",
             height: "auto",

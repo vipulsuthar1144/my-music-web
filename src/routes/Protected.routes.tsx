@@ -3,11 +3,11 @@ import AlbumNewRelease from "@/pages/album/AlbumNewRelease";
 import ArtistAlbums from "@/pages/artist/ArtistAlbums";
 import ArtistProfile from "@/pages/artist/ArtistProfile";
 import RelatedArtist from "@/pages/artist/RelatedArtist";
-import CurrentRoute from "@/pages/dummy/CurrentRoute";
 import Home from "@/pages/home/Home";
 import Notification from "@/pages/notification/Notification";
 
 import CategoryPlaylists from "@/pages/playlist/CategoryPlaylists";
+import MyPlaylist from "@/pages/playlist/MyPlaylist";
 import PlaylistDetails from "@/pages/playlist/PlaylistDetails";
 import PopularPlaylists from "@/pages/playlist/PopularPlaylists";
 import Search from "@/pages/search/Search";
@@ -28,10 +28,6 @@ const ProtectedRoutes: RouteObject[] = [
   {
     path: "home",
     element: <Navigate to={"/"} replace={true} />,
-  },
-  {
-    path: "current",
-    element: <CurrentRoute />,
   },
   {
     path: "notification",
@@ -97,6 +93,10 @@ const ProtectedRoutes: RouteObject[] = [
       {
         index: true,
         element: <MyProfile />,
+      },
+      {
+        path: "playlist",
+        element: <MyPlaylist />,
       },
       {
         path: "top-tracks",

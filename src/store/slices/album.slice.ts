@@ -1,7 +1,11 @@
 import { IAlbumSlice } from "@/schemas/album.schema";
 import { createSlice } from "@reduxjs/toolkit";
 import { getRandomColor } from "@utils/genaralFunctions";
-import { getAlbumById, getAlbumTracks, getNewReleaseAlbums } from "../thunkServices/album.thunksevices";
+import {
+  getAlbumById,
+  getAlbumTracks,
+  getNewReleaseAlbums,
+} from "../thunkServices/album.thunksevices";
 
 const intialState: IAlbumSlice = {
   bgColor: "#9759a8",
@@ -71,7 +75,10 @@ export const albumSlice = createSlice({
         if (offset == 0) {
           state.trackList = [...(action.payload?.items ?? [])];
         } else {
-          state.trackList = [...state.trackList, ...(action.payload?.items ?? [])];
+          state.trackList = [
+            ...state.trackList,
+            ...(action.payload?.items ?? []),
+          ];
         }
         if (offset >= 80) {
           state.hasMoreTrackList = false;
@@ -94,9 +101,14 @@ export const albumSlice = createSlice({
         state.hasMoreNewReleaseAlbumList = total > offset + limit;
 
         if (offset == 0) {
-          state.newReleaseAlbumList = [...(action.payload?.albums?.items ?? [])];
+          state.newReleaseAlbumList = [
+            ...(action.payload?.albums?.items ?? []),
+          ];
         } else {
-          state.newReleaseAlbumList = [...state.newReleaseAlbumList, ...(action.payload?.albums?.items ?? [])];
+          state.newReleaseAlbumList = [
+            ...state.newReleaseAlbumList,
+            ...(action.payload?.albums?.items ?? []),
+          ];
         }
         if (offset >= 80) {
           state.hasMoreNewReleaseAlbumList = false;

@@ -56,7 +56,7 @@ const AppBottomNavigation = () => {
       // filledIcon: <Search />,
     },
     {
-      id: "/playlist",
+      id: "/user/me/playlist",
       name: "Playlist",
       icon: <FeaturedPlayListOutlined />,
       filledIcon: <FeaturedPlayList />,
