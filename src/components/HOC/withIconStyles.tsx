@@ -9,14 +9,30 @@ type WithIconStylesProps = {
   fontSize?: string;
 };
 
-const withIconStyles = <P extends SvgIconProps>(IconComponent: ComponentType<P>, title: string = "", defaultFontSize: string = "20px"): React.FC<Omit<P, "fontSize"> & WithIconStylesProps> => {
-  const WithIconStyles: React.FC<Omit<P, "fontSize"> & WithIconStylesProps> = ({ onClick, fontSize = defaultFontSize, ...props }) => {
+const withIconStyles = <P extends SvgIconProps>(
+  IconComponent: ComponentType<P>,
+  title: string = "",
+  defaultFontSize: string = "20px"
+): React.FC<Omit<P, "fontSize"> & WithIconStylesProps> => {
+  const WithIconStyles: React.FC<Omit<P, "fontSize"> & WithIconStylesProps> = ({
+    onClick,
+    fontSize = defaultFontSize,
+    ...props
+  }) => {
     const classes = useStyles();
 
     return (
       <Tooltip title={title} disableInteractive>
-        <IconButton aria-label={title ?? "button"} className={classes.root} onMouseDown={(event) => event.stopPropagation()} onClick={onClick}>
-          <IconComponent {...(props as P)} sx={{ fontSize, color: "text.primary" }} />
+        <IconButton
+          aria-label={title ?? "button"}
+          className={classes.root}
+          onMouseDown={(event) => event.stopPropagation()}
+          onClick={onClick}
+        >
+          <IconComponent
+            {...(props as P)}
+            sx={{ fontSize, color: "text.primary" }}
+          />
         </IconButton>
       </Tooltip>
     );

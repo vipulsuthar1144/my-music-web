@@ -5,6 +5,7 @@ import { useAppDispatch, useAppSelector } from "@/store/store";
 import {
   getAlbumById,
   getAlbumTracks,
+  saveUnsaveAlbum,
 } from "@/store/thunkServices/album.thunksevices";
 import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
@@ -23,6 +24,7 @@ const useAlbumDetailController = () => {
     trackList,
     trackListOffset,
     hasMoreTrackList,
+    isSaveUnsaveAlbumLoading,
   } = useAppSelector((state) => state.album);
 
   useEffect(() => {
@@ -39,6 +41,15 @@ const useAlbumDetailController = () => {
   const handleGetAlbumTracks = () => {
     albumId &&
       dispatch(getAlbumTracks({ albumId: albumId, offset: trackListOffset }));
+  };
+
+  const handleSaveUnsaveAlbumAPICall = () => {
+    dispatch(
+      saveUnsaveAlbum({
+        forSave: albumData?.isSaved ? !albumData.isSaved : true,
+        albumId: albumId ?? "",
+      })
+    );
   };
   const lastTrackListItemRef = useLoadMore(
     handleGetAlbumTracks,
@@ -59,6 +70,7 @@ const useAlbumDetailController = () => {
     listenerGoToArtistDetails,
     lastTrackListItemRef,
     listenerOpenDialogImagePreview,
+    handleSaveUnsaveAlbumAPICall,
     isAlbumDataError,
     isAlbumDataLoading,
     albumData,
@@ -68,6 +80,7 @@ const useAlbumDetailController = () => {
     trackList,
     trackListOffset,
     hasMoreTrackList,
+    isSaveUnsaveAlbumLoading,
   };
 };
 

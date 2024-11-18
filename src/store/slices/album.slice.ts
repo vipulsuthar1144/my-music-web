@@ -5,6 +5,8 @@ import {
   getAlbumById,
   getAlbumTracks,
   getNewReleaseAlbums,
+  getSavedAlbums,
+  saveUnsaveAlbum,
 } from "../thunkServices/album.thunksevices";
 
 const intialState: IAlbumSlice = {
@@ -23,6 +25,14 @@ const intialState: IAlbumSlice = {
   newReleaseAlbumList: [],
   hasMoreNewReleaseAlbumList: true,
   newReleaseAlbumListOffset: 0,
+
+  isSavedAlbumListError: false,
+  isSavedAlbumListLoading: false,
+  savedAlbumList: [],
+  hasMoreSavedAlbumList: true,
+  savedAlbumListOffset: 0,
+
+  isSaveUnsaveAlbumLoading: false,
 };
 
 export const albumSlice = createSlice({
@@ -117,6 +127,44 @@ export const albumSlice = createSlice({
       .addCase(getNewReleaseAlbums.rejected, (state) => {
         state.isNewReleaseAlbumListLoading = false;
         state.isNewReleaseAlbumListError = true;
+      })
+      .addCase(saveUnsaveAlbum.pending, (state) => {
+        state.isSaveUnsaveAlbumLoading = true;
+      })
+      .addCase(saveUnsaveAlbum.fulfilled, (state, action) => {
+        state.isSaveUnsaveAlbumLoading = false;
+        state.albumData && (state.albumData.isSaved = action.payload);
+      })
+      .addCase(saveUnsaveAlbum.rejected, (state) => {
+        state.isSaveUnsaveAlbumLoading = false;
+      })
+      .addCase(getSavedAlbums.pending, (state) => {
+        state.isSavedAlbumListLoading = true;
+      })
+      .addCase(getSavedAlbums.fulfilled, (state, action) => {
+        let offset = action.payload?.offset ?? 0;
+        let limit = action.payload?.limit ?? 0;
+        let total = action.payload?.total ?? 0;
+
+        state.isSavedAlbumListLoading = false;
+        state.savedAlbumListOffset = offset + limit;
+        state.hasMoreSavedAlbumList = total > offset + limit;
+
+        if (offset == 0) {
+          state.savedAlbumList = [...(action.payload?.items ?? [])];
+        } else {
+          state.savedAlbumList = [
+            ...state.savedAlbumList,
+            ...(action.payload?.items ?? []),
+          ];
+        }
+        if (offset >= 80) {
+          state.hasMoreSavedAlbumList = false;
+        }
+      })
+      .addCase(getSavedAlbums.rejected, (state) => {
+        state.isSavedAlbumListLoading = false;
+        state.isSavedAlbumListError = true;
       });
   },
 });

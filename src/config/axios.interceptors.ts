@@ -1,3 +1,5 @@
+import { toggleDialogPremiumRequired } from "@/store/slices/globleLoader.slice";
+import { store } from "@/store/store";
 import { LocalStorageKeys } from "@utils/constants";
 import { showCustomToast } from "@utils/customToast";
 import axios from "axios";
@@ -39,19 +41,31 @@ const responseErrorHandler = (error: any) => {
   } else if (error?.response?.status >= 400 && error?.response?.status <= 499) {
     if (error.response.status === 401) {
       localStorage.clear();
-      showCustomToast("Session Expired", "info");
+      showCustomToast("Session Expired", "error");
       window.location.href = "/auth";
       // window.location.href = `/auth?message=${encodeURIComponent("Session timeout")}&&path=${JSON.stringify(window.location)}`;
-    } else if (error.code === "ERR_BAD_REQUEST" && error.response.status === 403) {
+    } else if (
+      error.code === "ERR_BAD_REQUEST" &&
+      error.response.status === 403
+    ) {
       localStorage.clear();
-      // showCustomToast("Unautherized contact to Admin", "error");
       window.location.href = "/access_denied";
     } else if (error.response?.data?.Message) {
-      error.code = "RES_ERROR";
+    } else if (
+      error.code === "PREMIUM_REQUIRED" &&
+      error.response.status === 403
+    ) {
+      store.dispatch(toggleDialogPremiumRequired(true));
+    } else {
+      // error.code = "RES_ERROR";
+      showCustomToast(`${error.response?.data.message}`, "error");
     }
   } else if (error?.response?.status >= 500) {
     if (error.response?.data?.Message) {
-      showCustomToast(`${error.response?.data.Message ?? "Internal Server Error"}`, "error");
+      showCustomToast(
+        `${error.response?.data.Message ?? "Internal Server Error"}`,
+        "error"
+      );
     } else {
       showCustomToast("Internal Server Error", "error");
     }
@@ -59,4 +73,9 @@ const responseErrorHandler = (error: any) => {
   return Promise.reject(error);
 };
 
-export { requestErrorHandler, requestHandler, responseErrorHandler, responseHandler };
+export {
+  requestErrorHandler,
+  requestHandler,
+  responseErrorHandler,
+  responseHandler,
+};

@@ -1,4 +1,9 @@
-import { Palette, PaletteColor, PaletteColorOptions, PaletteOptions } from "@mui/material";
+import {
+  Palette,
+  PaletteColor,
+  PaletteColorOptions,
+  PaletteOptions,
+} from "@mui/material";
 import { mColors } from "./mColors";
 
 export interface IExtendedPaletteOptions extends PaletteOptions {
@@ -13,7 +18,7 @@ const lightThemePalette: IExtendedPaletteOptions = {};
 
 const darkThemePalette: IExtendedPaletteOptions = {
   primary: {
-    main: mColors.midNightBlack,
+    main: mColors.loaderPrimary,
   },
   secondary: {
     main: mColors.gunMetal,

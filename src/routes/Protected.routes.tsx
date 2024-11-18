@@ -1,5 +1,6 @@
 import AlbumDetail from "@/pages/album/AlbumDetail";
 import AlbumNewRelease from "@/pages/album/AlbumNewRelease";
+import AlbumSaved from "@/pages/album/AlbumSaved";
 import ArtistAlbums from "@/pages/artist/ArtistAlbums";
 import ArtistProfile from "@/pages/artist/ArtistProfile";
 import RelatedArtist from "@/pages/artist/RelatedArtist";
@@ -97,6 +98,10 @@ const ProtectedRoutes: RouteObject[] = [
       {
         path: "playlist",
         element: <MyPlaylist />,
+      },
+      {
+        path: "saved-albums",
+        element: <AlbumSaved />,
       },
       {
         path: "top-tracks",

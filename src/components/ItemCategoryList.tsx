@@ -7,7 +7,7 @@ import { useMemo, useState } from "react";
 
 type ItemCategoryListProps = {
   category: ICategory;
-  onClick: () => void;
+  onClick?: () => void;
 };
 
 const ItemCategoryList = ({ category, onClick }: ItemCategoryListProps) => {
@@ -39,9 +39,19 @@ const ItemCategoryList = ({ category, onClick }: ItemCategoryListProps) => {
         onMouseLeave={() => {
           setIsHovered(false);
         }}
-        sx={{ height: "100%", display: "flex", justifyContent: "flex-start", alignItems: "flex-start" }}
+        sx={{
+          height: "100%",
+          display: "flex",
+          justifyContent: "flex-start",
+          alignItems: "flex-start",
+        }}
       >
-        <Typography variant="h4" position={"relative"} style={{ zIndex: 2 }} m={"20px"}>
+        <Typography
+          variant="h4"
+          position={"relative"}
+          style={{ zIndex: 2 }}
+          m={"20px"}
+        >
           {category.name}
         </Typography>
         <ImageCompWithLoader
@@ -52,7 +62,9 @@ const ItemCategoryList = ({ category, onClick }: ItemCategoryListProps) => {
             position: "absolute",
             top: "30%",
             left: "60%",
-            transform: isHovered ? " rotate(-45deg) scale(1.15) " : "scale(1) rotate(-45deg)",
+            transform: isHovered
+              ? " rotate(-45deg) scale(1.15) "
+              : "scale(1) rotate(-45deg)",
             width: "50%",
             aspectRatio: 1,
             zIndex: 1,

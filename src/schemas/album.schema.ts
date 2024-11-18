@@ -5,6 +5,7 @@ import { IRestrictions, ITrackSchema } from "./track.schema";
 
 export interface IAlbumSchema {
   album_type?: string;
+  isSaved?: boolean;
   artists?: IArtistSchema[];
   available_markets?: string[];
   external_urls?: IExternalUrls;
@@ -38,4 +39,12 @@ export interface IAlbumSlice {
   isNewReleaseAlbumListError: boolean;
   hasMoreNewReleaseAlbumList: boolean;
   newReleaseAlbumListOffset: number;
+
+  isSaveUnsaveAlbumLoading: boolean;
+
+  isSavedAlbumListLoading: boolean;
+  savedAlbumList: { album: IAlbumSchema }[];
+  isSavedAlbumListError: boolean;
+  hasMoreSavedAlbumList: boolean;
+  savedAlbumListOffset: number;
 }

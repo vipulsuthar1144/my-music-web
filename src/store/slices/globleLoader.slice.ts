@@ -5,6 +5,7 @@ type TGlobleLoader = {
   topLoadingProgress: number;
   openMoreOptionBottomSheet: boolean;
   openDialogImagePreview: boolean;
+  openDialogPremiumRequired: boolean;
 };
 
 const intialState: TGlobleLoader = {
@@ -12,6 +13,7 @@ const intialState: TGlobleLoader = {
   topLoadingProgress: 0,
   openMoreOptionBottomSheet: false,
   openDialogImagePreview: false,
+  openDialogPremiumRequired: false,
 };
 
 export const globleLoaderSlice = createSlice({
@@ -27,6 +29,9 @@ export const globleLoaderSlice = createSlice({
     toggleDialogImagePreview: (state, action) => {
       state.openDialogImagePreview = action.payload;
     },
+    toggleDialogPremiumRequired: (state, action) => {
+      state.openDialogPremiumRequired = action.payload;
+    },
   },
 });
 
@@ -34,6 +39,7 @@ export const {
   setTopLoadingProgress,
   toggleMoreOptionBottomSheet,
   toggleDialogImagePreview,
+  toggleDialogPremiumRequired,
 } = globleLoaderSlice.actions;
 
 export default globleLoaderSlice.reducer;

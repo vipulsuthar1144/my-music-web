@@ -1,16 +1,18 @@
 import { globleEaseInOutTransitionTime } from "@/theme/utils/globalTransitions";
 import { imgDefaultSong } from "@assets/images";
 import AppLoader from "@components/AppLoader";
+import { LoaderButton } from "@components/design/Button";
 import { ImageCompWithLoader } from "@components/design/Image";
 import { RootContainer } from "@components/design/styledComponents";
+import DialogImagePreview from "@components/dialog/DialogImagePreview";
 import FallbackError from "@components/FallbackError";
 import ItemSongListSkeleton from "@components/skeletons/ItemSongLIst.skeleton";
+import { Add, Check } from "@mui/icons-material";
 import { Box, Grid, Typography } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { Theme } from "react-toastify";
 import ItemSongList from "../../components/ItemSongList";
 import useAlbumDetailController from "./AlbumDetail.controller";
-import DialogImagePreview from "@components/dialog/DialogImagePreview";
 
 const AlbumDetail = () => {
   const classes = useStyles();
@@ -19,6 +21,7 @@ const AlbumDetail = () => {
     listenerGoToArtistDetails,
     lastTrackListItemRef,
     listenerOpenDialogImagePreview,
+    handleSaveUnsaveAlbumAPICall,
     isAlbumDataError,
     isAlbumDataLoading,
     albumData,
@@ -26,6 +29,7 @@ const AlbumDetail = () => {
     isTrackListLoading,
     isTrackListError,
     trackList,
+    isSaveUnsaveAlbumLoading,
   } = useAlbumDetailController();
 
   const renderAlbumProfile = () => {
@@ -88,7 +92,7 @@ const AlbumDetail = () => {
             >
               {albumData?.name}
             </Typography>
-            <Typography variant="h6" color="text.primary">
+            <Typography variant="h6" color="text.primary" mb={"15px"}>
               {`${albumData?.release_date?.slice(0, 4)} • `}
               {albumData?.artists?.map((item, index) => (
                 <Box
@@ -110,6 +114,28 @@ const AlbumDetail = () => {
               ))}
               {` • ${albumData?.total_tracks} songs • ${albumData?.album_type}`}
             </Typography>
+            <LoaderButton
+              startIcon={albumData?.isSaved ? <Check /> : <Add />}
+              label={albumData?.isSaved ? "Saved" : "Save"}
+              loading={isSaveUnsaveAlbumLoading}
+              variant={"outlined"}
+              color={"primary"}
+              style={{
+                "& .MuiButton-startIcon": {
+                  marginRight: "3px",
+                },
+                padding: "5px 18px",
+                fontSize: "13px",
+                borderRadius: "20px",
+                borderColor: "text.primary",
+                color: "text.primary",
+                "&:hover": {
+                  borderColor: "text.primary",
+                  color: "text.primary",
+                },
+              }}
+              onClick={handleSaveUnsaveAlbumAPICall}
+            />
           </Box>
         </Box>
         {renderAlbumsTracks()}

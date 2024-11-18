@@ -11,14 +11,16 @@ export const scopes = [
   "user-read-currently-playing",
   "user-read-recently-played",
   "user-read-playback-state",
-  "user-top-read",
   "user-modify-playback-state",
   "playlist-read-private",
   "playlist-read-collaborative",
+  "user-top-read",
   "user-read-email",
   "user-read-private",
   "user-follow-read",
   "user-follow-modify",
+  "user-library-read",
+  "user-library-modify",
 ];
 
 export const LocalStorageKeys = {
