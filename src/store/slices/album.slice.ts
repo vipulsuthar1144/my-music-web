@@ -54,6 +54,12 @@ export const albumSlice = createSlice({
       state.newReleaseAlbumList = [];
       state.hasMoreNewReleaseAlbumList = true;
       state.newReleaseAlbumListOffset = 0;
+
+      state.isSavedAlbumListLoading = false;
+      state.isSavedAlbumListError = false;
+      state.savedAlbumList = [];
+      state.hasMoreSavedAlbumList = true;
+      state.savedAlbumListOffset = 0;
     },
   },
   extraReducers: (builder) => {
