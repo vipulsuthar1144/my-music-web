@@ -85,7 +85,7 @@ const ImageCompWithLoader = ({
         onClick={onClick}
         onMouseDown={(event) => isPreventClickEffect && event.stopPropagation()}
         component="img"
-        draggable={false}
+        // draggable={false}
         src={imgSrc}
         alt={alt}
         onLoad={() => {

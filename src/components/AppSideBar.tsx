@@ -1,18 +1,18 @@
+import { globleTransitionTime } from "@/theme/utils/globalTransitions";
+import { appLogo } from "@assets/images";
 import ImageComp from "@components/design/Image";
 import OverlaySidebar from "@components/design/Overlay";
-import { appLogo } from "@assets/images";
 import {
   AccountCircle,
   AccountCircleOutlined,
-  FeaturedPlayList,
-  FeaturedPlayListOutlined,
   Home,
   HomeOutlined,
+  LibraryMusic,
+  LibraryMusicOutlined,
   Search,
   SearchOutlined,
 } from "@mui/icons-material";
 import { Box, useTheme } from "@mui/material";
-import { globleTransitionTime } from "@/theme/utils/globalTransitions";
 import { useEffect, useState } from "react";
 import { Menu, MenuItem, Sidebar, sidebarClasses } from "react-pro-sidebar";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -43,14 +43,14 @@ const AppSideBar = () => {
       filledIcon: <Search />,
     },
     {
-      id: "/user/me/playlist",
-      name: "Playlist",
-      icon: <FeaturedPlayListOutlined />,
-      filledIcon: <FeaturedPlayList />,
+      id: "/collection",
+      name: "Your Library",
+      icon: <LibraryMusicOutlined />,
+      filledIcon: <LibraryMusic />,
     },
     {
       id: "/user/me",
-      name: "My Profile",
+      name: "Profile",
       icon: <AccountCircleOutlined />,
       filledIcon: <AccountCircle />,
     },

@@ -55,7 +55,7 @@
     ]
   },
   "spotify_plans": {
-    "title": "Spotify plans",
+    "title": "Subscription plans",
     "links": [
       {
         "title": "Premium Individual",
@@ -74,7 +74,7 @@
         "url": "https://www.spotify.com/in-en/student/?ref=spotifycom_footer_premium_student"
       },
       {
-        "title": "Spotify Free",
+        "title": "Free",
         "url": "https://www.spotify.com/in-en/free/?ref=spotifycom_footer_free"
       }
     ]

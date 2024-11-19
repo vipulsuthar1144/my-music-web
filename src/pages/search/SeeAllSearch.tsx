@@ -25,8 +25,19 @@ const SeeAllSearch = () => {
   } = useSeeAllSearchController();
 
   const renderDataList = () => {
-    if (isSeeAllDataListError) return <FallbackError type="something_went_wrong" />;
-    if (seeAllDataList.length == 0 && !isSeeAllDataListError && !isSeeAllDataListLoading) return <FallbackError message={`No ${searchType} Found`} type="data_not_found" />;
+    if (isSeeAllDataListError)
+      return <FallbackError type="something_went_wrong" />;
+    if (
+      seeAllDataList.length == 0 &&
+      !isSeeAllDataListError &&
+      !isSeeAllDataListLoading
+    )
+      return (
+        <FallbackError
+          message={`No ${searchType} Found`}
+          type="data_not_found"
+        />
+      );
 
     switch (searchType) {
       case "track":
@@ -38,7 +49,12 @@ const SeeAllSearch = () => {
       case "album":
         return renderAlbumList();
       default:
-        return <FallbackError message={`No ${searchType} Found`} type="data_not_found" />;
+        return (
+          <FallbackError
+            message={`No ${searchType} Found`}
+            type="data_not_found"
+          />
+        );
     }
   };
   const renderTrackList = () => {
@@ -46,8 +62,23 @@ const SeeAllSearch = () => {
       <Grid container spacing={1}>
         {seeAllDataList.map((track: ITrackSchema, index) => (
           <Grid item xs={12} lg={6} key={track.id}>
-            <Box key={track.id} component={"div"} sx={{ width: "100%" }} ref={index === seeAllDataList.length - 1 ? lastArtistListItemRef : null}>
-              <ItemSongList key={track.id} img={track?.album?.images && track?.album?.images[0]?.url} title={track?.name} subtitleArr={track.artists} trackDuration={track.duration_ms} />
+            <Box
+              key={track.id}
+              component={"div"}
+              sx={{ width: "100%" }}
+              ref={
+                index === seeAllDataList.length - 1
+                  ? lastArtistListItemRef
+                  : null
+              }
+            >
+              <ItemSongList
+                key={track.id}
+                img={track?.album?.images && track?.album?.images[0]?.url}
+                title={track?.name}
+                subtitleArr={track.artists}
+                trackDuration={track.duration_ms}
+              />
             </Box>
           </Grid>
         ))}
@@ -60,7 +91,16 @@ const SeeAllSearch = () => {
       <Grid container spacing={1}>
         {seeAllDataList.map((item: IArtistSchema, index) => (
           <Grid item xs={6} sm={4} md={3} lg={1.5} key={item.id}>
-            <Box key={item.id} component={"div"} sx={{ width: "100%" }} ref={index === seeAllDataList.length - 1 ? lastArtistListItemRef : null}>
+            <Box
+              key={item.id}
+              component={"div"}
+              sx={{ width: "100%" }}
+              ref={
+                index === seeAllDataList.length - 1
+                  ? lastArtistListItemRef
+                  : null
+              }
+            >
               <ItemArtistAlbumsList
                 onClick={() => listenerGoToArtistDetails(item.id)}
                 key={item.id}
@@ -82,7 +122,16 @@ const SeeAllSearch = () => {
         <Grid container spacing={1}>
           {seeAllDataList.map((item: IAlbumSchema, index) => (
             <Grid item xs={6} sm={4} md={3} lg={1.5} key={item.id}>
-              <Box key={item.id} component={"div"} sx={{ width: "100%" }} ref={index === seeAllDataList.length - 1 ? lastArtistListItemRef : null}>
+              <Box
+                key={item.id}
+                component={"div"}
+                sx={{ width: "100%" }}
+                ref={
+                  index === seeAllDataList.length - 1
+                    ? lastArtistListItemRef
+                    : null
+                }
+              >
                 <ItemArtistAlbumsList
                   key={item.id}
                   onClick={() => listenerGoToAlbumDetails(item.id)}
@@ -105,7 +154,16 @@ const SeeAllSearch = () => {
         <Grid container spacing={1}>
           {seeAllDataList.map((item: IPlaylistSchema, index) => (
             <Grid item xs={6} sm={4} md={3} lg={1.5} key={item.id}>
-              <Box key={item.id} component={"div"} sx={{ width: "100%" }} ref={index === seeAllDataList.length - 1 ? lastArtistListItemRef : null}>
+              <Box
+                key={item.id}
+                component={"div"}
+                sx={{ width: "100%" }}
+                ref={
+                  index === seeAllDataList.length - 1
+                    ? lastArtistListItemRef
+                    : null
+                }
+              >
                 <ItemArtistAlbumsList
                   key={item.id}
                   onClick={() => listenerGoToPlaylistDetails(item.id)}
@@ -131,7 +189,10 @@ const SeeAllSearch = () => {
     }
     return Array.from({ length: 20 }, (_, index) => (
       <Grid item xs={6} sm={4} md={3} lg={1.5} key={index}>
-        <ItemArtistAlbumListSkeleton isArtist={searchType == "artist"} key={index} />
+        <ItemArtistAlbumListSkeleton
+          isArtist={searchType == "artist"}
+          key={index}
+        />
       </Grid>
     ));
   };

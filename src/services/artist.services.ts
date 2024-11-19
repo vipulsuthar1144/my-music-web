@@ -20,20 +20,20 @@ export const checkFollowArtistOrUserAPI = async (
 };
 
 export const followUnfollowArtistOrUserAPI = async (
-  forFollow: boolean = true,
+  isFollowed: boolean = false,
   artistId: string,
   type: TArtistOrUser = "artist",
   signal: AbortSignal
 ) => {
   let result;
-  if (forFollow) {
+  if (!isFollowed) {
     result = await apiInstance.put(
       `me/following?type=${type}&ids=${artistId}`,
       {
         signal,
       }
     );
-    console.log(forFollow, " followUnfollowArtistOrUserAPI : ", result);
+    console.log(isFollowed, " followUnfollowArtistOrUserAPI : ", result);
 
     if (result.status == 204 || result.status == 200) {
       return true;
@@ -45,14 +45,14 @@ export const followUnfollowArtistOrUserAPI = async (
         signal,
       }
     );
-    console.log(forFollow, " followUnfollowArtistOrUserAPI : ", result);
+    console.log(isFollowed, " followUnfollowArtistOrUserAPI : ", result);
 
     if (result.status == 204 || result.status == 200) {
       return false;
     }
   }
 
-  return forFollow;
+  return isFollowed;
 };
 
 export const getAlbumsOfArtistAPI = async (

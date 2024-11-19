@@ -54,7 +54,7 @@ const useArtistProfileController = () => {
   const handleFollowUnfollowArtistAPICall = () => {
     dispatch(
       followUnfollowArtist({
-        forFollow: artistData?.isFollowed ? !artistData.isFollowed : true,
+        isFollowed: artistData?.isFollowed ?? false,
         artistId: artistId ?? "",
       })
     );

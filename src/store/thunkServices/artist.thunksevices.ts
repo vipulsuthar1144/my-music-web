@@ -33,12 +33,12 @@ export const getArtistById = getAsyncThunk<IArtistSchema, { artistId: string }>(
 
 export const followUnfollowArtist = getAsyncThunk<
   boolean,
-  { forFollow: boolean; artistId: string }
+  { isFollowed: boolean; artistId: string }
 >(
   "PUT/DELETE/followUnfollowArtist",
-  async ({ forFollow, artistId }, signal) => {
+  async ({ isFollowed, artistId }, signal) => {
     const result = await followUnfollowArtistOrUserAPI(
-      forFollow,
+      isFollowed,
       artistId,
       "artist",
       signal

@@ -3,10 +3,10 @@ import { mColors } from "@/theme/utils/mColors";
 import {
   AccountCircle,
   AccountCircleOutlined,
-  FeaturedPlayList,
-  FeaturedPlayListOutlined,
   Home,
   HomeOutlined,
+  LibraryMusic,
+  LibraryMusicOutlined,
   PlayArrow,
   Search,
   SearchOutlined,
@@ -56,10 +56,10 @@ const AppBottomNavigation = () => {
       // filledIcon: <Search />,
     },
     {
-      id: "/user/me/playlist",
-      name: "Playlist",
-      icon: <FeaturedPlayListOutlined />,
-      filledIcon: <FeaturedPlayList />,
+      id: "/collection",
+      name: "Your Library",
+      icon: <LibraryMusicOutlined />,
+      filledIcon: <LibraryMusic />,
     },
     {
       id: "/user/me",

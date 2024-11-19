@@ -8,16 +8,17 @@ import Home from "@/pages/home/Home";
 import Notification from "@/pages/notification/Notification";
 
 import CategoryPlaylists from "@/pages/playlist/CategoryPlaylists";
-import MyPlaylist from "@/pages/playlist/MyPlaylist";
 import PlaylistDetails from "@/pages/playlist/PlaylistDetails";
 import PopularPlaylists from "@/pages/playlist/PopularPlaylists";
 import Search from "@/pages/search/Search";
 import SeeAllSearch from "@/pages/search/SeeAllSearch";
 import RecentPlayed from "@/pages/track/RecentPlayed";
+import SavedTracks from "@/pages/track/SavedTracks";
 import MyProfile from "@/pages/user/MyProfile";
 import SeeAllMyProfile from "@/pages/user/SeeAllMyProfile";
 import UserProfile from "@/pages/user/UserProfile";
 import { Navigate, RouteObject } from "react-router-dom";
+import MyLibrary from "@/pages/library/MyLibrary";
 
 // const Home = lazy(() => import("@/pages/home/Home"));
 
@@ -88,6 +89,7 @@ const ProtectedRoutes: RouteObject[] = [
     path: "track/recent-played",
     element: <RecentPlayed />,
   },
+
   {
     path: "user/me",
     children: [
@@ -96,12 +98,12 @@ const ProtectedRoutes: RouteObject[] = [
         element: <MyProfile />,
       },
       {
-        path: "playlist",
-        element: <MyPlaylist />,
-      },
-      {
         path: "saved-albums",
         element: <AlbumSaved />,
+      },
+      {
+        path: "saved-tracks",
+        element: <SavedTracks />,
       },
       {
         path: "top-tracks",
@@ -114,6 +116,23 @@ const ProtectedRoutes: RouteObject[] = [
       {
         path: "following",
         element: <SeeAllMyProfile />,
+      },
+    ],
+  },
+  {
+    path: "collection",
+    children: [
+      {
+        index: true,
+        element: <MyLibrary />,
+      },
+      {
+        path: "albums",
+        element: <AlbumSaved />,
+      },
+      {
+        path: "tracks",
+        element: <SavedTracks />,
       },
     ],
   },

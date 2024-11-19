@@ -5,6 +5,7 @@ import { IExternalUrls } from "./recent.schema";
 export interface ITrackSchema {
   album?: IAlbumSchema;
   artists?: IArtistSchema[];
+  isLiked?: boolean;
   available_markets?: string[];
   disc_number?: number;
   duration_ms?: number;
@@ -42,4 +43,12 @@ export interface ITrackSlice {
   isRecentPlayedTrackListLoading: boolean;
   recentPlayedTrackList: IRecentPlayedTrackSchema[];
   isRecentPlayedTrackListError: boolean;
+
+  isLikeUnlikeLoading: boolean;
+
+  isSavedTracksListLoading: boolean;
+  savedTracksList: { track: ITrackSchema }[];
+  isSavedTracksListError: boolean;
+  hasMoreTracksAlbumList: boolean;
+  savedTracksListOffset: number;
 }

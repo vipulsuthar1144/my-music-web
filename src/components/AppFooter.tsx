@@ -97,7 +97,7 @@ const AppFooter = () => {
           </Typography>
         </Box>
         <Typography variant="subtitle1" color={"text.secondary"}>
-          © 2024 Spotify AB
+          © 2024 My Music
         </Typography>
       </Box>
     </Box>
@@ -106,7 +106,7 @@ const AppFooter = () => {
 
 export default AppFooter;
 
-const useStyles = makeStyles((theme: Theme) => ({
+export const useStyles = makeStyles((theme: Theme) => ({
   root: {
     zIndex: 8,
     marginTop: "30px",

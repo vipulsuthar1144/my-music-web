@@ -23,6 +23,7 @@ const requestErrorHandler = (err: any) => {
 
 const responseHandler = (response: any) => {
   // store.dispatch(setTopLoadingProgress(100));
+  // store.dispatch(toggleDialogPremiumRequired(true));
   return Promise.resolve(response);
 };
 

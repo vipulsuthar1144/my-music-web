@@ -41,9 +41,9 @@ export const getSavedAlbums = getAsyncThunk<
 
 export const saveUnsaveAlbum = getAsyncThunk<
   boolean,
-  { forSave: boolean; albumId: string }
->("PUT/DELETE/followUnfollowArtist", async ({ forSave, albumId }, signal) => {
-  const result = await saveUnsaveAlbumAPI(forSave, albumId, signal);
+  { isSaved: boolean; albumId: string }
+>("PUT/DELETE/followUnfollowArtist", async ({ isSaved, albumId }, signal) => {
+  const result = await saveUnsaveAlbumAPI(isSaved, albumId, signal);
   return result;
 });
 

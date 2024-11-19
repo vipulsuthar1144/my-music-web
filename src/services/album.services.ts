@@ -21,16 +21,16 @@ export const checkIsSavedAlbumAPI = async (albumId: string) => {
 };
 
 export const saveUnsaveAlbumAPI = async (
-  forSave: boolean = true,
+  isSaved: boolean = false,
   albumId: string,
   signal: AbortSignal
 ) => {
   let result;
-  if (forSave) {
+  if (!isSaved) {
     result = await apiInstance.put(`me/albums?ids=${albumId}`, {
       signal,
     });
-    console.log(forSave, " saveUnsaveAlbumAPI : ", result);
+    console.log(isSaved, " saveUnsaveAlbumAPI : ", result);
 
     if (result.status == 204 || result.status == 200) {
       return true;
@@ -39,14 +39,14 @@ export const saveUnsaveAlbumAPI = async (
     result = await apiInstance.delete(`me/albums?ids=${albumId}`, {
       signal,
     });
-    console.log(forSave, " saveUnsaveAlbumAPI : ", result);
+    console.log(isSaved, " saveUnsaveAlbumAPI : ", result);
 
     if (result.status == 204 || result.status == 200) {
       return false;
     }
   }
 
-  return forSave;
+  return isSaved;
 };
 
 export const getAlbumsTracksAPI = async (

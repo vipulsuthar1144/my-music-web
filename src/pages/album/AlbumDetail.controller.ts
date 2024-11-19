@@ -46,7 +46,7 @@ const useAlbumDetailController = () => {
   const handleSaveUnsaveAlbumAPICall = () => {
     dispatch(
       saveUnsaveAlbum({
-        forSave: albumData?.isSaved ? !albumData.isSaved : true,
+        isSaved: albumData?.isSaved ?? false,
         albumId: albumId ?? "",
       })
     );

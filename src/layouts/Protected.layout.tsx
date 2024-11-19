@@ -6,6 +6,7 @@ import AppBottomNavigation from "@components/AppBottomNavigation";
 import AppFooter from "@components/AppFooter";
 import AppSideBar from "@components/AppSideBar";
 import AppTopBar from "@components/AppTopBar";
+import DialogPremiumRequired from "@components/dialog/DialogPremiumRequired";
 import MoreOptionBottomSheet from "@components/MoreOptionBottomSheet";
 import { Box, styled, Theme, useTheme } from "@mui/material";
 import { makeStyles } from "@mui/styles";
@@ -44,6 +45,7 @@ const ProtectedLayout = () => {
           },
         }}
       >
+        <DialogPremiumRequired />
         <MoreOptionBottomSheet />
         <AppTopBar />
         <Outlet />
