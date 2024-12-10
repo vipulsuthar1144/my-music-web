@@ -1,37 +1,36 @@
 import useLoadMore from "@/config/hooks/useLoadMore.hooks";
 import { resetPlaylistState } from "@/store/slices/playlist.slice";
 import { useAppDispatch, useAppSelector } from "@/store/store";
-import { getPopularPlaylists } from "@/store/thunkServices/playlist.thunkservices";
+import { getMyPlaylists } from "@/store/thunkServices/playlist.thunkservices";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-const usePopularPlaylistsController = () => {
+const useMyLibraryController = () => {
   const navigate = useNavigate();
 
   const dispatch = useAppDispatch();
   const {
-    isPopularPlaylistsError,
-    isPopularPlaylistsLoading,
-    hasMorePopularPlaylists,
-    popularPlaylists,
-    popularPlaylistsOffset,
+    isMyPlaylistError,
+    isMyPlaylistLoading,
+    myPlaylistOffset,
+    myPlaylists,
+    hasMoreMyPlaylist,
+    bgColor,
   } = useAppSelector((state) => state.playlist);
 
   useEffect(() => {
-    // dispatch(resetPlaylistState());
-    // dispatch(getPopularPlaylists({ limit: 20, offset: 0 }));
+    dispatch(resetPlaylistState());
+    dispatch(getMyPlaylists({ limit: 20, offset: 0 }));
   }, [dispatch]);
 
   const handleGetPlaylistsByCategoryId = () => {
-    dispatch(
-      getPopularPlaylists({ limit: 20, offset: popularPlaylistsOffset })
-    );
+    dispatch(getMyPlaylists({ limit: 20, offset: myPlaylistOffset }));
   };
   const lastPlaylistListItemRef = useLoadMore(
     handleGetPlaylistsByCategoryId,
-    isPopularPlaylistsLoading,
-    hasMorePopularPlaylists,
-    isPopularPlaylistsError
+    isMyPlaylistLoading,
+    hasMoreMyPlaylist,
+    isMyPlaylistError
   );
   const listenerGoToPlaylistDetails = (playlistId?: string) => {
     playlistId && navigate(`/playlist/${playlistId}`);
@@ -40,12 +39,13 @@ const usePopularPlaylistsController = () => {
   return {
     lastPlaylistListItemRef,
     listenerGoToPlaylistDetails,
-    isPopularPlaylistsError,
-    isPopularPlaylistsLoading,
-    hasMorePopularPlaylists,
-    popularPlaylists,
-    popularPlaylistsOffset,
+    isMyPlaylistError,
+    isMyPlaylistLoading,
+    myPlaylistOffset,
+    myPlaylists,
+    hasMoreMyPlaylist,
+    bgColor,
   };
 };
 
-export default usePopularPlaylistsController;
+export default useMyLibraryController;

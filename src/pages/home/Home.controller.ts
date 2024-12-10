@@ -1,16 +1,28 @@
 import { useAppDispatch, useAppSelector } from "@/store/store";
 import { getNewReleaseAlbums } from "@/store/thunkServices/album.thunksevices";
-import { getPopularPlaylists, getTop2DailyMixPlaylist } from "@/store/thunkServices/playlist.thunkservices";
-import { getRecentPlayedTracks, getTop5TrendingEnglishTracks, getTop5TrendingHindiTracks, getTop5TrendingPunjabiTracks } from "@/store/thunkServices/track.thunksevices";
+import {
+  getRecentPlayedTracks,
+  getTop5TrendingEnglishTracks,
+  getTop5TrendingHindiTracks,
+  getTop5TrendingPunjabiTracks,
+} from "@/store/thunkServices/track.thunksevices";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 const useHomeController = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const { isRecentPlayedTrackListError, isRecentPlayedTrackListLoading, recentPlayedTrackList } = useAppSelector((state) => state.track);
-  const { isNewReleaseAlbumListError, isNewReleaseAlbumListLoading, newReleaseAlbumList } = useAppSelector((state) => state.album);
-  const { isPopularPlaylistsError, isPopularPlaylistsLoading, popularPlaylists } = useAppSelector((state) => state.playlist);
+  const {
+    isRecentPlayedTrackListError,
+    isRecentPlayedTrackListLoading,
+    recentPlayedTrackList,
+  } = useAppSelector((state) => state.track);
+  const {
+    isNewReleaseAlbumListError,
+    isNewReleaseAlbumListLoading,
+    newReleaseAlbumList,
+  } = useAppSelector((state) => state.album);
+
   const {
     isHindiTrackListError,
     isHindiTrackListLoading,
@@ -21,9 +33,6 @@ const useHomeController = () => {
     isPunjabiTrackListError,
     isPunjabiTrackListLoading,
     punjabiTrackList,
-    isDailyMixListError,
-    isDailyMixListLoading,
-    dailyMixList,
   } = useAppSelector((state) => state.home);
 
   useEffect(() => {
@@ -33,13 +42,16 @@ const useHomeController = () => {
   const handleAPIcall = () => {
     try {
       const promises = [];
-      dailyMixList.length == 0 && promises.push(dispatch(getTop2DailyMixPlaylist()));
-      hindiTrackList.length === 0 && promises.push(dispatch(getTop5TrendingHindiTracks()));
-      punjabiTrackList.length === 0 && promises.push(dispatch(getTop5TrendingPunjabiTracks()));
-      englishTrackList.length === 0 && promises.push(dispatch(getTop5TrendingEnglishTracks()));
-      popularPlaylists.length == 0 && promises.push(dispatch(getPopularPlaylists({ limit: 10, offset: 0 })));
-      newReleaseAlbumList.length == 0 && promises.push(dispatch(getNewReleaseAlbums({ limit: 10, offset: 0 })));
-      promises.push(dispatch(getRecentPlayedTracks({ limit: 10 })));
+
+      hindiTrackList.length === 0 &&
+        promises.push(dispatch(getTop5TrendingHindiTracks()));
+      punjabiTrackList.length === 0 &&
+        promises.push(dispatch(getTop5TrendingPunjabiTracks()));
+      englishTrackList.length === 0 &&
+        promises.push(dispatch(getTop5TrendingEnglishTracks()));
+      newReleaseAlbumList.length == 0 &&
+        promises.push(dispatch(getNewReleaseAlbums({ limit: 10, offset: 0 })));
+      promises.push(dispatch(getRecentPlayedTracks({ limit: 50 })));
 
       if (promises.length > 0) {
         Promise.all(promises)
@@ -87,9 +99,6 @@ const useHomeController = () => {
     isNewReleaseAlbumListError,
     isNewReleaseAlbumListLoading,
     newReleaseAlbumList,
-    isPopularPlaylistsError,
-    isPopularPlaylistsLoading,
-    popularPlaylists,
     isHindiTrackListError,
     isHindiTrackListLoading,
     hindiTrackList,
@@ -99,9 +108,6 @@ const useHomeController = () => {
     isPunjabiTrackListError,
     isPunjabiTrackListLoading,
     punjabiTrackList,
-    isDailyMixListError,
-    isDailyMixListLoading,
-    dailyMixList,
   };
 };
 

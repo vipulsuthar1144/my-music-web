@@ -162,8 +162,15 @@ const UserProfile = () => {
           Public Playlist
         </Typography>
         <Grid container spacing={1} px={"10px"} sx={{ zIndex: 1 }}>
-          {userPlaylists.map((item, index) => (
-            <Grid item xs={6} sm={4} md={3} lg={1.5} key={`${item.id}${index}`}>
+          {userPlaylists?.map((item, index) => (
+            <Grid
+              item
+              xs={6}
+              sm={4}
+              md={3}
+              lg={1.5}
+              key={`${item?.id}${index}`}
+            >
               <Box
                 component={"div"}
                 sx={{ width: "100%" }}
@@ -174,10 +181,10 @@ const UserProfile = () => {
                 }
               >
                 <ItemArtistAlbumsList
-                  onClick={() => listenerGoToPlaylistDetails(item.id)}
-                  subtitle={`${item.description}`}
-                  title={item.name}
-                  img={(item.images && item?.images[0]?.url) || ""}
+                  onClick={() => listenerGoToPlaylistDetails(item?.id)}
+                  subtitle={`${item?.description}`}
+                  title={item?.name}
+                  img={(item?.images && item?.images[0]?.url) || ""}
                 />
               </Box>
             </Grid>

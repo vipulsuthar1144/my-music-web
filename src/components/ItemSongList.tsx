@@ -22,7 +22,16 @@ type ItemSongListProps = {
   onClick?: () => void;
 };
 
-const ItemSongList = ({ title, track_no = 0, img, subtitleArr, isAlbumArr = false, subtitle, onClick, trackDuration }: ItemSongListProps) => {
+const ItemSongList = ({
+  title,
+  track_no = 0,
+  img,
+  subtitleArr,
+  isAlbumArr = false,
+  subtitle,
+  onClick,
+  trackDuration,
+}: ItemSongListProps) => {
   const classes = useStyle();
   const navigate = useNavigate();
 
@@ -33,7 +42,14 @@ const ItemSongList = ({ title, track_no = 0, img, subtitleArr, isAlbumArr = fals
     albumId && navigate(`/album/${albumId}`);
   };
   return (
-    <Card sx={{ backgroundColor: "transparent", backgroundImage: "none", boxShadow: "none" }} className={classes.root}>
+    <Card
+      sx={{
+        backgroundColor: "transparent",
+        backgroundImage: "none",
+        boxShadow: "none",
+      }}
+      className={classes.root}
+    >
       <CardActionArea
         onClick={onClick}
         sx={{
@@ -50,7 +66,12 @@ const ItemSongList = ({ title, track_no = 0, img, subtitleArr, isAlbumArr = fals
         }}
       >
         {track_no > 0 && (
-          <Typography variant="subtitle1" minWidth={"25px"} color="text.primary" mr={"2px"}>
+          <Typography
+            variant="subtitle1"
+            minWidth={"20px"}
+            color="text.primary"
+            mr={"2px"}
+          >
             {track_no}
           </Typography>
         )}
@@ -80,9 +101,17 @@ const ItemSongList = ({ title, track_no = 0, img, subtitleArr, isAlbumArr = fals
                   onMouseDown={(event) => event.stopPropagation()}
                   onClick={(event) => {
                     event.stopPropagation();
-                    isAlbumArr ? listenerGoToAlbumDetails(item.id) : listenerGoToArtistDetails(item.id);
+                    isAlbumArr
+                      ? listenerGoToAlbumDetails(item.id)
+                      : listenerGoToArtistDetails(item.id);
                   }}
-                  sx={{ cursor: "pointer", "&:hover": { textDecoration: "underline", color: "text.primary" } }}
+                  sx={{
+                    cursor: "pointer",
+                    "&:hover": {
+                      textDecoration: "underline",
+                      color: "text.primary",
+                    },
+                  }}
                 >
                   {/* {subtitleArr.length - 1 == index ? `${item.name}` : `${item.name} • `} */}
                   {item.name}
@@ -93,11 +122,15 @@ const ItemSongList = ({ title, track_no = 0, img, subtitleArr, isAlbumArr = fals
           </SingleLineTypo>
         </Box>
         <Box sx={{ display: "flex", gap: "10px", alignItems: "flex-end" }}>
-          <AccessTimeRounded sx={{ fontSize: "20px", color: "text.secondary" }} />
+          <AccessTimeRounded
+            sx={{ fontSize: "20px", color: "text.secondary" }}
+          />
           <Typography variant="body2" color="text.secondary">
             {msToTimeConvert(trackDuration || 0)}
           </Typography>
         </Box>
+
+        {/* <MenuTrackOptions /> */}
       </CardActionArea>
     </Card>
   );

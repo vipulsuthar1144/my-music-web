@@ -1,7 +1,13 @@
 import { IPlaylistSlice } from "@/schemas/playlist.schema";
 import { createSlice } from "@reduxjs/toolkit";
 import { getRandomColor } from "@utils/genaralFunctions";
-import { getPlaylistById, getPlaylistsByCategoryId, getPlaylistTracks, getPopularPlaylists } from "../thunkServices/playlist.thunkservices";
+import {
+  getMyPlaylists,
+  getPlaylistById,
+  getPlaylistsByCategoryId,
+  getPlaylistTracks,
+  getPopularPlaylists,
+} from "../thunkServices/playlist.thunkservices";
 
 const intialState: IPlaylistSlice = {
   bgColor: "#9759a8",
@@ -27,6 +33,12 @@ const intialState: IPlaylistSlice = {
   popularPlaylists: [],
   hasMorePopularPlaylists: true,
   popularPlaylistsOffset: 0,
+
+  isMyPlaylistError: false,
+  isMyPlaylistLoading: false,
+  myPlaylists: [],
+  hasMoreMyPlaylist: true,
+  myPlaylistOffset: 0,
 };
 
 export const playlistSlice = createSlice({
@@ -54,6 +66,12 @@ export const playlistSlice = createSlice({
       state.popularPlaylists = [];
       state.hasMorePopularPlaylists = true;
       state.popularPlaylistsOffset = 0;
+
+      state.isMyPlaylistError = false;
+      state.isMyPlaylistLoading = false;
+      state.myPlaylists = [];
+      state.hasMoreMyPlaylist = true;
+      state.myPlaylistOffset = 0;
     },
   },
   extraReducers: (builder) => {
@@ -83,9 +101,18 @@ export const playlistSlice = createSlice({
         state.hasMorePlaylistTrackList = total > offset + limit;
 
         if (offset == 0) {
-          state.playlistTrackList = [...(action.payload?.items?.filter((item) => item.track?.name != "") ?? [])];
+          state.playlistTrackList = [
+            ...(action.payload?.items?.filter(
+              (item) => item.track?.name != ""
+            ) ?? []),
+          ];
         } else {
-          state.playlistTrackList = [...state.playlistTrackList, ...(action.payload?.items?.filter((item) => item.track?.name != "") ?? [])];
+          state.playlistTrackList = [
+            ...state.playlistTrackList,
+            ...(action.payload?.items?.filter(
+              (item) => item.track?.name != ""
+            ) ?? []),
+          ];
         }
       })
       .addCase(getPlaylistTracks.rejected, (state) => {
@@ -107,9 +134,14 @@ export const playlistSlice = createSlice({
         state.hasMoreCategoryPlaylists = total > offset + limit;
 
         if (offset == 0) {
-          state.categoryPlaylists = [...(action.payload?.playlists?.items ?? [])];
+          state.categoryPlaylists = [
+            ...(action.payload?.playlists?.items ?? []),
+          ];
         } else {
-          state.categoryPlaylists = [...state.categoryPlaylists, ...(action.payload?.playlists?.items ?? [])];
+          state.categoryPlaylists = [
+            ...state.categoryPlaylists,
+            ...(action.payload?.playlists?.items ?? []),
+          ];
         }
 
         if (offset >= 80) {
@@ -134,9 +166,14 @@ export const playlistSlice = createSlice({
         state.hasMorePopularPlaylists = total > offset + limit;
 
         if (offset == 0) {
-          state.popularPlaylists = [...(action.payload?.playlists?.items ?? [])];
+          state.popularPlaylists = [
+            ...(action.payload?.playlists?.items ?? []),
+          ];
         } else {
-          state.popularPlaylists = [...state.popularPlaylists, ...(action.payload?.playlists?.items ?? [])];
+          state.popularPlaylists = [
+            ...state.popularPlaylists,
+            ...(action.payload?.playlists?.items ?? []),
+          ];
         }
 
         if (offset >= 80) {
@@ -146,6 +183,37 @@ export const playlistSlice = createSlice({
       .addCase(getPopularPlaylists.rejected, (state) => {
         state.isPopularPlaylistsLoading = false;
         state.isPopularPlaylistsError = true;
+      })
+      .addCase(getMyPlaylists.pending, (state) => {
+        state.bgColor = `linear-gradient(45deg, ${getRandomColor()} 10%, ${getRandomColor()})`;
+        state.isMyPlaylistLoading = true;
+      })
+      .addCase(getMyPlaylists.fulfilled, (state, action) => {
+        let offset = action.payload?.offset ?? 0;
+        let limit = action.payload?.limit ?? 0;
+        let total = action.payload?.total ?? 0;
+
+        state.isMyPlaylistLoading = false;
+
+        state.myPlaylistOffset = offset + limit;
+        state.hasMoreMyPlaylist = total > offset + limit;
+
+        if (offset == 0) {
+          state.myPlaylists = [...(action.payload?.items ?? [])];
+        } else {
+          state.myPlaylists = [
+            ...state.popularPlaylists,
+            ...(action.payload?.items ?? []),
+          ];
+        }
+
+        if (offset >= 80) {
+          state.hasMoreMyPlaylist = false;
+        }
+      })
+      .addCase(getMyPlaylists.rejected, (state) => {
+        state.isMyPlaylistLoading = false;
+        state.isMyPlaylistError = true;
       });
   },
 });

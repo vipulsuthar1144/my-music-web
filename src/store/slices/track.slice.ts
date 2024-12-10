@@ -1,4 +1,4 @@
-import { ITrackSlice } from "@/schemas/track.schema";
+import { IRecentPlayedTrackSchema, ITrackSlice } from "@/schemas/track.schema";
 import { createSlice } from "@reduxjs/toolkit";
 import {
   getRecentPlayedTracks,
@@ -31,7 +31,18 @@ export const trackSlice = createSlice({
       })
       .addCase(getRecentPlayedTracks.fulfilled, (state, action) => {
         state.isRecentPlayedTrackListLoading = false;
-        state.recentPlayedTrackList = [...(action.payload?.items ?? [])];
+        const seen = new Set();
+        const recentList: IRecentPlayedTrackSchema[] =
+          action?.payload?.items?.reduceRight((acc, curr) => {
+            const trackId = curr.track?.id; // Extract the track ID
+            if (trackId && !seen.has(trackId)) {
+              seen.add(trackId); // Add only the ID to the Set
+              acc.unshift(curr); // Keep the current item
+            }
+            return acc;
+          }, [] as IRecentPlayedTrackSchema[]) ?? [];
+        state.recentPlayedTrackList = [...recentList];
+        // state.recentPlayedTrackList = [...(action?.payload?.items ?? [])];
       })
       .addCase(getRecentPlayedTracks.rejected, (state) => {
         state.isRecentPlayedTrackListLoading = false;

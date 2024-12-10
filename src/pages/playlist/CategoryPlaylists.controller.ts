@@ -9,19 +9,37 @@ const useCategoryPlaylistsController = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const { categoryId } = useParams();
-  const { isCategoryPlaylistsError, categoryTitle, isCategoryPlaylistsLoading, categoryPlaylists, categoryPlaylistsOffset, hasMoreCategoryPlaylists } = useAppSelector((state) => state.playlist);
+  const {
+    isCategoryPlaylistsError,
+    categoryTitle,
+    isCategoryPlaylistsLoading,
+    categoryPlaylists,
+    categoryPlaylistsOffset,
+    hasMoreCategoryPlaylists,
+  } = useAppSelector((state) => state.playlist);
 
   useEffect(() => {
     if (categoryId) {
-      dispatch(resetPlaylistState());
-      dispatch(getPlaylistsByCategoryId({ categoryId: categoryId, offset: 0 }));
+      // dispatch(resetPlaylistState());
+      // dispatch(getPlaylistsByCategoryId({ categoryId: categoryId, offset: 0 }));
     }
   }, [dispatch, categoryId]);
 
   const handleGetPlaylistsByCategoryId = () => {
-    categoryId && dispatch(getPlaylistsByCategoryId({ categoryId: categoryId, offset: categoryPlaylistsOffset }));
+    categoryId &&
+      dispatch(
+        getPlaylistsByCategoryId({
+          categoryId: categoryId,
+          offset: categoryPlaylistsOffset,
+        })
+      );
   };
-  const lastPlaylistListItemRef = useLoadMore(handleGetPlaylistsByCategoryId, isCategoryPlaylistsLoading, hasMoreCategoryPlaylists, isCategoryPlaylistsError);
+  const lastPlaylistListItemRef = useLoadMore(
+    handleGetPlaylistsByCategoryId,
+    isCategoryPlaylistsLoading,
+    hasMoreCategoryPlaylists,
+    isCategoryPlaylistsError
+  );
   const listenerGoToPlaylistDetails = (playlistId?: string) => {
     playlistId && navigate(`/playlist/${playlistId}`);
   };

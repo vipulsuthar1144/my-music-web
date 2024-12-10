@@ -59,7 +59,7 @@ const responseErrorHandler = (error: any) => {
       store.dispatch(toggleDialogPremiumRequired(true));
     } else {
       // error.code = "RES_ERROR";
-      showCustomToast(`${error.response?.data.message}`, "error");
+      showCustomToast(`Something went wrong`, "error");
     }
   } else if (error?.response?.status >= 500) {
     if (error.response?.data?.Message) {

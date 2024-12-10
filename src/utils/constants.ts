@@ -15,6 +15,7 @@ export const scopes = [
   "playlist-read-private",
   "playlist-read-collaborative",
   "user-top-read",
+  "streaming",
   "user-read-email",
   "user-read-private",
   "user-follow-read",
@@ -27,5 +28,5 @@ export const LocalStorageKeys = {
   IS_LOGGED_IN: "IS_LOGGED_IN",
   ACCESS_TOKEN: "ACCESS_TOKEN",
   THEME_MODE_VALUE: "THEME_MODE_VALUE",
-  AUTH_USER_MODEL_KEY: "AUTH_USER_MODEL_KEY",
+  DEVICE_ID: "DEVICE_ID",
 };

@@ -1,7 +1,14 @@
-import { IPlaylistSchema, IPlaylistTrackSchema } from "@/schemas/playlist.schema";
+import {
+  IPlaylistSchema,
+  IPlaylistTrackSchema,
+} from "@/schemas/playlist.schema";
 import { createSlice } from "@reduxjs/toolkit";
 import { getTop2DailyMixPlaylist } from "../thunkServices/playlist.thunkservices";
-import { getTop5TrendingEnglishTracks, getTop5TrendingHindiTracks, getTop5TrendingPunjabiTracks } from "../thunkServices/track.thunksevices";
+import {
+  getTop5TrendingEnglishTracks,
+  getTop5TrendingHindiTracks,
+  getTop5TrendingPunjabiTracks,
+} from "../thunkServices/track.thunksevices";
 
 interface IHomeSlice {
   isHindiTrackListLoading: boolean;
@@ -77,7 +84,11 @@ export const homeSlice = createSlice({
       })
       .addCase(getTop2DailyMixPlaylist.fulfilled, (state, action) => {
         state.isDailyMixListLoading = false;
-        const spotifyMix = action.payload?.playlists?.items?.filter((item) => item.owner?.id === "spotify");
+        console.log("getTop2DailyMixPlaylist", action.payload);
+
+        const spotifyMix = action.payload?.playlists?.items?.filter(
+          (item) => item?.owner?.id === "spotify"
+        );
         state.dailyMixList = [...(spotifyMix ?? [])];
       })
       .addCase(getTop2DailyMixPlaylist.rejected, (state) => {

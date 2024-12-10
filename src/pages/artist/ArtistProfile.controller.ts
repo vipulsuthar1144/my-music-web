@@ -44,7 +44,7 @@ const useArtistProfileController = () => {
               dispatch(
                 getAlbumsOfArtist({ artistId: artistId, offset: 0, limit: 10 })
               ),
-              dispatch(getRelatedArtists({ artistId: artistId })),
+              // dispatch(getRelatedArtists({ artistId: artistId })),
             ]);
           } catch {}
         });

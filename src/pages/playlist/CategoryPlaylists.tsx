@@ -6,10 +6,28 @@ import useCategoryPlaylistsController from "./CategoryPlaylists.controller";
 import FallbackError from "@components/FallbackError";
 
 const CategoryPlaylists = () => {
-  const { lastPlaylistListItemRef, listenerGoToPlaylistDetails, isCategoryPlaylistsError, isCategoryPlaylistsLoading, categoryPlaylists, categoryTitle } = useCategoryPlaylistsController();
+  const {
+    lastPlaylistListItemRef,
+    listenerGoToPlaylistDetails,
+    isCategoryPlaylistsError,
+    isCategoryPlaylistsLoading,
+    categoryPlaylists,
+    categoryTitle,
+  } = useCategoryPlaylistsController();
   const renderPlaylistList = () => {
-    if (isCategoryPlaylistsError) return <FallbackError type="something_went_wrong" />;
-    if (categoryPlaylists.length == 0 && !isCategoryPlaylistsError && !isCategoryPlaylistsLoading) return <FallbackError message="Playlist not found" type="data_not_found" />;
+    return (
+      <FallbackError message="Playlist not availbale" type="data_not_found" />
+    );
+    if (isCategoryPlaylistsError)
+      return <FallbackError type="something_went_wrong" />;
+    if (
+      categoryPlaylists.length == 0 &&
+      !isCategoryPlaylistsError &&
+      !isCategoryPlaylistsLoading
+    )
+      return (
+        <FallbackError message="Playlist not found" type="data_not_found" />
+      );
 
     return (
       <>
@@ -17,12 +35,20 @@ const CategoryPlaylists = () => {
         <Grid container spacing={1}>
           {categoryPlaylists.map((item, index) => (
             <Grid item xs={6} sm={4} md={3} lg={1.5} key={`${item.id}${index}`}>
-              <Box component={"div"} sx={{ width: "100%" }} ref={index === categoryPlaylists.length - 1 ? lastPlaylistListItemRef : null}>
+              <Box
+                component={"div"}
+                sx={{ width: "100%" }}
+                ref={
+                  index === categoryPlaylists.length - 1
+                    ? lastPlaylistListItemRef
+                    : null
+                }
+              >
                 <ItemArtistAlbumsList
                   onClick={() => listenerGoToPlaylistDetails(item.id)}
-                  subtitle={`By ${item.owner?.display_name}`}
-                  title={item.name}
-                  img={(item.images && item?.images[0]?.url) || ""}
+                  subtitle={`By ${item?.owner?.display_name}`}
+                  title={item?.name}
+                  img={(item?.images && item?.images[0]?.url) || ""}
                 />
               </Box>
             </Grid>

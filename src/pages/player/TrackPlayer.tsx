@@ -1,23 +1,43 @@
 import { imgDefaultSong } from "@assets/images";
 import {
   StyledCloseIconFilled,
+  StyledFavoriteIcon,
   StyledFavoriteIconOutlined,
   StyledNextIconFilled,
   StyledPauseIconOutlined,
+  StyledPlayIconOutlined,
   StyledPreviousIconFilled,
   StyledRepeatIconFilled,
+  StyledRepeatOnceIconFilled,
   StyledShuffleIconUnFilled,
 } from "@assets/SVG";
-import ImageComp from "@components/design/Image";
+import ImageComp, { ImageCompWithLoader } from "@components/design/Image";
 import { Box, Slider, sliderClasses, Theme, Typography } from "@mui/material";
 import { makeStyles } from "@mui/styles";
-import { useState } from "react";
+import React, { useState } from "react";
 import Draggable from "react-draggable";
+import useTrackPlayerController from "./TrackPlayer.controller";
+import { useAppDispatch } from "@/store/store";
+import {
+  getCurrentPlayingTrack,
+  pauseTrack,
+  playNextTrack,
+  playPreTrack,
+  playTrack,
+} from "@/store/thunkServices/player.thunkservice";
+import { LocalStorageKeys } from "@utils/constants";
+import { SingleLineTypo } from "@components/design/styledComponents";
+import { likeUnlikeTracks } from "@/store/thunkServices/track.thunksevices";
+import { msToTimeConvert } from "@utils/genaralFunctions";
+import SliderAutoProgress from "./helper/SliderProgress";
 
 const TrackPlayer = () => {
   const [isPressed, setIsPressed] = useState(false);
   const [isDrag, setIsDrag] = useState(true);
+  const { player, currentPlayingTrack } = useTrackPlayerController();
   const classes = useStyle();
+  const dispatch = useAppDispatch();
+
   return (
     <Draggable
       allowAnyClick={false}
@@ -47,71 +67,178 @@ const TrackPlayer = () => {
         </Box>
         <Box className={classes.dragIndigator} />
         {/* song image */}
-        <ImageComp
-          img={imgDefaultSong}
-          alt="album image"
+        <ImageCompWithLoader
+          img={
+            currentPlayingTrack?.item?.album?.images
+              ? currentPlayingTrack?.item?.album?.images[0].url
+              : ""
+          }
+          alt={"track"}
           style={{
-            width: 150,
-            // height: 150,
+            width: "150px",
+            // minWidth: "50px",
+            cursor: "grab",
             aspectRatio: 1,
-            borderRadius: "10px",
+            borderRadius: "12px",
             boxShadow: "0px 10px 10px 2px rgba(0,0,0,0.2)",
           }}
         />
 
         {/* song details */}
         <Box className={classes.displayFlex}>
-          <Box>
-            <Typography variant="subtitle1" color="text.primary">
-              Piya Aye Na
-            </Typography>
-            <Typography variant="subtitle2" color="text.secondary">
-              Aashique 2
-            </Typography>
+          <Box component={"div"} sx={{ flex: 1, overflow: "hidden" }}>
+            <SingleLineTypo variant="subtitle1" color="text.primary">
+              {currentPlayingTrack?.item?.name}
+            </SingleLineTypo>
+            <SingleLineTypo variant="subtitle2" color="text.secondary">
+              {currentPlayingTrack?.item?.artists?.map((item, index) => (
+                <React.Fragment key={item.id}>
+                  <Box
+                    component={"span"}
+                    onMouseDown={(event) => event.stopPropagation()}
+                    onClick={(event) => {
+                      event.stopPropagation();
+                      // isAlbumArr
+                      //   ? listenerGoToAlbumDetails(item.id)
+                      //   : listenerGoToArtistDetails(item.id);
+                    }}
+                    sx={{
+                      cursor: "pointer",
+                      "&:hover": {
+                        textDecoration: "underline",
+                        color: "text.primary",
+                      },
+                    }}
+                  >
+                    {/* {subtitleArr.length - 1 == index ? `${item.name}` : `${item.name} • `} */}
+                    {item.name}
+                  </Box>
+                  {currentPlayingTrack?.item?.artists &&
+                  currentPlayingTrack?.item?.artists?.length - 1 == index
+                    ? ``
+                    : ` • `}
+                </React.Fragment>
+              ))}
+            </SingleLineTypo>
           </Box>
 
-          <StyledFavoriteIconOutlined />
-        </Box>
-        <Box component={"div"} width={"100%"}>
-          <Box
-            component={"div"}
-            onMouseEnter={() => setIsDrag(false)}
-            onMouseLeave={() => {
-              setIsDrag(true);
-              setIsPressed(false);
-            }}
-          >
-            <Slider
-              onChange={() => {
-                setIsDrag(false);
-              }}
-              sx={{
-                color: "success.main",
-                padding: "5px 0px",
-                [`& .${sliderClasses.rail}`]: {
-                  backgroundColor: "text.secondary",
-                },
-              }}
+          {currentPlayingTrack?.item?.isLiked == true ? (
+            <StyledFavoriteIcon
+              onClick={() =>
+                dispatch(
+                  likeUnlikeTracks({
+                    isLiked: currentPlayingTrack?.item?.isLiked || false,
+                    trackId: currentPlayingTrack?.item?.id ?? "",
+                  })
+                )
+              }
+              style={{ minWidth: "24px", color: "error.main" }}
             />
-          </Box>
-          <Box className={classes.displayFlex}>
-            <Typography variant="body2" color="text.secondary">
-              02:00
-            </Typography>
-            <Typography variant="body2" color="text.secondary">
-              03:10
-            </Typography>
-          </Box>
+          ) : (
+            <StyledFavoriteIconOutlined
+              onClick={() =>
+                dispatch(
+                  likeUnlikeTracks({
+                    isLiked: currentPlayingTrack?.item?.isLiked || false,
+                    trackId: currentPlayingTrack?.item?.id ?? "",
+                  })
+                )
+              }
+              style={{ minWidth: "24px" }}
+            />
+          )}
         </Box>
+
+        <SliderAutoProgress
+          duration={currentPlayingTrack?.item?.duration_ms ?? 0}
+          progress={currentPlayingTrack?.progress_ms ?? 0}
+          isPlaying={currentPlayingTrack?.is_playing ?? false}
+        />
 
         <Box width={"110%"} className={classes.displayFlex}>
-          <StyledShuffleIconUnFilled />
-          <StyledPreviousIconFilled />
-          {/* <StyledPlayIconOutlined color="success" /> */}
-          <StyledPauseIconOutlined />
-          <StyledNextIconFilled />
-          <StyledRepeatIconFilled />
-          {/* <StyledRepeatOnceIconFilled /> */}
+          <StyledShuffleIconUnFilled
+            iconColor={
+              currentPlayingTrack?.shuffle_state
+                ? "primary.main"
+                : "text.primary"
+            }
+          />
+          <StyledPreviousIconFilled
+            disabled={
+              currentPlayingTrack?.actions?.disallows?.skipping_prev == true
+            }
+            onClick={() =>
+              dispatch(
+                playPreTrack({
+                  deviceId: JSON.parse(
+                    localStorage.getItem(LocalStorageKeys.DEVICE_ID) ??
+                      "unknown"
+                  ),
+                })
+              )
+            }
+          />
+
+          {currentPlayingTrack?.is_playing == true ? (
+            <StyledPauseIconOutlined
+              disabled={
+                currentPlayingTrack?.actions?.disallows?.pausing == true
+              }
+              onClick={() =>
+                dispatch(
+                  pauseTrack({
+                    deviceId: JSON.parse(
+                      localStorage.getItem(LocalStorageKeys.DEVICE_ID) ?? ""
+                    ),
+                  })
+                )
+              }
+            />
+          ) : (
+            <StyledPlayIconOutlined
+              disabled={
+                currentPlayingTrack?.actions?.disallows?.resuming == true
+              }
+              onClick={() => {
+                dispatch(
+                  playTrack({
+                    deviceId: JSON.parse(
+                      localStorage.getItem(LocalStorageKeys.DEVICE_ID) ?? ""
+                    ),
+                    reqPlayTrackSchema: {
+                      uris: [currentPlayingTrack?.item?.uri ?? ""],
+                      position_ms: currentPlayingTrack?.progress_ms,
+                    },
+                  })
+                );
+              }}
+            />
+          )}
+          <StyledNextIconFilled
+            disabled={
+              currentPlayingTrack?.actions?.disallows?.skipping_next == true
+            }
+            onClick={() =>
+              dispatch(
+                playNextTrack({
+                  deviceId: JSON.parse(
+                    localStorage.getItem(LocalStorageKeys.DEVICE_ID) ?? ""
+                  ),
+                })
+              )
+            }
+          />
+          {currentPlayingTrack?.repeat_state == "track" ? (
+            <StyledRepeatOnceIconFilled iconColor="primary.main" />
+          ) : (
+            <StyledRepeatIconFilled
+              iconColor={
+                currentPlayingTrack?.repeat_state == "context"
+                  ? "primary.main"
+                  : "text.primary"
+              }
+            />
+          )}
         </Box>
       </Box>
     </Draggable>

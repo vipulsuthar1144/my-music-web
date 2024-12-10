@@ -12,6 +12,13 @@ import { useNavigate } from "react-router-dom";
 import ItemSongList from "../../components/ItemSongList";
 import useHomeController from "./Home.controller";
 import FallbackError from "@components/FallbackError";
+import { useAppDispatch } from "@/store/store";
+import {
+  getCurrentPlayingTrack,
+  playTrack,
+} from "@/store/thunkServices/player.thunkservice";
+import useLocalStorage from "@/config/hooks/useLocalStorage.hooks";
+import { LocalStorageKeys } from "@utils/constants";
 
 const Home: React.FC = () => {
   const classes = useStyle();
@@ -26,9 +33,6 @@ const Home: React.FC = () => {
     isNewReleaseAlbumListError,
     isNewReleaseAlbumListLoading,
     newReleaseAlbumList,
-    isPopularPlaylistsError,
-    isPopularPlaylistsLoading,
-    popularPlaylists,
     isHindiTrackListError,
     isHindiTrackListLoading,
     hindiTrackList,
@@ -38,40 +42,10 @@ const Home: React.FC = () => {
     isPunjabiTrackListError,
     isPunjabiTrackListLoading,
     punjabiTrackList,
-    isDailyMixListError,
-    isDailyMixListLoading,
-    dailyMixList,
   } = useHomeController();
-  const navigate = useNavigate();
-  console.log("HOME PAGE");
+  const dispatch = useAppDispatch();
+  // console.log("HOME PAGE");
 
-  const renderMadeForYouList = () => {
-    if (isDailyMixListLoading) return renderSkeletons();
-    if (
-      (dailyMixList.length == 0 &&
-        !isDailyMixListLoading &&
-        !isDailyMixListError) ||
-      isDailyMixListError
-    )
-      return;
-    return (
-      <>
-        <Typography variant="h3" ml={"10px"}>
-          Made For You
-        </Typography>
-        <ContainerWithoutScrollbar>
-          {dailyMixList.map((item) => (
-            <ItemArtistAlbumsList
-              key={item.id}
-              onClick={() => listenerGoToPlaylistDetails(item.id)}
-              subtitle={`${item.description}`}
-              img={(item.images && item?.images[0]?.url) || ""}
-            />
-          ))}
-        </ContainerWithoutScrollbar>
-      </>
-    );
-  };
   const renderHindiTracks = () => {
     if (isHindiTrackListLoading) return renderSkeletons(true);
     if (
@@ -107,6 +81,18 @@ const Home: React.FC = () => {
                 }
                 title={item?.track?.name}
                 // track_no={index + 1}
+                onClick={() => {
+                  dispatch(
+                    playTrack({
+                      deviceId: JSON.parse(
+                        localStorage.getItem(LocalStorageKeys.DEVICE_ID) ??
+                          "unknown"
+                      ),
+                      reqPlayTrackSchema: { uris: [item.track?.uri ?? ""] },
+                    })
+                  );
+                  // console.log(item);
+                }}
                 subtitleArr={item?.track?.artists}
                 trackDuration={item?.track?.duration_ms}
               />
@@ -146,7 +132,17 @@ const Home: React.FC = () => {
             <Grid item xs={12} key={`${item?.track?.id}${index}`}>
               <ItemSongList
                 onClick={() => {
-                  navigate("/user/mee");
+                  dispatch(
+                    playTrack({
+                      deviceId: JSON.parse(
+                        localStorage.getItem(LocalStorageKeys.DEVICE_ID) ??
+                          "unknown"
+                      ),
+                      reqPlayTrackSchema: { uris: [item.track?.uri ?? ""] },
+                    })
+                  );
+
+                  // console.log(item);
                 }}
                 img={
                   item?.track?.album?.images &&
@@ -239,41 +235,6 @@ const Home: React.FC = () => {
       </>
     );
   };
-  const renderPopularPlaylistsList = () => {
-    if (isPopularPlaylistsLoading) return renderSkeletons();
-    if (
-      (popularPlaylists.length == 0 &&
-        !isPopularPlaylistsLoading &&
-        !isPopularPlaylistsError) ||
-      isPopularPlaylistsError
-    )
-      return;
-    return (
-      <>
-        <TitleSeeAll
-          title="More of what you like"
-          style={{ paddingLeft: "10px" }}
-          isSeeAllBtnVisible={popularPlaylists.length >= 10}
-          onSeeAllClick={listenerSeeAllPopularPlaylist}
-        />
-        <ContainerWithoutScrollbar>
-          {popularPlaylists.map(
-            (item, index) =>
-              index < 10 && (
-                <ItemArtistAlbumsList
-                  key={item.id}
-                  onClick={() => listenerGoToPlaylistDetails(item.id)}
-                  // subtitle={`By ${item.owner?.display_name}`}
-                  subtitle={`${item.description}`}
-                  title={item.name}
-                  img={(item.images && item?.images[0]?.url) || ""}
-                />
-              )
-          )}
-        </ContainerWithoutScrollbar>
-      </>
-    );
-  };
   const renderNewReleaseAlbumsList = () => {
     if (isNewReleaseAlbumListLoading) return renderSkeletons();
     if (
@@ -346,18 +307,16 @@ const Home: React.FC = () => {
 
   const renderUI = () => {
     if (
-      isDailyMixListError ||
       isEnglishTrackListError ||
       isHindiTrackListError ||
       isPunjabiTrackListError ||
       isRecentPlayedTrackListError ||
-      isPopularPlaylistsError ||
       isNewReleaseAlbumListError
     )
       return <FallbackError type="something_went_wrong" />;
     return (
       <>
-        {renderMadeForYouList()}
+        {renderRecentPlayedTrackList()}
         <Typography variant="h3" ml={"10px"}>
           Tranding Songs
         </Typography>
@@ -369,8 +328,6 @@ const Home: React.FC = () => {
           {renderPunjabiTracks()}
           {renderEnglishTracks()}
         </ContainerWithoutScrollbar>
-        {renderRecentPlayedTrackList()}
-        {renderPopularPlaylistsList()}
         {renderNewReleaseAlbumsList()}
       </>
     );

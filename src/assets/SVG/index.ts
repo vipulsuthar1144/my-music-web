@@ -7,6 +7,7 @@ import {
   CloseRounded,
   ContrastRounded,
   FacebookOutlined,
+  Favorite,
   FavoriteBorder,
   Instagram,
   MoreVert,
@@ -42,7 +43,14 @@ export const StyledSearchIconFilled = withIconStyles(SearchRounded, "Theme");
 export const StyledCloseIconFilled = withIconStyles(CloseRounded);
 export const StyledFavoriteIconOutlined = withIconStyles(
   FavoriteBorder,
-  "Add to Favorites"
+  "Save to Liked",
+  "24px"
+);
+export const StyledFavoriteIcon = withIconStyles(
+  Favorite,
+  "Remove from Liked",
+  "24px",
+  "error.main"
 );
 export const StyledRepeatIconFilled = withIconStyles(RepeatRounded);
 export const StyledRepeatOnceIconFilled = withIconStyles(RepeatOneRounded);
@@ -51,12 +59,12 @@ export const StyledNextIconFilled = withIconStyles(SkipNextRounded);
 export const StyledPreviousIconFilled = withIconStyles(SkipPreviousRounded);
 export const StyledPlayIconOutlined = withIconStyles(
   PlayCircleOutlineRounded,
-  "",
+  "Play",
   "40px"
 );
 export const StyledPauseIconOutlined = withIconStyles(
   PauseCircleOutlineRounded,
-  "",
+  "Pause",
   "40px"
 );
 export const StyledInstagramIconOutlined = withIconStyles(

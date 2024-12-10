@@ -19,7 +19,7 @@ export const getSavedTracksAPI = async (
   });
 };
 
-export const checkIsSavedAlbumAPI = async (trackId: string) => {
+export const checkIsSavedTrackAPI = async (trackId: string) => {
   return await apiInstance.get(`me/tracks/contains?ids=${trackId}`);
 };
 

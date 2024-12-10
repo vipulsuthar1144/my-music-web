@@ -3,7 +3,7 @@ import { TextButtonPrimary } from "@components/design/Button";
 import { Box, SxProps, Theme, Typography } from "@mui/material";
 import { Variant } from "@mui/material/styles/createTypography";
 import { getRandomColor } from "@utils/genaralFunctions";
-import { CSSProperties, useMemo, useState } from "react";
+import { CSSProperties, useEffect, useMemo, useState } from "react";
 
 export interface IGlobleImageProps {
   img?: string;
@@ -64,8 +64,13 @@ const ImageCompWithLoader = ({
   errorImage = imgDefaultSong,
   isPreventClickEffect = false,
 }: IGlobleImageProps) => {
-  const [imgSrc, setImgSrc] = useState(img);
+  const [imgSrc, setImgSrc] = useState(img ? img : imgDefaultSong);
   const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    setImgSrc(img ? img : imgDefaultSong);
+    setIsLoading(true);
+  }, [img]);
 
   const color = useMemo(() => {
     return getRandomColor();
@@ -77,6 +82,7 @@ const ImageCompWithLoader = ({
         height: "auto",
         overflow: "hidden",
         boxSizing: "border-box",
+        cursor: "pointer",
         ...style,
         backgroundColor: color,
       }}
@@ -85,7 +91,7 @@ const ImageCompWithLoader = ({
         onClick={onClick}
         onMouseDown={(event) => isPreventClickEffect && event.stopPropagation()}
         component="img"
-        // draggable={false}
+        draggable={false}
         src={imgSrc}
         alt={alt}
         onLoad={() => {
@@ -100,7 +106,7 @@ const ImageCompWithLoader = ({
           width: "100%",
           height: "100%",
           objectFit: "cover",
-          cursor: "pointer",
+
           opacity: isLoading ? 0 : 1,
           userSelect: "none",
         }}

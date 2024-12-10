@@ -58,4 +58,10 @@ export interface IPlaylistSlice {
   isPopularPlaylistsError: boolean;
   hasMorePopularPlaylists: boolean;
   popularPlaylistsOffset: number;
+
+  isMyPlaylistLoading: boolean;
+  myPlaylists: IPlaylistSchema[];
+  isMyPlaylistError: boolean;
+  hasMoreMyPlaylist: boolean;
+  myPlaylistOffset: number;
 }

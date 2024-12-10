@@ -153,9 +153,9 @@ const SeeAllSearch = () => {
       <>
         <Grid container spacing={1}>
           {seeAllDataList.map((item: IPlaylistSchema, index) => (
-            <Grid item xs={6} sm={4} md={3} lg={1.5} key={item.id}>
+            <Grid item xs={6} sm={4} md={3} lg={1.5} key={item?.id}>
               <Box
-                key={item.id}
+                key={item?.id}
                 component={"div"}
                 sx={{ width: "100%" }}
                 ref={
@@ -165,11 +165,11 @@ const SeeAllSearch = () => {
                 }
               >
                 <ItemArtistAlbumsList
-                  key={item.id}
-                  onClick={() => listenerGoToPlaylistDetails(item.id)}
-                  subtitle={`By ${item.owner?.display_name}`}
-                  title={item.name}
-                  img={(item.images && item?.images[0]?.url) || ""}
+                  key={item?.id}
+                  onClick={() => listenerGoToPlaylistDetails(item?.id)}
+                  subtitle={`By ${item?.owner?.display_name}`}
+                  title={item?.name}
+                  img={(item?.images && item?.images[0]?.url) || ""}
                 />
               </Box>
             </Grid>

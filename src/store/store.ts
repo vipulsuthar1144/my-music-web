@@ -7,6 +7,7 @@ import homeReducer from "./slices/home.slice";
 import categoryReducer from "./slices/category.slice";
 import userReducer from "./slices/user.slice";
 import searchReducer from "./slices/search.slice";
+import playerReducer from "./slices/player.slice";
 import globelLoaderReducer from "./slices/globleLoader.slice";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 
@@ -21,7 +22,12 @@ export const store = configureStore({
     category: categoryReducer,
     search: searchReducer,
     globleLoader: globelLoaderReducer,
+    player: playerReducer,
   },
+  // middleware: (getDefaultMiddleware) =>
+  //   getDefaultMiddleware({
+  //     serializableCheck: false,
+  //   }),
 });
 
 export type RootState = ReturnType<typeof store.getState>;

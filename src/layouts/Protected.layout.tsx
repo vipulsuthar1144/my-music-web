@@ -32,7 +32,7 @@ const ProtectedLayout = () => {
 
   return (
     <Box className={classes.root}>
-      {/* {!isSmallScreen && <TrackPlayer />} */}
+      {!isSmallScreen && <TrackPlayer />}
       {!isSmallScreen && <AppSideBar />}
       {isSmallScreen && <AppBottomNavigation />}
 

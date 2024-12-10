@@ -1,6 +1,9 @@
 import { ISearchSchema, ISearchSlice } from "@/schemas/search.schema";
 import { createSlice } from "@reduxjs/toolkit";
-import { getSearchResult, getSeeAllDataBySearchQuery } from "../thunkServices/search.thunksevices";
+import {
+  getSearchResult,
+  getSeeAllDataBySearchQuery,
+} from "../thunkServices/search.thunksevices";
 
 const intialState: ISearchSlice = {
   isSearchDataLoading: false,
@@ -76,7 +79,11 @@ export const searchSlice = createSlice({
 export const { emptySearchData, resetSearchState } = searchSlice.actions;
 export default searchSlice.reducer;
 
-const updateSeeAllData = (state: ISearchSlice, payloadKey: keyof ISearchSchema, payload: ISearchSchema) => {
+const updateSeeAllData = (
+  state: ISearchSlice,
+  payloadKey: keyof ISearchSchema,
+  payload: ISearchSchema
+) => {
   const data = payload[payloadKey];
 
   if (data) {
@@ -88,7 +95,12 @@ const updateSeeAllData = (state: ISearchSlice, payloadKey: keyof ISearchSchema, 
     state.seeAllDataListOffset = offset + limit;
     state.hasMoreSeeAllDataList = total > offset + limit;
 
-    state.seeAllDataList = offset === 0 ? [...items] : [...state.seeAllDataList, ...items];
+    console.log(items);
+
+    state.seeAllDataList =
+      offset === 0
+        ? [...items.filter((item) => item != null)]
+        : [...state.seeAllDataList, ...items.filter((item) => item != null)];
 
     if (offset >= 80) state.hasMoreSeeAllDataList = false;
   }
