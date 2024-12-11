@@ -11,6 +11,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Set up environment variables
+        run: |
+          echo "VITE_APP_PORT=${{ secrets.VITE_APP_PORT }}" >> .env
+          echo "VITE_APP_CLIENT_ID=${{ secrets.VITE_APP_CLIENT_ID }}" >> .env
+          echo "VITE_APP_AUTH_API_BASE_ENDPOINT=${{ secrets.VITE_APP_AUTH_API_BASE_ENDPOINT }}" >> .env
+          echo "VITE_APP_API_ENDPOINT=${{ secrets.VITE_APP_API_ENDPOINT }}" >> .env
+          echo "VITE_APP_REDIRECT_ENDPOINT=${{ secrets.VITE_APP_REDIRECT_ENDPOINT }}" >> .env
+
+      - name: Print .env file
+        run: cat .env
       - run: npm ci && npm run build
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
