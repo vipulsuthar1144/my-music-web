@@ -12,8 +12,7 @@ import {
 } from "@assets/SVG";
 import { ImageCompWithLoader } from "@components/design/Image";
 import { SingleLineTypo } from "@components/design/styledComponents";
-import { Box, Theme } from "@mui/material";
-import { makeStyles } from "@mui/styles";
+import { Box } from "@mui/material";
 import React, { useState } from "react";
 import Draggable from "react-draggable";
 import SliderAutoProgress from "./helper/SliderProgress";
@@ -32,7 +31,7 @@ const TrackPlayer = () => {
     listenerSkipPrevious,
     currentPlayingTrack,
   } = useTrackPlayerController();
-  const classes = useStyle();
+  // const classes = useStyle();
 
   return (
     <Draggable
@@ -53,15 +52,47 @@ const TrackPlayer = () => {
     >
       <Box
         component={"div"}
-        className={classes.root}
+        // className={classes.root}
         sx={{
           cursor: isPressed ? "grabbing" : "grab",
+          width: "350px",
+          height: "auto",
+          backgroundColor: "rgba(200,200,200,0.15)",
+          backdropFilter: "blur(20px)",
+          borderRadius: "10px",
+          position: "absolute",
+          // position: "fixed",
+          bottom: 20,
+          right: 20,
+          zIndex: 12,
+          display: "flex",
+          alignItems: "center",
+          flexDirection: "column",
+          justifyContent: "flex-start",
+          gap: "20px",
+          padding: "20px 40px",
         }}
       >
-        <Box className={classes.crossBtn}>
+        <Box
+          // className={classes.crossBtn}
+          sx={{
+            position: "absolute",
+            top: 5,
+            right: 5,
+          }}
+        >
           <StyledCloseIconFilled />
         </Box>
-        <Box className={classes.dragIndigator} />
+        <Box
+          // className={classes.dragIndigator}
+          sx={{
+            width: 80,
+            height: 3,
+            backgroundColor: "text.secondary",
+            borderRadius: "10px",
+            opacity: 0.6,
+          }}
+        />
         {/* song image */}
         <ImageCompWithLoader
           img={
@@ -81,7 +112,16 @@ const TrackPlayer = () => {
         />
 
         {/* song details */}
-        <Box className={classes.displayFlex}>
+        <Box
+          // className={classes.displayFlex}
+          sx={{
+            width: "100%",
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}
+        >
           <Box component={"div"} sx={{ flex: 1, overflow: "hidden" }}>
             <SingleLineTypo variant="subtitle1" color="text.primary">
               {currentPlayingTrack?.item?.name}
@@ -137,7 +177,17 @@ const TrackPlayer = () => {
           isPlaying={currentPlayingTrack?.is_playing ?? false}
         />
 
-        <Box width={"110%"} className={classes.displayFlex}>
+        <Box
+          width={"110%"}
+          // className={classes.displayFlex}
+          sx={{
+            width: "100%",
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}
+        >
           <StyledShuffleIconUnFilled
             iconColor={
               currentPlayingTrack?.shuffle_state
@@ -197,42 +247,42 @@ const TrackPlayer = () => {
 
 export default TrackPlayer;
 
-const useStyle = makeStyles((theme: Theme) => ({
-  root: {
-    width: "350px",
-    height: "auto",
-    backgroundColor: "rgba(200,200,200,0.15)",
-    backdropFilter: "blur(20px)",
-    borderRadius: "10px",
-    position: "absolute",
-    // position: "fixed",
-    bottom: 20,
-    right: 20,
-    zIndex: 12,
-    display: "flex",
-    alignItems: "center",
-    flexDirection: "column",
-    justifyContent: "flex-start",
-    gap: "20px",
-    padding: "20px 40px",
-  },
-  crossBtn: {
-    position: "absolute",
-    top: 5,
-    right: 5,
-  },
-  dragIndigator: {
-    width: 80,
-    height: 3,
-    backgroundColor: theme.palette.text.secondary,
-    borderRadius: "10px",
-    opacity: 0.6,
-  },
-  displayFlex: {
-    width: "100%",
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-  },
-}));
+// const useStyle = makeStyles((theme: Theme) => ({
+//   root: {
+//     width: "350px",
+//     height: "auto",
+//     backgroundColor: "rgba(200,200,200,0.15)",
+//     backdropFilter: "blur(20px)",
+//     borderRadius: "10px",
+//     position: "absolute",
+//     // position: "fixed",
+//     bottom: 20,
+//     right: 20,
+//     zIndex: 12,
+//     display: "flex",
+//     alignItems: "center",
+//     flexDirection: "column",
+//     justifyContent: "flex-start",
+//     gap: "20px",
+//     padding: "20px 40px",
+//   },
+//   crossBtn: {
+//     position: "absolute",
+//     top: 5,
+//     right: 5,
+//   },
+//   dragIndigator: {
+//     width: 80,
+//     height: 3,
+//     backgroundColor: theme.palette.text.secondary,
+//     borderRadius: "10px",
+//     opacity: 0.6,
+//   },
+//   displayFlex: {
+//     width: "100%",
+//     display: "flex",
+//     flexDirection: "row",
+//     justifyContent: "space-between",
+//     alignItems: "center",
+//   },
+// }));

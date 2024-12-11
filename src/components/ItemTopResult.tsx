@@ -2,8 +2,13 @@ import { globleEaseInOutTransitionTime } from "@/theme/utils/globalTransitions";
 import { MGradientsDarkTheme } from "@/theme/utils/mGredient";
 import { imgDefaultSong, imgPlay } from "@assets/images";
 import ImageComp from "@components/design/Image";
-import { Card, CardActionArea, CardContent, CardMedia, Theme, Typography } from "@mui/material";
-import { makeStyles } from "@mui/styles";
+import {
+  Card,
+  CardActionArea,
+  CardContent,
+  CardMedia,
+  Typography,
+} from "@mui/material";
 import { useState } from "react";
 
 type ItemTopResultProps = {
@@ -12,14 +17,22 @@ type ItemTopResultProps = {
 
 const ItemTopResult: React.FC<ItemTopResultProps> = ({ isArtist = false }) => {
   const [isHovered, setIsHovered] = useState(false);
-  const classes = useStyles();
+  // const classes = useStyles();
   return (
     <Card
-      className={classes.root}
+      // className={classes.root}
       sx={{
         backgroundColor: "secondary.main",
         backgroundImage: "none",
         boxShadow: "none",
+        width: "100%",
+        overflow: "hidden",
+        boxSizing: "border-box",
+        transition: `transform ${globleEaseInOutTransitionTime},backgroundColor ${globleEaseInOutTransitionTime}`,
+        borderRadius: "8px",
+        "&:hover": {
+          backgroundImage: MGradientsDarkTheme.hoverBgColor,
+        },
       }}
     >
       <CardActionArea
@@ -29,7 +42,16 @@ const ItemTopResult: React.FC<ItemTopResultProps> = ({ isArtist = false }) => {
         onMouseLeave={() => {
           setIsHovered(false);
         }}
-        sx={{ height: "100%", display: "flex", flexDirection: "column", justifyContent: "flex-start", alignItems: "flex-start", gap: "10px", padding: "12px", position: "relative" }}
+        sx={{
+          height: "100%",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "flex-start",
+          alignItems: "flex-start",
+          gap: "10px",
+          padding: "12px",
+          position: "relative",
+        }}
       >
         <CardMedia
           component="img"
@@ -80,15 +102,15 @@ const ItemTopResult: React.FC<ItemTopResultProps> = ({ isArtist = false }) => {
 
 export default ItemTopResult;
 
-const useStyles = makeStyles((_: Theme) => ({
-  root: {
-    width: "100%",
-    overflow: "hidden",
-    boxSizing: "border-box",
-    transition: `transform ${globleEaseInOutTransitionTime},backgroundColor ${globleEaseInOutTransitionTime}`,
-    borderRadius: "8px",
-    "&:hover": {
-      backgroundImage: MGradientsDarkTheme.hoverBgColor,
-    },
-  },
-}));
+// const useStyles = makeStyles((_: Theme) => ({
+//   root: {
+//     width: "100%",
+//     overflow: "hidden",
+//     boxSizing: "border-box",
+//     transition: `transform ${globleEaseInOutTransitionTime},backgroundColor ${globleEaseInOutTransitionTime}`,
+//     borderRadius: "8px",
+//     "&:hover": {
+//       backgroundImage: MGradientsDarkTheme.hoverBgColor,
+//     },
+//   },
+// }));

@@ -9,13 +9,11 @@ import FallbackError from "@components/FallbackError";
 import ItemSongListSkeleton from "@components/skeletons/ItemSongLIst.skeleton";
 import { Add, Check } from "@mui/icons-material";
 import { Box, Grid, Typography } from "@mui/material";
-import { makeStyles } from "@mui/styles";
-import { Theme } from "react-toastify";
 import ItemSongList from "../../components/ItemSongList";
 import useAlbumDetailController from "./AlbumDetail.controller";
 
 const AlbumDetail = () => {
-  const classes = useStyles();
+  // const classes = useStyles();
 
   const {
     listenerGoToArtistDetails,
@@ -42,8 +40,19 @@ const AlbumDetail = () => {
     return (
       <>
         <Box
-          className={classes.details}
-          sx={{ backgroundColor: `${bgColor}`, zIndex: 1 }}
+          // className={classes.details}
+          sx={{
+            backgroundColor: `${bgColor}`,
+            zIndex: 1,
+            borderRadius: "12px 12px 0 0",
+            padding: "30px",
+            display: "flex",
+            flexWrap: "wrap",
+            position: "relative",
+            // flex: 1,
+            gap: "30px",
+            alignItems: "flex-end",
+          }}
         >
           <Box
             sx={{
@@ -205,15 +214,15 @@ const AlbumDetail = () => {
 
 export default AlbumDetail;
 
-const useStyles = makeStyles((_: Theme) => ({
-  details: {
-    borderRadius: "12px 12px 0 0",
-    padding: "30px",
-    display: "flex",
-    flexWrap: "wrap",
-    position: "relative",
-    // flex: 1,
-    gap: "30px",
-    alignItems: "flex-end",
-  },
-}));
+// const useStyles = makeStyles((_: Theme) => ({
+//   details: {
+//     borderRadius: "12px 12px 0 0",
+//     padding: "30px",
+//     display: "flex",
+//     flexWrap: "wrap",
+//     position: "relative",
+//     // flex: 1,
+//     gap: "30px",
+//     alignItems: "flex-end",
+//   },
+// }));

@@ -5,15 +5,14 @@ import ImageComp, { ImageCompWithLoader } from "@components/design/Image";
 import { RootContainer } from "@components/design/styledComponents";
 import FallbackError from "@components/FallbackError";
 import ItemArtistAlbumListSkeleton from "@components/skeletons/ItemArtistAlbumsList.skeleton";
-import { Box, Grid, Theme, Typography } from "@mui/material";
-import { makeStyles } from "@mui/styles";
+import { Box, Grid, Typography } from "@mui/material";
 import { getFollowers } from "@utils/genaralFunctions";
 import ItemArtistAlbumsList from "../../components/ItemArtistAlbumsList";
 import useUserProfileController from "./UserProfile.controller";
 import DialogImagePreview from "@components/dialog/DialogImagePreview";
 
 const UserProfile = () => {
-  const classes = useStyles();
+  // const classes = useStyles();
   const {
     lastPlaylistListItemRef,
     listenerGoToPlaylistDetails,
@@ -39,8 +38,19 @@ const UserProfile = () => {
     return (
       <>
         <Box
-          className={classes.details}
-          sx={{ backgroundColor: `${bgColor}`, zIndex: 1 }}
+          // className={classes.details}
+          sx={{
+            backgroundColor: `${bgColor}`,
+            zIndex: 1,
+            borderRadius: "12px 12px 0 0",
+            padding: "30px",
+            display: "flex",
+            flexWrap: "wrap",
+            position: "relative",
+            // flex: 1,
+            gap: "30px",
+            alignItems: "flex-end",
+          }}
         >
           <Box
             sx={{
@@ -208,15 +218,15 @@ const UserProfile = () => {
 
 export default UserProfile;
 
-const useStyles = makeStyles((_: Theme) => ({
-  details: {
-    borderRadius: "12px 12px 0 0",
-    padding: "30px",
-    display: "flex",
-    flexWrap: "wrap",
-    position: "relative",
-    // flex: 1,
-    gap: "30px",
-    alignItems: "flex-end",
-  },
-}));
+// const useStyles = makeStyles((_: Theme) => ({
+//   details: {
+//     borderRadius: "12px 12px 0 0",
+//     padding: "30px",
+//     display: "flex",
+//     flexWrap: "wrap",
+//     position: "relative",
+//     // flex: 1,
+//     gap: "30px",
+//     alignItems: "flex-end",
+//   },
+// }));

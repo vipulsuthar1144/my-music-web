@@ -9,8 +9,7 @@ import {
 import FallbackError from "@components/FallbackError";
 import ItemArtistAlbumListSkeleton from "@components/skeletons/ItemArtistAlbumsList.skeleton";
 import ItemSongListSkeleton from "@components/skeletons/ItemSongLIst.skeleton";
-import { Box, Grid, Skeleton, Theme, Typography } from "@mui/material";
-import { makeStyles } from "@mui/styles";
+import { Box, Grid, Skeleton, Typography } from "@mui/material";
 import { getFollowers } from "@utils/genaralFunctions";
 import ItemArtistAlbumsList from "../../components/ItemArtistAlbumsList";
 import ItemSongList from "../../components/ItemSongList";
@@ -18,7 +17,7 @@ import useMyProfileController from "./MyProfile.controller";
 import DialogImagePreview from "@components/dialog/DialogImagePreview";
 
 const MyProfile = () => {
-  const classes = useStyles();
+  // const classes = useStyles();
   console.log("MY Profile Page");
 
   const {
@@ -52,8 +51,19 @@ const MyProfile = () => {
     return (
       <>
         <Box
-          className={classes.details}
-          sx={{ backgroundColor: `${bgColor}`, zIndex: 1 }}
+          // className={classes.details}
+          sx={{
+            backgroundColor: `${bgColor}`,
+            zIndex: 1,
+            borderRadius: "12px 12px 0 0",
+            padding: "30px",
+            display: "flex",
+            flexWrap: "wrap",
+            position: "relative",
+            // flex: 1,
+            gap: "30px",
+            alignItems: "flex-end",
+          }}
         >
           <Box
             sx={{
@@ -303,15 +313,15 @@ const MyProfile = () => {
 
 export default MyProfile;
 
-const useStyles = makeStyles((_: Theme) => ({
-  details: {
-    borderRadius: "12px 12px 0 0",
-    padding: "30px",
-    display: "flex",
-    flexWrap: "wrap",
-    position: "relative",
-    // flex: 1,
-    gap: "30px",
-    alignItems: "flex-end",
-  },
-}));
+// const useStyles = makeStyles((_: Theme) => ({
+//   details: {
+//     borderRadius: "12px 12px 0 0",
+//     padding: "30px",
+//     display: "flex",
+//     flexWrap: "wrap",
+//     position: "relative",
+//     // flex: 1,
+//     gap: "30px",
+//     alignItems: "flex-end",
+//   },
+// }));

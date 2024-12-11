@@ -6,8 +6,7 @@ import { RootContainer } from "@components/design/styledComponents";
 import FallbackError from "@components/FallbackError";
 import ItemPlaylistTrackListSkeleton from "@components/skeletons/ItemPlaylistTrackLIst.skeleton";
 import ItemSongListSkeleton from "@components/skeletons/ItemSongLIst.skeleton";
-import { Box, Grid, Theme, Typography, useTheme } from "@mui/material";
-import { makeStyles } from "@mui/styles";
+import { Box, Grid, Typography, useTheme } from "@mui/material";
 import { useIsSmallScreen } from "@utils/constants";
 import { formatDate, getFollowers } from "@utils/genaralFunctions";
 import ItemPlaylistTrackList from "../../components/ItemPlaylistTrackList";
@@ -16,7 +15,7 @@ import usePlaylistDetailsController from "./PlaylistDetails.controller";
 import DialogImagePreview from "@components/dialog/DialogImagePreview";
 
 const PlaylistDetails = () => {
-  const classes = useStyles();
+  // const classes = useStyles();
 
   const theme = useTheme();
   const isSmallScreen = useIsSmallScreen(theme);
@@ -45,8 +44,19 @@ const PlaylistDetails = () => {
     return (
       <>
         <Box
-          className={classes.details}
-          sx={{ backgroundColor: `${bgColor}`, zIndex: 1 }}
+          // className={classes.details}
+          sx={{
+            backgroundColor: `${bgColor}`,
+            zIndex: 1,
+            borderRadius: "12px 12px 0 0",
+            padding: "30px",
+            display: "flex",
+            flexWrap: "wrap",
+            position: "relative",
+            // flex: 1,
+            gap: "30px",
+            alignItems: "flex-end",
+          }}
         >
           <Box
             sx={{
@@ -215,15 +225,15 @@ const PlaylistDetails = () => {
 
 export default PlaylistDetails;
 
-const useStyles = makeStyles((_: Theme) => ({
-  details: {
-    borderRadius: "12px 12px 0 0",
-    padding: "30px",
-    display: "flex",
-    flexWrap: "wrap",
-    position: "relative",
-    // flex: 1,
-    gap: "30px",
-    alignItems: "flex-end",
-  },
-}));
+// const useStyles = makeStyles((_: Theme) => ({
+//   details: {
+//     borderRadius: "12px 12px 0 0",
+//     padding: "30px",
+//     display: "flex",
+//     flexWrap: "wrap",
+//     position: "relative",
+//     // flex: 1,
+//     gap: "30px",
+//     alignItems: "flex-end",
+//   },
+// }));

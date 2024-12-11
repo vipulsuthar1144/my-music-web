@@ -12,14 +12,13 @@ import { appLogo } from "@assets/images";
 import { LoaderButton } from "@components/design/Button";
 import { Download, LogoutRounded } from "@mui/icons-material";
 import { AppBar, Stack, Toolbar, useTheme } from "@mui/material";
-import { makeStyles } from "@mui/styles";
 import { useIsSmallScreen } from "@utils/constants";
 import { useNavigate } from "react-router-dom";
 import SearchBar from "./SearchBar";
 import ImageComp from "./design/Image";
 
 const AppTopBar = () => {
-  const classes = useStyles();
+  // const classes = useStyles();
   const navigate = useNavigate();
   const theme = useTheme();
   const dispatch = useAppDispatch();
@@ -33,10 +32,23 @@ const AppTopBar = () => {
         backgroundImage: "none",
         boxShadow: "none",
         zIndex: 10,
+        top: 0,
+        left: 0,
+        width: "100%",
+        height: "fit-content",
       }}
-      className={classes.appbar}
+      // className={classes.appbar}
     >
-      <Toolbar disableGutters sx={{ paddingX: 1 }} className={classes.toolBar}>
+      <Toolbar
+        disableGutters
+        sx={{
+          paddingX: 1,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+        }}
+        // className={classes.toolBar}
+      >
         {/* <StyledMenuIcon onClick={() => dispatch(toggleMoreOptionBottomSheet(true))} /> */}
 
         {isSmallScreen ? (
@@ -136,16 +148,16 @@ const AppTopBar = () => {
 
 export default AppTopBar;
 
-const useStyles = makeStyles(() => ({
-  appbar: {
-    top: 0,
-    left: 0,
-    width: "100%",
-    height: "fit-content",
-  },
-  toolBar: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "space-between",
-  },
-}));
+// const useStyles = makeStyles(() => ({
+//   appbar: {
+//     top: 0,
+//     left: 0,
+//     width: "100%",
+//     height: "fit-content",
+//   },
+//   toolBar: {
+//     display: "flex",
+//     alignItems: "center",
+//     justifyContent: "space-between",
+//   },
+// }));

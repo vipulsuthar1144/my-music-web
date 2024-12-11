@@ -3,8 +3,13 @@ import { MGradientsDarkTheme } from "@/theme/utils/mGredient";
 import { imgDefaultArtist, imgDefaultSong, imgPlay } from "@assets/images";
 import ImageComp, { ImageCompWithLoader } from "@components/design/Image";
 import { TwoLineTypo } from "@components/design/styledComponents";
-import { Box, Card, CardActionArea, CardContent, useTheme } from "@mui/material";
-import { makeStyles } from "@mui/styles";
+import {
+  Box,
+  Card,
+  CardActionArea,
+  CardContent,
+  useTheme,
+} from "@mui/material";
 import { globleEaseInOutTransitionTime } from "@/theme/utils/globalTransitions";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -19,9 +24,16 @@ type ItemArtistAlbumsListProps = {
   onClick?: () => void;
 };
 
-const ItemArtistAlbumsList: React.FC<ItemArtistAlbumsListProps> = ({ title, subtitleArr, subtitle, img, isArtist = false, onClick }) => {
+const ItemArtistAlbumsList: React.FC<ItemArtistAlbumsListProps> = ({
+  title,
+  subtitleArr,
+  subtitle,
+  img,
+  isArtist = false,
+  onClick,
+}) => {
   const [isHovered, setIsHovered] = useState(false);
-  const classes = useStyle();
+  // const classes = useStyle();
   const theme = useTheme();
   const isSmallScreen = useIsSmallScreen(theme);
   const navigate = useNavigate();
@@ -30,7 +42,7 @@ const ItemArtistAlbumsList: React.FC<ItemArtistAlbumsListProps> = ({ title, subt
   };
   return (
     <Card
-      className={classes.root}
+      // className={classes.root}
       sx={{
         flexShrink: 0,
         flexBasis: isSmallScreen ? "160px" : "200px",
@@ -38,6 +50,14 @@ const ItemArtistAlbumsList: React.FC<ItemArtistAlbumsListProps> = ({ title, subt
         backgroundImage: "none",
         boxShadow: "none",
         borderRadius: "8px",
+        // width: "100%",
+        height: "auto",
+        overflow: "hidden",
+        boxSizing: "border-box",
+        transition: `transform ${globleEaseInOutTransitionTime},backgroundColor ${globleEaseInOutTransitionTime}`,
+        "&:hover": {
+          backgroundImage: MGradientsDarkTheme.hoverBgColor,
+        },
       }}
     >
       <CardActionArea
@@ -48,7 +68,15 @@ const ItemArtistAlbumsList: React.FC<ItemArtistAlbumsListProps> = ({ title, subt
         onMouseLeave={() => {
           setIsHovered(false);
         }}
-        sx={{ height: "100%", display: "flex", flexDirection: "column", justifyContent: "flex-start", alignItems: "flex-start", gap: "10px", padding: "10px" }}
+        sx={{
+          height: "100%",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "flex-start",
+          alignItems: "flex-start",
+          gap: "10px",
+          padding: "10px",
+        }}
       >
         <Box sx={{ position: "relative", aspectRatio: 1, width: "100%" }}>
           <ImageCompWithLoader
@@ -80,10 +108,18 @@ const ItemArtistAlbumsList: React.FC<ItemArtistAlbumsListProps> = ({ title, subt
           />
         </Box>
         <CardContent sx={{ padding: 0, m: 0, width: "100%" }}>
-          <TwoLineTypo variant="subtitle1" color="text.primary" sx={{ textTransform: "capitalize" }}>
+          <TwoLineTypo
+            variant="subtitle1"
+            color="text.primary"
+            sx={{ textTransform: "capitalize" }}
+          >
             {title}
           </TwoLineTypo>
-          <TwoLineTypo variant="subtitle2" color="text.secondary" sx={{ textTransform: "capitalize" }}>
+          <TwoLineTypo
+            variant="subtitle2"
+            color="text.secondary"
+            sx={{ textTransform: "capitalize" }}
+          >
             {subtitle}
 
             {subtitleArr?.map((item) => (
@@ -96,7 +132,13 @@ const ItemArtistAlbumsList: React.FC<ItemArtistAlbumsListProps> = ({ title, subt
                     event.stopPropagation();
                     listenerGoToArtistDetails(item.id);
                   }}
-                  sx={{ cursor: "pointer", "&:hover": { textDecoration: "underline", color: "text.primary" } }}
+                  sx={{
+                    cursor: "pointer",
+                    "&:hover": {
+                      textDecoration: "underline",
+                      color: "text.primary",
+                    },
+                  }}
                 >
                   {item.name}
                 </Box>
@@ -111,15 +153,15 @@ const ItemArtistAlbumsList: React.FC<ItemArtistAlbumsListProps> = ({ title, subt
 
 export default ItemArtistAlbumsList;
 
-const useStyle = makeStyles({
-  root: {
-    // width: "100%",
-    height: "auto",
-    overflow: "hidden",
-    boxSizing: "border-box",
-    transition: `transform ${globleEaseInOutTransitionTime},backgroundColor ${globleEaseInOutTransitionTime}`,
-    "&:hover": {
-      backgroundImage: MGradientsDarkTheme.hoverBgColor,
-    },
-  },
-});
+// const useStyle = makeStyles({
+//   root: {
+//     // width: "100%",
+//     height: "auto",
+//     overflow: "hidden",
+//     boxSizing: "border-box",
+//     transition: `transform ${globleEaseInOutTransitionTime},backgroundColor ${globleEaseInOutTransitionTime}`,
+//     "&:hover": {
+//       backgroundImage: MGradientsDarkTheme.hoverBgColor,
+//     },
+//   },
+// });

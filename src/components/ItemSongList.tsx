@@ -5,8 +5,7 @@ import { MGradientsDarkTheme } from "@/theme/utils/mGredient";
 import { ImageCompWithLoader } from "@components/design/Image";
 import { SingleLineTypo } from "@components/design/styledComponents";
 import { AccessTimeRounded } from "@mui/icons-material";
-import { Box, Card, CardActionArea, Theme, Typography } from "@mui/material";
-import { makeStyles } from "@mui/styles";
+import { Box, Card, CardActionArea, Typography } from "@mui/material";
 import { msToTimeConvert } from "@utils/genaralFunctions";
 import React from "react";
 import { useNavigate } from "react-router-dom";
@@ -32,7 +31,7 @@ const ItemSongList = ({
   onClick,
   trackDuration,
 }: ItemSongListProps) => {
-  const classes = useStyle();
+  // const classes = useStyle();
   const navigate = useNavigate();
 
   const listenerGoToArtistDetails = (artistId?: string) => {
@@ -47,8 +46,17 @@ const ItemSongList = ({
         backgroundColor: "transparent",
         backgroundImage: "none",
         boxShadow: "none",
+        width: "100%",
+        transition: `transform ${globleEaseInOutTransitionTime},backgroundColor ${globleEaseInOutTransitionTime}`,
+        boxSizing: "border-box",
+        overFlow: "hidden",
+        "&:hover": {
+          // backgroundColor: theme.palette.secondary.main,
+          backgroundImage: MGradientsDarkTheme.hoverBgColor,
+          borderRadius: "5px",
+        },
       }}
-      className={classes.root}
+      // className={classes.root}
     >
       <CardActionArea
         onClick={onClick}
@@ -138,16 +146,16 @@ const ItemSongList = ({
 
 export default ItemSongList;
 
-const useStyle = makeStyles((_: Theme) => ({
-  root: {
-    width: "100%",
-    transition: `transform ${globleEaseInOutTransitionTime},backgroundColor ${globleEaseInOutTransitionTime}`,
-    boxSizing: "border-box",
-    overFlow: "hidden",
-    "&:hover": {
-      // backgroundColor: theme.palette.secondary.main,
-      backgroundImage: MGradientsDarkTheme.hoverBgColor,
-      borderRadius: "5px",
-    },
-  },
-}));
+// const useStyle = makeStyles((_: Theme) => ({
+//   root: {
+//     width: "100%",
+//     transition: `transform ${globleEaseInOutTransitionTime},backgroundColor ${globleEaseInOutTransitionTime}`,
+//     boxSizing: "border-box",
+//     overFlow: "hidden",
+//     "&:hover": {
+//       // backgroundColor: theme.palette.secondary.main,
+//       backgroundImage: MGradientsDarkTheme.hoverBgColor,
+//       borderRadius: "5px",
+//     },
+//   },
+// }));

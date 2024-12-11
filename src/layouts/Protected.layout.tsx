@@ -8,8 +8,7 @@ import AppSideBar from "@components/AppSideBar";
 import AppTopBar from "@components/AppTopBar";
 import DialogPremiumRequired from "@components/dialog/DialogPremiumRequired";
 import MoreOptionBottomSheet from "@components/MoreOptionBottomSheet";
-import { Box, styled, Theme, useTheme } from "@mui/material";
-import { makeStyles } from "@mui/styles";
+import { Box, styled, useTheme } from "@mui/material";
 import { LocalStorageKeys, useIsSmallScreen } from "@utils/constants";
 import { useEffect, useRef } from "react";
 import { Navigate, Outlet, useLocation } from "react-router-dom";
@@ -17,7 +16,7 @@ import { Navigate, Outlet, useLocation } from "react-router-dom";
 const ProtectedLayout = () => {
   const theme = useTheme();
   const isSmallScreen = useIsSmallScreen(theme);
-  const classes = useStyles();
+  // const classes = useStyles();
   const [accessToken, _] = useLocalStorage(LocalStorageKeys.ACCESS_TOKEN, "");
   const location = useLocation();
   const containerRef = useRef<HTMLDivElement>(null);
@@ -31,7 +30,15 @@ const ProtectedLayout = () => {
   }
 
   return (
-    <Box className={classes.root}>
+    <Box
+      // className={classes.root}
+      sx={{
+        height: "100vh",
+        background: MGradientsDarkTheme.backroundBlue,
+        display: "flex",
+        justifyContent: "center",
+      }}
+    >
       {!isSmallScreen && <TrackPlayer />}
       {!isSmallScreen && <AppSideBar />}
       {isSmallScreen && <AppBottomNavigation />}
@@ -57,14 +64,14 @@ const ProtectedLayout = () => {
 
 export default ProtectedLayout;
 
-const useStyles = makeStyles((_: Theme) => ({
-  root: {
-    height: "100vh",
-    background: MGradientsDarkTheme.backroundBlue,
-    display: "flex",
-    justifyContent: "center",
-  },
-}));
+// const useStyles = makeStyles((_: Theme) => ({
+//   root: {
+//     height: "100vh",
+//     background: MGradientsDarkTheme.backroundBlue,
+//     display: "flex",
+//     justifyContent: "center",
+//   },
+// }));
 
 export const CustomScrollBox = styled(Box)(({ theme }) => ({
   width: "100%",

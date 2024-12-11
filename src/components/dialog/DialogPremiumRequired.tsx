@@ -1,9 +1,9 @@
 import { toggleDialogPremiumRequired } from "@/store/slices/globleLoader.slice";
 import { useAppDispatch, useAppSelector } from "@/store/store";
 
-import { useStyles } from "@components/AppFooter";
 import { Close } from "@mui/icons-material";
 import {
+  Box,
   Dialog,
   DialogActions,
   DialogContent,
@@ -15,7 +15,7 @@ import footerData from "../../config/jsons/footerLinks.json";
 import { MGradientsDarkTheme } from "@/theme/utils/mGredient";
 
 const DialogPremiumRequired = () => {
-  const classes = useStyles();
+  // const classes = useStyles();
   const dispatch = useAppDispatch();
   const { openDialogPremiumRequired } = useAppSelector(
     (state) => state.globleLoader
@@ -71,14 +71,23 @@ const DialogPremiumRequired = () => {
         </Typography>
       </DialogContent>
       <DialogActions>
-        <a
-          className={classes.link}
-          style={{ color: "white", margin: "10px" }}
+        <Box
+          component="a"
           target="_blank"
           href={footerData.spotify_plans.links[0].url}
+          sx={{
+            paddingRight: "10px",
+            color: "text.secondary",
+            textDecoration: "none",
+            cursor: "pointer",
+            "&:hover": {
+              textDecoration: "underline",
+              color: "text.primary",
+            },
+          }}
         >
           Explore Premium
-        </a>
+        </Box>
       </DialogActions>
     </Dialog>
   );

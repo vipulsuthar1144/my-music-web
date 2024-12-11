@@ -7,13 +7,12 @@ import {
 } from "@components/design/styledComponents";
 import ItemArtistAlbumListSkeleton from "@components/skeletons/ItemArtistAlbumsList.skeleton";
 import ItemSongListSkeleton from "@components/skeletons/ItemSongLIst.skeleton";
-import { Box, Grid, Skeleton, Theme, Typography } from "@mui/material";
-import { makeStyles } from "@mui/styles";
+import { Box, Grid, Skeleton, Typography } from "@mui/material";
 import ItemSongList from "../../components/ItemSongList";
 import useHomeController from "./Home.controller";
 
 const Home: React.FC = () => {
-  const classes = useStyle();
+  // const classes = useStyle();
   const {
     listenerGoToAlbumDetails,
     listenerSeeAllNewRelease,
@@ -47,15 +46,41 @@ const Home: React.FC = () => {
 
     return (
       <Box
-        className={classes.trendingContainer}
+        // className={classes.trendingContainer}
         sx={{
           backgroundImage: `url(${
             hindiTrackList[0].track?.album?.images &&
             hindiTrackList[0].track?.album?.images[0].url
           })`,
+          flex: 1,
+          minWidth: "330px",
+          // backgroundColor: theme.palette.secondary.main,
+          borderRadius: "10px",
+          padding: "10px 5px",
+          // background: `linear-gradient(to top, rgba(12,11,26,0.95) 40%, rgba(12,11,26,0.6)  )`,
+          scrollSnapAlign: "start",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+          position: "relative",
+          zIndex: 1,
         }}
       >
-        <Box className={classes.trendingContainerBgImage} />
+        <Box
+          // className={classes.trendingContainerBgImage}
+          sx={{
+            height: "100%",
+            width: "100%",
+            position: "absolute",
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            zIndex: -1,
+            // opacity: 0.3,
+            background: `linear-gradient(to top, rgba(12,11,26,0.95) 30%, rgba(12,11,26,0.6)  )`,
+          }}
+        />
         <Typography variant="h4" m={"10px"}>
           Hindi
         </Typography>
@@ -94,15 +119,41 @@ const Home: React.FC = () => {
 
     return (
       <Box
-        className={classes.trendingContainer}
+        // className={classes.trendingContainer}
         sx={{
           backgroundImage: `url(${
             punjabiTrackList[0].track?.album?.images &&
             punjabiTrackList[0].track?.album?.images[0].url
           })`,
+          flex: 1,
+          minWidth: "330px",
+          // backgroundColor: theme.palette.secondary.main,
+          borderRadius: "10px",
+          padding: "10px 5px",
+          // background: `linear-gradient(to top, rgba(12,11,26,0.95) 40%, rgba(12,11,26,0.6)  )`,
+          scrollSnapAlign: "start",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+          position: "relative",
+          zIndex: 1,
         }}
       >
-        <Box className={classes.trendingContainerBgImage} />
+        <Box
+          // className={classes.trendingContainerBgImage}
+          sx={{
+            height: "100%",
+            width: "100%",
+            position: "absolute",
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            zIndex: -1,
+            // opacity: 0.3,
+            background: `linear-gradient(to top, rgba(12,11,26,0.95) 30%, rgba(12,11,26,0.6)  )`,
+          }}
+        />
         <Typography variant="h4" m={"10px"}>
           Punjabi
         </Typography>
@@ -140,15 +191,41 @@ const Home: React.FC = () => {
       return;
     return (
       <Box
-        className={classes.trendingContainer}
+        // className={classes.trendingContainer}
         sx={{
           backgroundImage: `url(${
             englishTrackList[0].track?.album?.images &&
             englishTrackList[0].track?.album?.images[0].url
           })`,
+          flex: 1,
+          minWidth: "330px",
+          // backgroundColor: theme.palette.secondary.main,
+          borderRadius: "10px",
+          padding: "10px 5px",
+          // background: `linear-gradient(to top, rgba(12,11,26,0.95) 40%, rgba(12,11,26,0.6)  )`,
+          scrollSnapAlign: "start",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+          position: "relative",
+          zIndex: 1,
         }}
       >
-        <Box className={classes.trendingContainerBgImage} />
+        <Box
+          // className={classes.trendingContainerBgImage}
+          sx={{
+            height: "100%",
+            width: "100%",
+            position: "absolute",
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            zIndex: -1,
+            // opacity: 0.3,
+            background: `linear-gradient(to top, rgba(12,11,26,0.95) 30%, rgba(12,11,26,0.6)  )`,
+          }}
+        />
         <Typography variant="h4" m={"10px"}>
           English
         </Typography>
@@ -249,7 +326,23 @@ const Home: React.FC = () => {
   const renderSkeletons = (isTrack: boolean = false) => {
     if (isTrack) {
       return (
-        <Box className={classes.trendingContainer}>
+        <Box
+          sx={{
+            flex: 1,
+            minWidth: "330px",
+            // backgroundColor: theme.palette.secondary.main,
+            borderRadius: "10px",
+            padding: "10px 5px",
+            // background: `linear-gradient(to top, rgba(12,11,26,0.95) 40%, rgba(12,11,26,0.6)  )`,
+            scrollSnapAlign: "start",
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            backgroundRepeat: "no-repeat",
+            position: "relative",
+            zIndex: 1,
+          }}
+          // className={classes.trendingContainer}
+        >
           <Skeleton
             variant="text"
             animation="wave"
@@ -316,38 +409,38 @@ const Home: React.FC = () => {
 
 export default Home;
 
-const useStyle = makeStyles((_: Theme) => ({
-  mainContainer: {
-    flex: 1,
-    display: "flex",
-    flexDirection: "column",
-    gap: "10px",
-    padding: "10px",
-  },
-  trendingContainer: {
-    flex: 1,
-    minWidth: "330px",
-    // backgroundColor: theme.palette.secondary.main,
-    borderRadius: "10px",
-    padding: "10px 5px",
-    // background: `linear-gradient(to top, rgba(12,11,26,0.95) 40%, rgba(12,11,26,0.6)  )`,
-    scrollSnapAlign: "start",
-    backgroundSize: "cover",
-    backgroundPosition: "center",
-    backgroundRepeat: "no-repeat",
-    position: "relative",
-    zIndex: 1,
-  },
-  trendingContainerBgImage: {
-    height: "100%",
-    width: "100%",
-    position: "absolute",
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    zIndex: -1,
-    // opacity: 0.3,
-    background: `linear-gradient(to top, rgba(12,11,26,0.95) 30%, rgba(12,11,26,0.6)  )`,
-  },
-}));
+// const useStyle = makeStyles((_: Theme) => ({
+//   mainContainer: {
+//     flex: 1,
+//     display: "flex",
+//     flexDirection: "column",
+//     gap: "10px",
+//     padding: "10px",
+//   },
+//   trendingContainer: {
+//     flex: 1,
+//     minWidth: "330px",
+//     // backgroundColor: theme.palette.secondary.main,
+//     borderRadius: "10px",
+//     padding: "10px 5px",
+//     // background: `linear-gradient(to top, rgba(12,11,26,0.95) 40%, rgba(12,11,26,0.6)  )`,
+//     scrollSnapAlign: "start",
+//     backgroundSize: "cover",
+//     backgroundPosition: "center",
+//     backgroundRepeat: "no-repeat",
+//     position: "relative",
+//     zIndex: 1,
+//   },
+//   trendingContainerBgImage: {
+//     height: "100%",
+//     width: "100%",
+//     position: "absolute",
+//     top: 0,
+//     left: 0,
+//     right: 0,
+//     bottom: 0,
+//     zIndex: -1,
+//     // opacity: 0.3,
+//     background: `linear-gradient(to top, rgba(12,11,26,0.95) 30%, rgba(12,11,26,0.6)  )`,
+//   },
+// }));

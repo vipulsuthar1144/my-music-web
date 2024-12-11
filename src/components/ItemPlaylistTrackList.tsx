@@ -4,8 +4,7 @@ import { MGradientsDarkTheme } from "@/theme/utils/mGredient";
 import { ImageCompWithLoader } from "@components/design/Image";
 import { SingleLineTypo } from "@components/design/styledComponents";
 import { AccessTimeRounded } from "@mui/icons-material";
-import { Box, Card, CardActionArea, Theme, Typography } from "@mui/material";
-import { makeStyles } from "@mui/styles";
+import { Box, Card, CardActionArea, Typography } from "@mui/material";
 import { msToTimeConvert } from "@utils/genaralFunctions";
 import React from "react";
 import { useNavigate } from "react-router-dom";
@@ -22,8 +21,18 @@ type ItemPlaylistTrackListProps = {
   dateAdded?: string;
 };
 
-const ItemPlaylistTrackList = ({ title, track_no = 0, img, subtitleArr, onClick, onAlbumClick, trackDuration, albumName, dateAdded }: ItemPlaylistTrackListProps) => {
-  const classes = useStyle();
+const ItemPlaylistTrackList = ({
+  title,
+  track_no = 0,
+  img,
+  subtitleArr,
+  onClick,
+  onAlbumClick,
+  trackDuration,
+  albumName,
+  dateAdded,
+}: ItemPlaylistTrackListProps) => {
+  // const classes = useStyle();
   const navigate = useNavigate();
 
   const listenerGoToArtistDetails = (artistId?: string) => {
@@ -31,7 +40,23 @@ const ItemPlaylistTrackList = ({ title, track_no = 0, img, subtitleArr, onClick,
   };
 
   return (
-    <Card sx={{ backgroundColor: "transparent", backgroundImage: "none", boxShadow: "none" }} className={classes.root}>
+    <Card
+      sx={{
+        backgroundColor: "transparent",
+        backgroundImage: "none",
+        boxShadow: "none",
+        width: "100%",
+        transition: `transform ${globleEaseInOutTransitionTime},backgroundColor ${globleEaseInOutTransitionTime}`,
+        boxSizing: "border-box",
+        overFlow: "hidden",
+        "&:hover": {
+          // backgroundColor: theme.palette.secondary.main,
+          backgroundImage: MGradientsDarkTheme.hoverBgColor,
+          borderRadius: "5px",
+        },
+      }}
+      // className={classes.root}
+    >
       <CardActionArea
         onClick={onClick}
         sx={{
@@ -47,7 +72,12 @@ const ItemPlaylistTrackList = ({ title, track_no = 0, img, subtitleArr, onClick,
           boxSizing: "border-box",
         }}
       >
-        <Typography variant="subtitle1" color="text.primary" mr={"2px"} minWidth={"25px"}>
+        <Typography
+          variant="subtitle1"
+          color="text.primary"
+          mr={"2px"}
+          minWidth={"25px"}
+        >
           {track_no}
         </Typography>
         <ImageCompWithLoader
@@ -62,7 +92,10 @@ const ItemPlaylistTrackList = ({ title, track_no = 0, img, subtitleArr, onClick,
           }}
         />
         {/* <CardContent sx={{ padding: 0, m: 0, flex: 1, width: "calc(100% - 80px)", display: "flex", justifyContent: "space-between", alignItems: "center" }}> */}
-        <Box component={"div"} sx={{ flex: 1, maxWidth: "40%", minWidth: "40%" }}>
+        <Box
+          component={"div"}
+          sx={{ flex: 1, maxWidth: "40%", minWidth: "40%" }}
+        >
           <SingleLineTypo variant="subtitle1" color="text.primary" mb={"2px"}>
             {title}
           </SingleLineTypo>
@@ -76,7 +109,13 @@ const ItemPlaylistTrackList = ({ title, track_no = 0, img, subtitleArr, onClick,
                     event.stopPropagation();
                     listenerGoToArtistDetails(item.id);
                   }}
-                  sx={{ cursor: "pointer", "&:hover": { textDecoration: "underline", color: "text.primary" } }}
+                  sx={{
+                    cursor: "pointer",
+                    "&:hover": {
+                      textDecoration: "underline",
+                      color: "text.primary",
+                    },
+                  }}
                 >
                   {item.name}
                 </Box>
@@ -91,12 +130,20 @@ const ItemPlaylistTrackList = ({ title, track_no = 0, img, subtitleArr, onClick,
           color="text.secondary"
           onMouseDown={(event) => event.stopPropagation()}
           onClick={onAlbumClick}
-          sx={{ cursor: "pointer", flex: 1, "&:hover": { textDecoration: "underline", color: "text.primary" } }}
+          sx={{
+            cursor: "pointer",
+            flex: 1,
+            "&:hover": { textDecoration: "underline", color: "text.primary" },
+          }}
         >
           {albumName}
         </SingleLineTypo>
 
-        <Typography variant="subtitle2" color="text.secondary" sx={{ flex: 0.5 }}>
+        <Typography
+          variant="subtitle2"
+          color="text.secondary"
+          sx={{ flex: 0.5 }}
+        >
           {dateAdded}
         </Typography>
 
@@ -104,7 +151,9 @@ const ItemPlaylistTrackList = ({ title, track_no = 0, img, subtitleArr, onClick,
             {msToTimeConvert(trackDuration || 0)}
           </Typography> */}
         <Box sx={{ display: "flex", gap: "10px", alignItems: "flex-end" }}>
-          <AccessTimeRounded sx={{ fontSize: "20px", color: "text.secondary" }} />
+          <AccessTimeRounded
+            sx={{ fontSize: "20px", color: "text.secondary" }}
+          />
           <Typography variant="body2" color="text.secondary">
             {msToTimeConvert(trackDuration || 0)}
           </Typography>
@@ -117,16 +166,16 @@ const ItemPlaylistTrackList = ({ title, track_no = 0, img, subtitleArr, onClick,
 
 export default ItemPlaylistTrackList;
 
-const useStyle = makeStyles((_: Theme) => ({
-  root: {
-    width: "100%",
-    transition: `transform ${globleEaseInOutTransitionTime},backgroundColor ${globleEaseInOutTransitionTime}`,
-    boxSizing: "border-box",
-    overFlow: "hidden",
-    "&:hover": {
-      // backgroundColor: theme.palette.secondary.main,
-      backgroundImage: MGradientsDarkTheme.hoverBgColor,
-      borderRadius: "5px",
-    },
-  },
-}));
+// const useStyle = makeStyles((_: Theme) => ({
+//   root: {
+//     width: "100%",
+//     transition: `transform ${globleEaseInOutTransitionTime},backgroundColor ${globleEaseInOutTransitionTime}`,
+//     boxSizing: "border-box",
+//     overFlow: "hidden",
+//     "&:hover": {
+//       // backgroundColor: theme.palette.secondary.main,
+//       backgroundImage: MGradientsDarkTheme.hoverBgColor,
+//       borderRadius: "5px",
+//     },
+//   },
+// }));
