@@ -22,6 +22,9 @@ jobs:
           echo "VITE_APP_API_ENDPOINT=${{ secrets.VITE_APP_API_ENDPOINT }}" >> .env
           echo "VITE_APP_REDIRECT_ENDPOINT=${{ secrets.VITE_APP_REDIRECT_ENDPOINT }}" >> .env
 
+      - name: Print .env file
+        run: cat .env
+
       - name: Install dependencies
         run: npm ci # Use npm ci for clean install based on package-lock.json
 
