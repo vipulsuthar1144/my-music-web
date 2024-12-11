@@ -1,3 +1,4 @@
+import FallbackError from "@components/FallbackError";
 import ItemArtistAlbumsList from "@components/ItemArtistAlbumsList";
 import { TitleSeeAll } from "@components/design/Image";
 import {
@@ -8,25 +9,15 @@ import ItemArtistAlbumListSkeleton from "@components/skeletons/ItemArtistAlbumsL
 import ItemSongListSkeleton from "@components/skeletons/ItemSongLIst.skeleton";
 import { Box, Grid, Skeleton, Theme, Typography } from "@mui/material";
 import { makeStyles } from "@mui/styles";
-import { useNavigate } from "react-router-dom";
 import ItemSongList from "../../components/ItemSongList";
 import useHomeController from "./Home.controller";
-import FallbackError from "@components/FallbackError";
-import { useAppDispatch } from "@/store/store";
-import {
-  getCurrentPlayingTrack,
-  playTrack,
-} from "@/store/thunkServices/player.thunkservice";
-import useLocalStorage from "@/config/hooks/useLocalStorage.hooks";
-import { LocalStorageKeys } from "@utils/constants";
 
 const Home: React.FC = () => {
   const classes = useStyle();
   const {
     listenerGoToAlbumDetails,
-    listenerGoToPlaylistDetails,
     listenerSeeAllNewRelease,
-    listenerSeeAllPopularPlaylist,
+    listenerPlayTrack,
     isRecentPlayedTrackListError,
     isRecentPlayedTrackListLoading,
     recentPlayedTrackList,
@@ -43,8 +34,6 @@ const Home: React.FC = () => {
     isPunjabiTrackListLoading,
     punjabiTrackList,
   } = useHomeController();
-  const dispatch = useAppDispatch();
-  // console.log("HOME PAGE");
 
   const renderHindiTracks = () => {
     if (isHindiTrackListLoading) return renderSkeletons(true);
@@ -82,16 +71,7 @@ const Home: React.FC = () => {
                 title={item?.track?.name}
                 // track_no={index + 1}
                 onClick={() => {
-                  dispatch(
-                    playTrack({
-                      deviceId: JSON.parse(
-                        localStorage.getItem(LocalStorageKeys.DEVICE_ID) ??
-                          "unknown"
-                      ),
-                      reqPlayTrackSchema: { uris: [item.track?.uri ?? ""] },
-                    })
-                  );
-                  // console.log(item);
+                  listenerPlayTrack(item.track?.uri);
                 }}
                 subtitleArr={item?.track?.artists}
                 trackDuration={item?.track?.duration_ms}
@@ -132,17 +112,7 @@ const Home: React.FC = () => {
             <Grid item xs={12} key={`${item?.track?.id}${index}`}>
               <ItemSongList
                 onClick={() => {
-                  dispatch(
-                    playTrack({
-                      deviceId: JSON.parse(
-                        localStorage.getItem(LocalStorageKeys.DEVICE_ID) ??
-                          "unknown"
-                      ),
-                      reqPlayTrackSchema: { uris: [item.track?.uri ?? ""] },
-                    })
-                  );
-
-                  // console.log(item);
+                  listenerPlayTrack(item.track?.uri);
                 }}
                 img={
                   item?.track?.album?.images &&
@@ -187,6 +157,9 @@ const Home: React.FC = () => {
           {englishTrackList?.map((item, index) => (
             <Grid item xs={12} key={`${item?.track?.id}${index}`}>
               <ItemSongList
+                onClick={() => {
+                  listenerPlayTrack(item.track?.uri);
+                }}
                 img={
                   item?.track?.album?.images &&
                   item?.track?.album?.images[0]?.url
@@ -220,6 +193,9 @@ const Home: React.FC = () => {
         <ContainerWithoutScrollbar>
           {recentPlayedTrackList.map((item, index) => (
             <ItemArtistAlbumsList
+              onClick={() => {
+                listenerPlayTrack(item.track?.uri);
+              }}
               key={`${item.track?.id}${index}`}
               subtitleArr={item.track?.artists}
               subtitle={"--"}
@@ -304,7 +280,6 @@ const Home: React.FC = () => {
       </Box>
     );
   };
-
   const renderUI = () => {
     if (
       isEnglishTrackListError ||

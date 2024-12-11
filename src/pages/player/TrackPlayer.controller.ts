@@ -1,20 +1,23 @@
 import useLocalStorage from "@/config/hooks/useLocalStorage.hooks";
+import { TRepeatModeOptions } from "@/services/player.services";
 import { useAppDispatch, useAppSelector } from "@/store/store";
-import { getCurrentPlayingTrack } from "@/store/thunkServices/player.thunkservice";
+import {
+  getCurrentPlayingTrack,
+  playback,
+} from "@/store/thunkServices/player.thunkservice";
+import { likeUnlikeTracks } from "@/store/thunkServices/track.thunksevices";
 import { LocalStorageKeys } from "@utils/constants";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 const useTrackPlayerController = () => {
-  let player: Spotify.Player | null | undefined = null;
+  // let player: Spotify.Player | null | undefined = null;
+  const [player, setPlayer] = useState<Spotify.Player | null | undefined>(null);
   const dispatch = useAppDispatch();
   const { currentPlayingTrack } = useAppSelector((state) => state.player);
   const [accessToken, _] = useLocalStorage(LocalStorageKeys.ACCESS_TOKEN, "");
-  const [deviceId, setDeviceId] = useLocalStorage(
-    LocalStorageKeys.DEVICE_ID,
-    ""
-  );
+  const [__, setDeviceId] = useLocalStorage(LocalStorageKeys.DEVICE_ID, "");
   useEffect(() => {
-    player = initializeDevice();
+    initializeDevice();
     return () => {
       if (player) {
         player.disconnect();
@@ -22,7 +25,7 @@ const useTrackPlayerController = () => {
     };
   }, [accessToken, player]);
 
-  const initializeDevice = (): Spotify.Player | null | undefined => {
+  const initializeDevice = () => {
     if (!player) {
       const script = document.createElement("script");
       script.src = "https://sdk.scdn.co/spotify-player.js";
@@ -31,28 +34,28 @@ const useTrackPlayerController = () => {
       console.log("track player");
 
       window.onSpotifyWebPlaybackSDKReady = () => {
-        player = new Spotify.Player({
+        const webPlayer = new Spotify.Player({
           name: "My Music",
           getOAuthToken: (cb) => cb(accessToken ?? ""),
           volume: 0.5,
         });
 
         // Error handling
-        player.addListener("initialization_error", ({ message }) => {
+        webPlayer.addListener("initialization_error", ({ message }) => {
           console.error("Initialization Error:", message);
         });
-        player.addListener("authentication_error", ({ message }) => {
+        webPlayer.addListener("authentication_error", ({ message }) => {
           console.error("Authentication Error:", message);
         });
-        player.addListener("account_error", (err: any) => {
+        webPlayer.addListener("account_error", (err: any) => {
           console.error("Account Error:", err.message, err);
         });
-        player.addListener("playback_error", ({ message }) => {
+        webPlayer.addListener("playback_error", ({ message }) => {
           console.error("Playback Error:", message);
         });
 
         // Player state
-        player.addListener("player_state_changed", (state) => {
+        webPlayer.addListener("player_state_changed", (state) => {
           if (!state) {
             console.log("No state available");
             return;
@@ -74,30 +77,96 @@ const useTrackPlayerController = () => {
         });
 
         // Ready event to get the device ID
-        player.addListener("ready", ({ device_id }) => {
+        webPlayer.addListener("ready", ({ device_id }) => {
           console.log("Ready with Device ID:", device_id);
           setDeviceId(device_id);
         });
 
-        player.addListener("not_ready", ({ device_id }) => {
+        webPlayer.addListener("not_ready", ({ device_id }) => {
           console.log("Device ID has gone offline:", device_id);
         });
 
         // Connect the player!
-        player.connect().then((success) => {
+        webPlayer.connect().then((success) => {
           if (success) {
             console.log("Player connected successfully!");
+            setPlayer(webPlayer);
           } else {
             console.error("Failed to connect player");
           }
         });
       };
-
-      return player;
     }
   };
+  const listenerResumePlayback = () => {
+    dispatch(
+      playback.play({
+        reqPlayTrackSchema: {
+          uris: [currentPlayingTrack?.item?.uri ?? ""],
+          position_ms: currentPlayingTrack?.progress_ms,
+        },
+      })
+    );
+  };
+  const listenerLikeUnlikeTrack = () => {
+    dispatch(
+      likeUnlikeTracks({
+        isLiked: currentPlayingTrack?.item?.isLiked || false,
+        trackId: currentPlayingTrack?.item?.id ?? "",
+      })
+    )
+      .unwrap()
+      .then(() => {
+        dispatch(getCurrentPlayingTrack());
+      });
+  };
+  const listenerPausePlayback = () => {
+    dispatch(playback.pause());
+  };
+  const listenerSkipNext = () => {
+    dispatch(playback.skipNext());
+  };
+  const listenerSkipPrevious = () => {
+    dispatch(playback.skipPrevious());
+  };
+  const listenerSeekToPosition = () => {};
+  const listenerSetVolume = () => {};
+  const listenerSetShuffleMode = () => {
+    dispatch(
+      playback.setShuffleMode({
+        shuffle: !(currentPlayingTrack?.shuffle_state ?? true),
+      })
+    );
+  };
+  const listenerSetRepeatMode = () => {
+    let repeatMode: TRepeatModeOptions = "off";
+    if (currentPlayingTrack?.repeat_state == "off") {
+      repeatMode = "context";
+    } else if (currentPlayingTrack?.repeat_state == "context") {
+      repeatMode = "track";
+    } else if (currentPlayingTrack?.repeat_state == "track") {
+      repeatMode = "off";
+    }
+    dispatch(
+      playback.setRepeatMode({
+        mode: repeatMode,
+      })
+    );
+  };
 
-  return { player, currentPlayingTrack };
+  return {
+    listenerLikeUnlikeTrack,
+    listenerSetRepeatMode,
+    listenerResumePlayback,
+    listenerPausePlayback,
+    listenerSkipNext,
+    listenerSkipPrevious,
+    listenerSeekToPosition,
+    listenerSetVolume,
+    listenerSetShuffleMode,
+    player,
+    currentPlayingTrack,
+  };
 };
 
 export default useTrackPlayerController;

@@ -1,10 +1,8 @@
 import {
   getAvailableDevicesAPI,
   getCurrentPlayingTrackAPI,
-  pauseTrackAPI,
-  playNextTrackAPI,
-  playPreTrackAPI,
-  playTrackAPI,
+  playbackAPI,
+  TRepeatModeOptions,
 } from "@/services/player.services";
 import getAsyncThunk from "../getAsyncThunk";
 import {
@@ -45,42 +43,47 @@ export const getCurrentPlayingTrack = getAsyncThunk<
   return null;
 });
 
-export const playTrack = getAsyncThunk<
-  void,
-  { deviceId: string; reqPlayTrackSchema: IRequestPlayTrackSchema }
->("PUT/playTrack", async ({ deviceId, reqPlayTrackSchema }, signal) => {
-  console.log("playTrack : ", deviceId, reqPlayTrackSchema.uris);
-
-  const result = await playTrackAPI(deviceId, reqPlayTrackSchema, signal);
-
-  if (result.data) return result.data;
-  return result;
-});
-
-export const pauseTrack = getAsyncThunk<void, { deviceId: string }>(
-  "PUT/pauseTrack",
-  async ({ deviceId }, signal) => {
-    const result = await pauseTrackAPI(deviceId, signal);
-
-    if (result.data) return result.data;
-    return result;
-  }
-);
-
-export const playNextTrack = getAsyncThunk<void, { deviceId: string }>(
-  "PUT/playNextTrack",
-  async ({ deviceId }, signal) => {
-    const result = await playNextTrackAPI(deviceId, signal);
-
-    if (result.data) return result.data;
-    return result;
-  }
-);
-export const playPreTrack = getAsyncThunk<void, { deviceId: string }>(
-  "PUT/playPreTrack",
-  async ({ deviceId }, signal) => {
-    const result = await playPreTrackAPI(deviceId, signal);
-    if (result.data) return result.data;
-    return result;
-  }
-);
+export const playback = {
+  play: getAsyncThunk<void, { reqPlayTrackSchema: IRequestPlayTrackSchema }>(
+    "PUT/playback/play",
+    async ({ reqPlayTrackSchema }, signal) => {
+      await playbackAPI.play(reqPlayTrackSchema, signal);
+    }
+  ),
+  pause: getAsyncThunk("PUT/playback/pause", async (_, signal) => {
+    await playbackAPI.pause(signal);
+  }),
+  skipNext: getAsyncThunk("PUT/playback/skipNext", async (_, signal) => {
+    await playbackAPI.skipNext(signal);
+  }),
+  skipPrevious: getAsyncThunk(
+    "PUT/playback/skipPrevious",
+    async (_, signal) => {
+      await playbackAPI.skipPrevious(signal);
+    }
+  ),
+  setRepeatMode: getAsyncThunk<void, { mode: TRepeatModeOptions }>(
+    "PUT/plaback/setRepeatMode",
+    async ({ mode }, signal) => {
+      await playbackAPI.setRepeatMode(mode, signal);
+    }
+  ),
+  setShuffleMode: getAsyncThunk<void, { shuffle: boolean }>(
+    "PUT/plaback/setShuffleMode",
+    async ({ shuffle }, signal) => {
+      await playbackAPI.setShuffleMode(shuffle, signal);
+    }
+  ),
+  seekToPosition: getAsyncThunk<void, { positionMs: number }>(
+    "PUT/plaback/seekToPosition",
+    async ({ positionMs }, signal) => {
+      await playbackAPI.seekToPosition(positionMs, signal);
+    }
+  ),
+  setVolume: getAsyncThunk<void, { volume: number }>(
+    "PUT/plaback/setVolume",
+    async ({ volume }, signal) => {
+      await playbackAPI.setVolume(volume, signal);
+    }
+  ),
+};

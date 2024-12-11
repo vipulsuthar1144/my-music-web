@@ -53,7 +53,11 @@ export const StyledFavoriteIcon = withIconStyles(
   "error.main"
 );
 export const StyledRepeatIconFilled = withIconStyles(RepeatRounded);
-export const StyledRepeatOnceIconFilled = withIconStyles(RepeatOneRounded);
+export const StyledRepeatOnceIconFilled = withIconStyles(
+  RepeatOneRounded,
+  "",
+  "24px"
+);
 export const StyledShuffleIconUnFilled = withIconStyles(ShuffleRounded);
 export const StyledNextIconFilled = withIconStyles(SkipNextRounded);
 export const StyledPreviousIconFilled = withIconStyles(SkipPreviousRounded);

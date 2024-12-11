@@ -1,5 +1,6 @@
 import { useAppDispatch, useAppSelector } from "@/store/store";
 import { getNewReleaseAlbums } from "@/store/thunkServices/album.thunksevices";
+import { playback } from "@/store/thunkServices/player.thunkservice";
 import {
   getRecentPlayedTracks,
   getTop5TrendingEnglishTracks,
@@ -67,6 +68,20 @@ const useHomeController = () => {
     }
   };
 
+  const listenerPlayTrack = (trackURI?: string) => {
+    trackURI &&
+      // dispatch(
+      //   playTrack({
+      //     reqPlayTrackSchema: { uris: [trackURI], position_ms: 0 },
+      //   })
+      // );
+      dispatch(
+        playback.play({
+          reqPlayTrackSchema: { uris: [trackURI], position_ms: 0 },
+        })
+      );
+  };
+
   const listenerGoToArtistDetails = (artistId?: string) => {
     artistId && navigate(`/artist/${artistId}`);
   };
@@ -93,6 +108,7 @@ const useHomeController = () => {
     listenerGoToPlaylistDetails,
     listenerSeeAllNewRelease,
     listenerSeeAllPopularPlaylist,
+    listenerPlayTrack,
     isRecentPlayedTrackListError,
     isRecentPlayedTrackListLoading,
     recentPlayedTrackList,

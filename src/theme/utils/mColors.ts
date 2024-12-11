@@ -1,6 +1,7 @@
 export const mColors = {
   midNightBlack: "#070610", //primary
-  gunMetal: "#252833", // secondary
+  // gunMetal: "#252833", // secondary
+  gunMetal: "#1f2937", // secondary
   // gunMetal: "#121212", // secondary
   offWhite: "#eae8f0",
   white: "#FFFFFF",

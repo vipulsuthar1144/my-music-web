@@ -1,4 +1,3 @@
-import { imgDefaultSong } from "@assets/images";
 import {
   StyledCloseIconFilled,
   StyledFavoriteIcon,
@@ -11,32 +10,31 @@ import {
   StyledRepeatOnceIconFilled,
   StyledShuffleIconUnFilled,
 } from "@assets/SVG";
-import ImageComp, { ImageCompWithLoader } from "@components/design/Image";
-import { Box, Slider, sliderClasses, Theme, Typography } from "@mui/material";
+import { ImageCompWithLoader } from "@components/design/Image";
+import { SingleLineTypo } from "@components/design/styledComponents";
+import { Box, Theme } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import React, { useState } from "react";
 import Draggable from "react-draggable";
-import useTrackPlayerController from "./TrackPlayer.controller";
-import { useAppDispatch } from "@/store/store";
-import {
-  getCurrentPlayingTrack,
-  pauseTrack,
-  playNextTrack,
-  playPreTrack,
-  playTrack,
-} from "@/store/thunkServices/player.thunkservice";
-import { LocalStorageKeys } from "@utils/constants";
-import { SingleLineTypo } from "@components/design/styledComponents";
-import { likeUnlikeTracks } from "@/store/thunkServices/track.thunksevices";
-import { msToTimeConvert } from "@utils/genaralFunctions";
 import SliderAutoProgress from "./helper/SliderProgress";
+import useTrackPlayerController from "./TrackPlayer.controller";
 
 const TrackPlayer = () => {
   const [isPressed, setIsPressed] = useState(false);
   const [isDrag, setIsDrag] = useState(true);
-  const { player, currentPlayingTrack } = useTrackPlayerController();
+  const {
+    listenerSetShuffleMode,
+    listenerSetRepeatMode,
+    listenerLikeUnlikeTrack,
+    listenerResumePlayback,
+    listenerPausePlayback,
+    listenerSkipNext,
+    listenerSkipPrevious,
+    listenerSeekToPosition,
+    listenerSetVolume,
+    currentPlayingTrack,
+  } = useTrackPlayerController();
   const classes = useStyle();
-  const dispatch = useAppDispatch();
 
   return (
     <Draggable
@@ -124,26 +122,12 @@ const TrackPlayer = () => {
 
           {currentPlayingTrack?.item?.isLiked == true ? (
             <StyledFavoriteIcon
-              onClick={() =>
-                dispatch(
-                  likeUnlikeTracks({
-                    isLiked: currentPlayingTrack?.item?.isLiked || false,
-                    trackId: currentPlayingTrack?.item?.id ?? "",
-                  })
-                )
-              }
+              onClick={listenerLikeUnlikeTrack}
               style={{ minWidth: "24px", color: "error.main" }}
             />
           ) : (
             <StyledFavoriteIconOutlined
-              onClick={() =>
-                dispatch(
-                  likeUnlikeTracks({
-                    isLiked: currentPlayingTrack?.item?.isLiked || false,
-                    trackId: currentPlayingTrack?.item?.id ?? "",
-                  })
-                )
-              }
+              onClick={listenerLikeUnlikeTrack}
               style={{ minWidth: "24px" }}
             />
           )}
@@ -162,21 +146,13 @@ const TrackPlayer = () => {
                 ? "primary.main"
                 : "text.primary"
             }
+            onClick={listenerSetShuffleMode}
           />
           <StyledPreviousIconFilled
             disabled={
               currentPlayingTrack?.actions?.disallows?.skipping_prev == true
             }
-            onClick={() =>
-              dispatch(
-                playPreTrack({
-                  deviceId: JSON.parse(
-                    localStorage.getItem(LocalStorageKeys.DEVICE_ID) ??
-                      "unknown"
-                  ),
-                })
-              )
-            }
+            onClick={listenerSkipPrevious}
           />
 
           {currentPlayingTrack?.is_playing == true ? (
@@ -184,54 +160,30 @@ const TrackPlayer = () => {
               disabled={
                 currentPlayingTrack?.actions?.disallows?.pausing == true
               }
-              onClick={() =>
-                dispatch(
-                  pauseTrack({
-                    deviceId: JSON.parse(
-                      localStorage.getItem(LocalStorageKeys.DEVICE_ID) ?? ""
-                    ),
-                  })
-                )
-              }
+              onClick={listenerPausePlayback}
             />
           ) : (
             <StyledPlayIconOutlined
               disabled={
                 currentPlayingTrack?.actions?.disallows?.resuming == true
               }
-              onClick={() => {
-                dispatch(
-                  playTrack({
-                    deviceId: JSON.parse(
-                      localStorage.getItem(LocalStorageKeys.DEVICE_ID) ?? ""
-                    ),
-                    reqPlayTrackSchema: {
-                      uris: [currentPlayingTrack?.item?.uri ?? ""],
-                      position_ms: currentPlayingTrack?.progress_ms,
-                    },
-                  })
-                );
-              }}
+              onClick={listenerResumePlayback}
             />
           )}
           <StyledNextIconFilled
             disabled={
               currentPlayingTrack?.actions?.disallows?.skipping_next == true
             }
-            onClick={() =>
-              dispatch(
-                playNextTrack({
-                  deviceId: JSON.parse(
-                    localStorage.getItem(LocalStorageKeys.DEVICE_ID) ?? ""
-                  ),
-                })
-              )
-            }
+            onClick={listenerSkipNext}
           />
           {currentPlayingTrack?.repeat_state == "track" ? (
-            <StyledRepeatOnceIconFilled iconColor="primary.main" />
+            <StyledRepeatOnceIconFilled
+              onClick={listenerSetRepeatMode}
+              iconColor="primary.main"
+            />
           ) : (
             <StyledRepeatIconFilled
+              onClick={listenerSetRepeatMode}
               iconColor={
                 currentPlayingTrack?.repeat_state == "context"
                   ? "primary.main"

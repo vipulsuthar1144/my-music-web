@@ -6,10 +6,6 @@ import { createSlice } from "@reduxjs/toolkit";
 import {
   getAvailableDevices,
   getCurrentPlayingTrack,
-  pauseTrack,
-  playNextTrack,
-  playPreTrack,
-  playTrack,
 } from "../thunkServices/player.thunkservice";
 import { likeUnlikeTracks } from "../thunkServices/track.thunksevices";
 
@@ -34,24 +30,9 @@ export const playerSlice = createSlice({
       })
       .addCase(getCurrentPlayingTrack.fulfilled, (state, action) => {
         console.log("getCurrentPlayingTrack :: ", action.payload);
-
         state.currentPlayingTrack = action.payload;
       })
-      .addCase(playTrack.fulfilled, () => {
-        // state.currentPlayingTrack = action.payload;
-      })
-      .addCase(pauseTrack.fulfilled, () => {
-        // state.currentPlayingTrack = action.payload;
-      })
-      .addCase(playNextTrack.fulfilled, () => {
-        // state.currentPlayingTrack = action.payload;
-      })
-      .addCase(playPreTrack.fulfilled, () => {
-        // state.currentPlayingTrack = action.payload;
-      })
-
       .addCase(likeUnlikeTracks.fulfilled, (state, action) => {
-        // state.isLikeUnlikeLoading = false;
         state.currentPlayingTrack?.item?.isLiked &&
           (state.currentPlayingTrack.item.isLiked = action.payload);
       });
