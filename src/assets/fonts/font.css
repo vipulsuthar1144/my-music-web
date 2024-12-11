@@ -1,0 +1,23 @@
+@font-face {
+  font-family: "Ubuntu-bold";
+  src: url("./Ubuntu-Bold.ttf");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Ubuntu-medium";
+  src: url("./Ubuntu-Medium.ttf");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Ubuntu-regular";
+  src: url("./Ubuntu-Regular.ttf");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Ubuntu-light";
+  src: url("./Ubuntu-Light.ttf");
+  font-display: swap;
+}

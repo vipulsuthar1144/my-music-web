@@ -1,0 +1,122 @@
+{
+  "company": {
+    "title": "Company",
+    "links": [
+      {
+        "title": "About",
+        "url": "https://www.spotify.com/in-en/about-us/contact/"
+      },
+      {
+        "title": "Jobs",
+        "url": "https://www.lifeatspotify.com/"
+      },
+      {
+        "title": "For the Record",
+        "url": "https://newsroom.spotify.com/"
+      }
+    ]
+  },
+  "communities": {
+    "title": "Communities",
+    "links": [
+      {
+        "title": "For Artists",
+        "url": "https://artists.spotify.com/home"
+      },
+      {
+        "title": "Developers",
+        "url": "https://developer.spotify.com/"
+      },
+      {
+        "title": "Advertising",
+        "url": "https://ads.spotify.com/en-IN/"
+      },
+      {
+        "title": "Investers",
+        "url": "https://investors.spotify.com/home/default.aspx"
+      },
+      {
+        "title": "Vendors",
+        "url": "https://spotifyforvendors.com/"
+      }
+    ]
+  },
+  "useful_links": {
+    "title": "Useful Links",
+    "links": [
+      {
+        "title": "Support",
+        "url": "https://support.spotify.com/in-en/"
+      },
+      {
+        "title": "For Mobile App",
+        "url": "https://www.spotify.com/in-en/download/windows/"
+      }
+    ]
+  },
+  "spotify_plans": {
+    "title": "Subscription plans",
+    "links": [
+      {
+        "title": "Premium Individual",
+        "url": "https://www.spotify.com/in-en/premium/?ref=spotifycom_footer_premium_individual"
+      },
+      {
+        "title": "Premium Duo",
+        "url": "https://www.spotify.com/in-en/duo/?ref=spotifycom_footer_premium_duo"
+      },
+      {
+        "title": "Premium Family",
+        "url": "https://www.spotify.com/in-en/family/?ref=spotifycom_footer_premium_family"
+      },
+      {
+        "title": "Premium Student",
+        "url": "https://www.spotify.com/in-en/student/?ref=spotifycom_footer_premium_student"
+      },
+      {
+        "title": "Free",
+        "url": "https://www.spotify.com/in-en/free/?ref=spotifycom_footer_free"
+      }
+    ]
+  },
+  "social_media_links": [
+    {
+      "title": "Twitter",
+      "url": "https://x.com/spotify"
+    },
+    {
+      "title": "Instagram",
+      "url": "https://www.instagram.com/spotify/"
+    },
+    {
+      "title": "Facebook",
+      "url": "https://www.facebook.com/Spotify"
+    }
+  ],
+  "other_links": [
+    {
+      "title": "Legal",
+      "url": "https://www.spotify.com/in-en/legal/end-user-agreement/"
+    },
+    {
+      "title": "Safety & Privacy Center",
+      "url": "https://www.spotify.com/in-en/safetyandprivacy"
+    },
+    {
+      "title": "Privacy Policy",
+      "url": "https://www.spotify.com/in-en/legal/privacy-policy/"
+    },
+    {
+      "title": "Cookies",
+      "url": "https://www.spotify.com/in-en/legal/cookies-policy/"
+    },
+    {
+      "title": "About Ads",
+      "url": "https://www.spotify.com/in-en/legal/privacy-policy/#s3"
+    },
+    {
+      "title": "Accessibility",
+      "url": "https://www.spotify.com/in-en/accessibility"
+    }
+  ]
+}
