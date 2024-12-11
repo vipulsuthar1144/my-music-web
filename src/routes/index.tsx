@@ -4,6 +4,7 @@ import AuthLayout from "../layouts/Auth.layout";
 import ProtectedLayout from "../layouts/Protected.layout";
 import AuthRoutes from "./Auth.routes";
 import ProtectedRoutes from "./Protected.routes";
+import Callback from "@/pages/auth/Callback";
 
 const AppRoutes = () => {
   const rootRoutes = createBrowserRouter(
@@ -12,6 +13,11 @@ const AppRoutes = () => {
         path: "/auth",
         element: <AuthLayout />,
         children: AuthRoutes,
+        errorElement: <FallbackError type="error_boundary" />,
+      },
+      {
+        path: "/callback",
+        element: <Callback />,
         errorElement: <FallbackError type="error_boundary" />,
       },
       {
