@@ -3,7 +3,6 @@ import { IconButton, SvgIconProps, Theme, Tooltip } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { globleTransitionTime } from "@/theme/utils/globalTransitions";
 import React, { ComponentType, MouseEvent } from "react";
-import zIndex from "@mui/material/styles/zIndex";
 
 type WithIconStylesProps = {
   onClick?: (event: MouseEvent<HTMLElement>) => void;

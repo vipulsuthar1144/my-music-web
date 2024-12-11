@@ -1,11 +1,8 @@
 import {
   AddCircleOutlineRounded,
   FavoriteBorderOutlined,
-  Logout,
   MoreVert,
-  PersonAdd,
   QueueMusicOutlined,
-  Settings,
 } from "@mui/icons-material";
 import { IconButton, ListItemIcon, Menu, MenuItem } from "@mui/material";
 import React from "react";

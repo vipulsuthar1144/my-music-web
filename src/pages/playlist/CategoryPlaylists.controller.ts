@@ -1,5 +1,4 @@
 import useLoadMore from "@/config/hooks/useLoadMore.hooks";
-import { resetPlaylistState } from "@/store/slices/playlist.slice";
 import { useAppDispatch, useAppSelector } from "@/store/store";
 import { getPlaylistsByCategoryId } from "@/store/thunkServices/playlist.thunkservices";
 import { useEffect } from "react";

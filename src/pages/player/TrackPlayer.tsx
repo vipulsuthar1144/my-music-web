@@ -21,7 +21,7 @@ import useTrackPlayerController from "./TrackPlayer.controller";
 
 const TrackPlayer = () => {
   const [isPressed, setIsPressed] = useState(false);
-  const [isDrag, setIsDrag] = useState(true);
+  const [isDrag, _] = useState(true);
   const {
     listenerSetShuffleMode,
     listenerSetRepeatMode,
@@ -30,8 +30,6 @@ const TrackPlayer = () => {
     listenerPausePlayback,
     listenerSkipNext,
     listenerSkipPrevious,
-    listenerSeekToPosition,
-    listenerSetVolume,
     currentPlayingTrack,
   } = useTrackPlayerController();
   const classes = useStyle();

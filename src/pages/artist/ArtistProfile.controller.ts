@@ -5,7 +5,6 @@ import {
   followUnfollowArtist,
   getAlbumsOfArtist,
   getArtistById,
-  getRelatedArtists,
   getTopTracksOfArtist,
 } from "@/store/thunkServices/artist.thunksevices";
 import { useEffect } from "react";

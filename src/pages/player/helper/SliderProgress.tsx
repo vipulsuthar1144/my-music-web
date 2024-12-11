@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Box, Slider, sliderClasses, Typography } from "@mui/material";
 import { msToTimeConvert } from "@utils/genaralFunctions";
-import { ICurrentPlayingTrackSchema } from "@/schemas/player.schema";
 
 interface TSliderAutoProgress {
   duration?: number;
@@ -38,7 +37,7 @@ const SliderAutoProgress = ({
   }, [progress]);
 
   // Handle manual slider changes
-  const handleChange = (event: Event, newValue: number | number[]) => {
+  const handleChange = (_: Event, newValue: number | number[]) => {
     if (typeof newValue === "number") {
       setValue(newValue);
     }

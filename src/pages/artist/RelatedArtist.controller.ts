@@ -1,6 +1,4 @@
-import { resetArtistState } from "@/store/slices/artist.slice";
 import { useAppDispatch, useAppSelector } from "@/store/store";
-import { getRelatedArtists } from "@/store/thunkServices/artist.thunksevices";
 import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
