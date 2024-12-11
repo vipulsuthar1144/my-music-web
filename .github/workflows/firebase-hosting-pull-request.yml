@@ -1,10 +1,9 @@
 name: Deploy to Firebase Hosting on PR
 
 on:
-  pull_request:
-    branches:
-      - main # Or any branch you want to target
-
+pull_request:
+  branches:
+    - master
 permissions:
   checks: write
   contents: read
