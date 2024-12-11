@@ -43,4 +43,5 @@ jobs:
         with:
           repoToken: ${{ secrets.GITHUB_TOKEN }}
           firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_MYMUSIC_1144 }}
+          channelId: mymusic-1144
           projectId: mymusic-1144
