@@ -1,4 +1,3 @@
-import useLocalStorage from "@/config/hooks/useLocalStorage.hooks";
 import { TRepeatModeOptions } from "@/services/player.services";
 import { useAppDispatch, useAppSelector } from "@/store/store";
 import {
@@ -6,98 +5,88 @@ import {
   playback,
 } from "@/store/thunkServices/player.thunkservice";
 import { likeUnlikeTracks } from "@/store/thunkServices/track.thunksevices";
-import { LocalStorageKeys } from "@utils/constants";
-import { useEffect, useState } from "react";
 
 const useTrackPlayerController = () => {
   // let player: Spotify.Player | null | undefined = null;
-  const [player, setPlayer] = useState<Spotify.Player | null | undefined>(null);
+  // const [player, setPlayer] = useState<Spotify.Player | null | undefined>(null);
   const dispatch = useAppDispatch();
   const { currentPlayingTrack } = useAppSelector((state) => state.player);
-  const [accessToken, _] = useLocalStorage(LocalStorageKeys.ACCESS_TOKEN, "");
-  const [__, setDeviceId] = useLocalStorage(LocalStorageKeys.DEVICE_ID, "");
-  useEffect(() => {
-    initializeDevice();
-    return () => {
-      if (player) {
-        player.disconnect();
-      }
-    };
-  }, [accessToken, player]);
+  // const [accessToken, _] = useLocalStorage(LocalStorageKeys.ACCESS_TOKEN, "");
+  // const [__, setDeviceId] = useLocalStorage(LocalStorageKeys.DEVICE_ID, "");
+  // useEffect(() => {
+  // initializeDevice();
+  // return () => {
+  //   if (player) {
+  //     player.disconnect();
+  //   }
+  // };
+  // }, [accessToken, player]);
 
-  const initializeDevice = () => {
-    if (!player) {
-      const script = document.createElement("script");
-      script.src = "https://sdk.scdn.co/spotify-player.js";
-      script.async = true;
-      document.body.appendChild(script);
-      console.log("track player");
+  // const initializeDevice = () => {
+  //   if (!player) {
+  //     const script = document.createElement("script");
+  //     script.src = "https://sdk.scdn.co/spotify-player.js";
+  //     script.async = true;
+  //     document.body.appendChild(script);
 
-      window.onSpotifyWebPlaybackSDKReady = () => {
-        const webPlayer = new Spotify.Player({
-          name: "My Music",
-          getOAuthToken: (cb) => cb(accessToken ?? ""),
-          volume: 0.5,
-        });
+  //     window.onSpotifyWebPlaybackSDKReady = () => {
+  //       const webPlayer = new Spotify.Player({
+  //         name: "My Music",
+  //         getOAuthToken: (cb) => cb(accessToken ?? ""),
+  //         volume: 0.5,
+  //       });
 
-        // Error handling
-        webPlayer.addListener("initialization_error", ({ message }) => {
-          console.error("Initialization Error:", message);
-        });
-        webPlayer.addListener("authentication_error", ({ message }) => {
-          console.error("Authentication Error:", message);
-        });
-        webPlayer.addListener("account_error", (err: any) => {
-          console.error("Account Error:", err.message, err);
-        });
-        webPlayer.addListener("playback_error", ({ message }) => {
-          console.error("Playback Error:", message);
-        });
+  //       // Error handling
+  //       webPlayer.addListener("initialization_error", ({ message }) => {
+  //         console.error("Initialization Error:", message);
+  //       });
+  //       webPlayer.addListener("authentication_error", ({ message }) => {
+  //         console.error("Authentication Error:", message);
+  //       });
+  //       webPlayer.addListener("account_error", (err: any) => {
+  //         console.error("Account Error:", err.message, err);
+  //       });
+  //       webPlayer.addListener("playback_error", ({ message }) => {
+  //         console.error("Playback Error:", message);
+  //       });
 
-        // Player state
-        webPlayer.addListener("player_state_changed", (state) => {
-          if (!state) {
-            console.log("No state available");
-            return;
-          }
-          console.log(
-            !state.loading &&
-              state.track_window.current_track.id !=
-                currentPlayingTrack?.item?.id,
-            "Player state changed:",
-            state
-          );
-          if (
-            (!state.loading || state.paused) &&
-            state.track_window.current_track.id !==
-              currentPlayingTrack?.item?.id
-          ) {
-            dispatch(getCurrentPlayingTrack());
-          }
-        });
+  //       // Player state
+  //       webPlayer.addListener("player_state_changed", (state) => {
+  //         if (!state) {
+  //           // console.log("No state available");
+  //           return;
+  //         }
+  //         if (
+  //           (!state.loading || state.paused) &&
+  //           state.track_window.current_track.id !==
+  //             currentPlayingTrack?.item?.id
+  //         ) {
+  //           dispatch(getCurrentPlayingTrack());
+  //         }
+  //       });
 
-        // Ready event to get the device ID
-        webPlayer.addListener("ready", ({ device_id }) => {
-          console.log("Ready with Device ID:", device_id);
-          setDeviceId(device_id);
-        });
+  //       // Ready event to get the device ID
+  //       webPlayer.addListener("ready", ({ device_id }) => {
+  //         console.log("Ready with Device ID:", device_id);
+  //         setDeviceId(device_id);
+  //       });
 
-        webPlayer.addListener("not_ready", ({ device_id }) => {
-          console.log("Device ID has gone offline:", device_id);
-        });
+  //       webPlayer.addListener("not_ready", ({ device_id }) => {
+  //         console.log("Device ID has gone offline:", device_id);
+  //       });
 
-        // Connect the player!
-        webPlayer.connect().then((success) => {
-          if (success) {
-            console.log("Player connected successfully!");
-            setPlayer(webPlayer);
-          } else {
-            console.error("Failed to connect player");
-          }
-        });
-      };
-    }
-  };
+  //       // Connect the player!
+  //       webPlayer.connect().then((success) => {
+  //         if (success) {
+  //           console.log("Player connected successfully!");
+  //           setPlayer(webPlayer);
+  //         } else {
+  //           console.error("Failed to connect player");
+  //         }
+  //       });
+  //     };
+  //   }
+  // };
   const listenerResumePlayback = () => {
     dispatch(
       playback.play({
@@ -164,7 +153,7 @@ const useTrackPlayerController = () => {
     listenerSeekToPosition,
     listenerSetVolume,
     listenerSetShuffleMode,
-    player,
+    // player,
     currentPlayingTrack,
   };
 };
