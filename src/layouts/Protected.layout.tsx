@@ -1,5 +1,7 @@
 import useLocalStorage from "@/config/hooks/useLocalStorage.hooks";
 import TrackPlayer from "@/pages/player/TrackPlayer";
+import { useAppDispatch, useAppSelector } from "@/store/store";
+import { getCurrentPlayingTrack } from "@/store/thunkServices/player.thunkservice";
 import { sidebarWidth } from "@/theme/utils/globalTransitions";
 import { MGradientsDarkTheme } from "@/theme/utils/mGredient";
 import AppBottomNavigation from "@components/AppBottomNavigation";
@@ -10,7 +12,7 @@ import DialogPremiumRequired from "@components/dialog/DialogPremiumRequired";
 import MoreOptionBottomSheet from "@components/MoreOptionBottomSheet";
 import { Box, styled, useTheme } from "@mui/material";
 import { LocalStorageKeys, useIsSmallScreen } from "@utils/constants";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Navigate, Outlet, useLocation } from "react-router-dom";
 
 const ProtectedLayout = () => {
@@ -20,6 +22,84 @@ const ProtectedLayout = () => {
   const [accessToken, _] = useLocalStorage(LocalStorageKeys.ACCESS_TOKEN, "");
   const location = useLocation();
   const containerRef = useRef<HTMLDivElement>(null);
+  const [player, setPlayer] = useState<Spotify.Player | null | undefined>(null);
+  const dispatch = useAppDispatch();
+  const { currentPlayingTrack } = useAppSelector((state) => state.player);
+  const [__, setDeviceId] = useLocalStorage(LocalStorageKeys.DEVICE_ID, "");
+  useEffect(() => {
+    accessToken && initializeDevice();
+    return () => {
+      if (player) {
+        player.disconnect();
+      }
+    };
+  }, [accessToken, player]);
+
+  const initializeDevice = () => {
+    if (!player) {
+      const script = document.createElement("script");
+      script.src = "https://sdk.scdn.co/spotify-player.js";
+      script.async = true;
+      document.body.appendChild(script);
+
+      window.onSpotifyWebPlaybackSDKReady = () => {
+        const webPlayer = new Spotify.Player({
+          name: "My Music",
+          getOAuthToken: (cb) => cb(accessToken ?? ""),
+          volume: 0.5,
+        });
+
+        // Error handling
+        webPlayer.addListener("initialization_error", ({ message }) => {
+          console.error("Initialization Error:", message);
+        });
+        webPlayer.addListener("authentication_error", ({ message }) => {
+          console.error("Authentication Error:", message);
+        });
+        webPlayer.addListener("account_error", (err: any) => {
+          console.error("Account Error:", err.message, err);
+        });
+        webPlayer.addListener("playback_error", ({ message }) => {
+          console.error("Playback Error:", message);
+        });
+
+        // Player state
+        webPlayer.addListener("player_state_changed", (state) => {
+          if (!state) {
+            // console.log("No state available");
+            return;
+          }
+          if (
+            (!state.loading || state.paused) &&
+            state.track_window.current_track.id !==
+              currentPlayingTrack?.item?.id
+          ) {
+            dispatch(getCurrentPlayingTrack());
+          }
+        });
+
+        // Ready event to get the device ID
+        webPlayer.addListener("ready", ({ device_id }) => {
+          console.log("Ready with Device ID:", device_id);
+          setDeviceId(device_id);
+        });
+
+        webPlayer.addListener("not_ready", ({ device_id }) => {
+          console.log("Device ID has gone offline:", device_id);
+        });
+
+        // Connect the player!
+        webPlayer.connect().then((success) => {
+          if (success) {
+            console.log("Player connected successfully!");
+            setPlayer(webPlayer);
+          } else {
+            console.error("Failed to connect player");
+          }
+        });
+      };
+    }
+  };
 
   useEffect(() => {
     containerRef.current && containerRef.current.scrollTo(0, 0);

@@ -56,7 +56,10 @@ const manifestForPlugIn: Partial<VitePWAOptions> = {
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: "./",
+  base: "/",
+  build: {
+    outDir: "dist",
+  },
   plugins: [react(), VitePWA(manifestForPlugIn)],
   server: {
     port: Number(FRONTEND_PORT) || 1818,
