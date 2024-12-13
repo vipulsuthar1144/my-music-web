@@ -1,5 +1,4 @@
 import useLocalStorage from "@/config/hooks/useLocalStorage.hooks";
-import { MGradientsDarkTheme } from "@/theme/utils/mGredient";
 import { Box } from "@mui/material";
 import { LocalStorageKeys } from "@utils/constants";
 import { Navigate, Outlet } from "react-router-dom";
@@ -13,7 +12,8 @@ const AuthLayout = () => {
     <Box
       sx={{
         height: "100vh",
-        background: MGradientsDarkTheme.backroundBlue,
+        // background: MGradientsDarkTheme.backroundBlue,
+        backgroundColor: "black",
         display: "flex",
         justifyContent: "center",
       }}
