@@ -1,58 +1,36 @@
-import { appLogoMyMusic } from "@assets/images";
-import { LoaderButton } from "@components/design/Button";
-import ImageComp from "@components/design/Image";
 import { RootContainer } from "@components/design/styledComponents";
-import { useTheme } from "@mui/material";
-import useAuthController from "./Auth.controller";
+import HeroSection from "./components/Hero";
+import Features from "./components/Features";
+import Categories from "./components/Categories";
+import PlaylistFeatures from "./components/PlaylistFeatures";
+import Screenshots from "./components/Screenshots";
+import Pricing from "./components/Plans";
+import Download from "./components/Download";
+import AppFooter from "@components/AppFooter";
+import { Box } from "@mui/material";
 
 const Auth = () => {
-  const { listenerGoToLoginURL } = useAuthController();
-  const theme = useTheme();
   return (
     <>
-      {/* <LoadingBar color={mColors.loaderPrimary} progress={progress} /> */}
       <RootContainer
         sx={{
+          width: "100%",
           height: "100%",
           alignItems: "center",
-          justifyContent: "center",
+          justifyContent: "flex-start",
         }}
+        style={{ padding: 0, gap: 0 }}
       >
-        <ImageComp
-          img={appLogoMyMusic}
-          alt="My Music"
-          style={{
-            width: "25%",
-            height: "auto",
-            userSelect: "none",
-            marginBottom: "30px",
-            [theme.breakpoints.down("lg")]: {
-              width: "40%",
-            },
-            [theme.breakpoints.down("md")]: {
-              width: "60%",
-            },
-            [theme.breakpoints.down("sm")]: {
-              width: "90%",
-            },
-          }}
-        />
-        <LoaderButton
-          label={"Continue With Spotify"}
-          variant={"contained"}
-          color={"primary"}
-          style={{
-            background: "none",
-            backgroundColor: "loader.main",
-            color: "black",
-            borderRadius: "20px",
-            "&:hover": {
-              backgroundColor: "loader.main",
-              color: "black",
-            },
-          }}
-          onClick={listenerGoToLoginURL}
-        />
+        <HeroSection />
+        <Features />
+        <Categories />
+        <PlaylistFeatures />
+        <Screenshots />
+        <Pricing />
+        <Download />
+        <Box sx={{ width: "100%", padding: "10px 20px" }}>
+          <AppFooter />
+        </Box>
       </RootContainer>
     </>
   );

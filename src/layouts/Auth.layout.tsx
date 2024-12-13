@@ -13,7 +13,8 @@ const AuthLayout = () => {
     <Box
       sx={{
         height: "100vh",
-        background: MGradientsDarkTheme.backroundBlue,
+        // background: MGradientsDarkTheme.backroundBlue,
+        backgroundColor: "black",
         display: "flex",
         justifyContent: "center",
       }}
