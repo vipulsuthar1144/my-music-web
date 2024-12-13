@@ -1,5 +1,4 @@
 import useLocalStorage from "@/config/hooks/useLocalStorage.hooks";
-import { MGradientsDarkTheme } from "@/theme/utils/mGredient";
 import { Box } from "@mui/material";
 import { LocalStorageKeys } from "@utils/constants";
 import { Navigate, Outlet } from "react-router-dom";
