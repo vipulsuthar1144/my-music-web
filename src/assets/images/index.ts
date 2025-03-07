@@ -5,6 +5,7 @@ import imgDefaultArtist from "@assets/images/default_user.png";
 import imgDefaultSong from "@assets/images/default_song.jpeg";
 import imgDefaultLikedSong from "@assets/images/default-liked.jpg";
 import imgVerifiedTick from "@assets/images/verified_tick.png";
+import imgPremiumRequired from "@assets/images/premium_required.jpg";
 
 export {
   appLogoMyMusic,
@@ -14,4 +15,5 @@ export {
   imgDefaultSong,
   appLogo,
   imgPlay,
+  imgPremiumRequired,
 };

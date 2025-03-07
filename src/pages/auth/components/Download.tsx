@@ -1,6 +1,6 @@
-import { DownloadOutlined } from "@mui/icons-material";
-import { Box, Button, Container, Grid, Typography } from "@mui/material";
+import { Box, Container, Grid, Typography } from "@mui/material";
 import { motion } from "framer-motion";
+import InstallAppButton from "./InstallAppButton";
 
 const Download = () => {
   return (
@@ -48,19 +48,7 @@ const Download = () => {
                   gap: 2,
                 }}
               >
-                <Button
-                  variant="contained"
-                  startIcon={<DownloadOutlined />}
-                  sx={{
-                    backgroundColor: "gray.800",
-                    color: "white",
-                    cursor: "not-allowed",
-                    "&:hover": { backgroundColor: "gray.700" },
-                    paddingX: 4,
-                  }}
-                >
-                  Download
-                </Button>
+                <InstallAppButton />
               </Box>
             </motion.div>
           </Grid>
@@ -81,8 +69,6 @@ const Download = () => {
                 }}
               >
                 <img
-                  //   src="https://images.unsplash.com/photo-1524678606370-a47ad25cb82a?w=800&q=80"
-                  //   src="https://images.unsplash.com/photo-1420161900862-9a86fa1f5c79?q=80&w=2669&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                   src="https://images.unsplash.com/photo-1510279410431-2d0808d69bf8?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                   alt="App preview"
                   style={{ width: "100%", height: "100%", objectFit: "cover" }}

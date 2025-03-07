@@ -1,5 +1,9 @@
 import useLocalStorage from "@/config/hooks/useLocalStorage.hooks";
 import TrackPlayer from "@/pages/player/TrackPlayer";
+import {
+  resetPlayerState,
+  togglePlaybackLoadingState,
+} from "@/store/slices/player.slice";
 import { useAppDispatch, useAppSelector } from "@/store/store";
 import { getCurrentPlayingTrack } from "@/store/thunkServices/player.thunkservice";
 import { sidebarWidth } from "@/theme/utils/globalTransitions";
@@ -24,7 +28,9 @@ const ProtectedLayout = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [player, setPlayer] = useState<Spotify.Player | null | undefined>(null);
   const dispatch = useAppDispatch();
-  const { currentPlayingTrack } = useAppSelector((state) => state.player);
+  const { currentPlayingTrack, isPlaybackLoading } = useAppSelector(
+    (state) => state.player
+  );
   const [__, setDeviceId] = useLocalStorage(LocalStorageKeys.DEVICE_ID, "");
   useEffect(() => {
     accessToken && initializeDevice();
@@ -58,6 +64,7 @@ const ProtectedLayout = () => {
         });
         webPlayer.addListener("account_error", (err: any) => {
           console.error("Account Error:", err.message, err);
+          dispatch(resetPlayerState());
         });
         webPlayer.addListener("playback_error", ({ message }) => {
           console.error("Playback Error:", message);
@@ -67,7 +74,14 @@ const ProtectedLayout = () => {
         webPlayer.addListener("player_state_changed", (state) => {
           if (!state) {
             // console.log("No state available");
+            dispatch(resetPlayerState());
             return;
+          }
+
+          // console.log(state, currentPlayingTrack);
+
+          if (state.loading != isPlaybackLoading) {
+            dispatch(togglePlaybackLoadingState());
           }
           if (
             (!state.loading || state.paused) &&

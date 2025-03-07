@@ -1,3 +1,4 @@
+import InstallAppButton from "@/pages/auth/components/InstallAppButton";
 import { toggleMoreOptionBottomSheet } from "@/store/slices/globleLoader.slice";
 import { useAppDispatch } from "@/store/store";
 import { mColors } from "@/theme/utils/mColors";
@@ -10,7 +11,7 @@ import {
 } from "@assets/SVG";
 import { appLogo } from "@assets/images";
 import { LoaderButton } from "@components/design/Button";
-import { Download, LogoutRounded } from "@mui/icons-material";
+import { LogoutRounded } from "@mui/icons-material";
 import { AppBar, Stack, Toolbar, useTheme } from "@mui/material";
 import { useIsSmallScreen } from "@utils/constants";
 import { useNavigate } from "react-router-dom";
@@ -106,23 +107,7 @@ const AppTopBar = () => {
               <StyledThemeModeIconFilled />
               {/* <StyledSettingIconFilled onClick={() => showCustomToast("clicked", "info")} /> */}
               {/* <StyledSettingIconFilled onClick={showToast} /> */}
-
-              <LoaderButton
-                startIcon={<Download />}
-                label={"Install App"}
-                variant={"outlined"}
-                color={"primary"}
-                style={{
-                  marginLeft: 1.5,
-                  padding: "5px 18px",
-                  fontSize: "13px",
-                  borderRadius: "20px",
-                }}
-                onClick={() => {
-                  // localStorage.clear();
-                  // navigate("/auth", { replace: true });
-                }}
-              />
+              <InstallAppButton renderKey="IS_TOP_BAR" />
               <LoaderButton
                 startIcon={<LogoutRounded />}
                 label={"LogOut"}
