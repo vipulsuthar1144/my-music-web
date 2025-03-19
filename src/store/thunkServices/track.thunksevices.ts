@@ -33,8 +33,9 @@ export const getTop5TrendingHindiTracks = getAsyncThunk<
   );
   const result =
     top1Playlist.data.playlists?.items &&
+    top1Playlist.data.playlists?.items[0]?.id &&
     (await getPlaylistTracksAPI(
-      top1Playlist.data.playlists?.items[0]?.id ?? "",
+      top1Playlist.data.playlists?.items[0]?.id,
       0,
       5,
       signal
@@ -56,6 +57,7 @@ export const getTop5TrendingPunjabiTracks = getAsyncThunk<
   );
   const result =
     top1Playlist.data.playlists?.items &&
+    top1Playlist.data.playlists?.items[0]?.id &&
     (await getPlaylistTracksAPI(
       top1Playlist.data.playlists?.items[0]?.id ?? "",
       0,
@@ -79,6 +81,7 @@ export const getTop5TrendingEnglishTracks = getAsyncThunk<
   );
   const result =
     top1Playlist.data.playlists?.items &&
+    top1Playlist.data.playlists?.items[0]?.id &&
     (await getPlaylistTracksAPI(
       top1Playlist.data.playlists?.items[0]?.id ?? "",
       0,

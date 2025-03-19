@@ -7,7 +7,7 @@ const FRONTEND_PORT = process.env.VITE_APP_PORT;
 
 const manifestForPlugIn: Partial<VitePWAOptions> = {
   registerType: "prompt",
-  includeAssets: ["favicon.ico", "apple-touch-icon.png", "masked-icon.svg"],
+  includeAssets: ["favicon.ico", "apple-touch-icon.png"],
   manifest: {
     name: "My Music",
     short_name: "My Music",
@@ -45,9 +45,9 @@ const manifestForPlugIn: Partial<VitePWAOptions> = {
     start_url: "/",
     orientation: "portrait-primary",
   },
-  // devOptions: {
-  //   enabled: true,
-  // },
+  devOptions: {
+    enabled: true,
+  },
   workbox: {
     // defining cached files formats
     globPatterns: ["**/*.{js,css,html,ico,png,svg,webmanifest}"],
@@ -60,6 +60,7 @@ export default defineConfig({
   build: {
     outDir: "dist",
   },
+
   plugins: [react(), VitePWA(manifestForPlugIn)],
   server: {
     port: Number(FRONTEND_PORT) || 1818,

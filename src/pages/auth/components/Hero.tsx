@@ -13,7 +13,8 @@ const HeroSection = () => {
   return (
     <Box
       width={"100%"}
-      minHeight={"80vh"}
+      minHeight={"90vh"}
+      height={"auto"}
       position="relative"
       overflow="hidden"
     >
@@ -63,7 +64,6 @@ const HeroSection = () => {
           }}
           viewport={{ once: true }}
         >
-          ``{" "}
           <ImageComp
             img={appLogoMyMusic}
             alt="My Music"
@@ -76,7 +76,7 @@ const HeroSection = () => {
                 width: "40%",
               },
               [theme.breakpoints.down("md")]: {
-                width: "60%",
+                width: "40%",
               },
               [theme.breakpoints.down("sm")]: {
                 width: "60%",

@@ -1,6 +1,7 @@
 import { apiInstance } from "@/config/axios.config";
 import { IRequestPlayTrackSchema } from "@/schemas/player.schema";
 import { toggleDialogPremiumRequired } from "@/store/slices/globleLoader.slice";
+import { resetPlayerState } from "@/store/slices/player.slice";
 import { store } from "@/store/store";
 import { LocalStorageKeys } from "@utils/constants";
 
@@ -35,13 +36,14 @@ export const playbackAPI = {
     reqPlayTrackSchema: IRequestPlayTrackSchema,
     signal: AbortSignal
   ) => {
-    const deviceId = localStorage.getItem(LocalStorageKeys.DEVICE_ID);
+    const deviceId =
+      (await localStorage.getItem(LocalStorageKeys.DEVICE_ID)) ?? null;
     if (!deviceId) {
-      // showCustomToast("Device is not available", "error");
+      store.dispatch(resetPlayerState());
       store.dispatch(toggleDialogPremiumRequired(true));
-      // throw new Error("Device is not available");
-      return;
+      throw new Error("Device is not available");
     }
+
     await apiInstance.put(
       `me/player/play?device_id=${JSON.parse(deviceId)}`,
       {

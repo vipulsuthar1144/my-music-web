@@ -20,13 +20,15 @@ const Callback = () => {
     }
     const token = getAccessTokenFromURL();
     window.history.replaceState(null, "", window.location.pathname);
-    if (token) {
-      setAccessToken(token);
-      navigate("/", { replace: true });
-      return;
-    } else {
-      navigate("/auth", { replace: true });
-    }
+    setTimeout(() => {
+      if (token) {
+        setAccessToken(token);
+        navigate("/", { replace: true });
+        return;
+      } else {
+        navigate("/auth", { replace: true });
+      }
+    }, 1000);
   }, []);
 
   const getAccessTokenFromURL = (): string => {

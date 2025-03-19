@@ -17,6 +17,9 @@ import React, { useState } from "react";
 import Draggable from "react-draggable";
 import SliderAutoProgress from "./helper/SliderProgress";
 import useTrackPlayerController from "./TrackPlayer.controller";
+import { resetPlayerState } from "@/store/slices/player.slice";
+import { playback } from "@/store/thunkServices/player.thunkservice";
+import AppLoader from "@components/AppLoader";
 
 const TrackPlayer = () => {
   const [isPressed, setIsPressed] = useState(false);
@@ -29,7 +32,11 @@ const TrackPlayer = () => {
     listenerPausePlayback,
     listenerSkipNext,
     listenerSkipPrevious,
+    listenerGoToArtistDetails,
+    dispatch,
+    isPlayerVisible,
     currentPlayingTrack,
+    isPlaybackLoading,
   } = useTrackPlayerController();
   // const classes = useStyle();
 
@@ -52,6 +59,7 @@ const TrackPlayer = () => {
     >
       <Box
         component={"div"}
+        hidden={true}
         // className={classes.root}
         sx={{
           cursor: isPressed ? "grabbing" : "grab",
@@ -65,7 +73,7 @@ const TrackPlayer = () => {
           bottom: 20,
           right: 20,
           zIndex: 12,
-          display: "flex",
+          display: isPlayerVisible ? "flex" : "none",
           alignItems: "center",
           flexDirection: "column",
           justifyContent: "flex-start",
@@ -81,7 +89,17 @@ const TrackPlayer = () => {
             right: 5,
           }}
         >
-          <StyledCloseIconFilled />
+          <StyledCloseIconFilled
+            onClick={() => {
+              dispatch(playback.pause())
+                .unwrap()
+                .then(() => {
+                  setTimeout(() => {
+                    dispatch(resetPlayerState());
+                  }, 800);
+                });
+            }}
+          />
         </Box>
         <Box
           // className={classes.dragIndigator}
@@ -134,6 +152,7 @@ const TrackPlayer = () => {
                     onMouseDown={(event) => event.stopPropagation()}
                     onClick={(event) => {
                       event.stopPropagation();
+                      listenerGoToArtistDetails(item?.id);
                       // isAlbumArr
                       //   ? listenerGoToAlbumDetails(item.id)
                       //   : listenerGoToArtistDetails(item.id);
@@ -240,6 +259,23 @@ const TrackPlayer = () => {
             />
           )}
         </Box>
+        {isPlaybackLoading && (
+          <Box
+            sx={{
+              position: "absolute",
+              top: 0,
+              left: 0,
+              width: "100%",
+              height: "100%",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              backgroundColor: "rgba(0, 0, 0,0.4)",
+            }}
+          >
+            <AppLoader />
+          </Box>
+        )}
       </Box>
     </Draggable>
   );

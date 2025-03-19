@@ -16,34 +16,82 @@ export interface ILoaderButtonProps extends IGlobalButtonProps {
   loading?: boolean;
 }
 
-export const ContainedButton = ({ label, onClick, disabled, style, type }: IGlobalButtonProps) => {
+export const ContainedButton = ({
+  label,
+  onClick,
+  disabled,
+  style,
+  type,
+}: IGlobalButtonProps) => {
   const buttonType = type === "reset" || type === "submit" ? type : "button";
   return (
-    <Button variant="contained" color="primary" type={buttonType} disabled={disabled} onClick={onClick} sx={{ ...style }}>
+    <Button
+      variant="contained"
+      color="primary"
+      type={buttonType}
+      disabled={disabled}
+      onClick={onClick}
+      sx={{ ...style }}
+    >
       {label}
     </Button>
   );
 };
 
-export const ContainedGreenButton = ({ label, onClick, disabled, style, type }: IGlobalButtonProps) => {
+export const ContainedGreenButton = ({
+  label,
+  onClick,
+  disabled,
+  style,
+  type,
+}: IGlobalButtonProps) => {
   const buttonType = type === "reset" || type === "submit" ? type : "button";
   return (
-    <Button variant="contained" color="success" type={buttonType} disabled={disabled} onClick={onClick} sx={{ ...style }}>
+    <Button
+      variant="contained"
+      color="success"
+      type={buttonType}
+      disabled={disabled}
+      onClick={onClick}
+      sx={{ ...style }}
+    >
       {label}
     </Button>
   );
 };
 
-export const TextButtonPrimary = ({ label, onClick, disabled, style, type }: IGlobalButtonProps) => {
+export const TextButtonPrimary = ({
+  label,
+  onClick,
+  disabled,
+  style,
+  type,
+}: IGlobalButtonProps) => {
   const buttonType = type === "reset" || type === "submit" ? type : "button";
   return (
-    <Button variant="text" type={buttonType} disabled={disabled} onClick={onClick} sx={{ color: "text.primary", ...style }}>
+    <Button
+      variant="text"
+      type={buttonType}
+      disabled={disabled}
+      onClick={onClick}
+      sx={{ color: "text.primary", ...style }}
+    >
       {label}
     </Button>
   );
 };
 
-export const LoaderButton = ({ variant, color, type, onClick, label, loading = false, style, startIcon }: ILoaderButtonProps) => {
+export const LoaderButton = ({
+  variant,
+  color,
+  type,
+  onClick,
+  label,
+  loading = false,
+  style,
+  startIcon,
+  disabled,
+}: ILoaderButtonProps) => {
   const buttonType = type === "reset" || type === "submit" ? type : "button";
   return (
     <Box
@@ -58,11 +106,14 @@ export const LoaderButton = ({ variant, color, type, onClick, label, loading = f
         startIcon={startIcon}
         variant={variant}
         color={color}
-        disabled={loading}
+        disabled={loading || disabled}
         type={buttonType}
         onClick={onClick}
         sx={{
           ...style,
+        }}
+        style={{
+          cursor: loading || disabled ? "not-allowed" : "pointer",
         }}
       >
         {label}

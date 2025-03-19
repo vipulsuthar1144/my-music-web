@@ -5,12 +5,15 @@ import {
   playback,
 } from "@/store/thunkServices/player.thunkservice";
 import { likeUnlikeTracks } from "@/store/thunkServices/track.thunksevices";
+import { useNavigate } from "react-router-dom";
 
 const useTrackPlayerController = () => {
   // let player: Spotify.Player | null | undefined = null;
   // const [player, setPlayer] = useState<Spotify.Player | null | undefined>(null);
   const dispatch = useAppDispatch();
-  const { currentPlayingTrack } = useAppSelector((state) => state.player);
+  const { currentPlayingTrack, isPlayerVisible, isPlaybackLoading } =
+    useAppSelector((state) => state.player);
+  const navigate = useNavigate();
   // const [accessToken, _] = useLocalStorage(LocalStorageKeys.ACCESS_TOKEN, "");
   // const [__, setDeviceId] = useLocalStorage(LocalStorageKeys.DEVICE_ID, "");
   // useEffect(() => {
@@ -143,6 +146,10 @@ const useTrackPlayerController = () => {
     );
   };
 
+  const listenerGoToArtistDetails = (artistId?: string) => {
+    artistId && navigate(`/artist/${artistId}`);
+  };
+
   return {
     listenerLikeUnlikeTrack,
     listenerSetRepeatMode,
@@ -154,6 +161,10 @@ const useTrackPlayerController = () => {
     listenerSetVolume,
     listenerSetShuffleMode,
     // player,
+    dispatch,
+    isPlayerVisible,
+    isPlaybackLoading,
+    listenerGoToArtistDetails,
     currentPlayingTrack,
   };
 };

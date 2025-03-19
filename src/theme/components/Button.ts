@@ -1,5 +1,10 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Theme, ComponentsProps, ComponentsOverrides, ComponentsVariants } from "@mui/material";
+import {
+  Theme,
+  ComponentsProps,
+  ComponentsOverrides,
+  ComponentsVariants,
+} from "@mui/material";
 import { MGradientsDarkTheme } from "../utils/mGredient";
 import { mColors } from "../utils/mColors";
 import { globleTransitionTime } from "@/theme/utils/globalTransitions";
