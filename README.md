@@ -12,7 +12,7 @@ MyMusic replicates all the core features of **Spotify Web**, along with its own 
 
 ## 📌 Live Preview
 
-👉 **[View Live Website](https://mymusic-1144.web.app)**
+👉 **[View Live Website](https://mymusic-1144.web.app)** (pre-release)
 
 ## **🌟 Features**
 
