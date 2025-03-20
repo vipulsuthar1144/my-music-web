@@ -42,14 +42,16 @@ git checkout -b docs/issue-id/documention-name
 
 We're expecting to see proper commit messages with the following format:
 
-```sh
+```js
  <type>(optional scope): <description>(#<ISSUE_ID>)
 ```
 
 An example commit message:
 
-```sh
+```js
 feat(core): add useAwesome hook (#1234)
+```
+```js
 feat: Added new feature or Component
 fix:  Resolve the bug
 docs: Updated documentation
@@ -72,7 +74,7 @@ npm test
 - Open a **pull request (PR)** to the **main** branch.
 - Provide a clear description of your changes.
 
-```sh
+```js
 feat: added x feature #ISSUE_ID
 
 Now with x feature, you can do y.
@@ -82,7 +84,7 @@ Resolves #ISSUE_ID
 
 or
 
-```sh
+```js
 fix: issue with x. #ISSUE_ID
 
 We had an edge where it causes x issue to happen, now it's fixed.
