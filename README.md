@@ -1,5 +1,9 @@
 # 🎵 MyMusic - Your Ultimate Music Streaming Platform!
 
+![React](https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=react&logoColor=black) ![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)  ![TailwindCSS](https://img.shields.io/badge/TailwindCSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)  ![MUI](https://img.shields.io/badge/MUI-0081CB?style=for-the-badge&logo=mui&logoColor=white)    ![Axios](https://img.shields.io/badge/Axios-5A29E4?style=for-the-badge&logo=axios&logoColor=white)  ![Redux](https://img.shields.io/badge/Redux-764ABC?style=for-the-badge&logo=redux&logoColor=white) ![Firebase](https://img.shields.io/badge/Firebase-FFCA28?style=for-the-badge&logo=firebase&logoColor=black)  ![Spotify](https://img.shields.io/badge/Spotifyapi-007ACC?style=for-the-badge&logo=spotify&logoColor=white)
+
+
+
 ## **🚀 Overview**
 
 **MyMusic** is a **modern music streaming web platform** designed to provide a seamless listening experience. Built with **React, TypeScript, and Spotify APIs**, it offers a **smooth UI, real-time playback, and personalized music recommendations**.
