@@ -46,7 +46,7 @@ MyMusic replicates all the core features of **Spotify Web**, along with its own 
 <img src="./src/assets/screenshots/screen-2.jpg" alt="preview"/>
 <br>
 
-### 3. Track Player
+### 3. Dragable Track Player
 
 <img src="./src/assets/screenshots/screen-2A.jpg" alt="preview"/>
 <br>
