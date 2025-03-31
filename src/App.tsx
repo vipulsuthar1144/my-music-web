@@ -1,4 +1,5 @@
 import FallbackErrorBoundary from "@components/FallbackErrorBoundary";
+import { useEffect } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 import { Provider } from "react-redux";
 import "react-toastify/dist/ReactToastify.css";
@@ -6,9 +7,9 @@ import "./App.css";
 import AppRoutes from "./routes";
 import { store } from "./store/store";
 import AppTheme from "./theme/AppTheme";
-import { useEffect } from "react";
 
 function App() {
+  // const { isOnline } = useNetworkStatus();
   useEffect(() => {
     if ("serviceWorker" in navigator) {
       window.addEventListener("load", () => {
@@ -26,6 +27,14 @@ function App() {
       });
     }
   }, []);
+
+  // useEffect(() => {
+  //   if (isOnline) {
+  //     showCustomToast("Back Online", "success");
+  //   } else {
+  //     showCustomToast("No Internet Connection", "error");
+  //   }
+  // }, [isOnline]);
   return (
     <ErrorBoundary fallback={<FallbackErrorBoundary />}>
       <Provider store={store}>

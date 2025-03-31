@@ -1,8 +1,6 @@
 # 🎵 MyMusic - Your Ultimate Music Streaming Platform!
 
-![React](https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=react&logoColor=black) ![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)  ![TailwindCSS](https://img.shields.io/badge/TailwindCSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)  ![MUI](https://img.shields.io/badge/MUI-0081CB?style=for-the-badge&logo=mui&logoColor=white)    ![Axios](https://img.shields.io/badge/Axios-5A29E4?style=for-the-badge&logo=axios&logoColor=white)  ![Redux](https://img.shields.io/badge/Redux-764ABC?style=for-the-badge&logo=redux&logoColor=white) ![Firebase](https://img.shields.io/badge/Firebase-FFCA28?style=for-the-badge&logo=firebase&logoColor=black)  ![Spotify](https://img.shields.io/badge/Spotifyapi-007ACC?style=for-the-badge&logo=spotify&logoColor=white)
-
-
+![React](https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=react&logoColor=black) ![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white) ![TailwindCSS](https://img.shields.io/badge/TailwindCSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white) ![MUI](https://img.shields.io/badge/MUI-0081CB?style=for-the-badge&logo=mui&logoColor=white) ![Axios](https://img.shields.io/badge/Axios-5A29E4?style=for-the-badge&logo=axios&logoColor=white) ![Redux](https://img.shields.io/badge/Redux-764ABC?style=for-the-badge&logo=redux&logoColor=white) ![Firebase](https://img.shields.io/badge/Firebase-FFCA28?style=for-the-badge&logo=firebase&logoColor=black) ![Spotify](https://img.shields.io/badge/Spotifyapi-007ACC?style=for-the-badge&logo=spotify&logoColor=white)
 
 ## **🚀 Overview**
 
@@ -35,6 +33,73 @@ MyMusic replicates all the core features of **Spotify Web**, along with its own 
 - **Spotify API 🎵** – Fetching music data & streaming
 - **Firebase 🔥** – Deployment & hosting
 - **PWA** – Installable app with offline capabilities
+
+## 📸 Screenshots
+
+### 1. Landing Page
+
+<img src="./src/assets/screenshots/screen-1.jpg" alt="preview"/>
+<br>
+
+### 2. Home Screen
+
+<img src="./src/assets/screenshots/screen-2.jpg" alt="preview"/>
+<br>
+
+### 3. Dragable Track Player
+
+<img src="./src/assets/screenshots/screen-2A.jpg" alt="preview"/>
+<br>
+
+### 4. Browse Categories
+
+<img src="./src/assets/screenshots/screen-3.jpg" alt="preview"/>
+<br>
+
+### 5. Search Results
+
+<img src="./src/assets/screenshots/screen-4.jpg" alt="preview"/> 
+<img src="./src/assets/screenshots/screen-5.jpg" alt="preview"/>
+<br>
+
+### 6. Artist Profile
+
+<img src="./src/assets/screenshots/screen-6.jpg" alt="preview"/>
+<br>  
+<img src="./src/assets/screenshots/screen-7.jpg" alt="preview"/>
+<br>
+
+### 7. Album Details
+
+<img src="./src/assets/screenshots/screen-8.jpg" alt="preview"/>
+<br>
+
+### 8. Your Library
+
+<img src="./src/assets/screenshots/screen-9.jpg" alt="preview"/>
+<br>
+
+### 9. Recent Played Tracks
+
+<img src="./src/assets/screenshots/screen-10.jpg" alt="preview"/>
+<br>
+
+### 10. Top Tracks and Your Following
+
+<img src="./src/assets/screenshots/screen-11.jpg" alt="preview"/>
+<br>
+
+### 11. One Click Installation
+
+<img src="./src/assets/screenshots/screen-12.jpg" alt="preview"/>
+<br>
+
+### 12. Responsive Mobile Layout
+
+<img src="./src/assets/screenshots/mobile-1.jpg" alt="preview"/>
+<img src="./src/assets/screenshots/mobile-2.jpg" alt="preview"/>
+<img src="./src/assets/screenshots/mobile-3.jpg" alt="preview"/>
+<br>
 
 ## **🔧 Installation & Setup**
 
