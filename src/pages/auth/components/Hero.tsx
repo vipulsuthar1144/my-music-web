@@ -17,6 +17,9 @@ const HeroSection = () => {
       height={"auto"}
       position="relative"
       overflow="hidden"
+      display={"flex"}
+      justifyContent={"center"}
+      alignItems={"center"}
     >
       {/* Background gradients */}
       <Box
