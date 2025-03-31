@@ -15,7 +15,7 @@ MyMusic replicates all the core features of **Spotify Web**, along with its own 
 👉 **Note :-** 
 |  |
 |-------------|
-| We are excited to introduce the beta release of our music web application! Currently, access is limited to a select group of users for testing and feedback. If you would like to request access, please send an email to vipulsuthar1144@gmail.com. Our team will review your request and provide further details. We appreciate your interest and look forward to your valuable feedback. |
+| We are excited to introduce the beta release of our music web application! Currently, access is limited to a select group of users for testing and feedback. If you would like to request access, please send an email to vipulsuthar1144@gmail.com. I will review your request and provide further details. I appreciate your interest and look forward to your valuable feedback. |
 
 
 ## **🌟 Features**
