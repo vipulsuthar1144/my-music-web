@@ -56,10 +56,12 @@ const AppTopBar = () => {
           <>
             <ImageComp
               img={appLogo}
+              onClick={() => navigate("/")}
               alt="Spotify"
               style={{
                 width: "40px",
                 height: "40px",
+                cursor: "pointer",
                 // ml: "5px",
               }}
             />
@@ -104,7 +106,7 @@ const AppTopBar = () => {
                   navigate("/notification");
                 }}
               />
-              <StyledThemeModeIconFilled />
+              {/* <StyledThemeModeIconFilled /> */}
               {/* <StyledSettingIconFilled onClick={() => showCustomToast("clicked", "info")} /> */}
               {/* <StyledSettingIconFilled onClick={showToast} /> */}
               <InstallAppButton renderKey="IS_TOP_BAR" />

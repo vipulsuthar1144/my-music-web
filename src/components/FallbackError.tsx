@@ -110,6 +110,27 @@ const FallbackError = ({
             </Box>
           </Typography>
           <Typography variant="h6">
+            If you have any questions or need further assistance or problem,
+            please contact on{" "}
+            <Box
+              component={"strong"}
+              style={{
+                userSelect: "text",
+              }}
+            >
+              vipulsuthar1144@gmail.com
+            </Box>{" "}
+            and raise issue on{" "}
+            <Box component={"strong"}>
+              <a
+                href="https://github.com/vipulsuthar1144/my-music-web"
+                target="_blank"
+              >
+                Github
+              </a>
+            </Box>{" "}
+          </Typography>
+          <Typography variant="h6">
             Thank you for your understanding and interest in helping us improve
             the application!
           </Typography>

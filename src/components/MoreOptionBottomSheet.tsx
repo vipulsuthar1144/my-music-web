@@ -94,12 +94,12 @@ const MoreOptionBottomSheet = () => {
             </ListItemButton>
           </ListItem>
 
-          <ListItem disablePadding>
+          {/* <ListItem disablePadding>
             <ListItemButton sx={{ padding: "10px", gap: "10px" }}>
               <ContrastRounded />
               <ListItemText primary={"Dark Mode"} />
             </ListItemButton>
-          </ListItem>
+          </ListItem> */}
           <ListItem disablePadding>
             <InstallAppButton renderKey="IS_BOTTOM_SHEET" />
           </ListItem>

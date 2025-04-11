@@ -122,9 +122,9 @@ const AppFooter = () => {
                   },
                 }}
               >
-                {item.title == "Instagram" && <StyledInstagramIconOutlined />}
-                {item.title == "Facebook" && <StyledFacebookIconOutlined />}
-                {item.title == "Twitter" && <StyledTwitterIconOutlined />}
+                {item.title == "Linkedin" && <StyledInstagramIconOutlined />}
+                {item.title == "Github" && <StyledFacebookIconOutlined />}
+                {item.title == "Portfolio" && <StyledTwitterIconOutlined />}
               </Box>
             ))}
           </Typography>
@@ -174,7 +174,7 @@ const AppFooter = () => {
           </Typography>
         </Box>
         <Typography variant="subtitle1" color={"text.secondary"}>
-          © 2024 My Music
+          © {new Date().getFullYear()} My Music
         </Typography>
       </Box>
     </Box>
