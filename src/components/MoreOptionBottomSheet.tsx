@@ -4,7 +4,6 @@ import { useAppDispatch, useAppSelector } from "@/store/store";
 import {
   ArrowBackIosNewRounded,
   ArrowForwardIosRounded,
-  ContrastRounded,
   LogoutOutlined,
 } from "@mui/icons-material";
 import {

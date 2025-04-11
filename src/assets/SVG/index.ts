@@ -6,11 +6,9 @@ import {
   CheckCircle,
   CloseRounded,
   ContrastRounded,
-  FacebookOutlined,
   Favorite,
   FavoriteBorder,
   GitHub,
-  Instagram,
   LinkedIn,
   MoreVert,
   Notifications,
@@ -24,8 +22,6 @@ import {
   ShuffleRounded,
   SkipNextRounded,
   SkipPreviousRounded,
-  Web,
-  X,
 } from "@mui/icons-material";
 
 export const StyledBackIcon = withIconStyles(ArrowBackIosNewRounded, "Go Back");

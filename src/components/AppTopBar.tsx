@@ -7,7 +7,6 @@ import {
   StyledForwardIcon,
   StyledMenuIcon,
   StyledNotificationIconFilled,
-  StyledThemeModeIconFilled,
 } from "@assets/SVG";
 import { appLogo } from "@assets/images";
 import { LoaderButton } from "@components/design/Button";
