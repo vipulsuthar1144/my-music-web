@@ -1,7 +1,7 @@
 {
   "name": "my-music-app",
   "private": true,
-  "version": "1.0.1-beta.1",
+  "version": "1.0.2-beta",
   "type": "module",
   "scripts": {
     "start": "env-cmd -f .env vite --host 0.0.0.0",
