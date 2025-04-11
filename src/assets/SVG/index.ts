@@ -6,14 +6,15 @@ import {
   CheckCircle,
   CloseRounded,
   ContrastRounded,
-  FacebookOutlined,
   Favorite,
   FavoriteBorder,
-  Instagram,
+  GitHub,
+  LinkedIn,
   MoreVert,
   Notifications,
   PauseCircleOutlineRounded,
   PlayCircleOutlineRounded,
+  Public,
   RepeatOneRounded,
   RepeatRounded,
   SearchRounded,
@@ -21,7 +22,6 @@ import {
   ShuffleRounded,
   SkipNextRounded,
   SkipPreviousRounded,
-  X,
 } from "@mui/icons-material";
 
 export const StyledBackIcon = withIconStyles(ArrowBackIosNewRounded, "Go Back");
@@ -71,17 +71,9 @@ export const StyledPauseIconOutlined = withIconStyles(
   "Pause",
   "40px"
 );
-export const StyledInstagramIconOutlined = withIconStyles(
-  Instagram,
-  "",
-  "24px"
-);
-export const StyledFacebookIconOutlined = withIconStyles(
-  FacebookOutlined,
-  "",
-  "26px"
-);
-export const StyledTwitterIconOutlined = withIconStyles(X, "", "20px");
+export const StyledInstagramIconOutlined = withIconStyles(LinkedIn, "", "24px");
+export const StyledFacebookIconOutlined = withIconStyles(GitHub, "", "22px");
+export const StyledTwitterIconOutlined = withIconStyles(Public, "", "25px");
 export const StyledMenuIcon = withIconStyles(MoreVert, "", "24px");
 export const StyledCheckIcon = withIconStyles(
   CheckCircle,

@@ -22,10 +22,7 @@ const SavedTracks = () => {
       !isSavedTracksListLoading
     )
       return (
-        <FallbackError
-          message="No Recent Played Tracks Found"
-          type="data_not_found"
-        />
+        <FallbackError message="No Liked Tracks Found" type="data_not_found" />
       );
 
     return (

@@ -86,11 +86,13 @@ const AppSideBar = () => {
         >
           <ImageComp
             img={appLogo}
+            onClick={() => navigate("/")}
             alt="Spotify"
             style={{
               width: "40px",
               height: "40px",
               position: "absolute",
+              cursor: "pointer",
               top: 15,
               left: 20,
               zIndex: 10,

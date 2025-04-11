@@ -7,8 +7,16 @@ import { useEffect } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 
 const useSearchController = () => {
-  const { isSearchDataLoading, searchData, isSearchDataError } = useAppSelector((state) => state.search);
-  const { isCategoriesLoading, isCategoriesError, categories, hasMoreCategoriesData, categoriesOffset } = useAppSelector((state) => state.category);
+  const { isSearchDataLoading, searchData, isSearchDataError } = useAppSelector(
+    (state) => state.search
+  );
+  const {
+    isCategoriesLoading,
+    isCategoriesError,
+    categories,
+    hasMoreCategoriesData,
+    categoriesOffset,
+  } = useAppSelector((state) => state.category);
   const [searchParams] = useSearchParams();
   const searchQuery = searchParams.get("q") || "";
   const dispatch = useAppDispatch();
@@ -18,13 +26,13 @@ const useSearchController = () => {
     if (categories.length === 0 && searchQuery == "") {
       handleGetCategories();
     }
-    const timeout = setTimeout(() => {
-      handleSearchResult();
-    }, 800);
-    return () => {
-      return clearTimeout(timeout);
-      // dispatch(emptySearchData());
-    };
+    // const timeout = setTimeout(() => {
+    handleSearchResult();
+    // }, 800);
+    // return () => {
+    // return clearTimeout(timeout);
+    // dispatch(emptySearchData());
+    // };
   }, [dispatch, searchQuery]);
 
   useEffect(() => {
@@ -34,12 +42,19 @@ const useSearchController = () => {
   }, []);
 
   const handleSearchResult = () => {
-    searchQuery == "" ? dispatch(emptySearchData()) : dispatch(getSearchResult(searchQuery));
+    searchQuery == ""
+      ? dispatch(emptySearchData())
+      : dispatch(getSearchResult(searchQuery));
   };
   const handleGetCategories = () => {
     dispatch(getAllCategories({ offset: categoriesOffset }));
   };
-  const lastCategoryItemRef = useLoadMore(handleGetCategories, isCategoriesLoading, hasMoreCategoriesData, isCategoriesError);
+  const lastCategoryItemRef = useLoadMore(
+    handleGetCategories,
+    isCategoriesLoading,
+    hasMoreCategoriesData,
+    isCategoriesError
+  );
 
   const listenerSeeAllTracks = () => {
     navigate(`/search/track/${searchQuery}`);

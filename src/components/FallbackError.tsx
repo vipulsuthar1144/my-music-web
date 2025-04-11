@@ -67,18 +67,75 @@ const FallbackError = ({
         <Typography variant="h1" color={"error.main"}>
           Access Denied
         </Typography>
-        <Typography variant="h6" maxWidth={"600px"}>
-          This application is currently in its{" "}
-          <Box component={"strong"}>Beta Phase</Box> and is available
-          exclusively for a limited group of users who have been granted access
-          to test and provide feedback. If you would like to request access or
-          have questions about using the application, please contact the admin
-          for more information.
-        </Typography>
-        <Typography variant="h6">
-          Thank you for your understanding and interest in helping us improve
-          the application!
-        </Typography>
+        <Box
+          component={"div"}
+          width={"100%"}
+          display={"flex"}
+          flexDirection={"column"}
+          gap={"10px"}
+          maxWidth={"600px"}
+        >
+          <Typography variant="h6">
+            This application is currently in its{" "}
+            <Box component={"strong"}>Beta Phase</Box> and is available
+            exclusively for a limited group of users who have been granted
+            access to test and provide feedback.
+          </Typography>
+          <Typography
+            variant="h6"
+            paddingInlineStart={"8px"}
+            textAlign={"start"}
+          >
+            However, you can now <Box component={"strong"}>Sign in</Box> using
+            the guest account:
+            <br></br>
+            Email:{" "}
+            <Box
+              component={"strong"}
+              style={{
+                userSelect: "text",
+              }}
+            >
+              guest@mymusic.com
+            </Box>
+            <br></br>
+            Password:{" "}
+            <Box
+              component={"strong"}
+              style={{
+                userSelect: "text",
+              }}
+            >
+              Guest@mymusic.com
+            </Box>
+          </Typography>
+          <Typography variant="h6">
+            If you have any questions or need further assistance or problem,
+            please contact on{" "}
+            <Box
+              component={"strong"}
+              style={{
+                userSelect: "text",
+              }}
+            >
+              vipulsuthar1144@gmail.com
+            </Box>{" "}
+            and raise issue on{" "}
+            <Box component={"strong"}>
+              <a
+                href="https://github.com/vipulsuthar1144/my-music-web"
+                target="_blank"
+              >
+                Github
+              </a>
+            </Box>{" "}
+          </Typography>
+          <Typography variant="h6">
+            Thank you for your understanding and interest in helping us improve
+            the application!
+          </Typography>
+        </Box>
+
         <Button
           variant="contained"
           color="primary"
@@ -180,7 +237,7 @@ const FallbackError = ({
         }}
       >
         <ListAlt sx={{ fontSize: 80, color: "text.primary" }} />
-        <Typography variant="h1">
+        <Typography variant="h3">
           {message == "" ? "Empty Data" : message}
         </Typography>
         <Typography variant="h6">

@@ -5,10 +5,10 @@ import { Box, Typography } from "@mui/material";
 const Notification = () => {
   return (
     <RootContainer style={{ padding: "50px 20px" }}>
-      <Typography variant="h2">What's New</Typography>
+      {/* <Typography variant="h2">What's New</Typography>
       <Typography variant="subtitle2" color="text.secondary">
         The latest releases from artists, podcasts, and shows you follow.
-      </Typography>
+      </Typography> */}
 
       <Box
         component={"div"}
